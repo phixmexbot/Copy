@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geometric Animation</title>
+    <title>Aesthetic Animation</title>
     <style>
         body {
             margin: 0;
@@ -11,50 +11,97 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f0f0f0;
+            background-color: #111;
         }
 
         canvas {
-            border: 1px solid black;
+            border: 1px solid #444;
         }
     </style>
-    <!-- Include Telegram Web App script -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <canvas id="animationCanvas" width="400" height="400"></canvas>
+    <canvas id="animationCanvas"></canvas>
 
     <script>
         // Get the canvas element and its 2D drawing context
         const canvas = document.getElementById('animationCanvas');
         const ctx = canvas.getContext('2d');
 
-        // Function to draw a geometric animation
-        function drawAnimation() {
-            // Clear the canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Set canvas dimensions
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-            // Set properties for the animation
-            const size = 50;
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const speed = 0.05;
-            const angle = performance.now() * speed;
+        // Particle class
+        class Particle {
+            constructor(x, y, radius, color, velocity) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.velocity = velocity;
+            }
 
-            // Draw a rotating square
-            ctx.save();
-            ctx.translate(centerX, centerY);
-            ctx.rotate(angle);
-            ctx.fillStyle = 'blue';
-            ctx.fillRect(-size / 2, -size / 2, size, size);
-            ctx.restore();
+            // Draw the particle
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
 
-            // Call the function recursively to create animation loop
-            requestAnimationFrame(drawAnimation);
+            // Update the particle's position
+            update() {
+                this.draw();
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+
+                // Bounce off the edges
+                if (this.x - this.radius <= 0 || this.x + this.radius >= canvas.width) {
+                    this.velocity.x = -this.velocity.x;
+                }
+                if (this.y - this.radius <= 0 || this.y + this.radius >= canvas.height) {
+                    this.velocity.y = -this.velocity.y;
+                }
+            }
         }
 
-        // Start the animation
-        drawAnimation();
+        // Generate random color
+        function randomColor() {
+            return '#' + Math.random().toString(16).substr(2, 6);
+        }
+
+        // Generate random velocity
+        function randomVelocity() {
+            return {
+                x: (Math.random() - 0.5) * 4,
+                y: (Math.random() - 0.5) * 4
+            };
+        }
+
+        // Create particles
+        const particles = [];
+        for (let i = 0; i < 100; i++) {
+            const radius = Math.random() * 20 + 5;
+            particles.push(new Particle(
+                Math.random() * canvas.width,
+                Math.random() * canvas.height,
+                radius,
+                randomColor(),
+                randomVelocity()
+            ));
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+            });
+        }
+
+        // Start animation
+        animate();
     </script>
 </body>
 </html>
