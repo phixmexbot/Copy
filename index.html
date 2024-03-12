@@ -3,25 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animation</title>
+    <title>Geometric Animation</title>
     <style>
         body {
+            margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            background-color: #f0f0f0;
         }
 
-        .animation {
-            max-width: 100%;
-            max-height: 100%;
+        canvas {
+            border: 1px solid black;
         }
     </style>
     <!-- Include Telegram Web App script -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <img src="animation.gif" alt="Animation" class="animation">
+    <canvas id="animationCanvas" width="400" height="400"></canvas>
+
+    <script>
+        // Get the canvas element and its 2D drawing context
+        const canvas = document.getElementById('animationCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Function to draw a geometric animation
+        function drawAnimation() {
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Set properties for the animation
+            const size = 50;
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const speed = 0.05;
+            const angle = performance.now() * speed;
+
+            // Draw a rotating square
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            ctx.rotate(angle);
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(-size / 2, -size / 2, size, size);
+            ctx.restore();
+
+            // Call the function recursively to create animation loop
+            requestAnimationFrame(drawAnimation);
+        }
+
+        // Start the animation
+        drawAnimation();
+    </script>
 </body>
 </html>
