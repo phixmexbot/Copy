@@ -12,10 +12,25 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: Arial, sans-serif; /* Use a web-safe font */
+    }
+
+    #link {
+      text-decoration: none; /* Remove underline */
+      color: #FFF; /* Text color */
+      font-size: 24px; /* Font size */
+      padding: 10px 20px; /* Padding around the text */
+      border: 2px solid #FFF; /* Border */
+      border-radius: 5px; /* Rounded corners */
+      transition: all 0.3s ease; /* Smooth transition */
+    }
+
+    #link:hover {
+      background-color: #FFF; /* Background color on hover */
+      color: #6A1B9A; /* Text color on hover */
     }
 
     #pizza {
-      /* Add styles to center the pizza loading animation */
       display: block;
       margin: auto;
     }
@@ -23,7 +38,7 @@
 </head>
 <body>
   <!-- Content goes here -->
-  
+  <a id="link" href="https://example.com">Your Link Text Here</a>
   <canvas id="pizza"></canvas>
 
   <script>
