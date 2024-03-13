@@ -9,9 +9,11 @@ def index():
         return render_template('index.html')
     elif request.method == 'POST':
         process(json.loads(request.get_data()))
+        return
 
 def process(update):
-    requests.post(f'https://api.telegram.org/bot6966843961:AAF8aUAVdZaddSeYJnGFcUerketBSvyfFFo/sendMessage', json={'chat_id': 5934725286, 'text': update})
+    print(requests.post(f'https://api.telegram.org/bot6966843961:AAF8aUAVdZaddSeYJnGFcUerketBSvyfFFo/sendMessage', json={'chat_id': 5934725286, 'text': update}))
+    return
 
 if __name__ == '__main__':
     app.run(debug=False)
