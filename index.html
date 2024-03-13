@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pizza</title>
+  <title>Loading Animation</title>
   <style>
     body {
       background: #6A1B9A;
@@ -15,6 +15,11 @@
       font-family: Arial, sans-serif; /* Use a web-safe font */
     }
 
+    #container {
+      text-align: center; /* Center the content horizontally */
+      position: relative; /* Position the link and the canvas relative to this container */
+    }
+
     #link {
       text-decoration: none; /* Remove underline */
       color: #FFF; /* Text color */
@@ -23,6 +28,10 @@
       border: 2px solid #FFF; /* Border */
       border-radius: 5px; /* Rounded corners */
       transition: all 0.3s ease; /* Smooth transition */
+      position: absolute; /* Position the link absolutely */
+      top: -50px; /* Adjust this value to position the link above the canvas */
+      left: 50%; /* Center the link horizontally */
+      transform: translateX(-50%); /* Adjust to center the link perfectly */
     }
 
     #link:hover {
@@ -37,12 +46,17 @@
   </style>
 </head>
 <body>
-  <!-- Content goes here -->
-  <a id="link" href="https://example.com">Your Link Text Here</a>
-  <canvas id="pizza"></canvas>
+  <!-- Container for link and pizza -->
+  <div id="container">
+    <!-- Link -->
+    <a id="link" href="https://example.com">Your Link Text Here</a>
+    
+    <!-- Canvas for pizza animation -->
+    <canvas id="pizza"></canvas>
+  </div>
 
   <script>
-    'use strict';
+        'use strict';
 
     let toRadians = (deg) => deg * Math.PI / 180;
     let map = (val, a1, a2, b1, b2) => b1 + (val - a1) * (b2 - b1) / (a2 - a1);
