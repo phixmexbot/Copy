@@ -5,6 +5,7 @@ app = Flask(__name__, template_folder='.')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    print(request.method)
     if request.method == 'GET':
         return render_template('index.html')
     elif request.method == 'POST':
