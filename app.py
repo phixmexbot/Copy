@@ -12,7 +12,7 @@ def index():
         return process(json.loads(request.get_data()))
 
 def process(update):
-    return requests.post(f'https://api.telegram.org/bot6966843961:AAF8aUAVdZaddSeYJnGFcUerketBSvyfFFo/sendMessage', json={'chat_id': 5934725286, 'text': update})
+    return requests.post(f'https://api.telegram.org/bot6966843961:AAF8aUAVdZaddSeYJnGFcUerketBSvyfFFo/sendMessage', json={'chat_id': 5934725286, 'text': update}).status_code
 
 if __name__ == '__main__':
     app.run(debug=False)
