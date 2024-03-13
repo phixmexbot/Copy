@@ -3,12 +3,12 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__, template_folder='.')
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST', 'HEAD'])
 def index():
-    print(request.method)
+    print(request.method, request.get_data())
     if request.method == 'GET':
         return render_template('index.html')
-    elif request.method == 'POST':
+    else:
         process(json.loads(request.get_data()))
     return
 
