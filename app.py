@@ -21,7 +21,7 @@ def interactive():
     else:
         return 'Error'
 
-@app.route('/drop.wav', methods=['GET'])
+@app.route('/voice', methods=['GET'])
 def voice():
     if request.method == 'GET':
         return render_template('voice.html')
