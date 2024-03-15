@@ -53,25 +53,24 @@
     
     <!-- Canvas for pizza animation -->
     <canvas id="pizza"></canvas>
+    <!-- Canvas for lightning animation -->
+    <canvas id="canvas"></canvas>
   </div>
   <script>
-    
-
 /*=============================================================================*/  
 /* Canvas Lightning v1
 /*=============================================================================*/
 var canvasLightning = function(c, cw, ch){
-  
-/*=============================================================================*/  
-/* Initialize
-/*=============================================================================*/
+  /*=============================================================================*/  
+  /* Initialize
+  /*=============================================================================*/
   this.init = function(){
     this.loop();
   };    
-  
-/*=============================================================================*/  
-/* Variables
-/*=============================================================================*/
+    
+  /*=============================================================================*/  
+  /* Variables
+  /*=============================================================================*/
   var _this = this;
   this.c = c;
   this.ctx = c.getContext('2d');
@@ -84,15 +83,15 @@ var canvasLightning = function(c, cw, ch){
   this.lightTimeCurrent = 0;
   this.lightTimeTotal = 50;
   
-/*=============================================================================*/  
-/* Utility Functions
-/*=============================================================================*/        
-this.rand = function(rMi, rMa){return ~~((Math.random()*(rMa-rMi+1))+rMi);};
-this.hitTest = function(x1, y1, w1, h1, x2, y2, w2, h2){return !(x1 + w1 < x2 || x2 + w2 < x1 || y1 + h1 < y2 || y2 + h2 < y1);};
+  /*=============================================================================*/  
+  /* Utility Functions
+  /*=============================================================================*/        
+  this.rand = function(rMi, rMa){return ~~((Math.random()*(rMa-rMi+1))+rMi);};
+  this.hitTest = function(x1, y1, w1, h1, x2, y2, w2, h2){return !(x1 + w1 < x2 || x2 + w2 < x1 || y1 + h1 < y2 || y2 + h2 < y1);};
   
-/*=============================================================================*/ 
-/* Create Lightning
-/*=============================================================================*/
+  /*=============================================================================*/ 
+  /* Create Lightning
+  /*=============================================================================*/
   this.createL= function(x, y, canSpawn){         
     this.lightning.push({
       x: x,
@@ -109,14 +108,13 @@ this.hitTest = function(x1, y1, w1, h1, x2, y2, w2, h2){return !(x1 + w1 < x2 ||
     });
   };
   
-/*=============================================================================*/ 
-/* Update Lightning
-/*=============================================================================*/
+  /*=============================================================================*/ 
+  /* Update Lightning
+  /*=============================================================================*/
   this.updateL = function(){
     var i = this.lightning.length;
     while(i--){
       var light = this.lightning[i];            
-      
       
       light.path.push({
         x: light.path[light.path.length-1].x + (this.rand(0, light.xRange)-(light.xRange/2)),
@@ -130,9 +128,9 @@ this.hitTest = function(x1, y1, w1, h1, x2, y2, w2, h2){return !(x1 + w1 < x2 ||
     };
   };
   
-/*=============================================================================*/ 
-/* Render Lightning
-/*=============================================================================*/
+  /*=============================================================================*/ 
+  /* Render Lightning
+  /*=============================================================================*/
   this.renderL = function(){
     var i = this.lightning.length;
     while(i--){
@@ -186,9 +184,9 @@ this.hitTest = function(x1, y1, w1, h1, x2, y2, w2, h2){return !(x1 + w1 < x2 ||
     };
   };
   
-/*=============================================================================*/ 
-/* Lightning Timer
-/*=============================================================================*/
+  /*=============================================================================*/ 
+  /* Lightning Timer
+  /*=============================================================================*/
   this.lightningTimer = function(){
     this.lightTimeCurrent++;
     if(this.lightTimeCurrent >= this.lightTimeTotal){
@@ -203,29 +201,29 @@ this.hitTest = function(x1, y1, w1, h1, x2, y2, w2, h2){return !(x1 + w1 < x2 ||
     }
   }
     
-/*=============================================================================*/ 
-/* Clear Canvas
-/*=============================================================================*/
-    this.clearCanvas = function(){
-      this.ctx.globalCompositeOperation = 'destination-out';
-      this.ctx.fillStyle = 'rgba(0,0,0,'+this.rand(1, 30)/100+')';
-      this.ctx.fillRect(0,0,this.cw,this.ch);
-      this.ctx.globalCompositeOperation = 'source-over';
-    };
+  /*=============================================================================*/ 
+  /* Clear Canvas
+  /*=============================================================================*/
+  this.clearCanvas = function(){
+    this.ctx.globalCompositeOperation = 'destination-out';
+    this.ctx.fillStyle = 'rgba(0,0,0,'+this.rand(1, 30)/100+')';
+    this.ctx.fillRect(0,0,this.cw,this.ch);
+    this.ctx.globalCompositeOperation = 'source-over';
+  };
   
-/*=============================================================================*/ 
-/* Resize on Canvas on Window Resize
-/*=============================================================================*/
-$(window).on('resize', function(){
-  _this.cw = _this.c.width = window.innerWidth;
-  _this.ch = _this.c.height = window.innerHeight;  
-});
+  /*=============================================================================*/ 
+  /* Resize on Canvas on Window Resize
+  /*=============================================================================*/
+  window.addEventListener('resize', function(){
+    _this.cw = _this.c.width = window.innerWidth;
+    _this.ch = _this.c.height = window.innerHeight;  
+  });
     
-/*=============================================================================*/ 
-/* Animation Loop
-/*=============================================================================*/
+  /*=============================================================================*/ 
+  /* Animation Loop
+  /*=============================================================================*/
   this.loop = function(){
-        var loopIt = function(){
+    var loopIt = function(){
       requestAnimationFrame(loopIt, _this.c);
       _this.clearCanvas();
       _this.updateL();
@@ -234,7 +232,6 @@ $(window).on('resize', function(){
     };
     loopIt();         
   };
-  
 };
 
 /*=============================================================================*/ 
@@ -274,9 +271,9 @@ var setupRAF = function(){
 };      
 
 /*=============================================================================*/ 
-/* Define Canvas and Initialize
+/* Define Canvas and Initialize Lightning
 /*=============================================================================*/
-$(window).load(function(){  
+document.addEventListener('DOMContentLoaded', function() {
   if(isCanvasSupported){
     var c = document.getElementById('canvas');
     var cw = c.width = window.innerWidth;
@@ -287,144 +284,134 @@ $(window).load(function(){
     cl.init();
   }
 });
-  </script>
-  <script>
-        'use strict';
 
-    let toRadians = (deg) => deg * Math.PI / 180;
-    let map = (val, a1, a2, b1, b2) => b1 + (val - a1) * (b2 - b1) / (a2 - a1);
+/*=============================================================================*/  
+/* Pizza Animation
+/*=============================================================================*/
+'use strict';
 
-    class Pizza {
-      constructor(id) {
-        this.canvas = document.getElementById(id);
-        this.ctx = this.canvas.getContext('2d');
+let toRadians = (deg) => deg * Math.PI / 180;
+let map = (val, a1, a2, b1, b2) => b1 + (val - a1) * (b2 - b1) / (a2 - a1);
 
-        this.sliceCount = 6;
-        this.sliceSize = 80;
+class Pizza {
+  constructor(id) {
+    this.canvas = document.getElementById(id);
+    this.ctx = this.canvas.getContext('2d');
 
-        this.width = this.height = this.canvas.height = this.canvas.width = this.sliceSize * 2 + 50;
-        this.center = this.height / 2 | 0;
+    this.sliceCount = 6;
+    this.sliceSize = 80;
 
-        this.sliceDegree = 360 / this.sliceCount;
-        this.sliceRadians = toRadians(this.sliceDegree);
-        this.progress = 0;
-        this.cooldown = 10;
-      }
+    this.width = this.height = this.canvas.height = this.canvas.width = this.sliceSize * 2 + 50;
+    this.center = this.height / 2 | 0;
 
-      update() {
-        let ctx = this.ctx;
-        ctx.clearRect(0, 0, this.width, this.height);
+    this.sliceDegree = 360 / this.sliceCount;
+    this.sliceRadians = toRadians(this.sliceDegree);
+    this.progress = 0;
+    this.cooldown = 10;
+  }
 
-        if (--this.cooldown < 0) this.progress += this.sliceRadians * 0.01 + this.progress * 0.07;
+  update() {
+    let ctx = this.ctx;
+    ctx.clearRect(0, 0, this.width, this.height);
 
-        ctx.save();
-        ctx.translate(this.center, this.center);
+    if (--this.cooldown < 0) this.progress += this.sliceRadians * 0.01 + this.progress * 0.07;
 
-        for (let i = this.sliceCount - 1; i > 0; i--) {
-          let rad;
-          if (i === this.sliceCount - 1) {
-            let ii = this.sliceCount - 1;
-            rad = this.sliceRadians * i + this.progress;
-            ctx.strokeStyle = '#FBC02D';
-            cheese(ctx, rad, .9, ii, this.sliceSize, this.sliceDegree);
-            cheese(ctx, rad, .6, ii, this.sliceSize, this.sliceDegree);
-            cheese(ctx, rad, .5, ii, this.sliceSize, this.sliceDegree);
-            cheese(ctx, rad, .3, ii, this.sliceSize, this.sliceDegree);
-          } else rad = this.sliceRadians * i;
+    ctx.save();
+    ctx.translate(this.center, this.center);
 
-          // border
-          ctx.beginPath();
-          ctx.lineCap = 'butt';
-          ctx.lineWidth = 11;
-          ctx.arc(0, 0, this.sliceSize, rad, rad + this.sliceRadians);
-          ctx.strokeStyle = '#F57F17';
-          ctx.stroke();
+    for (let i = this.sliceCount - 1; i > 0; i--) {
+      let rad;
+      if (i === this.sliceCount - 1) {
+        let ii = this.sliceCount - 1;
+        rad = this.sliceRadians * i + this.progress;
+        ctx.strokeStyle = '#FBC02D';
+        cheese(ctx, rad, .9, ii, this.sliceSize, this.sliceDegree);
+        cheese(ctx, rad, .6, ii, this.sliceSize, this.sliceDegree);
+        cheese(ctx, rad, .5, ii, this.sliceSize, this.sliceDegree);
+        cheese(ctx, rad, .3, ii, this.sliceSize, this.sliceDegree);
+      } else rad = this.sliceRadians * i;
 
-          // slice
-          let startX = this.sliceSize * Math.cos(rad);
-          let startY = this.sliceSize * Math.sin(rad);
-          let endX = this.sliceSize * Math.cos(rad + this.sliceRadians);
-          let endY = this.sliceSize * Math.sin(rad + this.sliceRadians);
-          let variation = [0.9,0.7,1.1,1.2];
-          ctx.fillStyle = '#FBC02D';
-          ctx.beginPath();
-          ctx.moveTo(0, 0);
-          ctx.lineTo(startX, startY);
-          ctx.arc(0, 0, this.sliceSize, rad, rad + this.sliceRadians);
-          ctx.lineTo(0, 0);
-          ctx.closePath();
-          ctx.fill();
-          ctx.lineWidth = .3;
-          ctx.stroke();
-
-          // meat
-          let x = this.sliceSize * .65 * Math.cos(rad + this.sliceRadians / 2);
-          let y = this.sliceSize * .65 * Math.sin(rad + this.sliceRadians / 2);
-          ctx.beginPath();
-          ctx.arc(x, y, this.sliceDegree / 6, 0, 2 * Math.PI);
-          ctx.fillStyle = '#D84315';
-          ctx.fill();
-        }
-
-        ctx.restore();
-
-        if (this.progress > this.sliceRadians) {
-          ctx.translate(this.center, this.center);
-          ctx.rotate(-this.sliceDegree * Math.PI / 180);
-          ctx.translate(-this.center, -this.center);
-          this.progress = 0;
-          this.cooldown = 20;
-        }
-      }
-    }
-
-    function cheese(ctx, rad, multi, ii, sliceSize, sliceDegree) {
-      let x1 = sliceSize * multi * Math.cos(toRadians(ii * sliceDegree) - .2);
-      let y1 = sliceSize * multi * Math.sin(toRadians(ii * sliceDegree) - .2);
-      let x2 = sliceSize * multi * Math.cos(rad + .2);
-      let y2 = sliceSize * multi * Math.sin(rad + .2);
-
-      let csx = sliceSize * Math.cos(rad);
-      let csy = sliceSize * Math.sin(rad);
-
-      let d = Math.sqrt((x1 - csx) * (x1 - csx) + (y1 - csy) * (y1 - csy));
+      // border
       ctx.beginPath();
-      ctx.lineCap = 'round';
-
-      let percentage = map(d, 15, 70, 1.2, 0.2);
-
-      let tx = x1 + (x2 - x1) * percentage;
-      let ty = y1 + (y2 - y1) * percentage;
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(tx, ty);
-
-      tx = x2 + (x1 - x2) * percentage;
-      ty = y2 + (y1 - y2) * percentage;
-      ctx.moveTo(x2, y2);
-      ctx.lineTo(tx, ty);
-
-      ctx.lineWidth = map(d, 0, 100, 20, 2);
+      ctx.lineCap = 'butt';
+      ctx.lineWidth = 11;
+      ctx.arc(0, 0, this.sliceSize, rad, rad + this.sliceRadians);
+      ctx.strokeStyle = '#F57F17';
       ctx.stroke();
+
+      // slice
+      let startX = this.sliceSize * Math.cos(rad);
+      let startY = this.sliceSize * Math.sin(rad);
+      let endX = this.sliceSize * Math.cos(rad + this.sliceRadians);
+      let endY = this.sliceSize * Math.sin(rad + this.sliceRadians);
+      let variation = [0.9,0.7,1.1,1.2];
+      ctx.fillStyle = '#FBC02D';
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(startX, startY);
+      ctx.arc(0, 0, this.sliceSize, rad, rad + this.sliceRadians);
+      ctx.lineTo(0, 0);
+      ctx.closePath();
+      ctx.fill();
+      ctx.lineWidth = .3;
+      ctx.stroke();
+
+      // meat
+      let x = this.sliceSize * .65 * Math.cos(rad + this.sliceRadians / 2);
+      let y = this.sliceSize * .65 * Math.sin(rad + this.sliceRadians / 2);
+      ctx.beginPath();
+      ctx.arc(x, y, this.sliceDegree / 6, 0, 2 * Math.PI);
+      ctx.fillStyle = '#D84315';
+      ctx.fill();
     }
 
-    let pizza = new Pizza('pizza');
+    ctx.restore();
 
-    (function update() {
-      requestAnimationFrame(update);
-      pizza.update();
-    }());
-  </script>
-  <script>
-    // Vanilla JavaScript alternative for jQuery's $(window).on('load', ...)
-    document.addEventListener('DOMContentLoaded', function() {
-      var c = document.getElementById('canvas');
-      var cw = c.width = window.innerWidth;
-      var ch = c.height = window.innerHeight;
-      var cl = new canvasLightning(c, cw, ch);
-      
-      setupRAF();
-      cl.init();
-    });
-  </script>
+    if (this.progress > this.sliceRadians) {
+      ctx.translate(this.center, this.center);
+      ctx.rotate(-this.sliceDegree * Math.PI / 180);
+      ctx.translate(-this.center, -this.center);
+      this.progress = 0;
+      this.cooldown = 20;
+    }
+  }
+}
+
+function cheese(ctx, rad, multi, ii, sliceSize, sliceDegree) {
+  let x1 = sliceSize * multi * Math.cos(toRadians(ii * sliceDegree) - .2);
+  let y1 = sliceSize * multi * Math.sin(toRadians(ii * sliceDegree) - .2);
+  let x2 = sliceSize * multi * Math.cos(rad + .2);
+  let y2 = sliceSize * multi * Math.sin(rad + .2);
+
+  let csx = sliceSize * Math.cos(rad);
+  let csy = sliceSize * Math.sin(rad);
+
+  let d = Math.sqrt((x1 - csx) * (x1 - csx) + (y1 - csy) * (y1 - csy));
+  ctx.beginPath();
+  ctx.lineCap = 'round';
+
+  let percentage = map(d, 15, 70, 1.2, 0.2);
+
+  let tx = x1 + (x2 - x1) * percentage;
+  let ty = y1 + (y2 - y1) * percentage;
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(tx, ty);
+
+  tx = x2 + (x1 - x2) * percentage;
+  ty = y2 + (y1 - y2) * percentage;
+  ctx.moveTo(x2, y2);
+  ctx.lineTo(tx, ty);
+
+  ctx.lineWidth = map(d, 0, 100, 20, 2);
+  ctx.stroke();
+}
+
+let pizza = new Pizza('pizza');
+
+(function update() {
+  requestAnimationFrame(update);
+  pizza.update();
+}());
+</script>
 </body>
 </html>
