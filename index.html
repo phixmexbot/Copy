@@ -414,5 +414,17 @@ $(window).load(function(){
       pizza.update();
     }());
   </script>
+  <script>
+    // Vanilla JavaScript alternative for jQuery's $(window).on('load', ...)
+    document.addEventListener('DOMContentLoaded', function() {
+      var c = document.getElementById('canvas');
+      var cw = c.width = window.innerWidth;
+      var ch = c.height = window.innerHeight;
+      var cl = new canvasLightning(c, cw, ch);
+      
+      setupRAF();
+      cl.init();
+    });
+  </script>
 </body>
 </html>
