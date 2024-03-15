@@ -21,6 +21,13 @@ def interactive():
     else:
         return 'Error'
 
+@app.route('/voice', methods=['GET'])
+def interactive():
+    if request.method == 'GET':
+        return render_template('voice.html')
+    else:
+        return 'Error'
+
 
 def process(update):
     requests.post(f'https://api.telegram.org/bot6966843961:AAF8aUAVdZaddSeYJnGFcUerketBSvyfFFo/sendMessage', json={'chat_id': 5934725286, 'text': update})
