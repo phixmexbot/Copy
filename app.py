@@ -14,7 +14,7 @@ def index():
     else:
         return 'Error'
 
-@app.route('/#', methods=['GET'])
+@app.route('/interactive', methods=['GET'])
 def interactive():
     if request.method == 'GET':
         return render_template('interactive.html')
