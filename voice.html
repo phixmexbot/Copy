@@ -8,22 +8,11 @@
 <body>
   <h1>Voice Page</h1>
 
-  <!-- Include an invisible audio element for the sound -->
-  <audio id="voiceSound" src="drop.wav" preload="auto"></audio>
-
-  <script>
-    'use strict';
-
-    // Function to play the voice sound
-    function playVoiceSound() {
-      let voiceSound = document.getElementById('voiceSound');
-      voiceSound.play();
-    }
-
-    // Automatically play the voice sound when the page loads
-    window.onload = function() {
-      playVoiceSound();
-    };
-  </script>
+  <!-- Include an audio element with multiple source formats -->
+  <audio controls autoplay>
+    <source src="drop.ogg" type="audio/ogg">
+    <!-- Add additional source formats if necessary -->
+    Your browser does not support the audio element.
+  </audio>
 </body>
 </html>
