@@ -22,7 +22,7 @@ def interactive():
         return 'Error'
 
 @app.route('/voice', methods=['GET'])
-def interactive():
+def voice():
     if request.method == 'GET':
         return render_template('voice.html')
     else:
