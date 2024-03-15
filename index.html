@@ -43,6 +43,22 @@
       display: block;
       margin: auto;
     }
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none; /* Ensure clicks go through the bubbles */
+      z-index: -1; /* Send bubbles behind everything else */
+      animation: moveBubble linear infinite;
+    }
+
+    @keyframes moveBubble {
+      0% {
+        transform: translateY(0) translateX(0) scale(1);
+      }
+      100% {
+        transform: translateY(-100vh) translateX(calc(-100vw + 100%)) scale(0.3);
+      }
+    }
   </style>
 </head>
 <body>
@@ -54,6 +70,9 @@
     <!-- Canvas for pizza animation -->
     <canvas id="pizza"></canvas>
   </div>
+
+    <!-- New: Div for bubbles -->
+  <div id="bubbles-container"></div
 
   <script>
         'use strict';
@@ -180,6 +199,23 @@
       requestAnimationFrame(update);
       pizza.update();
     }());
+    document.addEventListener('DOMContentLoaded', function() {
+      const bubblesContainer = document.getElementById('bubbles-container');
+      const numBubbles = 30; // Adjust number of bubbles as needed
+
+      for (let i = 0; i < numBubbles; i++) {
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        bubble.style.width = `${Math.random() * 30 + 5}px`; // Random width between 5px and 35px
+        bubble.style.height = bubble.style.width; // Maintain aspect ratio
+        bubble.style.background = `rgba(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255},${Math.random()})`; // Random color with transparency
+        bubble.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+        bubble.style.animationDuration = `${Math.random() * 8 + 4}s`; // Random animation duration between 4s and 12s
+
+        // Append bubble to container
+        bubblesContainer.appendChild(bubble);
+      }
+    });
   </script>
 </body>
 </html>
