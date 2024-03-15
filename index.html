@@ -13,49 +13,45 @@
       align-items: center;
       justify-content: center;
       font-family: Arial, sans-serif; /* Use a web-safe font */
+      overflow: hidden; /* Prevent scrolling */
     }
 
     #container {
-      text-align: center; /* Center the content horizontally */
-      position: relative; /* Position the link and the canvas relative to this container */
-    }
-
-    #link {
-      text-decoration: none; /* Remove underline */
-      color: #FFF; /* Text color */
-      font-size: 24px; /* Font size */
-      padding: 10px 20px; /* Padding around the text */
-      border: 2px solid #FFF; /* Border */
-      border-radius: 5px; /* Rounded corners */
-      transition: all 0.3s ease; /* Smooth transition */
-      position: absolute; /* Position the link absolutely */
-      top: -50px; /* Adjust this value to position the link above the canvas */
-      left: 50%; /* Center the link horizontally */
-      transform: translateX(-50%); /* Adjust to center the link perfectly */
-    }
-
-    #link:hover {
-      background-color: #FFF; /* Background color on hover */
-      color: #6A1B9A; /* Text color on hover */
+      position: relative;
+      width: 100%;
+      height: 100%;
     }
 
     #pizza {
       display: block;
       margin: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2; /* Ensure pizza is above the lightning effect */
+    }
+
+    #canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1; /* Ensure lightning effect is below the pizza */
     }
   </style>
 </head>
 <body>
-  <!-- Container for link and pizza -->
+  <!-- Container for the pizza and lightning effect -->
   <div id="container">
-    <!-- Link -->
-    <a id="link" href="https://t.me/+wVYiIEx69_VkNTc6">Click</a>
-    
-    <!-- Canvas for pizza animation -->
-    <canvas id="pizza"></canvas>
     <!-- Canvas for lightning animation -->
     <canvas id="canvas"></canvas>
+    
+    <!-- Placeholder for pizza animation (replace with actual pizza animation code) -->
+    <div id="pizza">🍕</div>
   </div>
+
   <script>
 /*=============================================================================*/  
 /* Canvas Lightning v1
