@@ -21,10 +21,10 @@ def interactive():
     else:
         return 'Error'
 
-@app.route('/chase', methods=['GET'])
-def chase():
+@app.route('/orbit', methods=['GET'])
+def orbit():
     if request.method == 'GET':
-        return render_template('chase.html')
+        return render_template('orbit.html')
     else:
         return 'Error'
 
