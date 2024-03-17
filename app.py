@@ -21,6 +21,13 @@ def interactive():
     else:
         return 'Error'
 
+@app.route('/chase', methods=['GET'])
+def chase():
+    if request.method == 'GET':
+        return render_template('chase.html')
+    else:
+        return 'Error'
+
 @app.route('/voice', methods=['GET'])
 def voice():
     if request.method == 'GET':
