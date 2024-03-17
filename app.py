@@ -28,6 +28,13 @@ def orbit():
     else:
         return 'Error'
 
+@app.route('/bouble', methods=['GET'])
+def bouble():
+    if request.method == 'GET':
+        return render_template('bouble.html')
+    else:
+        return 'Error'
+
 @app.route('/voice', methods=['GET'])
 def voice():
     if request.method == 'GET':
