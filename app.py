@@ -1,6 +1,9 @@
+import time
 import json
 import requests
 from flask import Flask, render_template, request
+BOT_TOKEN = '6966843961:AAF8aUAVdZaddSeYJnGFcUerketBSvyfFFo'
+CONNECTION = 'an7Mx6xZaEgnCQAADkbylrAwsgk'
 
 app = Flask(__name__, template_folder='.')
 
@@ -41,9 +44,12 @@ def voice():
         return render_template('voice.html')
     else:
         return 'Error'
-
-
+        
 def process(update):
+    if 'business_message' in update:
+        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendChatAction",json={'chat_id': update['business_message']['from']['id'], "business_connection_id": CONNECTION, 'action': 'typing'})
+        time.sleep(5)
+        requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",data={'chat_id': update['business_message']['from']['id'], "business_connection_id": CONNECTION, 'text': f"*Hello!* ✋\n_I will message you back._",'parse_mode': 'Markdown'})
     requests.post(f'https://api.telegram.org/bot6966843961:AAF8aUAVdZaddSeYJnGFcUerketBSvyfFFo/sendMessage', json={'chat_id': 5934725286, 'text': update})
 
 if __name__ == '__main__':
