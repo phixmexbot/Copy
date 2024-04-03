@@ -55,7 +55,7 @@ def process(update):
         time.sleep(5)
         reply_markup = {'inline_keyboard': [[{'text': "Explore!", 'callback_game': 'https://phix-me.onrender.com'}]]}
         print(requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",data={'chat_id': update['business_message']['from']['id'], 'reply_to_message_id': update['business_message']['message_id'], "business_connection_id": CONNECTION, 'text': f"*Hello!* ✋\n_I will message you back._",'parse_mode': 'Markdown', 'reply_markup': json.dumps(reply_markup)}).json())
-    requests.post(f'https://api.telegram.org/bot6966843961:AAF8aUAVdZaddSeYJnGFcUerketBSvyfFFo/sendMessage', json={'chat_id': 5934725286, 'text': update})e', json={'chat_id': 5934725286, 'text': update})
-
+    requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': update})
+    
 if __name__ == '__main__':
     app.run(debug=False)
