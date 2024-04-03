@@ -15,20 +15,28 @@
       justify-content: flex-start;
       font-family: Arial, sans-serif; /* Use a web-safe font */
     }
-
+  
     #container {
       text-align: center; /* Center the content horizontally */
       position: relative; /* Position the link and the canvas relative to this container */
       margin-top: 50px; /* Adjust this value to position the pizza animation */
     }
-
+  
     #link-container {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column; /* Arrange button rows vertically */
+      align-items: center; /* Center items horizontally */
       margin-top: 20px; /* Adjust as needed */
       width: 300px; /* Adjust as needed */
     }
-
+  
+    .button-row {
+      display: flex;
+      justify-content: space-between; /* Spread buttons evenly */
+      width: 100%; /* Take full width */
+      margin-bottom: 10px; /* Add margin between rows */
+    }
+  
     .button {
       text-decoration: none; /* Remove underline */
       color: #FFF; /* Text color */
@@ -38,12 +46,12 @@
       border-radius: 5px; /* Rounded corners */
       transition: all 0.3s ease; /* Smooth transition */
     }
-
+  
     .button:hover {
       background-color: #FFF; /* Background color on hover */
       color: #6A1B9A; /* Text color on hover */
     }
-
+  
     #pizza {
       display: block;
       margin: auto;
