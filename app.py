@@ -5,7 +5,7 @@ import requests
 from flask import Flask, render_template, request
 
 BOT_TOKEN = '6966843961:AAF8aUAVdZaddSeYJnGFcUerketBSvyfFFo'
-CONNECTION = 'an7Mx6xZaEgnCQAADkbylrAwsgk'
+CONNECTION = 'l5fqrAiviEj0CAAALAJbw05zldA'
 REACTIONS = ['👍', '🔥', '❤️', '👏', '🕊']
 
 app = Flask(__name__, template_folder='.')
