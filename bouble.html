@@ -9,26 +9,20 @@ body {
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   height: 100vh;
   overflow: hidden;
-  display: flex;
-  font-family: 'Anton', sans-serif;
-  justify-content: center;
-  align-items: center;
+  margin: 0; /* Added to remove default margin */
 }
 
 .night {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 100vw; /* Use vw unit for width */
+  height: 100vh; /* Use vh unit for height */
   transform: rotateZ(45deg);
-  /* animation: sky 200000ms linear infinite; */
 }
 
 .shooting_star {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  /* width: 100px; */
-  height: 2px;
+  width: 2px; /* Adjust width as needed */
+  height: 20px; /* Adjust height as needed */
   background: linear-gradient(-45deg, rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
   border-radius: 999px;
   filter: drop-shadow(0 0 6px rgba(105, 155, 255, 1));
@@ -37,55 +31,13 @@ body {
     shooting 3000ms ease-in-out infinite;
 }
 
-.shooting_star::before {
-  content: '';
-  position: absolute;
-  top: calc(50% - 1px);
-  right: 0;
-  /* width: 30px; */
-  height: 2px;
-  background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
-  transform: translateX(50%) rotateZ(45deg);
-  border-radius: 100%;
-  animation: shining 3000ms ease-in-out infinite;
-}
-
-.shooting_star::after {
-  content: '';
-  position: absolute;
-  top: calc(50% - 1px);
-  right: 0;
-  /* width: 30px; */
-  height: 2px;
-  background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
-  transform: translateX(50%) rotateZ(-45deg);
-  border-radius: 100%;
-  animation: shining 3000ms ease-in-out infinite;
-}
-
 @keyframes tail {
   0% {
     width: 0;
   }
-  
   30% {
     width: 100px;
   }
-  
-  100% {
-    width: 0;
-  }
-}
-
-@keyframes shining {
-  0% {
-    width: 0;
-  }
-  
-  50% {
-    width: 30px;
-  }
-  
   100% {
     width: 0;
   }
@@ -95,32 +47,34 @@ body {
   0% {
     transform: translateX(0);
   }
-  
   100% {
     transform: translateX(300px);
   }
 }
-
-/*@keyframes sky {
-  0% {
-    transform: rotate(45deg);
-  }
-  
-  100% {
-    transform: rotate(45 + 360deg);
-  }
-}*/
 </style>
 </head>
 <body>
-<div class="night">
+<div class="night" id="night">
   <!-- Night sky with shooting stars -->
-  <!-- Generated using Pug loop -->
-  <!-- You can remove or add more shooting stars here -->
-  <div class="shooting_star" style="top: 10%; left: 20%;"></div>
-  <div class="shooting_star" style="top: 30%; left: 50%;"></div>
-  <div class="shooting_star" style="top: 50%; left: 80%;"></div>
-  <!-- Add more shooting stars with different top and left values -->
+  <!-- Generated using JavaScript -->
 </div>
+
+<script>
+// Function to create shooting stars at touch positions
+function createShootingStar(x, y) {
+  const star = document.createElement('div');
+  star.classList.add('shooting_star');
+  star.style.top = y + 'px';
+  star.style.left = x + 'px';
+  document.getElementById('night').appendChild(star);
+}
+
+// Event listener for touch events
+document.addEventListener('touchstart', function(event) {
+  event.preventDefault(); // Prevent default touch action
+  const touch = event.touches[0]; // Get the first touch position
+  createShootingStar(touch.clientX, touch.clientY); // Create shooting star at touch position
+});
+</script>
 </body>
 </html>
