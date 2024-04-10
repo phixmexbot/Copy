@@ -84,17 +84,18 @@
     
     @keyframes tail {
       0% {
-        width: 0;
+        transform: translateY(0) scaleX(0); /* Start at top, width 0 */
       }
-      
+    
       30% {
-        width: 100px;
+        transform: translateY(-100px) scaleX(1); /* Move down 100px, full width */
       }
-      
+    
       100% {
-        width: 0;
+        transform: translateY(-100px) scaleX(0); /* End at bottom, width 0 */
       }
     }
+
     
     @keyframes shining {
       0% {
