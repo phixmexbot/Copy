@@ -1,176 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Particles Integration</title>
-<style>
-  /* CSS Styles */
-  body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-  }
-
-  #particles-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-
-  /* ---- reset ---- */
-  .github {
-    z-index: 10000;
-    bottom: 10px;
-    right: 10px;
-    position: fixed;
-    border-radius: 10px;
-    background: #fff;
-    padding: 0 12px 6px 12px;
-    border: 1px solid #000;
-  }
-
-  .github a:hover,
-  .github a:link,
-  .github a:visited,
-  .github a:active {
-    color: #000;
-    text-decoration: none;
-  }
-
-  .github img {
-    height: 30px;
-  }
-
-  .github #gh-project {
-    font-size: 20px;
-    padding-left: 5px;
-    font-weight: bold;
-    vertical-align: bottom;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Background</title>
+  <style>
+    /* Paste your CSS code here, including the content from the provided snippet */
+    <css-doodle> :doodle { @grid: 45x1 / 40vmin; position: relative; z-index: 1; }
+      :container { transform: translate(50%, 33vmin) }
+      :after, :before { content: ''; @place-cell: center; @size: 100%; background: radial-gradient( @p(#FFFDE1, #FB3569) @r(70%), transparent 0 ) @pn(30% 50%, 70% 50%, 50% 60%) / @r(.1vmin, 5vmin) @lr() no-repeat; }
+      @place-cell: centerr; @size: 100%; will-change: transform; animation: r 4s linear infinite; animation-delay: calc(-4s / @size() * @i()); --translate: translateY(calc(-66vmin / @size() * @i()));
+      @keyframes r { from { transform: var(--translate) rotate(0) } to { transform: var(--translate) rotateZ(-1turn) } }
+    </css-doodle>
+    <css-doodle> :doodle { @grid: 1x3 / 100vmax; position: absolute; top: 0; left: 0; z-index: 0; }
+      @size: 100% 150%; position: absolute; background: @m(100, ( linear-gradient(transparent, @p( #FFFDE1@repeat(2, @p([0-9a-f])), #FB3569@repeat(2, @p([0-9a-f])) )) @r(0%, 100%) @r(0%, 100%) / @r(1px) @r(23vmin) no-repeat )); will-change: transform; animation: f 20s linear calc(-20s / @size() * @i()) infinite;
+      @keyframes f { from { transform: translateY(-100%) } to { transform: translateY(100%) } }
+    </css-doodle>
+    css: html, body { height: 100%; margin: 0; background: #261c33; overflow: hidden; display: flex; align-items: center; justify-content: center }
+  </style>
 </head>
 <body>
-<!-- HTML Structure -->
-<div class="github">
-  <a class="btn btn-link" href="https://github.com/matteobruni/tsparticles" title="Find more info on GitHub">
-    <img class="img-fluid" id="gh-mark" src="https://particles.js.org/images/GitHub-Mark-120px-plus.png" alt="">
-    <span id="gh-project">tsParticles</span>
-  </a>
-  <div>
-    <a class="github-button" href="https://github.com/matteobruni/tsparticles" data-icon="octicon-star" aria-label="Star matteobruni/tsparticles on GitHub">Star</a>
-    <a class="github-button" href="https://github.com/matteobruni/tsparticles/fork" data-icon="octicon-repo-forked" aria-label="Fork matteobruni/tsparticles on GitHub">Fork</a>
-  </div>
-</div>
-
-<!-- Particles Container -->
-<div id="particles-container"></div>
-
-<!-- JavaScript -->
-<script>
-  // JavaScript Code
-  async function loadParticles(options) {
-    const tsParticles = await import("https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm");
-    const { loadAll } = await import("https://cdn.jsdelivr.net/npm/@tsparticles/all@3.1.0/+esm");
-
-    await loadAll(tsParticles);
-
-    await tsParticles.load({ container: "particles-container", options });
-  }
-
-  const configs = {
-    particles: {
-      destroy: {
-        mode: "split",
-        split: {
-          count: 1,
-          factor: {
-            value: {
-              min: 2,
-              max: 4
-            }
-          },
-          rate: {
-            value: 100
-          },
-          particles: {
-            life: {
-              count: 1,
-              duration: {
-                value: {
-                  min: 2,
-                  max: 3
-                }
-              }
-            },
-            move: {
-              speed: {
-                min: 10,
-                max: 15
-              }
-            }
-          }
-        }
-      },
-      number: {
-        value: 80
-      },
-      color: {
-        value: [
-          "#3998D0",
-          "#2EB6AF",
-          "#A9BD33",
-          "#FEC73B",
-          "#F89930",
-          "#F45623",
-          "#D62E32",
-          "#EB586E",
-          "#9952CF"
-        ]
-      },
-      shape: {
-        type: "circle"
-      },
-      opacity: {
-        value: 1
-      },
-      size: {
-        value: {
-          min: 10,
-          max: 15
-        }
-      },
-      collisions: {
-        enable: true,
-        mode: "bounce"
-      },
-      move: {
-        enable: true,
-        speed: 3,
-        outModes: "bounce"
-      }
-    },
-    interactivity: {
-      events: {
-        onClick: {
-          enable: true,
-          mode: "pop"
-        }
-      }
-    },
-    background: {
-      color: "#000000"
-    }
-  };
-
-  loadParticles(configs);
-</script>
-
-<!-- External JavaScript -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+  <h1>Animated Backgrounds</h1>
+  <p>This page demonstrates dynamic backgrounds created with CSS.</p>
 </body>
 </html>
