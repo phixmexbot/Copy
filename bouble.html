@@ -61,7 +61,9 @@ body {
 
 <script>
 // Function to create shooting stars at touch positions
-function createShootingStar(x, y) {
+function createShootingStar(event) {
+  const x = event.clientX;
+  const y = event.clientY;
   const star = document.createElement('div');
   star.classList.add('shooting_star');
   star.style.top = y + 'px';
@@ -72,8 +74,7 @@ function createShootingStar(x, y) {
 // Event listener for touch events
 document.addEventListener('touchstart', function(event) {
   event.preventDefault(); // Prevent default touch action
-  const touch = event.touches[0]; // Get the first touch position
-  createShootingStar(touch.clientX, touch.clientY); // Create shooting star at touch position
+  createShootingStar(event.touches[0]); // Create shooting star at touch position
 });
 </script>
 </body>
