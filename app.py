@@ -37,7 +37,7 @@ def orbit():
 @app.route('/bouble', methods=['GET'])
 def bouble():
     if request.method == 'GET':
-        return render_template('bouble.html')
+        return render_template('bouble.pug')
     else:
         return 'Error'
 
