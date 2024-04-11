@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Title Here</title>
+  <title>Chase</title>
   <style>
     html, body { 
       height: 100%; 
@@ -17,43 +17,6 @@
   </style>
 </head>
 <body>
-  <!-- First css-doodle -->
-  <css-doodle>
-    :doodle {
-      @grid: 45x1 / 40vmin;
-      position: relative;
-      z-index: 1; 
-    }
-    :container {
-      transform: translate(50%, 33vmin)
-    }
-    :after, :before {
-      content: '';
-      @place-cell: center;
-      @size: 100%;
-      background: radial-gradient(
-        @p(#FFFDE1, #FB3569) @r(70%),
-        transparent 0
-      ) 
-      @pn(30% 50%, 70% 50%, 50% 60%) / 
-      @r(.1vmin, 5vmin) @lr() 
-      no-repeat;
-    }
-    
-    @place-cell: center;
-    @size: 100%;
-    
-    will-change: transform;
-    animation: r 4s linear infinite;
-    animation-delay: calc(-4s / @size() * @i());
-
-    --translate: translateY(calc(-66vmin / @size() * @i()));
-    @keyframes r {
-      from { transform: var(--translate) rotate(0); }
-      to { transform: var(--translate) rotateZ(-1turn); }
-    }
-  </css-doodle>
-
   <!-- Second css-doodle -->
   <css-doodle> 
     :doodle {
