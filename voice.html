@@ -3,179 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSS Doodle Animation</title>
+  <title>Rainy Background</title>
   <style>
     html, body {
       height: 100%;
       margin: 0;
-      background: #261c33;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
-    css-doodle {
+    .rain {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      pointer-events: none;
     }
 
-    /* Adjust the position and size of the doodle elements */
-    css-doodle :doodle {
-      @grid: 45x1 / 40vmin;
-      position: relative;
-      z-index: 1;
-    }
-
-    css-doodle :container {
-      transform: translate(50%, 33vmin);
-    }
-
-    css-doodle :after, css-doodle :before {
-      content: '';
-      @place-cell: center;
-      @size: 50%; /* Adjusted size to make it smaller */
-      background: radial-gradient(
-        @p(#FFFDE1, #FB3569) @r(70%),
-        transparent 0
-      );
-      background-size: @r(.1vmin, 5vmin) @lr();
-      background-position: @pn(30% 50%, 70% 50%, 50% 60%);
-      background-repeat: no-repeat;
-    }
-
-    css-doodle :after,
-    css-doodle :before {
-      @place-cell: center;
-      @size: 50%; /* Adjusted size to make it smaller */
-      background: radial-gradient(
-        @p(#FFFDE1, #FB3569) @r(70%),
-        transparent 0
-      ) @r(0) @lr();
-      background-size: @r(.1vmin, 5vmin) @lr();
-      background-position: @pn(30% 50%, 70% 50%, 50% 60%);
-      background-repeat: no-repeat;
-    }
-
-    @place-cell: center;
-    @size: 100%;
-
-    will-change: transform;
-    animation: r 4s linear infinite;
-    animation-delay: calc(-4s / @size() * @i());
-
-    --translate: translateY(calc(-66vmin / @size() * @i()));
-    @keyframes r {
-      from { transform: var(--translate) rotate(0) }
-      to { transform: var(--translate) rotateZ(-1turn) }
-    }
-
-    css-doodle:nth-child(2) {
+    .raindrop {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      background: #00f;
+      opacity: 0.5;
+      pointer-events: none;
+      animation: fall 3s linear infinite;
     }
 
-    css-doodle:nth-child(2) :doodle {
-      @grid: 1x3 / 100vmax;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
-
-    @size: 100% 100%; /* Adjusted size to make it smaller */
-    position: absolute;
-  
-    background: @m(100, (
-      linear-gradient(transparent, @p(
-        #FFFDE1@repeat(2, @p([0-9a-f])), 
-        #FB3569@repeat(2, @p([0-9a-f])) 
-      ))
-      @r(0%, 100%) @r(0%, 100%) /
-      @r(1px) @r(23vmin)
-      no-repeat
-    ));
-
-    will-change: transform;
-    animation: f 20s linear calc(-20s / @size() * @i()) infinite;
-    @keyframes f {
-      from { transform: translateY(-100%) }
-      to { transform: translateY(100%) }
+    @keyframes fall {
+      from {
+        transform: translateY(-10%);
+      }
+      to {
+        transform: translateY(110%);
+      }
     }
   </style>
 </head>
 <body>
-  <css-doodle>
-    :doodle {
-      @grid: 45x1 / 40vmin;
-      position: relative;
-      z-index: 1;
-    }
-    :container {
-      transform: translate(50%, 33vmin)
-    }
-    :after, :before {
-      content: '';
-      @place-cell: center;
-      @size: 50%;
-      background: radial-gradient(
-        @p(#FFFDE1, #FB3569) @r(70%),
-        transparent 0
-      )
-      @pn(30% 50%, 70% 50%, 50% 60%) /
-      @r(.1vmin, 5vmin) @lr()
-      no-repeat;
+  <div class="rain"></div>
+  <script>
+    // Function to create a new raindrop layer
+    function createRaindropLayer() {
+      const rain = document.querySelector('.rain');
+      const raindropLayer = document.createElement('div');
+      raindropLayer.classList.add('raindrop-layer');
+
+      for (let i = 0; i < 100; i++) {
+        const raindrop = document.createElement('div');
+        raindrop.classList.add('raindrop');
+        raindrop.style.left = Math.random() * 100 + 'vw';
+        raindrop.style.animationDuration = Math.random() * 2 + 1 + 's';
+        raindrop.style.animationDelay = Math.random() * 5 + 's';
+        raindropLayer.appendChild(raindrop);
+      }
+
+      rain.appendChild(raindropLayer);
     }
 
-    @place-cell: center;
-    @size: 100%;
+    // Initial raindrop layer
+    createRaindropLayer();
 
-    will-change: transform;
-    animation: r 4s linear infinite;
-    animation-delay: calc(-4s / @size() * @i());
-
-    --translate: translateY(calc(-66vmin / @size() * @i()));
-    @keyframes r {
-      from { transform: var(--translate) rotate(0) }
-      to { transform: var(--translate) rotateZ(-1turn) }
-    }
-  </css-doodle>
-
-  <css-doodle> 
-    :doodle {
-      @grid: 1x3 / 100vmax;
-      position: absolute;
-      top: 0; left: 0;
-      z-index: 0;
-    }
-
-    @size: 100% 100%; /* Adjusted size to make it smaller */
-    position: absolute;
-  
-    background: @m(100, (
-      linear-gradient(transparent, @p(
-        #FFFDE1@repeat(2, @p([0-9a-f])), 
-        #FB3569@repeat(2, @p([0-9a-f])) 
-      ))
-      @r(0%, 100%) @r(0%, 100%) /
-      @r(1px) @r(23vmin)
-      no-repeat
-    ));
-
-    will-change: transform;
-    animation: f 20s linear calc(-20s / @size() * @i()) infinite;
-    @keyframes f {
-      from { transform: translateY(-100%) }
-      to { transform: translateY(100%) }
-    }
-  </css-doodle>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.6.1/css-doodle.min.js"></script>
+    // Create new raindrop layer on touch event
+    document.addEventListener('touchstart', function() {
+      createRaindropLayer();
+    });
+  </script>
 </body>
 </html>
