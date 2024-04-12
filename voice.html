@@ -1,71 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rainy Background</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      overflow: hidden;
-    }
-
-    .rain {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-
-    .raindrop {
-      position: absolute;
-      background: #00f;
-      opacity: 0.5;
-      pointer-events: none;
-      animation: fall 3s linear infinite;
-    }
-
-    @keyframes fall {
-      from {
-        transform: translateY(-10%);
-      }
-      to {
-        transform: translateY(110%);
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Solar System Simulation</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #212121;
+        }
+        #canvas {
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
 </head>
 <body>
-  <div class="rain"></div>
-  <script>
-    // Function to create a new raindrop layer
-    function createRaindropLayer() {
-      const rain = document.querySelector('.rain');
-      const raindropLayer = document.createElement('div');
-      raindropLayer.classList.add('raindrop-layer');
+    <canvas id="canvas">Your browser doesn't support canvas</canvas>
 
-      for (let i = 0; i < 100; i++) {
-        const raindrop = document.createElement('div');
-        raindrop.classList.add('raindrop');
-        raindrop.style.left = Math.random() * 100 + 'vw';
-        raindrop.style.animationDuration = Math.random() * 2 + 1 + 's';
-        raindrop.style.animationDelay = Math.random() * 5 + 's';
-        raindropLayer.appendChild(raindrop);
-      }
+    <script>
+        const TWO_PI = Math.PI * 2;
+        const ALLOWED_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-      rain.appendChild(raindropLayer);
-    }
+        const settings = {
+            spawnMass: 25,
+            pauseWhileAiming: false,
+            amountOfPredictions: 200
+        };
 
-    // Initial raindrop layer
-    createRaindropLayer();
+        class Vector2D {
+            constructor(x, y) {
+                this._x = x;
+                this._y = y;
+            }
+            setX(x) {
+                this._x = x;
+            }
+            setY(y) {
+                this._y = y;
+            }
+            getX() {
+                return this._x;
+            }
+            getY() {
+                return this._y;
+            }
+            setAngle(angle) {
+                let length = this.getLength();
+                this._x = Math.cos(angle) * length;
+                this._y = Math.sin(angle) * length;
+            }
+            getAngle() {
+                return Math.atan2(this._y, this._x);
+            }
+            setLength(length) {
+                let angle = this.getAngle();
+                this._x = Math.cos(angle) * length;
+                this._y = Math.sin(angle) * length;
+            }
+            getLength() {
+                return Math.sqrt(this._x * this._x + this._y * this._y);
+            }
+            add(v2) {
+                return new Vector2D(this._x + v2.getX(), this._y + v2.getY());
+            }
+            subtract(v2) {
+                return new Vector2D(this._x - v2.getX(), this._y - v2.getY());
+            }
+            multiply(value) {
+                return new Vector2D(this._x * value, this._y * value);
+            }
+            divide(value) {
+                return new Vector2D(this._x / value, this._y / value);
+            }
+            addTo(v2) {
+                this._x += v2.getX();
+                this._y += v2.getY();
+            }
+            subtractFrom(v2) {
+                this._x -= v2.getX();
+                this._y -= v2.getY();
+            }
+            multiplyBy(value) {
+                this._x *= value;
+                this._y *= value;
+            }
+            divideBy(value) {
+                this._x /= value;
+                this._y /= value;
+            }
+        }
 
-    // Create new raindrop layer on touch event
-    document.addEventListener('touchstart', function() {
-      createRaindropLayer();
-    });
-  </script>
+        class Utils {
+            static getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            static randomString(length) {
+                let text = "";
+                for (let i = 0; i < length; i++) {
+                    text += ALLOWED_CHARACTERS.charAt(Math.floor(Math.random() * ALLOWED_CHARACTERS.length));
+                }
+                return text;
+            }
+        }
+
+        class Application {
+            constructor() {
+                this.canvas = document.getElementById("canvas");
+                this.context = this.canvas.getContext("2d");
+                this.width = this.canvas.width = window.innerWidth;
+                this.height = this.canvas.height = window.innerHeight;
+                this.center = {
+                    x: this.width / 2,
+                    y: this.height / 2
+                };
+
+                this.solarSystem = new SolarSystem();
+                this.planetLauncher = new PlanetLauncher(this.canvas, this.solarSystem);
+
+                window.addEventListener('resize', () => this.resizeCanvas(), false);
+            }
+
+            resizeCanvas() {
+                this.width = this.canvas.width = window.innerWidth;
+                this.height = this.canvas.height = window.innerHeight;
+                this.center = {
+                    x: this.width / 2,
+                    y: this.height / 2
+                };
+
+                this.reset();
+            }
+
+            update() {
+                if (settings.pauseWhileAiming === false) {
+                    this.solarSystem.update();
+                } else if (settings.pauseWhileAiming === true && this.planetLauncher.isMouseDown === false) {
+                    this.solarSystem.update();
+                }
+
+                this.planetLauncher.update();
+            }
+
+            render() {
+                this.context.clearRect(0, 0, this.width, this.height);
+
+                this.solarSystem.render(this.context);
+                this.planetLauncher.render(this.context);
+            }
+
+            loop() {
+                this.update();
+                this.render();
+
+                window.requestAnimationFrame(() => this.loop());
+            }
+
+            reset() {
+                this.solarSystem.planets = [];
+                this.solarSystem.initializePlanets(this.center);
+            }
+        }
+
+        class SolarSystem {
+            constructor() {
+                this.planets = [];
+            }
+
+            initializePlanets(center) {
+                this.planets.push(new Planet(center.x, center.y, 0, 0, 200));
+                this.planets.push(new Planet(center.x, center.y - 150, 1.1, 0, 25));
+                this.planets.push(new Planet(center.x + 70, center.y - 90, 1.45, Math.PI, 25));
+                this.planets.push(new Planet(center.x - 180, center.y + 160, 1, Math.PI / 1.4, 25));
+                this.planets.push(new Planet(center.x + 250, center.y + 250, 0.6, -Math.PI / 2, 25));
+                this.planets.push(new Planet(center.x - 250, center.y + 250, 0.7, Math.PI / 1.5, 25));
+                this.planets.push(new Planet(center.x + 50, center.y + 400, 0.5, Math.PI / 3, 25));
+                this.planets.push(new Planet(center.x - 350, center.y - 350, 0.4, Math.PI / 2, 25));
+            }
+
+            update() {
+                for (let i = 0; i < this.planets.length; i++) {
+                    let planet = this.planets[i];
+                    planet.update(this.planets);
+                }
+            }
+
+            render(context) {
+                for (let i = 0; i < this.planets.length; i++) {
+                    let planet = this.planets[i];
+                    planet.render(context);
+                }
+            }
+        }
+
+        class Planet {
+            constructor(x, y, speed, angle, size) {
+                this.position = new Vector2D(x, y);
+                this.velocity = new Vector2D(speed, 0).setAngle(angle);
+                this.size = size;
+                this.mass = this.size * 1;
+            }
+
+            update(planets) {
+                for (let i = 0; i < planets.length; i++) {
+                    let planet = planets[i];
+                    if (planet !== this) {
+                        let distance = this.position.subtract(planet.position).getLength();
+                        let gravityForce = Math.min(0.1, planet.mass / distance);
+                        let angle = this.position.subtract(planet.position).getAngle();
+                        let gravityVector = new Vector2D(0, gravityForce).setAngle(angle);
+
+                        this.velocity.addTo(gravityVector);
+                    }
+                }
+                this.position.addTo(this.velocity);
+            }
+
+            render(context) {
+                context.beginPath();
+                context.arc(this.position.getX(), this.position.getY(), this.size, 0, TWO_PI);
+                context.fillStyle = "#fff";
+                context.fill();
+                context.closePath();
+            }
+        }
+
+        class PlanetLauncher {
+            constructor(canvas, solarSystem) {
+                this.canvas = canvas;
+                this.context = this.canvas.getContext('2d');
+                this.solarSystem = solarSystem;
+                this.mouse = new Vector2D(0, 0);
+                this.isMouseDown = false;
+
+                this.canvas.addEventListener('mousedown', (event) => this.onMouseDown(event));
+                this.canvas.addEventListener('mousemove', (event) => this.onMouseMove(event));
+                this.canvas.addEventListener('mouseup', (event) => this.onMouseUp(event));
+            }
+
+            onMouseDown(event) {
+                this.isMouseDown = true;
+            }
+
+            onMouseMove(event) {
+                this.mouse.setX(event.clientX);
+                this.mouse.setY(event.clientY);
+            }
+
+            onMouseUp(event) {
+                if (this.isMouseDown) {
+                    let speed = Utils.getRandomInt(5, 10);
+                    let angle = this.solarSystem.planets[0].position.subtract(this.mouse).getAngle() + Math.PI;
+
+                    this.solarSystem.planets.push(new Planet(this.solarSystem.planets[0].position.getX(), this.solarSystem.planets[0].position.getY(), speed, angle, settings.spawnMass));
+                }
+                this.isMouseDown = false;
+            }
+
+            update() {}
+
+            render() {}
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
+
+    <script>
+        window.onload = function () {
+            const application = new Application();
+            application.solarSystem.initializePlanets(application.center);
+
+            const gui = new dat.GUI();
+            gui.add(settings, 'spawnMass', 5, 200);
+            gui.add(settings, 'amountOfPredictions', 50, 500);
+            gui.add(settings, 'pauseWhileAiming');
+            gui.add(application, 'reset');
+            gui.close();
+
+            application.loop();
+        };
+    </script>
 </body>
 </html>
