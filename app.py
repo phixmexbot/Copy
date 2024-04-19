@@ -4,7 +4,7 @@ import random
 import requests
 from flask import Flask, render_template, request
 
-BOT_TOKEN = '6966843961:AAF8aUAVdZaddSeYJnGFcUerketBSvyfFFo'
+BOT_TOKEN = '6966843961:AAHWbv6Mh8yU4AO4T6HGhAD5x64Fcg0VHtA'
 CONNECTION = 'l5fqrAiviEj0CAAALAJbw05zldA'
 REACTIONS = ['👍', '🔥', '❤️', '👏', '🕊']
 
