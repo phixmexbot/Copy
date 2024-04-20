@@ -6,10 +6,20 @@
     <title>Mobile Chatbot</title>
     <style>
 /* Add your CSS styles here */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Set the height of the body to fill the viewport */
+    background: linear-gradient(to bottom, #2980b9, #6ab7ff); /* Define the gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .chat-container {
     width: calc(100% - 20px);
     padding: 10px;
-    background-color: #f5f5f5;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
     border-radius: 10px;
     overflow-y: scroll;
     height: 300px; /* Adjust height as needed */
