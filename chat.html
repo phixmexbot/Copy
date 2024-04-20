@@ -7,33 +7,45 @@
     <style>
 /* Add your CSS styles here */
 .chat-container {
-    width: calc(100% - 40px); /* Set a fixed width with padding */
-    padding: 20px;
-    background-color: #f4f4f4;
+    width: calc(100% - 20px);
+    padding: 10px;
+    background-color: #f5f5f5;
     border-radius: 10px;
     overflow-y: scroll;
     height: 300px; /* Adjust height as needed */
     box-sizing: border-box; /* Include padding and borders in the width calculation */
     margin: 0 auto; /* Center the chat container */
 }
+
 .chat-bubble {
+    background-color: #DCF8C6;
+    color: #000;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px;
+    max-width: 70%;
+    align-self: flex-start; /* Align chat bubbles to the left */
+}
+
+.user-bubble {
     background-color: #007bff;
     color: #fff;
-    padding: 10px 15px;
-    border-radius: 20px;
+    padding: 10px;
+    border-radius: 10px;
     margin: 5px;
-    max-width: 80%;
+    max-width: 70%;
+    align-self: flex-end; /* Align user chat bubbles to the right */
 }
+
 .user-input {
-    width: calc(100% - 40px); /* Set the width to match the chat container */
+    width: calc(100% - 20px);
     margin: 0 auto;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 5px;
     margin-top: 10px;
     box-sizing: border-box; /* Include padding and borders in the width calculation */
 }
-
     </style>
 </head>
 <body>
