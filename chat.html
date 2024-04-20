@@ -10,59 +10,72 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh; /* Set the height of the body to fill the viewport */
-    background: linear-gradient(to bottom, #2980b9, #6ab7ff); /* Define the gradient */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
 }
 
 .chat-container {
-    width: calc(100% - 20px);
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    flex: 1;
+    padding: 20px;
+    background-color: #f4f4f4;
     border-radius: 10px;
     overflow-y: scroll;
-    height: 300px; /* Adjust height as needed */
-    box-sizing: border-box; /* Include padding and borders in the width calculation */
-    margin: 0 auto; /* Center the chat container */
 }
 
 .chat-bubble {
-    background-color: #DCF8C6;
-    color: #000;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 5px;
-    max-width: 70%;
-    align-self: flex-start; /* Align chat bubbles to the left */
-}
-
-.user-bubble {
     background-color: #007bff;
     color: #fff;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 10px 15px;
+    border-radius: 20px;
     margin: 5px;
-    max-width: 70%;
-    align-self: flex-end; /* Align user chat bubbles to the right */
+    max-width: 80%;
+}
+
+.user-input-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .user-input {
-    width: calc(100% - 20px);
-    margin: 0 auto;
+    flex: 1;
     padding: 10px;
     border: none;
-    border-radius: 5px;
-    margin-top: 10px;
-    box-sizing: border-box; /* Include padding and borders in the width calculation */
+    border-radius: 20px;
+    margin-right: 10px;
 }
+
+.user-input::placeholder {
+    color: #aaa; /* Placeholder color */
+}
+
+.action-icon {
+    margin-left: 10px;
+}
+
+.action-icon img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
     </style>
 </head>
 <body>
     <div class="chat-container" id="chat-container">
         <!-- Chat messages will be appended here -->
     </div>
-    <input type="text" id="user-input" class="user-input" placeholder="Type your message...">
+    <div class="user-input-container">
+        <input type="text" id="user-input" class="user-input" placeholder="Text Message...">
+        <div class="action-icon">
+            <!-- Add your icon here (e.g., an icon representing sending pictures or voice messages) -->
+            <img src="picture_icon.png" alt="Picture Icon">
+        </div>
+    </div>
     
     <script>
         const chatContainer = document.getElementById('chat-container');
