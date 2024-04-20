@@ -2,7 +2,7 @@ import time
 import json
 import random
 import requests
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 
 BOT_TOKEN = '6966843961:AAHWbv6Mh8yU4AO4T6HGhAD5x64Fcg0VHtA'
 CONNECTION = 'l5fqrAiviEj0CAAALAJbw05zldA'
@@ -55,11 +55,11 @@ def chat():
     else:
         return 'Error'
 
-@app.route('/process', methods=['POST'])
+@app.route('/process_input', methods=['POST'])
 def process_input():
-    input = request.json['message']
-    response = "You said: " + input
-    return response
+    user_input = request.json['message']
+    response = "You said: " + user_input
+    return jsonify({'response': response})
 
         
 def process(update):
