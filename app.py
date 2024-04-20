@@ -54,6 +54,13 @@ def chat():
         return render_template('chat.html')
     else:
         return 'Error'
+
+@app.route('/process', methods=['POST'])
+def process_input():
+    input = request.json['message']
+    response = "You said: " + input
+    return response
+
         
 def process(update):
     requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': update})
