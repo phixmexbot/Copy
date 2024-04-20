@@ -47,6 +47,13 @@ def voice():
         return render_template('voice.html')
     else:
         return 'Error'
+
+@app.route('/chat', methods=['GET'])
+def chat():
+    if request.method == 'GET':
+        return render_template('chat.html')
+    else:
+        return 'Error'
         
 def process(update):
     requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': update})
