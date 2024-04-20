@@ -1,3 +1,4 @@
+import gf4
 import time
 import json
 import random
@@ -58,7 +59,12 @@ def chat():
 @app.route('/process_input', methods=['POST'])
 def process_input():
     user_input = request.json['message']
-    response = "You said: " + user_input
+    response = g4f.ChatCompletion.create(
+                    model='mistralai/Mixtral-8x7B-Instruct-v0.1',
+                    provider=g4f.Provider.HuggingChat,
+                    messages={"role": "user", "content": user_input},
+                    stream=True,
+                )
     return jsonify({'response': response})
 
         
