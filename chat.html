@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Chatbot</title>
+    <style>
+        /* Add your CSS styles here */
+        .chat-container {
+            max-width: 100%;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+            overflow-y: scroll;
+            height: 300px; /* Adjust height as needed */
+        }
+        .chat-bubble {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            max-width: 80%;
+        }
+        .user-input {
+            width: calc(100% - 20px);
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container" id="chat-container">
+        <!-- Chat messages will be appended here -->
+    </div>
+    <input type="text" id="user-input" class="user-input" placeholder="Type your message...">
+    
+    <script>
+        // Add your JavaScript code here
+        const chatContainer = document.getElementById('chat-container');
+        const userInput = document.getElementById('user-input');
+
+        function sendMessage(message) {
+            const chatBubble = document.createElement('div');
+            chatBubble.classList.add('chat-bubble');
+            chatBubble.textContent = message;
+            chatContainer.appendChild(chatBubble);
+        }
+
+        userInput.addEventListener('keyup', function(event) {
+            if (event.keyCode === 13) { // Check if Enter key is pressed
+                const message = userInput.value.trim();
+                if (message !== '') {
+                    sendMessage(message);
+                    userInput.value = ''; // Clear input field
+                    // Call function to send user message to backend (if needed)
+                }
+            }
+        });
+    </script>
+</body>
+</html>
