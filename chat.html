@@ -18,7 +18,6 @@ body {
     flex: 1;
     padding: 20px;
     background-color: #f4f4f4;
-    border-radius: 10px;
     overflow-y: scroll;
 }
 
@@ -26,7 +25,7 @@ body {
     background-color: #007bff;
     color: #fff;
     padding: 10px 15px;
-    border-radius: 20px;
+    border-radius: 10px; /* Optionally keep border radius for chat bubbles */
     margin: 5px;
     max-width: 80%;
 }
@@ -37,15 +36,15 @@ body {
     padding: 10px;
     background-color: #fff;
     border-top: 1px solid #ccc;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px; /* Circular edge for bottom left corner of input container */
+    border-bottom-right-radius: 20px; /* Circular edge for bottom right corner of input container */
 }
 
 .user-input {
     flex: 1;
     padding: 10px;
     border: none;
-    border-radius: 20px;
+    border-radius: 0; /* Remove border radius for input field */
     margin-right: 10px;
 }
 
@@ -62,6 +61,7 @@ body {
     height: 24px;
     cursor: pointer;
 }
+
 
     </style>
 </head>
