@@ -56,8 +56,8 @@ def chat():
     else:
         return 'Error'
 
-@app.route('/process_input', methods=['POST'])
-def process_input():
+@app.route('/process', methods=['POST'])
+def process():
     user_input = request.json['message']
     response = g4f.ChatCompletion.create(
                     model='mistralai/Mixtral-8x7B-Instruct-v0.1',
@@ -65,7 +65,10 @@ def process_input():
                     messages={"role": "user", "content": user_input},
                     stream=True,
                 )
-    return jsonify({'response': response})
+    output = ''
+    for message in response:
+        output += message
+    return jsonify({'response': output})
 
         
 def process(update):
