@@ -68,6 +68,7 @@ def process():
     output = ''
     for message in response:
         output += message
+    print(output)
     return jsonify({'response': output})
 
         
