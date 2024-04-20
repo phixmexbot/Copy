@@ -1,4 +1,4 @@
-import gf4
+import g4f
 import time
 import json
 import random
