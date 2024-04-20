@@ -55,7 +55,7 @@
                 if (message !== '') {
                     sendMessage(message);
                     userInput.value = ''; // Clear input field
-                    fetch('/process_input', {
+                    fetch('/process', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
