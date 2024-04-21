@@ -59,6 +59,7 @@ def chat():
 @app.route('/process', methods=['POST'])
 def process():
     if 'file' in request.files:
+        print('keldi')
         return jsonify({'responce': 'yedi'})
     else:
         user_input = request.json['message']
