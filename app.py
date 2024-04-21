@@ -78,7 +78,7 @@ def process():
             ],
             stream=True,
         )
-        output = ''
+    output = ''
     for message in response:
         output += message
     print(output)
