@@ -189,6 +189,8 @@
         fileInput.addEventListener('change', function(event) {
             const file = fileInput.files[0]; // Get the selected file
             if (file) {
+                const message = `File uploaded: ${file.name}`;
+                sendMessage(message, 'user');
                 // Create FormData object
                 const formData = new FormData();
                 formData.append('file', file);
@@ -198,22 +200,10 @@
                     method: 'POST',
                     body: formData
                 })
-                .then(response => {
-                    if (response.ok) {
-                        return response.text();
-                    }
-                    throw new Error('Network response was not ok.');
-                })
+                .then(response => response.json())
                 .then(data => {
-                    // Handle success response
-                    const message = `File uploaded: ${file.name}`;
-                    sendMessage(message, 'user');
+                    sendMessage(data.response, 'system');
                 })
-                .catch(error => {
-                    // Handle error
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-        
                 // Clear the file input
                 fileInput.value = ''; 
             }
