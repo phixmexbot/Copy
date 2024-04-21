@@ -135,18 +135,31 @@
     </div>
     <div class="user-input-container">
         <input type="text" id="user-input" class="user-input" placeholder="Type your message...">
-        <div class="action-icon">
-            <!-- Add your icon here -->
+        <input type="file" id="file-input" accept="image/*" style="display: none;"> <!-- Hidden file input -->
+        <div class="action-icon" onclick="document.getElementById('file-input').click();"> <!-- Clicking this icon will trigger file input click -->
+            <!-- Use a custom icon for the attachment button -->
             <img src="https://www.svgrepo.com/show/7884/attachment.svg" alt="Attach">
         </div>
         <div class="voice-button">
             <!-- Replace the voice icon with your picture icon -->
-            <img src="https://icones.pro/wp-content/uploads/2021/12/icone-de-microphone-jaune.png" alt="Voice">
+            <img src="https://icones.pro/wp-content/uploads/2021/12/icone-de-microphone-jaune.png" alt="Voice" id="start-record">
+        </div>
+        <div class="voice-button" style="display: none;">
+            <!-- Icons for discarding and sending the voice message -->
+            <img src="https://icones.pro/wp-content/uploads/2021/12/icone-de-microphone-jaune.png" alt="Discard" id="discard-record">
+            <img src="https://icones.pro/wp-content/uploads/2021/12/icone-de-microphone-jaune.png" alt="Send" id="send-record">
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/recorderjs/dist/recorder.min.js"></script>
     <script>
         const chatContainer = document.getElementById('chat-container');
         const userInput = document.getElementById('user-input');
+        const fileInput = document.getElementById('file-input');
+        const startRecordBtn = document.getElementById('start-record');
+        const discardRecordBtn = document.getElementById('discard-record');
+        const sendRecordBtn = document.getElementById('send-record');
+
+        let recorder;
 
         function sendMessage(message, sender) {
             const chatBubble = document.createElement('div');
@@ -156,9 +169,33 @@
             } else {
                 chatBubble.classList.add('system-message');
             }
-            chatBubble.textContent = message;
+
+            // Check if message is a file
+            if (message.startsWith('File uploaded:')) {
+                const fileUrl = URL.createObjectURL(fileInput.files[0]);
+                const fileImg = document.createElement('img');
+                fileImg.src = fileUrl;
+                fileImg.style.maxWidth = '100%';
+                fileImg.style.height = 'auto';
+                chatBubble.appendChild(fileImg);
+            } else {
+                chatBubble.textContent = message;
+            }
+
             chatContainer.appendChild(chatBubble);
         }
+
+        // Event listener for file input change
+        fileInput.addEventListener('change', function(event) {
+            const file = fileInput.files[0]; // Get the selected file
+            if (file) {
+                // You can handle the file here, for example, display a preview or upload it
+                const message = `File uploaded: ${file.name}`;
+                sendMessage(message, 'user');
+                // You may also want to clear the file input for the next selection
+                fileInput.value = ''; // Clear the file input
+            }
+        });
 
         userInput.addEventListener('keyup', function(event) {
             if (event.keyCode === 13) { // Check if Enter key is pressed
@@ -181,6 +218,48 @@
                 }
             }
         });
+
+        function startRecording() {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(function(stream) {
+                    const audioContext = new AudioContext();
+                    const input = audioContext.createMediaStreamSource(stream);
+                    recorder = new Recorder(input);
+                    recorder.record();
+                    startRecordBtn.style.display = 'none';
+                    discardRecordBtn.style.display = 'inline-block';
+                    sendRecordBtn.style.display = 'inline-block';
+                })
+                .catch(function(err) {
+                    console.error('Error: ', err);
+                });
+        }
+
+        function stopRecording() {
+            recorder.stop();
+            recorder.exportWAV(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const audio = new Audio(url);
+                audio.controls = true;
+                chatContainer.appendChild(audio);
+            });
+            recorder.clear();
+        }
+
+        startRecordBtn.addEventListener('click', startRecording);
+        discardRecordBtn.addEventListener('click', function() {
+            recorder.clear();
+            startRecordBtn.style.display = 'inline-block';
+            discardRecordBtn.style.display = 'none';
+            sendRecordBtn.style.display = 'none';
+        });
+        sendRecordBtn.addEventListener('click', function() {
+            stopRecording();
+            startRecordBtn.style.display = 'inline-block';
+            discardRecordBtn.style.display = 'none';
+            sendRecordBtn.style.display = 'none';
+        });
     </script>
 </body>
+
 </html>
