@@ -9,34 +9,42 @@
         body {
             margin: 0;
             padding: 0;
-            height: 100vh; /* Set the height of the body to fill the viewport */
+            height: 100vh;
             display: flex;
             flex-direction: column;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Soft background color */
         }
 
         .chat-container {
             flex: 1;
             padding: 20px;
-            background: linear-gradient(135deg, #354f52, #2f3e46); /* Gradient background */
+            background: linear-gradient(135deg, #354f52, #2f3e46);
             overflow-y: scroll;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
         }
 
         .chat-bubble {
             padding: 10px 15px;
-            border-radius: 10px; /* Optionally keep border radius for chat bubbles */
+            border-radius: 10px;
             margin: 5px;
             max-width: 80%;
+            word-wrap: break-word; /* Wrap long words */
         }
 
         .user-message {
-            background-color: #4CAF50; /* Green */
+            background-color: #4CAF50;
             color: white;
-            align-self: flex-end; /* Align user messages to the right */
+            align-self: flex-end;
+            animation: fadeInRight 0.5s ease; /* Smooth animation for message appearance */
         }
 
         .system-message {
-            background-color: #007bff; /* Blue */
+            background-color: #007bff;
             color: white;
+            animation: fadeInLeft 0.5s ease; /* Smooth animation for message appearance */
         }
 
         .user-input-container {
@@ -45,45 +53,75 @@
             align-items: center;
             padding: 10px;
             background-color: #fff;
-            border-top: 1px solid #ccc;
-            border-bottom-left-radius: 20px; /* Circular edge for bottom left corner of input container */
-            border-bottom-right-radius: 20px; /* Circular edge for bottom right corner of input container */
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
         }
 
         .user-input {
             flex: 1;
             padding: 10px;
             border: none;
-            border-radius: 20px; /* Circular edges for input field */
+            border-radius: 20px;
             margin-right: 10px;
-            transition: background-color 0.3s; /* Smooth transition for background color change */
+            transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+            font-size: 14px; /* Adjust font size for better readability */
+            outline: none; /* Remove default outline */
         }
 
         .user-input::placeholder {
-            color: #aaa; /* Placeholder color */
+            color: #aaa;
         }
 
         .user-input:focus {
-            background-color: #ffeeba; /* Yellowish color when focused */
-        }
-
-        .action-icon {
-            margin-left: 10px;
+            background-color: #ffef96; /* Soft yellowish color when focused */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Slight shadow when focused */
         }
 
         .action-icon img {
             width: 24px;
             height: 24px;
             cursor: pointer;
+            transition: transform 0.3s; /* Smooth transition for icon */
+        }
+
+        .action-icon img:hover {
+            transform: scale(1.1); /* Enlarge icon on hover */
         }
 
         .voice-button {
-            margin-left: 10px;
             width: 24px;
             height: 24px;
             cursor: pointer;
-            background-color: #007bff; /* Blue */
+            background-color: #007bff;
             border-radius: 50%;
+            transition: transform 0.3s; /* Smooth transition for button */
+        }
+
+        .voice-button:hover {
+            transform: scale(1.1); /* Enlarge button on hover */
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px); /* Start slightly off to the right */
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0); /* Move to original position */
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px); /* Start slightly off to the left */
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0); /* Move to original position */
+            }
         }
     </style>
 </head>
@@ -92,10 +130,10 @@
         <!-- Chat messages will be appended here -->
     </div>
     <div class="user-input-container">
-        <input type="text" id="user-input" class="user-input" placeholder="Text Message...">
+        <input type="text" id="user-input" class="user-input" placeholder="Type your message...">
         <div class="action-icon">
-            <!-- Add your icon here (e.g., an icon representing sending pictures or voice messages) -->
-            <img src="picture.png" alt="Picture Icon">
+            <!-- Add your icon here -->
+            <img src="picture_icon.png" alt="Picture Icon">
         </div>
         <div class="voice-button"></div>
     </div>
@@ -114,26 +152,18 @@
             }
             chatBubble.textContent = message;
             chatContainer.appendChild(chatBubble);
+            chatContainer.scrollTop = chatContainer.scrollHeight; /* Scroll to bottom */
         }
 
         userInput.addEventListener('keyup', function(event) {
-            if (event.keyCode === 13) { // Check if Enter key is pressed
+            if (event.key === 'Enter') { // Check if Enter key is pressed
                 const message = userInput.value.trim();
                 if (message !== '') {
                     sendMessage(message, 'user');
                     userInput.value = ''; // Clear input field
-                    fetch('/process', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ message: message })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        sendMessage(data.response, 'system');
-                    })
-                    .catch(error => console.error('Error:', error));
+                    // Simulate system response (replace with actual logic)
+                    const systemResponse = 'Thank you for your message!';
+                    setTimeout(() => { sendMessage(systemResponse, 'system'); }, 1000); // Simulate delay
                 }
             }
         });
