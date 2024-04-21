@@ -5,64 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile Chatbot</title>
     <style>
-/* Add your CSS styles here */
-body {
-    margin: 0;
-    padding: 0;
-    height: 100vh; /* Set the height of the body to fill the viewport */
-    display: flex;
-    flex-direction: column;
-}
+        /* Add your CSS styles here */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Set the height of the body to fill the viewport */
+            display: flex;
+            flex-direction: column;
+        }
 
-.chat-container {
-    flex: 1;
-    padding: 20px;
-    background-color: #f4f4f4;
-    overflow-y: scroll;
-}
+        .chat-container {
+            flex: 1;
+            padding: 20px;
+            background-color: #f4f4f4;
+            overflow-y: scroll;
+        }
 
-.chat-bubble {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 10px; /* Optionally keep border radius for chat bubbles */
-    margin: 5px;
-    max-width: 80%;
-}
+        .chat-bubble {
+            padding: 10px 15px;
+            border-radius: 10px; /* Optionally keep border radius for chat bubbles */
+            margin: 5px;
+            max-width: 80%;
+        }
 
-.user-input-container {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: #fff;
-    border-top: 1px solid #ccc;
-    border-bottom-left-radius: 20px; /* Circular edge for bottom left corner of input container */
-    border-bottom-right-radius: 20px; /* Circular edge for bottom right corner of input container */
-}
+        .user-message {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            align-self: flex-end; /* Align user messages to the right */
+        }
 
-.user-input {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 0; /* Remove border radius for input field */
-    margin-right: 10px;
-}
+        .system-message {
+            background-color: #007bff; /* Blue */
+            color: white;
+        }
 
-.user-input::placeholder {
-    color: #aaa; /* Placeholder color */
-}
+        .user-input-container {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            border-top: 1px solid #ccc;
+            border-bottom-left-radius: 20px; /* Circular edge for bottom left corner of input container */
+            border-bottom-right-radius: 20px; /* Circular edge for bottom right corner of input container */
+        }
 
-.action-icon {
-    margin-left: 10px;
-}
+        .user-input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 0; /* Remove border radius for input field */
+            margin-right: 10px;
+        }
 
-.action-icon img {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-}
+        .user-input::placeholder {
+            color: #aaa; /* Placeholder color */
+        }
 
+        .action-icon {
+            margin-left: 10px;
+        }
 
+        .action-icon img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -81,9 +88,14 @@ body {
         const chatContainer = document.getElementById('chat-container');
         const userInput = document.getElementById('user-input');
 
-        function sendMessage(message) {
+        function sendMessage(message, sender) {
             const chatBubble = document.createElement('div');
             chatBubble.classList.add('chat-bubble');
+            if (sender === 'user') {
+                chatBubble.classList.add('user-message');
+            } else {
+                chatBubble.classList.add('system-message');
+            }
             chatBubble.textContent = message;
             chatContainer.appendChild(chatBubble);
         }
@@ -92,7 +104,7 @@ body {
             if (event.keyCode === 13) { // Check if Enter key is pressed
                 const message = userInput.value.trim();
                 if (message !== '') {
-                    sendMessage(message);
+                    sendMessage(message, 'user');
                     userInput.value = ''; // Clear input field
                     fetch('/process', {
                         method: 'POST',
@@ -103,7 +115,7 @@ body {
                     })
                     .then(response => response.json())
                     .then(data => {
-                        sendMessage(data.response);
+                        sendMessage(data.response, 'system');
                     })
                     .catch(error => console.error('Error:', error));
                 }
