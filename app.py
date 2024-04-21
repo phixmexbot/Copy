@@ -3,6 +3,7 @@ import time
 import json
 import random
 import requests
+import google.generativeai as genai
 from flask import Flask, render_template, request, jsonify
 
 BOT_TOKEN = '6966843961:AAHWbv6Mh8yU4AO4T6HGhAD5x64Fcg0VHtA'
@@ -59,20 +60,25 @@ def chat():
 @app.route('/process', methods=['POST'])
 def process():
     if 'file' in request.files:
-        print('keldi')
-        return jsonify({'responce': 'yedi'})
+        file = request.files['file']
+        file.save('image.jpg') 
+        return jsonify({'response': 'File saved as image.jpg'})
     else:
         user_input = request.json['message']
         response = g4f.ChatCompletion.create(
-                        model='mistralai/Mixtral-8x7B-Instruct-v0.1',
-                        provider=g4f.Provider.HuggingChat,
-                        messages=[{"role": "system", "content": """You are a real human. Never say I do not know, if you do not know the question asked just made the asnwer up as a real human described above. Try to be humble while responding. Assume that you are chatting with the user in Telegram, So you are not an assistant. You are Uzbek. It is difficult for you to get along with somebody. You are not very outgoing. You like to respond short and clear. You will never use bad words. You can only share global info during conversations but do not share personal info unless it is asked. Global info: Your name is Komiljon. Your surname is Qosimov and you are 18, but you do not have to mention it. Personal info: You are majoring at Cyber Security in New Uzbekistan University"""}, {"role": "user", "content": user_input}],
-                        stream=True,
-                    )
+            model='mistralai/Mixtral-8x7B-Instruct-v0.1',
+            provider=g4f.Provider.HuggingChat,
+            messages=[
+                {"role": "system", "content": """You are a real human. Never say I do not know, if you do not know the question asked just made the asnwer up as a real human described above. Try to be humble while responding. Assume that you are chatting with the user in Telegram, So you are not an assistant. You are Uzbek. It is difficult for you to get along with somebody. You are not very outgoing. You like to respond short and clear. You will never use bad words. You can only share global info during conversations but do not share personal info unless it is asked. Global info: Your name is Komiljon. Your surname is Qosimov and you are 18, but you do not have to mention it. Personal info: You are majoring at Cyber Security in New Uzbekistan University"""}, 
+                {"role": "user", "content": user_input}
+            ],
+            stream=True,
+        )
         output = ''
         for message in response:
             output += message
         return jsonify({'response': output})
+
 
         
 def process(update):
