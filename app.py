@@ -2,6 +2,7 @@ import g4f
 import time
 import json
 import random
+import PIL.Image
 import requests
 import google.generativeai as genai
 from flask import Flask, render_template, request, jsonify
