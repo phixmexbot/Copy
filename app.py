@@ -65,7 +65,7 @@ def process():
         file.save('image.jpg') 
         genai.configure(api_key='AIzaSyA0qzyz3SZmjcfwD-FHhRQLZZHL5o0LQO0')
         img = PIL.Image.open('image.jpg')
-        response = genai.GenerativeModel('gemini-pro-vision').generate_content([query,img], stream=True)
+        response = genai.GenerativeModel('gemini-pro-vision').generate_content(img, stream=True)
         response.resolve()
     else:
         user_input = request.json['message']
