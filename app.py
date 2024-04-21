@@ -62,7 +62,10 @@ def process():
     if 'file' in request.files:
         file = request.files['file']
         file.save('image.jpg') 
-        return jsonify({'response': 'File saved as image.jpg'})
+        genai.configure(api_key='AIzaSyA0qzyz3SZmjcfwD-FHhRQLZZHL5o0LQO0')
+        img = PIL.Image.open('image.jpg')
+        response = genai.GenerativeModel('gemini-pro-vision').generate_content([query,img], stream=True)
+        response.resolve()
     else:
         user_input = request.json['message']
         response = g4f.ChatCompletion.create(
@@ -75,9 +78,10 @@ def process():
             stream=True,
         )
         output = ''
-        for message in response:
-            output += message
-        return jsonify({'response': output})
+    for message in response:
+        output += message
+    print(output)
+    return jsonify({'response': output})
 
 
         
