@@ -1,5 +1,6 @@
 g4f
 flask
+Pillow
 gunicorn
 requests
 google-generativeai
