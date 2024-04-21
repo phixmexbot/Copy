@@ -67,6 +67,11 @@ def process():
         img = PIL.Image.open('image.jpg')
         response = genai.GenerativeModel('gemini-pro-vision').generate_content(img, stream=True)
         response.resolve()
+        output = ''
+        for message in response:
+            output += message.text
+        print(output)
+        return jsonify({'response': output})
     else:
         user_input = request.json['message']
         response = g4f.ChatCompletion.create(
@@ -78,11 +83,11 @@ def process():
             ],
             stream=True,
         )
-    output = ''
-    for message in response:
-        output += message
-    print(output)
-    return jsonify({'response': output})
+        output = ''
+        for message in response:
+            output += message
+        print(output)
+        return jsonify({'response': output})
 
 
         
