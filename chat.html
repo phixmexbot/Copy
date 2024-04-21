@@ -21,24 +21,13 @@ body {
     overflow-y: scroll;
 }
 
-.user-bubble {
-    background-color: #007bff; /* Blue background for user's messages */
+.chat-bubble {
+    background-color: #007bff;
     color: #fff;
     padding: 10px 15px;
-    border-radius: 10px;
+    border-radius: 10px; /* Optionally keep border radius for chat bubbles */
     margin: 5px;
     max-width: 80%;
-    align-self: flex-end; /* Align user chat bubbles to the right */
-}
-
-.system-bubble {
-    background-color: #28a745; /* Green background for system's responses */
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 10px;
-    margin: 5px;
-    max-width: 80%;
-    align-self: flex-start; /* Align system chat bubbles to the left */
 }
 
 .user-input-container {
@@ -55,7 +44,7 @@ body {
     flex: 1;
     padding: 10px;
     border: none;
-    border-radius: 5px; /* Remove border radius for input field */
+    border-radius: 0; /* Remove border radius for input field */
     margin-right: 10px;
 }
 
@@ -72,6 +61,8 @@ body {
     height: 24px;
     cursor: pointer;
 }
+
+
     </style>
 </head>
 <body>
