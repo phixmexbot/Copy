@@ -189,13 +189,36 @@
         fileInput.addEventListener('change', function(event) {
             const file = fileInput.files[0]; // Get the selected file
             if (file) {
-                // You can handle the file here, for example, display a preview or upload it
-                const message = `File uploaded: ${file.name}`;
-                sendMessage(message, 'user');
-                // You may also want to clear the file input for the next selection
-                fileInput.value = ''; // Clear the file input
+                // Create FormData object
+                const formData = new FormData();
+                formData.append('file', file);
+        
+                // Send POST request to /process
+                fetch('/process', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(data => {
+                    // Handle success response
+                    const message = `File uploaded: ${file.name}`;
+                    sendMessage(message, 'user');
+                })
+                .catch(error => {
+                    // Handle error
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        
+                // Clear the file input
+                fileInput.value = ''; 
             }
         });
+
 
         userInput.addEventListener('keyup', function(event) {
             if (event.keyCode === 13) { // Check if Enter key is pressed
