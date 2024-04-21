@@ -40,6 +40,7 @@
         }
 
         .user-input-container {
+            position: relative;
             display: flex;
             align-items: center;
             padding: 10px;
@@ -53,12 +54,17 @@
             flex: 1;
             padding: 10px;
             border: none;
-            border-radius: 0; /* Remove border radius for input field */
+            border-radius: 20px; /* Circular edges for input field */
             margin-right: 10px;
+            transition: background-color 0.3s; /* Smooth transition for background color change */
         }
 
         .user-input::placeholder {
             color: #aaa; /* Placeholder color */
+        }
+
+        .user-input:focus {
+            background-color: #ffeeba; /* Yellowish color when focused */
         }
 
         .action-icon {
@@ -69,6 +75,15 @@
             width: 24px;
             height: 24px;
             cursor: pointer;
+        }
+
+        .voice-button {
+            margin-left: 10px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            background-color: #007bff; /* Blue */
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -82,6 +97,7 @@
             <!-- Add your icon here (e.g., an icon representing sending pictures or voice messages) -->
             <img src="picture_icon.png" alt="Picture Icon">
         </div>
+        <div class="voice-button"></div>
     </div>
     
     <script>
