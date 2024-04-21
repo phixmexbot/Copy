@@ -137,7 +137,6 @@
         </div>
         <div class="voice-button"></div>
     </div>
-    
     <script>
         const chatContainer = document.getElementById('chat-container');
         const userInput = document.getElementById('user-input');
@@ -152,18 +151,26 @@
             }
             chatBubble.textContent = message;
             chatContainer.appendChild(chatBubble);
-            chatContainer.scrollTop = chatContainer.scrollHeight; /* Scroll to bottom */
         }
 
         userInput.addEventListener('keyup', function(event) {
-            if (event.key === 'Enter') { // Check if Enter key is pressed
+            if (event.keyCode === 13) { // Check if Enter key is pressed
                 const message = userInput.value.trim();
                 if (message !== '') {
                     sendMessage(message, 'user');
                     userInput.value = ''; // Clear input field
-                    // Simulate system response (replace with actual logic)
-                    const systemResponse = 'Thank you for your message!';
-                    setTimeout(() => { sendMessage(systemResponse, 'system'); }, 1000); // Simulate delay
+                    fetch('/process', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ message: message })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        sendMessage(data.response, 'system');
+                    })
+                    .catch(error => console.error('Error:', error));
                 }
             }
         });
