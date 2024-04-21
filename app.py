@@ -59,7 +59,7 @@ def chat():
 @app.route('/process', methods=['POST'])
 def process():
     if 'file' in request.files:
-        return jsonify({'responce': 'yedi')
+        return jsonify({'responce': 'yedi'})
     else:
         user_input = request.json['message']
         response = g4f.ChatCompletion.create(
