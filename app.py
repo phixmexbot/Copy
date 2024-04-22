@@ -15,6 +15,10 @@ app = Flask(__name__, template_folder='.')
 
 @app.route('/', methods=['GET', 'POST', 'HEAD'])
 def index():
+    print("Request Headers:")
+    print(request.headers)
+    print("Request Data:")
+    print(request.get_data(as_text=True))
     if request.method == 'GET':
         return render_template('index.html')
     elif request.method == 'POST':
@@ -59,7 +63,7 @@ def chat():
         return 'Error'
 
 @app.route('/process', methods=['POST'])
-def process():
+def process_me():
     if 'file' in request.files:
         file = request.files['file']
         file.save('image.jpg') 
