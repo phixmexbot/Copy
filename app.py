@@ -15,6 +15,8 @@ app = Flask(__name__, template_folder='.')
 
 @app.route('/', methods=['GET', 'POST', 'HEAD'])
 def index():
+    print("URL Parameters:")
+    print(request.args)
     print("Request Headers:")
     print(request.headers)
     print("Request Data:")
