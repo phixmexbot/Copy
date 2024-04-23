@@ -104,6 +104,21 @@
             transform: scale(1.1); /* Enlarge button on hover */
         }
 
+        .send-button {
+            margin-right: 10px; /* Add space between send button and other buttons */
+        }
+
+        .send-button img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.3s; /* Smooth transition for button */
+        }
+
+        .send-button img:hover {
+            transform: scale(1.1); /* Enlarge button on hover */
+        }
+
         @keyframes fadeInRight {
             from {
                 opacity: 0;
@@ -134,20 +149,23 @@
     <div class="user-input-container">
         <input type="text" id="user-input" class="user-input" placeholder="Type your message...">
         <input type="file" id="file-input" accept="image/*" style="display: none;"> <!-- Hidden file input -->
+        <div class="send-button action-icon" onclick="sendMessageFromInput()">
+            <!-- Add a custom icon for the send button -->
+            <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/send.png" alt="Send">
+        </div>
         <div class="action-icon" onclick="document.getElementById('file-input').click();"> <!-- Clicking this icon will trigger file input click -->
             <!-- Use a custom icon for the attachment button -->
-            <img src="https://www.svgrepo.com/show/7884/attachment.svg" alt="Attach">
+            <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/attach.png" alt="Attach">
         </div>
         <div class="voice-button">
             <!-- Replace the voice icon with your picture icon -->
-            <img src="https://icones.pro/wp-content/uploads/2021/12/icone-de-microphone-jaune.png" alt="Voice" id="start-record">
+            <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/voice.png" alt="Voice" id="Voice">
         </div>
     </div>
     <script>
         const chatContainer = document.getElementById('chat-container');
         const userInput = document.getElementById('user-input');
         const fileInput = document.getElementById('file-input');
-        const startRecordButton = document.getElementById('start-record');
 
         function sendMessage(message, sender) {
             const chatBubble = document.createElement('div');
@@ -217,9 +235,6 @@
             recognition.start();
         }
 
-        // Event listener for voice input button
-        startRecordButton.addEventListener('click', startRecording);
-
         // Event listener for file input change
         fileInput.addEventListener('change', function(event) {
             const file = fileInput.files[0]; // Get the selected file
@@ -248,28 +263,32 @@
             }
         });
 
+        function sendMessageFromInput() {
+            const message = userInput.value.trim();
+            if (message !== '') {
+                sendMessage(message, 'user');
+                userInput.value = ''; // Clear input field
+                fetch('/process', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: message })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    sendMessage(data.response, 'system');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    sendMessage('Error sending message to server', 'system');
+                });
+            }
+        }
+        
         userInput.addEventListener('keyup', function(event) {
-            if (event.keyCode === 13) { // Check if Enter key is pressed
-                const message = userInput.value.trim();
-                if (message !== '') {
-                    sendMessage(message, 'user');
-                    userInput.value = ''; // Clear input field
-                    fetch('/process', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ message: message })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        sendMessage(data.response, 'system');
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        sendMessage('Error sending message to server', 'system');
-                    });
-                }
+            if (event.key === 'Enter') { // Check if Enter key is pressed
+                sendMessageFromInput();
             }
         });
     </script>
