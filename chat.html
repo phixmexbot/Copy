@@ -144,22 +144,11 @@
             <!-- Replace the voice icon with your picture icon -->
             <img src="https://icones.pro/wp-content/uploads/2021/12/icone-de-microphone-jaune.png" alt="Voice" id="start-record">
         </div>
-        <div class="voice-button" style="display: none;">
-            <!-- Icons for discarding and sending the voice message -->
-            <img src="https://icones.pro/wp-content/uploads/2021/12/icone-de-microphone-jaune.png" alt="Discard" id="discard-record">
-            <img src="https://icones.pro/wp-content/uploads/2021/12/icone-de-microphone-jaune.png" alt="Send" id="send-record">
-        </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/recorderjs/dist/recorder.min.js"></script>
     <script>
         const chatContainer = document.getElementById('chat-container');
         const userInput = document.getElementById('user-input');
         const fileInput = document.getElementById('file-input');
-        const startRecordBtn = document.getElementById('start-record');
-        const discardRecordBtn = document.getElementById('discard-record');
-        const sendRecordBtn = document.getElementById('send-record');
-
-        let recorder;
 
         function sendMessage(message, sender) {
             const chatBubble = document.createElement('div');
@@ -230,47 +219,6 @@
                     .catch(error => console.error('Error:', error));
                 }
             }
-        });
-
-        function startRecording() {
-            navigator.mediaDevices.getUserMedia({ audio: true })
-                .then(function(stream) {
-                    const audioContext = new AudioContext();
-                    const input = audioContext.createMediaStreamSource(stream);
-                    recorder = new Recorder(input);
-                    recorder.record();
-                    startRecordBtn.style.display = 'none';
-                    discardRecordBtn.style.display = 'inline-block';
-                    sendRecordBtn.style.display = 'inline-block';
-                })
-                .catch(function(err) {
-                    console.error('Error: ', err);
-                });
-        }
-
-        function stopRecording() {
-            recorder.stop();
-            recorder.exportWAV(function(blob) {
-                const url = URL.createObjectURL(blob);
-                const audio = new Audio(url);
-                audio.controls = true;
-                chatContainer.appendChild(audio);
-            });
-            recorder.clear();
-        }
-
-        startRecordBtn.addEventListener('click', startRecording);
-        discardRecordBtn.addEventListener('click', function() {
-            recorder.clear();
-            startRecordBtn.style.display = 'inline-block';
-            discardRecordBtn.style.display = 'none';
-            sendRecordBtn.style.display = 'none';
-        });
-        sendRecordBtn.addEventListener('click', function() {
-            stopRecording();
-            startRecordBtn.style.display = 'inline-block';
-            discardRecordBtn.style.display = 'none';
-            sendRecordBtn.style.display = 'none';
         });
     </script>
 </body>
