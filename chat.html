@@ -47,18 +47,16 @@
             animation: fadeInLeft 0.5s ease; /* Smooth animation for message appearance */
         }
 
-      .user-input-container {
-          position: relative;
-          display: flex;
-          align-items: center;
-          padding: 10px;
-          background-color: #cad2c5; /* Monotone color */
-          border-bottom-left-radius: 0px;
-          border-bottom-right-radius: 0px;
-          box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-      }
-
-
+        .user-input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #cad2c5; /* Monotone color */
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+            box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
 
         .user-input {
             flex: 1;
@@ -149,6 +147,7 @@
         const chatContainer = document.getElementById('chat-container');
         const userInput = document.getElementById('user-input');
         const fileInput = document.getElementById('file-input');
+        const startRecordButton = document.getElementById('start-record');
 
         function sendMessage(message, sender) {
             const chatBubble = document.createElement('div');
@@ -174,6 +173,53 @@
             chatContainer.appendChild(chatBubble);
         }
 
+        // Function to handle voice input
+        function startRecording() {
+            const recognition = new webkitSpeechRecognition();
+            recognition.lang = 'en-US'; // Set language to English (you can change it if needed)
+
+            recognition.onstart = function() {
+                console.log('Recording started');
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                userInput.value = transcript;
+                sendMessage(transcript, 'user');
+
+                // Send the transcript to the server
+                fetch('/process', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: transcript })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    sendMessage(data.response, 'system');
+                })
+                .catch(error => {
+                    console.error('Error sending message to server:', error);
+                    sendMessage('Error sending message to server', 'system');
+                });
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Error occurred during recording:', event.error);
+                sendMessage('Error occurred during recording', 'system');
+            };
+
+            recognition.onend = function() {
+                console.log('Recording ended');
+            };
+
+            recognition.start();
+        }
+
+        // Event listener for voice input button
+        startRecordButton.addEventListener('click', startRecording);
+
         // Event listener for file input change
         fileInput.addEventListener('change', function(event) {
             const file = fileInput.files[0]; // Get the selected file
@@ -193,11 +239,14 @@
                 .then(data => {
                     sendMessage(data.response, 'system');
                 })
+                .catch(error => {
+                    console.error('Error sending file to server:', error);
+                    sendMessage('Error sending file to server', 'system');
+                });
                 // Clear the file input
                 fileInput.value = ''; 
             }
         });
-
 
         userInput.addEventListener('keyup', function(event) {
             if (event.keyCode === 13) { // Check if Enter key is pressed
@@ -216,11 +265,13 @@
                     .then(data => {
                         sendMessage(data.response, 'system');
                     })
-                    .catch(error => console.error('Error:', error));
+                    .catch(error => {
+                        console.error('Error:', error);
+                        sendMessage('Error sending message to server', 'system');
+                    });
                 }
             }
         });
     </script>
 </body>
-
 </html>
