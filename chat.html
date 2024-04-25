@@ -16,7 +16,7 @@
             background-color: #f8f9fa; /* Soft background color */
         }
 
-        .chat-container {
+        .chat-container { 
             flex: 1;
             padding: 20px;
             background: linear-gradient(180deg, #E4C59E, #AF8260);
@@ -44,6 +44,16 @@
         .system-message {
             background-color: #007bff;
             color: white;
+            animation: fadeInLeft 0.5s ease; /* Smooth animation for message appearance */
+        }
+
+        .background-box {
+            background-color: #f8f9fa; /* Soft background color for background boxes */
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin: 5px;
+            max-width: 80%;
+            word-wrap: break-word; /* Wrap long words */
             animation: fadeInLeft 0.5s ease; /* Smooth animation for message appearance */
         }
 
@@ -126,8 +136,10 @@
             }
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
+    <div id="vanta-element" style="display: block; position: absolute; z-index: 0; top: 0px; left: 0px; width: 100%; height: 100vh;"></div>
     <div class="chat-container" id="chat-container">
         <!-- Chat messages will be appended here -->
     </div>
@@ -147,6 +159,19 @@
             <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/voice.png" alt="Voice" id="start-record">
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.birds.min.js"></script>
+    <script>
+        VANTA.BIRDS({
+            el: "#vanta-element",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00
+        });
+    </script>
     <script>
         const chatContainer = document.getElementById('chat-container');
         const userInput = document.getElementById('user-input');
@@ -157,12 +182,6 @@
         function generateSessionId() {
             return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         }
-        // FOR PERSISTENT SESSION ID
-        // let sessionId = localStorage.getItem('sessionId');
-        // if (!sessionId) {
-            // sessionId = generateSessionId();
-            // localStorage.setItem('sessionId', sessionId);
-        // }
         
         let sessionId = generateSessionId();
 
@@ -182,6 +201,7 @@
                 .then(response => response.json())
                 .then(data => {
                     sendMessage(data.response, 'system');
+                    addBackgroundBox(data.response); // Add background box with the response text
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -201,20 +221,16 @@
             } else {
                 chatBubble.classList.add('system-message');
             }
-
-            // Check if message is a file
-            if (message.startsWith('File uploaded:')) {
-                const fileUrl = URL.createObjectURL(fileInput.files[0]);
-                const fileImg = document.createElement('img');
-                fileImg.src = fileUrl;
-                fileImg.style.maxWidth = '100%';
-                fileImg.style.height = 'auto';
-                chatBubble.appendChild(fileImg);
-            } else {
-                chatBubble.textContent = message;
-            }
-
+            chatBubble.textContent = message;
             chatContainer.appendChild(chatBubble);
+        }
+
+        // Function to add background box
+        function addBackgroundBox(text) {
+            const backgroundBox = document.createElement('div');
+            backgroundBox.classList.add('background-box');
+            backgroundBox.textContent = text;
+            chatContainer.appendChild(backgroundBox);
         }
 
         // Function to handle voice input
@@ -242,6 +258,7 @@
                 .then(response => response.json())
                 .then(data => {
                     sendMessage(data.response, 'system');
+                    addBackgroundBox(data.response); // Add background box with the response text
                 })
                 .catch(error => {
                     console.error('Error sending message to server:', error);
@@ -282,6 +299,7 @@
                 .then(response => response.json())
                 .then(data => {
                     sendMessage(data.response, 'system');
+                    addBackgroundBox(data.response); // Add background box with the response text
                 })
                 .catch(error => {
                     console.error('Error sending file to server:', error);
@@ -300,3 +318,4 @@
     </script>
 </body>
 </html>
+  
