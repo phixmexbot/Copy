@@ -201,7 +201,6 @@
                 .then(response => response.json())
                 .then(data => {
                     sendMessage(data.response, 'system');
-                    addBackgroundBox(data.response); // Add background box with the response text
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -223,14 +222,6 @@
             }
             chatBubble.textContent = message;
             chatContainer.appendChild(chatBubble);
-        }
-
-        // Function to add background box
-        function addBackgroundBox(text) {
-            const backgroundBox = document.createElement('div');
-            backgroundBox.classList.add('background-box');
-            backgroundBox.textContent = text;
-            chatContainer.appendChild(backgroundBox);
         }
 
         // Function to handle voice input
