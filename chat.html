@@ -157,13 +157,14 @@
         function generateSessionId() {
             return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         }
-
-        // Get or generate session ID for the current session
-        // let sessionId = localStorage.getItem('sessionId'); FOR PERSISTENT SESSION ID
-        if (!sessionId) {
-            sessionId = generateSessionId();
-            // localStorage.setItem('sessionId', sessionId); FOR PERSISTENT SESSION ID
-        }
+        // FOR PERSISTENT SESSION ID
+        // let sessionId = localStorage.getItem('sessionId');
+        // if (!sessionId) {
+            // sessionId = generateSessionId();
+            // localStorage.setItem('sessionId', sessionId);
+        // }
+        
+        let sessionId = generateSessionId();
 
         // Function to send message when send button is clicked
         function sendMessageFromInput() {
