@@ -159,10 +159,10 @@
         }
 
         // Get or generate session ID for the current session
-        let sessionId = localStorage.getItem('sessionId');
+        // let sessionId = localStorage.getItem('sessionId'); FOR PERSISTENT SESSION ID
         if (!sessionId) {
             sessionId = generateSessionId();
-            localStorage.setItem('sessionId', sessionId);
+            // localStorage.setItem('sessionId', sessionId); FOR PERSISTENT SESSION ID
         }
 
         // Function to send message when send button is clicked
