@@ -114,19 +114,6 @@
             transform: scale(1.1); /* Enlarge button on hover */
         }
 
-        @keyframes pulseAnimation {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-
         @keyframes fadeInRight {
             from {
                 opacity: 0;
@@ -289,41 +276,37 @@
         }
 
         // Function to handle voice input
-// Function to handle voice input
-function startRecording() {
-    const recognition = new webkitSpeechRecognition();
-    recognition.lang = 'en-US'; // Set language to English (you can change it if needed)
+        function startRecording() {
+            const recognition = new webkitSpeechRecognition();
+            recognition.lang = 'en-US'; // Set language to English (you can change it if needed)
 
-    recognition.onstart = function() {
-        console.log('Recording started');
-        startRecordButton.classList.add('pulse-animation'); // Apply animation class
-    };
+            recognition.onstart = function() {
+                console.log('Recording started');
+            };
 
-    recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript;
-        userInput.value = transcript; // Set transcript to input field
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                userInput.value = transcript; // Set transcript to input field
 
-        // Event listener for Enter key press
-        userInput.addEventListener('keyup', function(event) {
-            if (event.keyCode === 13) { // Check if Enter key is pressed
-                sendMessageFromInput(); // Send message if Enter key is pressed
-            }
-        });
-    };
+                // Event listener for Enter key press
+                userInput.addEventListener('keyup', function(event) {
+                    if (event.keyCode === 13) { // Check if Enter key is pressed
+                        sendMessageFromInput(); // Send message if Enter key is pressed
+                    }
+                });
+            };
 
-    recognition.onerror = function(event) {
-        console.error('Error occurred during recording:', event.error);
-        sendMessage('Error occurred during recording', 'system');
-    };
+            recognition.onerror = function(event) {
+                console.error('Error occurred during recording:', event.error);
+                sendMessage('Error occurred during recording', 'system');
+            };
 
-    recognition.onend = function() {
-        console.log('Recording ended');
-        startRecordButton.classList.remove('pulse-animation'); // Remove animation class
-    };
+            recognition.onend = function() {
+                console.log('Recording ended');
+            };
 
-    recognition.start();
-}
-
+            recognition.start();
+        }
 
         // Event listener for voice input button
         document.getElementById('start-record').addEventListener('click', startRecording);
