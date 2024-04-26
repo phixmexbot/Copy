@@ -188,24 +188,76 @@
         function sendMessageFromInput() {
             const message = userInput.value.trim();
             if (message !== '') {
-                sendMessage(message, 'user');
+                if (isImage(message)) {
+                    sendImage(message);
+                    sendImageToServer(message);
+                } else {
+                    sendMessage(message, 'user');
+                    sendMessageToServer(message);
+                }
                 userInput.value = ''; // Clear input field
-                fetch('/process', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ id: sessionId, message: message }) // Include sessionId as id attribute
-                })
-                .then(response => response.json())
-                .then(data => {
-                    sendMessage(data.response, 'system');
+            }
+        }
+
+        // Function to send message to server
+        function sendMessageToServer(message) {
+            fetch('/process', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: sessionId, message: message }) // Include sessionId as id attribute
+            })
+            .then(response => response.json())
+            .then(data => {
+                sendMessage(data.response, 'system');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                sendMessage('Error sending message to server', 'system');
+            });
+        }
+
+        // Function to check if message is an image URL
+        function isImage(message) {
+            return /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(message);
+        }
+
+        // Function to handle image message
+        function sendImage(url) {
+            const imageMessage = document.createElement('img');
+            imageMessage.src = url;
+            imageMessage.classList.add('chat-bubble');
+            imageMessage.classList.add('user-message');
+            chatContainer.appendChild(imageMessage);
+        }
+
+        // Function to send image message to server
+        function sendImageToServer(imageURL) {
+            const file = fetch(imageURL)
+                .then(res => res.blob())
+                .then(blob => {
+                    const formData = new FormData();
+                    formData.append('file', blob, 'image.jpg');
+                    formData.append('id', sessionId);
+
+                    fetch('/process', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        sendMessage(data.response, 'system');
+                    })
+                    .catch(error => {
+                        console.error('Error sending image to server:', error);
+                        sendMessage('Error sending image to server', 'system');
+                    });
                 })
                 .catch(error => {
-                    console.error('Error:', error);
-                    sendMessage('Error sending message to server', 'system');
+                    console.error('Error fetching image:', error);
+                    sendMessage('Error fetching image', 'system');
                 });
-            }
         }
 
         // Event listener for send button click
@@ -263,25 +315,9 @@
         fileInput.addEventListener('change', function(event) {
             const file = fileInput.files[0]; // Get the selected file
             if (file) {
-                const message = `File uploaded: ${file.name}`;
-                sendMessage(message, 'user');
-                // Create FormData object
-                const formData = new FormData();
-                formData.append('file', file);
-        
-                // Send POST request to /process
-                fetch('/process', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    sendMessage(data.response, 'system');
-                })
-                .catch(error => {
-                    console.error('Error sending file to server:', error);
-                    sendMessage('Error sending file to server', 'system');
-                });
+                const imageURL = URL.createObjectURL(file); // Get URL for uploaded image
+                sendImage(imageURL); // Display the image in the chat
+                sendImageToServer(imageURL); // Send the image to the server
                 // Clear the file input
                 fileInput.value = ''; 
             }
