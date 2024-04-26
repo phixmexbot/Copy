@@ -250,7 +250,6 @@
                 .then(response => response.json())
                 .then(data => {
                     sendMessage(data.response, 'system');
-                    addBackgroundBox(data.response); // Add background box with the response text
                 })
                 .catch(error => {
                     console.error('Error sending message to server:', error);
@@ -291,7 +290,6 @@
                 .then(response => response.json())
                 .then(data => {
                     sendMessage(data.response, 'system');
-                    addBackgroundBox(data.response); // Add background box with the response text
                 })
                 .catch(error => {
                     console.error('Error sending file to server:', error);
@@ -310,4 +308,3 @@
     </script>
 </body>
 </html>
-  
