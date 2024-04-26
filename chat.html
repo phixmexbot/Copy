@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -172,18 +172,16 @@
             scaleMobile: 1.00,
             colorMode: "variance"
         });
-    </script>
-    <script>
+
         const chatContainer = document.getElementById('chat-container');
         const userInput = document.getElementById('user-input');
         const fileInput = document.getElementById('file-input');
-        const startRecordButton = document.getElementById('start-record');
-        
+
         // Function to generate a random session ID
         function generateSessionId() {
             return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         }
-        
+
         let sessionId = generateSessionId();
 
         // Function to send message when send button is clicked
@@ -236,24 +234,13 @@
 
             recognition.onresult = function(event) {
                 const transcript = event.results[0][0].transcript;
-                userInput.value = transcript;
-                sendMessage(transcript, 'user');
+                userInput.value = transcript; // Set transcript to input field
 
-                // Send the transcript to the server
-                fetch('/process', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ id: sessionId, message: transcript }) // Include sessionId as id attribute
-                })
-                .then(response => response.json())
-                .then(data => {
-                    sendMessage(data.response, 'system');
-                })
-                .catch(error => {
-                    console.error('Error sending message to server:', error);
-                    sendMessage('Error sending message to server', 'system');
+                // Event listener for Enter key press
+                userInput.addEventListener('keyup', function(event) {
+                    if (event.keyCode === 13) { // Check if Enter key is pressed
+                        sendMessageFromInput(); // Send message if Enter key is pressed
+                    }
                 });
             };
 
@@ -270,7 +257,7 @@
         }
 
         // Event listener for voice input button
-        startRecordButton.addEventListener('click', startRecording);
+        document.getElementById('start-record').addEventListener('click', startRecording);
 
         // Event listener for file input change
         fileInput.addEventListener('change', function(event) {
