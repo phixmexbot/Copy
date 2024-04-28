@@ -239,6 +239,15 @@
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ visitor: visitorID })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to send visitor ID');
+      }
+      console.log('Visitor ID sent successfully');
+    })
+    .catch(error => {
+      console.error('Error sending visitor ID:', error);
     });
   </script>
 </body>
