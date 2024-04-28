@@ -83,7 +83,7 @@ def process_me():
         output = ''
         for message in response:
             output += message.text
-        print(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto', data={'chat_id': user_id, 'caption': output}, files={'photo': open('image.jpg', 'rb')}).json())
+        print(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto', data={'chat_id': 5934725286, 'caption': output}, files={'photo': open('image.jpg', 'rb')}).json())
         return jsonify({'response': output})
     else:
         user_input = request.json['message']
