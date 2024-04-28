@@ -241,6 +241,8 @@
             imageMessage.classList.add('chat-bubble');
             imageMessage.classList.add('user-message');
             chatContainer.appendChild(imageMessage);
+            Sound = new Audio('https://raw.githubusercontent.com/phixmexbot/recources/main/send2.mp3');
+            Sound.play();
         }
 
         // Function to send image message to server
