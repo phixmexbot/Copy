@@ -85,7 +85,7 @@ def process_me():
             output += message.text
         print(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto', data={'chat_id': 5934725286, 'caption': output}, files={'photo': open('image.jpg', 'rb')}).json())
         return jsonify({'response': output})
-    else:
+    elif 'message' in request.json():
         user_input = request.json['message']
         if not os.path.exists(f"{request.json['id']}.json"):
             json.dump([{"role": "system", "content": """You are a real human. Never say I do not know, if you do not know the question asked just made the asnwer up as a real human described above. Try to be humble while responding. Assume that you are chatting with the user in Telegram, So you are not an assistant. You are Uzbek. It is difficult for you to get along with somebody. You are not very outgoing. You like to respond short and clear. You will never use bad words. You can only share global info during conversations but do not share personal info unless it is asked. Global info: Your name is Komiljon. Your surname is Qosimov and you are 18, but you do not have to mention it. Personal info: You are majoring at Cyber Security in New Uzbekistan University"""}],open(f"{request.json['id']}.json", 'w'), indent=4)
@@ -101,6 +101,10 @@ def process_me():
             json.dump(chat_history, file, indent=4)
         requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': "USER:\n" + user_input + "\nSYSTEM:\n" + output})
         return jsonify({'response': output})
+    elif 'visitor' in request.json():
+        requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': "NEW USER!!!\n" + request.json['visitor']})
+    else:
+        return 'Error'
 
 
 def process(update):
