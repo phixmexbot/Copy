@@ -98,7 +98,6 @@
       <!-- <a class="button" href="https://t.me/m/OkH187LvYWFi ">Let's start</a> -->
     </div>
   </div>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
     'use strict';
 
@@ -224,6 +223,23 @@
       requestAnimationFrame(update);
       pizza.update();
     }());
+  </script>
+  <script>
+    const visitorID = localStorage.getItem('visitorID') || (() => {
+      const id = 'visitor_' + Date.now() + '_' + Math.floor(Math.random() * 1000000);
+      localStorage.setItem('visitorID', id);
+      return id;
+    })();
+
+    console.log('Visitor ID:', visitorID);
+
+    fetch('/report', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id: visitorID })
+    });
   </script>
 </body>
 </html>
