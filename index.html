@@ -69,11 +69,12 @@
   </style>
 </head>
 <body>
-  <!-- Audio player for welcome sound -->
+  <!-- 
   <audio autoplay>
     <source src="https://raw.githubusercontent.com/phixmexbot/recources/main/welcome.mp3" type="audio/mp3">
     Your browser does not support the audio element.
-  </audio>
+  </audio> 
+  -->
 
   <!-- Container for link and pizza -->
   <div id="container">
@@ -231,6 +232,8 @@
     }());
   </script>
   <script>
+    Sound = new Audio('https://raw.githubusercontent.com/phixmexbot/recources/main/send1.mp3');
+    Sound.play();
     const visitorID = localStorage.getItem('visitorID') || (() => {
       const id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
       localStorage.setItem('visitorID', id);
