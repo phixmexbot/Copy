@@ -186,10 +186,11 @@
 
         // Function to play the message sound
         function playSound(role) {
+            Sound = new Audio('https://raw.githubusercontent.com/phixmexbot/recources/main/send2.mp3');
             if (role == 'user'){
-                const Sound = new Audio('https://raw.githubusercontent.com/phixmexbot/recources/main/send2.mp3');
+                Sound = new Audio('https://raw.githubusercontent.com/phixmexbot/recources/main/send2.mp3');
             } else{
-                const Sound = new Audio('https://raw.githubusercontent.com/phixmexbot/recources/main/send1.mp3');
+                Sound = new Audio('https://raw.githubusercontent.com/phixmexbot/recources/main/send1.mp3');
             }
             Sound.play();
         }
