@@ -226,19 +226,19 @@
   </script>
   <script>
     const visitorID = localStorage.getItem('visitorID') || (() => {
-      const id = 'visitor_' + Date.now() + '_' + Math.floor(Math.random() * 1000000);
+      const id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
       localStorage.setItem('visitorID', id);
       return id;
     })();
 
     console.log('Visitor ID:', visitorID);
 
-    fetch('/report', {
+    fetch('/process', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ id: visitorID })
+      body: JSON.stringify({ visitor: visitorID })
     });
   </script>
 </body>
