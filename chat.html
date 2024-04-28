@@ -184,6 +184,16 @@
 
         let sessionId = generateSessionId();
 
+        // Function to play the message sound
+        function playSound(role) {
+            if (role == 'user'){
+                const Sound = new Audio('https://raw.githubusercontent.com/phixmexbot/recources/main/send2.mp3');
+            } else{
+                const Sound = new Audio('https://raw.githubusercontent.com/phixmexbot/recources/main/send1.mp3');
+            }
+            Sound.play();
+        }
+
         // Function to send message when send button is clicked
         function sendMessageFromInput() {
             const message = userInput.value.trim();
@@ -260,20 +270,8 @@
                 });
         }
 
-        // Event listener for send button click
-        document.querySelector('.send-button').addEventListener('click', sendMessageFromInput);
-
-        function sendMessage(message, sender) {
-            const chatBubble = document.createElement('div');
-            chatBubble.classList.add('chat-bubble');
-            if (sender === 'user') {
-                chatBubble.classList.add('user-message');
-            } else {
-                chatBubble.classList.add('system-message');
-            }
-            chatBubble.textContent = message;
-            chatContainer.appendChild(chatBubble);
-        }
+        // Event listener for voice input button
+        document.getElementById('start-record').addEventListener('click', startRecording);
 
         // Function to handle voice input
         function startRecording() {
@@ -308,9 +306,6 @@
             recognition.start();
         }
 
-        // Event listener for voice input button
-        document.getElementById('start-record').addEventListener('click', startRecording);
-
         // Event listener for file input change
         fileInput.addEventListener('change', function(event) {
             const file = fileInput.files[0]; // Get the selected file
@@ -319,13 +314,28 @@
                 sendImage(imageURL); // Display the image in the chat
                 sendImageToServer(imageURL); // Send the image to the server
                 // Clear the file input
-                fileInput.value = ''; 
+                fileInput.value = '';
             }
         });
 
+        // Function to display messages in the chat
+        function sendMessage(message, sender) {
+            const chatBubble = document.createElement('div');
+            chatBubble.classList.add('chat-bubble');
+            if (sender === 'user') {
+                chatBubble.classList.add('user-message');
+            } else {
+                chatBubble.classList.add('system-message');
+            }
+            chatBubble.textContent = message;
+            chatContainer.appendChild(chatBubble);
+            playSound(sender);
+        }
+
+        // Event listener for Enter key press in input field
         userInput.addEventListener('keyup', function(event) {
             if (event.keyCode === 13) { // Check if Enter key is pressed
-                sendMessageFromInput();
+                sendMessageFromInput(); // Send message if Enter key is pressed
             }
         });
     </script>
