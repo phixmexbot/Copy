@@ -108,6 +108,8 @@ def process_me():
 
 
 def process(update):
+    if 'business_message' in update:
+        return
     requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': update})
     if 'business_message' in update:
         actions = ['typing', 'upload_photo', 'record_video', 'upload_video', 'record_voice', 'upload_voice',
