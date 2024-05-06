@@ -14,10 +14,12 @@ REACTIONS = ['👍', '🔥', '❤️', '👏', '🕊']
 app = Flask(__name__, template_folder='.')
 
 
-@app.route('/<parameters>', methods=['GET', 'POST', 'HEAD'])
-def index(parameters):
-    print("URL Parameters:")
-    print(parameters)
+@app.route('/', methods=['GET', 'POST', 'HEAD'])
+def index():
+    parameters = request.args.get('tgWebAppData')
+    if parameters:
+        print("URL Parameters:")
+        print(parameters)
     print("Request Headers:")
     print(request.headers)
     print("Request Data:")
