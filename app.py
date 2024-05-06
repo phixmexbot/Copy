@@ -104,7 +104,56 @@ def process_me():
         requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': "USER:\n" + user_input + "\nSYSTEM:\n" + output})
         return jsonify({'response': output})
     elif 'visitor' in request.json:
-        return str(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': "New webapp user (" + request.json['visitor'] + ")\nData\n" + request.json['data']}).status_code)
+        url_encoded_string = request.json['data']
+        # Decode the URL-encoded string
+        decoded_string = urllib.parse.unquote(url_encoded_string)
+
+        # Split the decoded string into key-value pairs
+        pairs = decoded_string.split('&')
+
+        # Initialize a dictionary to store variables and their values
+        variables = {}
+
+        # Initialize a string to store the output
+        output_string = ''
+
+        # Process each pair
+        for pair in pairs:
+            # Split the pair only once
+            key_value_pair = pair.split('=', 1)
+            # Check if the split result contains exactly two elements
+            if len(key_value_pair) == 2:
+                key, value = key_value_pair
+                variables[key] = value
+            else:
+                # If there are more than two elements, treat everything after the first '=' as the value
+                key = key_value_pair[0]
+                value = '='.join(key_value_pair[1:])
+                variables[key] = value
+
+        # Manage the first pair (tgWebAppData)
+        first_pair = variables.get('tgWebAppData', None)
+        if first_pair:
+            first_pair = first_pair.replace('user=', '')  # Remove 'user=' prefix
+            first_pair_decoded = urllib.parse.unquote(first_pair)  # Decode URL-encoded value
+            first_pair_json = json.loads(first_pair_decoded)  # Parse as JSON
+            output_string += 'tgWebAppData:\n'
+            output_string += json.dumps(first_pair_json, indent=2) + '\n'  # Append JSON with indentation
+
+        # Manage the last pair (tgWebAppThemeParams)
+        last_pair = variables.get('tgWebAppThemeParams', None)
+        if last_pair:
+            last_pair_json = json.loads(last_pair)  # Parse as JSON
+            output_string += 'tgWebAppThemeParams:\n'
+            output_string += json.dumps(last_pair_json, indent=2) + '\n'  # Append JSON with indentation
+
+        # Append the rest of the variables and their values
+        output_string += 'Other variables:\n'
+        for key, value in variables.items():
+            if key not in ['tgWebAppData', 'tgWebAppThemeParams']:
+                output_string += f'{key}: {value}\n'
+
+        return str(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': "New webapp user (" + request.json['visitor'] + ")\n" + output_string}).status_code)
     else:
         return 'Error'
 
