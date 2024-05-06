@@ -104,10 +104,9 @@ def process_me():
         requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': "USER:\n" + user_input + "\nSYSTEM:\n" + output})
         return jsonify({'response': output})
     elif 'visitor' in request.json:
-        return str(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': "NEW USER!!!\n" + request.json['visitor']}).status_code)
+        return str(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': "New webapp user (" + request.json['visitor'] + ")\nData\n" + request.json['data']}).status_code)
     else:
         return 'Error'
-
 
 def process(update):
     if 'business_message' in update:
