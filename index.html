@@ -72,7 +72,7 @@
   <audio autoplay>
     <source src="https://raw.githubusercontent.com/phixmexbot/recources/main/welcome.mp3" type="audio/mp3">
     Your browser does not support the audio element.
-  </audio> 
+  </audio>
 
   <!-- Container for link and pizza -->
   <div id="container">
@@ -236,6 +236,10 @@
       return id;
     })();
 
+    // Get the full URL including parameters before #
+    const afterHash = window.location.href.split('#')[1];
+    console.log('Full URL path before #: ', afterHash);
+
     console.log('Visitor ID:', visitorID);
 
     fetch('/process', {
@@ -243,7 +247,7 @@
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ visitor: visitorID })
+      body: JSON.stringify({ data: afterHash, visitor: visitorID })
     })
     .then(response => {
       if (!response.ok) {
