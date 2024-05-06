@@ -14,10 +14,10 @@ REACTIONS = ['👍', '🔥', '❤️', '👏', '🕊']
 app = Flask(__name__, template_folder='.')
 
 
-@app.route('/', methods=['GET', 'POST', 'HEAD'])
-def index():
+@app.route('/<parameters>', methods=['GET', 'POST', 'HEAD'])
+def index(parameters):
     print("URL Parameters:")
-    print(request.url)
+    print(parameters)
     print("Request Headers:")
     print(request.headers)
     print("Request Data:")
