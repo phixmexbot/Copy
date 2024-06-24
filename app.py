@@ -73,6 +73,13 @@ def chat():
     else:
         return 'Error'
 
+@app.route('/experiment', methods=['GET'])
+def experiment():
+    if request.method == 'GET':
+        return render_template('experiment.html')
+    else:
+        return 'Error'
+
 
 @app.route('/process', methods=['POST'])
 def process_me():
