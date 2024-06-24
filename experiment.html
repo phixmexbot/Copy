@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Search Page</title>
+    <title>Core</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg">
     <style>
         * {
             border: 0;
@@ -22,6 +23,7 @@
             background-size: 0.75em 0.375em;
         }
         body {
+            background: #323641;
             background-position: 50% calc(50% + 0.2em);
             display: grid;
             place-items: center;
@@ -57,6 +59,150 @@
             top: 20px;
             right: 20px;
         }
+        .letter-image {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+        }
+        .animated-mail {
+            position: absolute;
+            height: 75px;
+            width: 100px;
+            -webkit-transition: .4s;
+            -moz-transition: .4s;
+            transition: .4s;
+        }
+        .body {
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 0 50px 100px;
+            border-color: transparent transparent #e95f55 transparent;
+            z-index: 2;
+        }
+        .top-fold {
+            position: absolute;
+            top: 25px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 25px 50px 0 50px;
+            -webkit-transform-origin: 50% 0%;
+            -webkit-transition: transform .4s .4s, z-index .2s .4s;
+            -moz-transform-origin: 50% 0%;
+            -moz-transition: transform .4s .4s, z-index .2s .4s;
+            transform-origin: 50% 0%;
+            transition: transform .4s .4s, z-index .2s .4s;
+            border-color: #cf4a43 transparent transparent transparent;
+            z-index: 2;
+        }
+        .back-fold {
+            position: absolute;
+            bottom: 0;
+            width: 100px;
+            height: 50px;
+            background: #cf4a43;
+            z-index: 0;
+        }
+        .left-fold {
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 25px 0 25px 50px;
+            border-color: transparent transparent transparent #e15349;
+            z-index: 2;
+        }
+        .letter {
+            left: 10px;
+            bottom: 0px;
+            position: absolute;
+            width: 80px;
+            height: 30px;
+            background: white;
+            z-index: 1;
+            overflow: hidden;
+            -webkit-transition: .4s .2s;
+            -moz-transition: .4s .2s;
+            transition: .4s .2s;
+        }
+        .letter-border {
+            height: 5px;
+            width: 100%;
+            background: repeating-linear-gradient(
+                -45deg,
+                #cb5a5e,
+                #cb5a5e 4px,
+                transparent 4px,
+                transparent 9px
+            );
+        }
+        .letter-title {
+            margin-top: 5px;
+            margin-left: 2.5px;
+            height: 5px;
+            width: 40%;
+            background: #cb5a5e;
+        }
+        .letter-context {
+            margin-top: 5px;
+            margin-left: 2.5px;
+            height: 5px;
+            width: 20%;
+            background: #cb5a5e;
+        }
+        .letter-stamp {
+            margin-top: 15px;
+            margin-left: 60px;
+            border-radius: 100%;
+            height: 15px;
+            width: 15px;
+            background: #cb5a5e;
+            opacity: 0.3;
+        }
+        .shadow {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            width: 200px;
+            height: 15px;
+            transition: .4s;
+            transform: translateX(-50%);
+            -webkit-transition: .4s;
+            -webkit-transform: translateX(-50%);
+            -moz-transition: .4s;
+            -moz-transform: translateX(-50%);
+            border-radius: 100%;
+            background: radial-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.0), rgba(0,0,0,0.0));
+        }
+        .letter-image:hover .animated-mail {
+            transform: translateY(25px);
+            -webkit-transform: translateY(25px);
+            -moz-transform: translateY(25px);
+        }
+        .letter-image:hover .animated-mail .top-fold {
+            transition: transform .4s, z-index .2s;
+            transform: rotateX(180deg);
+            -webkit-transition: transform .4s, z-index .2s;
+            -webkit-transform: rotateX(180deg);
+            -moz-transition: transform .4s, z-index .2s;
+            -moz-transform: rotateX(180deg);
+            z-index: 0;
+        }
+        .letter-image:hover .animated-mail .letter {
+            height: 90px;
+        }
+        .letter-image:hover .shadow {
+            width: 125px;
+        }
+
+        /* Toggle Button Styles */
         input[type=checkbox] {
             --off: #c7cad1;
             --mid: #829ad6;
@@ -208,8 +354,25 @@
     <div class="theme-toggle">
         <input class="pristine" type="checkbox" name="toggle" value="on">
     </div>
+    <div class="letter-image">
+        <div class="animated-mail">
+            <div class="back-fold"></div>
+            <div class="letter">
+                <div class="letter-border"></div>
+                <div class="letter-title"></div>
+                <div class="letter-context"></div>
+                <div class="letter-stamp">
+                    <div class="letter-stamp-inner"></div>
+                </div>
+            </div>
+            <div class="top-fold"></div>
+            <div class="body"></div>
+            <div class="left-fold"></div>
+        </div>
+        <div class="shadow"></div>
+    </div>
     <div class="container">
-        <h1>My Search Page</h1>
+        <h1>Core</h1>
         <form action="https://www.google.com/search" method="GET">
             <input type="text" name="q" class="search-bar" placeholder="Search...">
             <br>
