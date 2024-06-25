@@ -2,6 +2,7 @@ import os
 import g4f
 import time
 import json
+import imaplib
 import requests
 import PIL.Image
 import urllib.parse
@@ -79,6 +80,25 @@ def experiment():
         return render_template('experiment.html')
     else:
         return 'Error'
+
+def check_unread_emails():
+    try:
+        mail = imaplib.IMAP4_SSL('imap.gmail.com')
+        mail.login('komiljonqosimov8@gmail.com', 'K_973050330_k')
+        mail.select('inbox')
+
+        status, response = mail.search(None, '(UNSEEN)')
+        unread_msg_nums = response[0].split()
+
+        return len(unread_msg_nums)
+    except Exception as e:
+        print(f"Error checking emails: {e}")
+        return 0
+
+@app.route('/checkEmail', methods=['GET'])
+def check_email_route():
+    unread_count = check_unread_emails()
+    return jsonify({'unread_count': unread_count})
 
 
 @app.route('/process', methods=['POST'])
