@@ -7,74 +7,77 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg">
     <style>
         * {
-            border: 0;
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        body, input {
-            font: 80px/1.5 sans-serif;
-        }
-        body, input[type=checkbox]:before {
-            background-image:
-                linear-gradient(90deg,#f1f2f3 2px,#f1f2f300 2px),
-                linear-gradient(#f1f2f3 2px,#fff 2px);
-            background-repeat: repeat;
-            background-size: 0.75em 0.375em;
-        }
+
         body {
-            background: #323641;
-            background-position: 50% calc(50% + 0.2em);
-            display: grid;
-            place-items: center;
+            background-color: #323641;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100vh;
         }
+
         .container {
             text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
         }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
         .search-bar {
-            width: 400px;
+            width: 100%;
             padding: 10px;
             font-size: 18px;
             border: 1px solid #dfe1e5;
             border-radius: 24px;
             box-shadow: none;
             outline: none;
+            margin-bottom: 10px;
         }
+
         .search-button {
             padding: 10px 20px;
-            margin-top: 20px;
             font-size: 16px;
             border: none;
             background-color: #4285f4;
             color: white;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
+
         .search-button:hover {
             background-color: #357ae8;
         }
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
+
         .letter-image {
-            position: absolute;
-            top: 20px;
-            left: 20px;
+            position: absolute; /* or use relative if it fits your layout better */
+            top: 20px; /* Adjust as needed */
+            left: 20px; /* Adjust as needed */
             width: 100px;
             height: 100px;
             cursor: pointer;
         }
+
         .animated-mail {
             position: absolute;
             height: 75px;
             width: 100px;
-            -webkit-transition: .4s;
-            -moz-transition: .4s;
             transition: .4s;
         }
+
         .body {
             position: absolute;
             bottom: 0;
@@ -85,6 +88,7 @@
             border-color: transparent transparent #e95f55 transparent;
             z-index: 2;
         }
+
         .top-fold {
             position: absolute;
             top: 25px;
@@ -92,15 +96,12 @@
             height: 0;
             border-style: solid;
             border-width: 25px 50px 0 50px;
-            -webkit-transform-origin: 50% 0%;
-            -webkit-transition: transform .4s .4s, z-index .2s .4s;
-            -moz-transform-origin: 50% 0%;
-            -moz-transition: transform .4s .4s, z-index .2s .4s;
             transform-origin: 50% 0%;
             transition: transform .4s .4s, z-index .2s .4s;
             border-color: #cf4a43 transparent transparent transparent;
             z-index: 2;
         }
+
         .back-fold {
             position: absolute;
             bottom: 0;
@@ -109,6 +110,7 @@
             background: #cf4a43;
             z-index: 0;
         }
+
         .left-fold {
             position: absolute;
             bottom: 0;
@@ -119,6 +121,7 @@
             border-color: transparent transparent transparent #e15349;
             z-index: 2;
         }
+
         .letter {
             left: 10px;
             bottom: 0px;
@@ -128,10 +131,9 @@
             background: white;
             z-index: 1;
             overflow: hidden;
-            -webkit-transition: .4s .2s;
-            -moz-transition: .4s .2s;
             transition: .4s .2s;
         }
+
         .letter-border {
             height: 5px;
             width: 100%;
@@ -143,6 +145,7 @@
                 transparent 9px
             );
         }
+
         .letter-title {
             margin-top: 5px;
             margin-left: 2.5px;
@@ -150,6 +153,7 @@
             width: 40%;
             background: #cb5a5e;
         }
+
         .letter-context {
             margin-top: 5px;
             margin-left: 2.5px;
@@ -157,6 +161,7 @@
             width: 20%;
             background: #cb5a5e;
         }
+
         .letter-stamp {
             margin-top: 15px;
             margin-left: 60px;
@@ -166,6 +171,7 @@
             background: #cb5a5e;
             opacity: 0.3;
         }
+
         .shadow {
             position: absolute;
             top: 100px;
@@ -174,186 +180,30 @@
             height: 15px;
             transition: .4s;
             transform: translateX(-50%);
-            -webkit-transition: .4s;
-            -webkit-transform: translateX(-50%);
-            -moz-transition: .4s;
-            -moz-transform: translateX(-50%);
             border-radius: 100%;
             background: radial-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.0), rgba(0,0,0,0.0));
         }
+
         .letter-image:hover .animated-mail {
             transform: translateY(25px);
-            -webkit-transform: translateY(25px);
-            -moz-transform: translateY(25px);
         }
+
         .letter-image:hover .animated-mail .top-fold {
             transition: transform .4s, z-index .2s;
             transform: rotateX(180deg);
-            -webkit-transition: transform .4s, z-index .2s;
-            -webkit-transform: rotateX(180deg);
-            -moz-transition: transform .4s, z-index .2s;
-            -moz-transform: rotateX(180deg);
             z-index: 0;
         }
+
         .letter-image:hover .animated-mail .letter {
             height: 90px;
         }
+
         .letter-image:hover .shadow {
             width: 125px;
-        }
-
-        /* Toggle Button Styles */
-        input[type=checkbox] {
-            --off: #c7cad1;
-            --mid: #829ad6;
-            --on: #255ff4;
-            --transDur: 0.5s;
-            --timing: cubic-bezier(0.6,0,0.4,1);
-            animation: bgOff var(--transDur) var(--timing);
-            background-color: var(--off);
-            border-radius: 0.67em / 0.5em;
-            box-shadow:
-                0 0.05em 0.1em #00000007 inset,
-                0 -0.25em 0.25em #0001 inset,
-                0 -0.5em 0 #0001 inset,
-                0 0.1em 0.1em #0001;
-            cursor: pointer;
-            position: relative;
-            width: 2.25em;
-            height: 1.5em;
-            -webkit-appearance: none;
-            appearance: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-        input[type=checkbox]:before {
-            animation: handleOff var(--transDur) var(--timing);
-            background-attachment: fixed;
-            background-position: 50% calc(50% - 0.1875em);
-            border-radius: 0.5em / 0.375em;
-            box-shadow:
-                0 0.175em 0.175em 0 #0001 inset,
-                0 0.375em 0 #0002 inset,
-                0 0.375em 0 var(--off) inset,
-                0 0.475em 0.1em #0001 inset;
-            content: "";
-            display: block;
-            position: absolute;
-            top: 0.125em;
-            left: 0.125em;
-            width: 1em;
-            height: 0.75em;
-        }
-        input[type=checkbox]:checked {
-            animation: bgOn var(--transDur) var(--timing) forwards;
-        }
-        input[type=checkbox]:checked:before {
-            animation: handleOn var(--transDur) var(--timing) forwards;
-        }
-        input[type=checkbox]:focus {
-            outline: none;
-        }
-        input[type=checkbox].pristine, input[type=checkbox].pristine:before {
-            animation: none;
-        }
-        /* Dark mode */
-        @media (prefers-color-scheme: dark) {
-            body, input[type=checkbox]:before {
-                background-image:
-                    linear-gradient(90deg,#3a3d46 2px,#3a3d4600 2px),
-                    linear-gradient(#3a3d46 2px,#2e3138 2px);
-            }
-            input[type=checkbox] {
-                --off: #5c6270;
-                --mid: #3d5fb6;
-            }
-        }
-        /* Animations */
-        @keyframes bgOff {
-            from {
-                background-color: var(--on);
-            }
-            50% {
-                background-color: var(--mid);
-            }
-            to {
-                background-color: var(--off);
-            }
-        }
-        @keyframes bgOn {
-            from {
-                background-color: var(--off);
-            }
-            50% {
-                background-color: var(--mid);
-            }
-            to {
-                background-color: var(--on);
-            }
-        }
-        @keyframes handleOff {
-            from {
-                box-shadow:
-                    0 0.175em 0.175em 0 #0001 inset,
-                    0 0.375em 0 #0002 inset,
-                    0 0.375em 0 var(--on) inset,
-                    0 0.475em 0.1em #0001 inset;
-                left: 1.125em;
-                width: 1em;
-            }
-            50% {
-                box-shadow:
-                    0 0.175em 0.175em 0 #0001 inset,
-                    0 0.375em 0 #0002 inset,
-                    0 0.375em 0 var(--mid) inset,
-                    0 0.475em 0.1em #0001 inset;
-                left: 0.125em;
-                width: 2em;
-            }
-            to {
-                box-shadow:
-                    0 0.175em 0.175em 0 #0001 inset,
-                    0 0.375em 0 #0002 inset,
-                    0 0.375em 0 var(--off) inset,
-                    0 0.475em 0.1em #0001 inset;
-                left: 0.125em;
-                width: 1em;
-            }
-        }
-        @keyframes handleOn {
-            from {
-                box-shadow:
-                    0 0.175em 0.175em 0 #0001 inset,
-                    0 0.375em 0 #0002 inset,
-                    0 0.375em 0 var(--off) inset,
-                    0 0.475em 0.1em #0001 inset;
-                left: 0.125em;
-                width: 1em;
-            }
-            50% {
-                box-shadow:
-                    0 0.175em 0.175em 0 #0001 inset,
-                    0 0.375em 0 #0002 inset,
-                    0 0.375em 0 var(--mid) inset,
-                    0 0.475em 0.1em #0001 inset;
-                left: 0.125em;
-                width: 2em;
-            }
-            to {
-                box-shadow:
-                    0 0.175em 0.175em 0 #0001 inset,
-                    0 0.375em 0 #0002 inset,
-                    0 0.375em 0 var(--on) inset,
-                    0 0.475em 0.1em #0001 inset;
-                left: 1.125em;
-                width: 1em;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="theme-toggle">
-        <input class="pristine" type="checkbox" name="toggle" value="on">
-    </div>
     <div class="letter-image">
         <div class="animated-mail">
             <div class="back-fold"></div>
@@ -361,9 +211,7 @@
                 <div class="letter-border"></div>
                 <div class="letter-title"></div>
                 <div class="letter-context"></div>
-                <div class="letter-stamp">
-                    <div class="letter-stamp-inner"></div>
-                </div>
+                <div class="letter-stamp"></div>
             </div>
             <div class="top-fold"></div>
             <div class="body"></div>
@@ -379,12 +227,35 @@
             <button type="submit" class="search-button">Search</button>
         </form>
     </div>
+
     <script>
-        // for removing the `pristine` class that prevents CSS animation on load
-        document.addEventListener("click", e => {
-            let tar = e.target;
-            if (tar.name == "toggle")
-                tar.removeAttribute("class");
+        document.querySelector('.letter-image').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/checkEmail');
+                if (!response.ok) {
+                    throw new Error('Error checking unread emails');
+                }
+                const data = await response.json();
+                const unreadCount = data.unread_count;
+
+                // Example: Update UI based on unread email count
+                if (unreadCount > 0) {
+                    alert(`You have ${unreadCount} unread emails!`);
+                    // Additional UI updates or actions here
+                } else {
+                    alert('No unread emails.');
+                }
+            } catch (error) {
+                console.error('Error checking emails:', error.message);
+                alert('Error checking emails. Please try again later.');
+            }
+        });
+
+        document.getElementById('searchForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const query = document.querySelector('.search-bar').value;
+            console.log('Search query:', query);
+            // Perform search or other actions as needed
         });
     </script>
 </body>
