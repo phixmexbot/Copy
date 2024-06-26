@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Core</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
@@ -18,9 +19,20 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
+        }
+
+        .age-display {
+            font-size: 24px;
+            color: white;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.3s ease;
         }
 
         .container {
@@ -28,23 +40,34 @@
             padding: 20px;
             border-radius: 10px;
             max-width: 400px;
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
             font-size: 32px;
             margin-bottom: 20px;
-            color: white;
+            color: black;
+            font-weight: bold;
         }
 
         .search-bar {
-            width: 100%;
+            width: 80px; /* Adjust as needed */
             padding: 10px;
-            font-size: 18px;
-            border: 1px solid #dfe1e5;
-            border-radius: 24px;
-            box-shadow: none;
+            font-size: 26px;
+            border: 4px solid #ffd52d;
+            border-radius: 50px;
+            box-sizing: border-box;
+            font-family: Comic Sans MS;
+            color: #ffd52d;
             outline: none;
-            margin-bottom: 10px;
+            transition: width 0.5s, background-color 0.5s, border-radius 0.5s;
+        }
+
+        .search-bar:focus {
+            width: 350px; /* Adjust as needed */
+            background-color: #3b3640;
+            border-radius: 10px;
         }
 
         .search-button {
@@ -56,6 +79,7 @@
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            margin-top: 10px;
         }
 
         .search-button:hover {
@@ -63,9 +87,9 @@
         }
 
         .letter-image {
-            position: absolute; /* or use relative if it fits your layout better */
-            top: 20px; /* Adjust as needed */
-            left: 20px; /* Adjust as needed */
+            position: absolute;
+            top: 20px;
+            left: 20px;
             width: 100px;
             height: 100px;
             cursor: pointer;
@@ -201,9 +225,72 @@
         .letter-image:hover .shadow {
             width: 125px;
         }
+
+        /* Search box and YouTube icon styles */
+        .box {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .input {
+            padding: 10px;
+            width: 80px;
+            height: 80px;
+            background: none;
+            border: 4px solid #ffd52d;
+            border-radius: 50px;
+            box-sizing: border-box;
+            font-family: Comic Sans MS;
+            font-size: 26px;
+            color: #ffd52d;
+            outline: none;
+            transition: .5s;
+        }
+
+        .box:hover .input {
+            width: 350px;
+            background: #3b3640;
+            border-radius: 10px;
+        }
+
+        .box i {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translate(-50%,-50%);
+            font-size: 26px;
+            color: #ffd52d;
+            transition: .2s;
+        }
+
+        .box:hover i {
+            opacity: 0;
+            z-index: -1;
+        }
+
+        /* YouTube icon */
+        #ytb {
+            height: 50px;
+            width: 50px;
+            text-align: center;
+            line-height: 52px;
+            border: 2px solid transparent;
+            color: #ff1717;
+            font-size: 25px;
+            transition: 0.3s;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+
+        #ytb:hover {
+            border-radius: 50%;
+            border-color: #ff1717;
+            box-shadow: 0 0 10px #ff4040;
+        }
     </style>
 </head>
 <body>
+    <div class="age-display" id="age"></div>
     <div class="letter-image">
         <div class="animated-mail">
             <div class="back-fold"></div>
@@ -219,16 +306,29 @@
         </div>
         <div class="shadow"></div>
     </div>
+
     <div class="container">
         <h1>Core</h1>
-        <form action="https://www.google.com/search" method="GET">
-            <input type="text" name="q" class="search-bar" placeholder="Search...">
-            <br>
-            <button type="submit" class="search-button">Search</button>
-        </form>
+        <div class="box">
+            <form name="search" method="GET" action="https://www.google.com/search">
+                <input type="text" class="input" name="q" onmouseout="this.value = ''; this.blur();">
+            </form>
+            <i class="fas fa-search"></i>
+        </div>
     </div>
 
     <script>
+        function updateAge() {
+            const birthDate = new Date('2006-01-07T00:00:00');
+            const now = new Date();
+            const ageInMilliseconds = now - birthDate;
+            const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
+            document.getElementById('age').innerText = ageInYears.toFixed(8);
+        }
+
+        setInterval(updateAge, 100); // Update every 100 milliseconds for smooth transition
+        updateAge(); // Initial call to set the age immediately
+
         document.querySelector('.letter-image').addEventListener('click', async () => {
             try {
                 const response = await fetch('/checkEmail');
@@ -249,13 +349,6 @@
                 console.error('Error checking emails:', error.message);
                 alert('Error checking emails. Please try again later.');
             }
-        });
-
-        document.getElementById('searchForm').addEventListener('submit', (event) => {
-            event.preventDefault();
-            const query = document.querySelector('.search-bar').value;
-            console.log('Search query:', query);
-            // Perform search or other actions as needed
         });
     </script>
 </body>
