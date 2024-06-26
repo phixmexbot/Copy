@@ -84,12 +84,13 @@ def experiment():
 def check_unread_emails():
     try:
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
-        mail.login('komiljonqosimov8@gmail.com', 'K_973050330_k')
+        mail.login(os.getenv('komiljonqosimov8@gmail.com'), os.getenv('K_973050330_k'))
         mail.select('inbox')
 
         status, response = mail.search(None, '(UNSEEN)')
         unread_msg_nums = response[0].split()
 
+        mail.logout()
         return len(unread_msg_nums)
     except Exception as e:
         print(f"Error checking emails: {e}")
