@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Core</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
@@ -257,7 +257,7 @@
             position: absolute;
             top: 50%;
             right: 15px;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
             font-size: 26px;
             color: #ffd52d;
             transition: .2s;
@@ -319,106 +319,118 @@
         }
 
         .social-icon:hover {
-            color: #fff;
-        }
+            color: #fff
+;
+}
+    .social-icon:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+        transform: translate(-50%, -150%);
+    }
 
-        .social-icon:hover .tooltip {
-            visibility: visible;
-            opacity: 1;
-            transform: translate(-50%, -150%);
-        }
+    .social-icon--lms {
+        background: #4CAF50;
+    }
 
-        .social-icon--codepen {
-            background: #000;
-        }
+    .social-icon--lms .tooltip {
+        background: #4CAF50;
+        color: currentColor;
+    }
 
-        .social-icon--codepen .tooltip {
-            background: #000;
-            color: currentColor;
-        }
+    .social-icon--lms .tooltip:after {
+        border-top-color: #4CAF50;
+    }
 
-        .social-icon--codepen .tooltip:after {
-            border-top-color: #000;
-        }
+    .social-icon--github {
+        background: #4284c0;
+    }
 
-        .social-icon--github {
-            background: #4284c0;
-        }
+    .social-icon--github .tooltip {
+        background: #4284c0;
+        color: currentColor;
+    }
 
-        .social-icon--github .tooltip {
-            background: #4284c0;
-            color: currentColor;
-        }
+    .social-icon--github .tooltip:after {
+        border-top-color: #4284c0;
+    }
 
-        .social-icon--github .tooltip:after {
-            border-top-color: #4284c0;
-        }
+    .social-icon--chatgpt {
+        background: #2b97f1;
+    }
 
-        .social-icon--twitter {
-            background: #2b97f1;
-        }
+    .social-icon--chatgpt .tooltip {
+        background: #2b97f1;
+        color: currentColor;
+    }
 
-        .social-icon--twitter .tooltip {
-            background: #2b97f1;
-            color: currentColor;
-        }
+    .social-icon--chatgpt .tooltip:after {
+        border-top-color: #2b97f1;
+    }
 
-        .social-icon--twitter .tooltip:after {
-            border-top-color: #2b97f1;
-        }
+    .social-icon--youtube {
+        background: #ef5a92;
+    }
 
-        .social-icon--dribbble {
-            background: #ef5a92;
-        }
+    .social-icon--youtube .tooltip {
+        background: #ef5a92;
+        color: currentColor;
+    }
 
-        .social-icon--dribbble .tooltip {
-            background: #ef5a92;
-            color: currentColor;
-        }
+    .social-icon--youtube .tooltip:after {
+        border-top-color: #ef5a92;
+    }
 
-        .social-icon--dribbble .tooltip:after {
-            border-top-color: #ef5a92;
-        }
+    .social-icon--instagram {
+        background: #527fa6;
+    }
 
-        .social-icon--instagram {
-            background: #527fa6;
-        }
+    .social-icon--instagram .tooltip {
+        background: #527fa6;
+        color: currentColor;
+    }
 
-        .social-icon--instagram .tooltip {
-            background: #527fa6;
-            color: currentColor;
-        }
+    .social-icon--instagram .tooltip:after {
+        border-top-color: #527fa6;
+    }
 
-        .social-icon--instagram .tooltip:after {
-            border-top-color: #527fa6;
-        }
+    .social-icon--linkedin {
+        background: #006599;
+    }
 
-        .social-icon--linkedin {
-            background: #006599;
-        }
+    .social-icon--linkedin .tooltip {
+        background: #006599;
+        color: currentColor;
+    }
 
-        .social-icon--linkedin .tooltip {
-            background: #006599;
-            color: currentColor;
-        }
+    .social-icon--linkedin .tooltip:after {
+        border-top-color: #006599;
+    }
 
-        .social-icon--linkedin .tooltip:after {
-            border-top-color: #006599;
-        }
+    .social-icon--facebook {
+        background: #3b5a9b;
+    }
 
-        .social-icon--facebook {
-            background: #3b5a9b;
-        }
+    .social-icon--facebook .tooltip {
+        background: #3b5a9b;
+        color: currentColor;
+    }
 
-        .social-icon--facebook .tooltip {
-            background: #3b5a9b;
-            color: currentColor;
-        }
+    .social-icon--facebook .tooltip:after {
+        border-top-color: #3b5a9b;
+    }
+    .social-icon--render {
+        background: #4CAF50;
+    }
 
-        .social-icon--facebook .tooltip:after {
-            border-top-color: #3b5a9b;
-        }
-    </style>
+    .social-icon--render .tooltip {
+        background: #4CAF50;
+        color: currentColor;
+    }
+
+    .social-icon--render .tooltip:after {
+        border-top-color: #4CAF50;
+    }
+</style>
 </head>
 <body>
     <!-- Your existing content here... -->
@@ -438,87 +450,91 @@
         </div>
         <div class="shadow"></div>
     </div>
-
     <div class="container">
-        <h1>Core</h1>
-        <div class="box">
-            <form name="search" method="GET" action="https://www.google.com/search">
-                <input type="text" class="input" name="q" onmouseout="this.value = ''; this.blur();">
-            </form>
-            <i class="fas fa-search"></i>
-        </div>
+    <h1>Core</h1>
+    <div class="box">
+        <form name="search" method="GET" action="https://www.google.com/search">
+            <input type="text" class="input" name="q" onmouseout="this.value = ''; this.blur();">
+        </form>
+        <i class="fas fa-search"></i>
     </div>
-    <div class="social-icons">
-        <a class="social-icon social-icon--codepen" data-url="https://codepen.io">
-            <i class="fa fa-codepen"></i>
-            <div class="tooltip">Codepen</div>
-        </a>
-        <a class="social-icon social-icon--github" data-url="https://github.com">
-            <i class="fa fa-github"></i>
-            <div class="tooltip">Github</div>
-        </a>
-        <a class="social-icon social-icon--twitter" data-url="https://twitter.com">
-            <i class="fa fa-twitter"></i>
-            <div class="tooltip">Twitter</div>
-        </a>
-        <a class="social-icon social-icon--dribbble" data-url="https://dribbble.com">
-            <i class="fa fa-dribbble"></i>
-            <div class="tooltip">Dribbble</div>
-        </a>
-        <a class="social-icon social-icon--instagram" data-url="https://instagram.com">
-            <i class="fa fa-instagram"></i>
-            <div class="tooltip">Instagram</div>
-        </a>
-        <a class="social-icon social-icon--linkedin" data-url="https://linkedin.com">
-            <i class="fa fa-linkedin"></i>
-            <div class="tooltip">LinkedIn</div>
-        </a>
-        <a class="social-icon social-icon--facebook" data-url="https://facebook.com">
-            <i class="fa fa-facebook"></i>
-            <div class="tooltip">Facebook</div>
-        </a>
-    </div>
+</div>
+<div class="social-icons">
+    <a class="social-icon social-icon--lms" data-url="https://lms.newuu.uz">
+        <i class="fa fa-graduation-cap"></i>
+        <div class="tooltip">LMS</div>
+    </a>
+    <a class="social-icon social-icon--github" data-url="https://github.com">
+<i class="fa-brands fa-square-github"></i>
+        <div class="tooltip">Github</div>
+    </a>
+    <a class="social-icon social-icon--instagram" data-url="https://instagram.com">
+<i class="fa-brands fa-square-instagram"></i>
+        <div class="tooltip">Instagram</div>
+    </a>
+    <a class="social-icon social-icon--chatgpt" data-url="https://chatgpt.com">
+<i class="fa-solid fa-brain"></i>
+        <div class="tooltip">ChatGPT</div>
+    </a>
+    <a class="social-icon social-icon--linkedin" data-url="https://linkedin.com">
+<i class="fa-brands fa-linkedin"></i>
+        <div class="tooltip">LinkedIn</div>
+    </a>
+    <a class="social-icon social-icon--youtube" data-url="https://youtube.com">
+<i class="fa-brands fa-youtube"></i>
+        <div class="tooltip">Youtube</div>
+    </a>
+    <a class="social-icon social-icon--facebook" data-url="https://facebook.com">
+<i class="fa-brands fa-square-facebook"></i>
+        <div class="tooltip">Facebook</div>
+    </a>
+    <a class="social-icon social-icon--render" data-url="https://render.com">
+<i class="fa-solid fa-server"></i>
+        <div class="tooltip">Render</div>
+    </a>
+</div>
 
-    <script>
-        function updateAge() {
-            const birthDate = new Date('2006-01-07T00:00:00');
-            const now = new Date();
-            const ageInMilliseconds = now - birthDate;
-            const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
-            document.getElementById('age').innerText = ageInYears.toFixed(8);
+<script>
+    function updateAge() {
+        const birthDate = new Date('2006-01-07T00:00:00');
+        const now = new Date();
+        const ageInMilliseconds = now - birthDate;
+        const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
+        document.getElementById('age').innerText = ageInYears.toFixed(8);
+    }
+
+    setInterval(updateAge, 1000); // Update every 100 milliseconds for smooth transition
+    updateAge(); // Initial call to set the age immediately
+
+document.querySelector('.letter-image').addEventListener('click', async () => {
+    try {
+        const response = await fetch('/checkEmail');
+        if (!response.ok) {
+            throw new Error('Error checking unread emails');
         }
+        const data = await response.json();
+        const unreadCount = data.unread_count;
 
-        setInterval(updateAge, 1000); // Update every 100 milliseconds for smooth transition
-        updateAge(); // Initial call to set the age immediately
+        // Example: Update UI based on unread email count
+        if (unreadCount > 0) {
+            alert(`You have ${unreadCount} unread emails!`);
+            // Additional UI updates or actions here
+        } else {
+            alert('No unread emails.');
+        }
+    } catch (error) {
+        console.error('Error checking emails:', error.message);
+        alert('Error checking emails. Please try again later.');
+    }
+});
 
-        document.querySelector('.letter-image').addEventListener('click', async () => {
-            try {
-                const response = await fetch('/checkEmail');
-                if (!response.ok) {
-                    throw new Error('Error checking unread emails');
-                }
-                const data = await response.json();
-                const unreadCount = data.unread_count;
+document.querySelectorAll('.social-icon').forEach(icon => {
+    icon.addEventListener('click', () => {
+        const url = icon.getAttribute('data-url');
+        window.location.href = url;
+    });
+});
 
-                // Example: Update UI based on unread email count
-                if (unreadCount > 0) {
-                    alert(`You have ${unreadCount} unread emails!`);
-                    // Additional UI updates or actions here
-                } else {
-                    alert('No unread emails.');
-                }
-            } catch (error) {
-                console.error('Error checking emails:', error.message);
-                alert('Error checking emails. Please try again later.');
-            }
-        });
-
-        document.querySelectorAll('.social-icon').forEach(icon => {
-            icon.addEventListener('click', () => {
-                const url = icon.getAttribute('data-url');
-                window.location.href = url;
-            });
-        });
-    </script>
+</script>
 </body>
 </html>
