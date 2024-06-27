@@ -268,28 +268,160 @@
             z-index: -1;
         }
 
-        /* YouTube icon */
-        #ytb {
-            height: 50px;
-            width: 50px;
-            text-align: center;
-            line-height: 52px;
-            border: 2px solid transparent;
-            color: #ff1717;
-            font-size: 25px;
-            transition: 0.3s;
+        .social-icons {
+            display: flex;
+            justify-content: center;
             margin-top: 20px;
-            text-decoration: none;
         }
 
-        #ytb:hover {
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 0.5rem;
             border-radius: 50%;
-            border-color: #ff1717;
-            box-shadow: 0 0 10px #ff4040;
+            cursor: pointer;
+            font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+            font-size: 2.5rem;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .social-icon .tooltip {
+            visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            padding: 0.8rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            opacity: 0;
+            pointer-events: none;
+            text-transform: uppercase;
+            transform: translate(-50%, -100%);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .social-icon .tooltip:after {
+            content: "";
+            position: absolute;
+            bottom: 1px;
+            left: 50%;
+            border: solid;
+            border-width: 10px 10px 0 10px;
+            border-color: transparent;
+            transform: translate(-50%, 100%);
+        }
+
+        .social-icon:hover {
+            color: #fff;
+        }
+
+        .social-icon:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translate(-50%, -150%);
+        }
+
+        .social-icon--codepen {
+            background: #000;
+        }
+
+        .social-icon--codepen .tooltip {
+            background: #000;
+            color: currentColor;
+        }
+
+        .social-icon--codepen .tooltip:after {
+            border-top-color: #000;
+        }
+
+        .social-icon--github {
+            background: #4284c0;
+        }
+
+        .social-icon--github .tooltip {
+            background: #4284c0;
+            color: currentColor;
+        }
+
+        .social-icon--github .tooltip:after {
+            border-top-color: #4284c0;
+        }
+
+        .social-icon--twitter {
+            background: #2b97f1;
+        }
+
+        .social-icon--twitter .tooltip {
+            background: #2b97f1;
+            color: currentColor;
+        }
+
+        .social-icon--twitter .tooltip:after {
+            border-top-color: #2b97f1;
+        }
+
+        .social-icon--dribbble {
+            background: #ef5a92;
+        }
+
+        .social-icon--dribbble .tooltip {
+            background: #ef5a92;
+            color: currentColor;
+        }
+
+        .social-icon--dribbble .tooltip:after {
+            border-top-color: #ef5a92;
+        }
+
+        .social-icon--instagram {
+            background: #527fa6;
+        }
+
+        .social-icon--instagram .tooltip {
+            background: #527fa6;
+            color: currentColor;
+        }
+
+        .social-icon--instagram .tooltip:after {
+            border-top-color: #527fa6;
+        }
+
+        .social-icon--linkedin {
+            background: #006599;
+        }
+
+        .social-icon--linkedin .tooltip {
+            background: #006599;
+            color: currentColor;
+        }
+
+        .social-icon--linkedin .tooltip:after {
+            border-top-color: #006599;
+        }
+
+        .social-icon--facebook {
+            background: #3b5a9b;
+        }
+
+        .social-icon--facebook .tooltip {
+            background: #3b5a9b;
+            color: currentColor;
+        }
+
+        .social-icon--facebook .tooltip:after {
+            border-top-color: #3b5a9b;
         }
     </style>
 </head>
 <body>
+    <!-- Your existing content here... -->
     <div class="age-display" id="age"></div>
     <div class="letter-image">
         <div class="animated-mail">
@@ -316,6 +448,36 @@
             <i class="fas fa-search"></i>
         </div>
     </div>
+    <div class="social-icons">
+        <a class="social-icon social-icon--codepen" data-url="https://codepen.io">
+            <i class="fa fa-codepen"></i>
+            <div class="tooltip">Codepen</div>
+        </a>
+        <a class="social-icon social-icon--github" data-url="https://github.com">
+            <i class="fa fa-github"></i>
+            <div class="tooltip">Github</div>
+        </a>
+        <a class="social-icon social-icon--twitter" data-url="https://twitter.com">
+            <i class="fa fa-twitter"></i>
+            <div class="tooltip">Twitter</div>
+        </a>
+        <a class="social-icon social-icon--dribbble" data-url="https://dribbble.com">
+            <i class="fa fa-dribbble"></i>
+            <div class="tooltip">Dribbble</div>
+        </a>
+        <a class="social-icon social-icon--instagram" data-url="https://instagram.com">
+            <i class="fa fa-instagram"></i>
+            <div class="tooltip">Instagram</div>
+        </a>
+        <a class="social-icon social-icon--linkedin" data-url="https://linkedin.com">
+            <i class="fa fa-linkedin"></i>
+            <div class="tooltip">LinkedIn</div>
+        </a>
+        <a class="social-icon social-icon--facebook" data-url="https://facebook.com">
+            <i class="fa fa-facebook"></i>
+            <div class="tooltip">Facebook</div>
+        </a>
+    </div>
 
     <script>
         function updateAge() {
@@ -326,7 +488,7 @@
             document.getElementById('age').innerText = ageInYears.toFixed(8);
         }
 
-        setInterval(updateAge, 100); // Update every 100 milliseconds for smooth transition
+        setInterval(updateAge, 1000); // Update every 100 milliseconds for smooth transition
         updateAge(); // Initial call to set the age immediately
 
         document.querySelector('.letter-image').addEventListener('click', async () => {
@@ -349,6 +511,13 @@
                 console.error('Error checking emails:', error.message);
                 alert('Error checking emails. Please try again later.');
             }
+        });
+
+        document.querySelectorAll('.social-icon').forEach(icon => {
+            icon.addEventListener('click', () => {
+                const url = icon.getAttribute('data-url');
+                window.location.href = url;
+            });
         });
     </script>
 </body>
