@@ -4,3 +4,4 @@ Pillow
 gunicorn
 requests
 google-generativeai
+curl_cffi
