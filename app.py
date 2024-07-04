@@ -83,8 +83,14 @@ def experiment():
 
 def check_unread_emails():
     try:
+        email = os.environ.get('EMAIL')
+        password = os.environ.get('EMAIL_PASSWORD')
+
+        if not email or not password:
+            raise ValueError("Email or password environment variable not set")
+
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
-        mail.login(os.getenv('komiljonqosimov8@gmail.com'), os.getenv('K_973050330_k'))
+        mail.login(email, password)
         mail.select('inbox')
 
         status, response = mail.search(None, '(UNSEEN)')
