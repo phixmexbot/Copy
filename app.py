@@ -45,6 +45,14 @@ def interactive():
         print(f"Error occurred: {e}")
 
 
+@app.route('/home', methods=['GET'])
+def home():
+    try:
+        return render_template('home.html')
+    except Exception as e:
+        print(f"Error occurred: {e}")
+
+
 @app.route('/orbit', methods=['GET'])
 def orbit():
     try:
