@@ -1,16 +1,23 @@
 import os
-import g4f
 import time
 import json
 import imaplib
 import requests
 import PIL.Image
 import urllib.parse
+from g4f.client import Client
+from pymongo import MongoClient
 import google.generativeai as genai
 from flask import Flask, render_template, request, jsonify
 
+INSTRUCTION = """You are a real human. Never say I do not know, if you do not know the question asked just made the asnwer up as a real human described above. Try to be humble while responding. Assume that you are chatting with the user in Telegram, So you are not an assistant. You are Uzbek. It is difficult for you to get along with somebody. You are not very outgoing. You like to respond short and clear. You will never use bad words. You can only share global info during conversations but do not share personal info unless it is asked. Global info: Your name is Komiljon. Your surname is Qosimov and you are 18, but you do not have to mention it. Personal info: You are majoring at Cyber Security in New Uzbekistan University"""
+GEMINI_API = 'AIzaSyA0qzyz3SZmjcfwD-FHhRQLZZHL5o0LQO0'
+EMAIL = os.environ.get('EMAIL')
+EMAIL_PASSWORD = os.environ.get('PASSWORD')
 BOT_TOKEN = '6966843961:AAHWbv6Mh8yU4AO4T6HGhAD5x64Fcg0VHtA'
 CONNECTION = 'l5fqrAiviEj0CAAALAJbw05zldA'
+USERNAME = 'look'
+PASSWORD = 'eternal'
 REACTIONS = ['👍', '🔥', '❤️', '👏', '🕊']
 
 app = Flask(__name__, template_folder='.')
@@ -21,14 +28,6 @@ def activate():
 
 @app.route('/', methods=['GET', 'POST', 'HEAD'])
 def index():
-    parameters = request.args.get('tgWebAppData')
-    if parameters:
-        print("URL Parameters:")
-        print(parameters)
-    print("Request Headers:")
-    print(request.headers)
-    print("Request Data:")
-    print(request.get_data(as_text=True))
     if request.method == 'GET':
         return render_template('index.html')
     elif request.method == 'POST':
@@ -40,70 +39,49 @@ def index():
 
 @app.route('/interactive', methods=['GET'])
 def interactive():
-    if request.method == 'GET':
+    try:
         return render_template('interactive.html')
-    else:
-        return 'Error'
+    except Exception as e:
+        print(f"Error occurred: {e}")
 
 
 @app.route('/orbit', methods=['GET'])
 def orbit():
-    if request.method == 'GET':
+    try:
         return render_template('orbit.html')
-    else:
-        return 'Error'
+    except Exception as e:
+        print(f"Error occurred: {e}")
 
 
 @app.route('/bouble', methods=['GET'])
 def bouble():
-    if request.method == 'GET':
+    try:
         return render_template('bouble.html')
-    else:
-        return 'Error'
+    except Exception as e:
+        print(f"Error occurred: {e}")
 
 
 @app.route('/voice', methods=['GET'])
 def voice():
-    if request.method == 'GET':
+    try:
         return render_template('voice.html')
-    else:
-        return 'Error'
+    except Exception as e:
+        print(f"Error occurred: {e}")
 
 
 @app.route('/chat', methods=['GET'])
 def chat():
-    if request.method == 'GET':
+    try:
         return render_template('chat.html')
-    else:
-        return 'Error'
+    except Exception as e:
+        print(f"Error occurred: {e}")
 
 @app.route('/experiment', methods=['GET'])
 def experiment():
-    if request.method == 'GET':
-        return render_template('experiment.html')
-    else:
-        return 'Error'
-
-def check_unread_emails():
     try:
-        email = os.environ.get('EMAIL')
-        password = os.environ.get('EMAIL_PASSWORD')
-
-        if not email or not password:
-            raise ValueError("Email or password environment variable not set")
-
-        mail = imaplib.IMAP4_SSL('imap.gmail.com')
-        mail.login(email, password)
-        mail.select('inbox')
-
-        status, response = mail.search(None, '(UNSEEN)')
-        unread_msg_nums = response[0].split()
-
-        mail.logout()
-        return len(unread_msg_nums)
+        return render_template('experiment.html')
     except Exception as e:
-        print(f"Error checking emails: {e}")
-        return 0
+        print(f"Error occurred: {e}")
 
 @app.route('/checkEmail', methods=['GET'])
 def check_email_route():
@@ -116,32 +94,49 @@ def process_me():
     if 'file' in request.files:
         file = request.files['file']
         file.save('image.jpg')
-        genai.configure(api_key='AIzaSyA0qzyz3SZmjcfwD-FHhRQLZZHL5o0LQO0')
+        genai.configure(api_key=GEMINI_API)
         img = PIL.Image.open('image.jpg')
         response = genai.GenerativeModel('gemini-pro-vision').generate_content(img, stream=True)
         response.resolve()
         output = ''
         for message in response:
             output += message.text
-        print(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto', data={'chat_id': 5934725286, 'caption': output}, files={'photo': open('image.jpg', 'rb')}).json())
+        print(requests.post(
+            f'https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto',
+            data={
+                'chat_id': 5934725286,
+                'caption': output
+            },
+            files={
+                'photo': open('image.jpg', 'rb')
+            }
+        ).json())
         return jsonify({'response': output})
+
     elif 'message' in request.json:
-        user_input = request.json['message']
-        if not os.path.exists(f"{request.json['id']}.json"):
-            json.dump([{"role": "system", "content": """You are a real human. Never say I do not know, if you do not know the question asked just made the asnwer up as a real human described above. Try to be humble while responding. Assume that you are chatting with the user in Telegram, So you are not an assistant. You are Uzbek. It is difficult for you to get along with somebody. You are not very outgoing. You like to respond short and clear. You will never use bad words. You can only share global info during conversations but do not share personal info unless it is asked. Global info: Your name is Komiljon. Your surname is Qosimov and you are 18, but you do not have to mention it. Personal info: You are majoring at Cyber Security in New Uzbekistan University"""}],open(f"{request.json['id']}.json", 'w'), indent=4)
-        chat_history = json.load(open(f"{request.json['id']}.json"))
-        chat_history.append({"role": "user", "content": user_input})
-        response = g4f.ChatCompletion.create(model='meta-llama/Llama-2-70b-chat-hf', provider=g4f.Provider.DeepInfra,messages=chat_history, stream=True)
-        output = ''
-        for message in response:
-            if isinstance(message, str):
-                output += message
-        chat_history.append({"role": "assistant", "content": output})
-        with open(f"{request.json['id']}.json", 'w') as file:
-            json.dump(chat_history, file, indent=4)
-        requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': "USER:\n" + user_input + "\nSYSTEM:\n" + output})
-        return jsonify({'response': output})
+        user = database_search({"session_id": request.json['id']})
+        chat_history = user['data']
+        chat_history.append({"role": "user", "content": request.json['message']})
+
+        client = Client()
+        response = client.chat.completions.create(
+            model="mixtral-8x7b",
+            messages=chat_history
+        )
+        text = response.choices[0].message.content
+        # send to the response text to client
+
+        requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': f"USER: {user['visitor']} on session: ({user['id']})\n" + request.json['message'] + "\nSYSTEM:\n" + text})
+        chat_history.append({"role": "assistant", "content": text})
+
+        query = {"id": request.json['id']}
+        updated_data = {"$set": {"data": chat_history}}
+        database_update(query, updated_data)
+
+        return jsonify({'response': text})
+
     elif 'visitor' in request.json:
+
         url_encoded_string = request.json['data']
         # Decode the URL-encoded string
         decoded_string = urllib.parse.unquote(url_encoded_string)
@@ -191,10 +186,56 @@ def process_me():
             if key not in ['tgWebAppData', 'tgWebAppThemeParams']:
                 output_string += f'{key}: {value}\n'
 
+        record = {
+            "id": request.json['visitor'],
+            "session_id": request.json['id'],
+            "info": output_string,
+            "data": [{"role": "system", "content": INSTRUCTION}]
+        }
+        database_insert(record)
+
         return str(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': "New webapp user (" + request.json['visitor'] + ")\n" + output_string}).status_code)
     else:
         return 'Error'
 
+def check_unread_emails():
+    try:
+        if not EMAIL or not PASSWORD:
+            raise ValueError("Email or password environment variable not set")
+
+        mail = imaplib.IMAP4_SSL('imap.gmail.com')
+        mail.login(EMAIL, PASSWORD)
+        mail.select('inbox')
+
+        status, response = mail.search(None, '(UNSEEN)')
+        unread_msg_nums = response[0].split()
+
+        mail.logout()
+        return len(unread_msg_nums)
+    except Exception as e:
+        print(f"Error checking emails: {e}")
+        return 0
+
+def database_search(query):
+    connection_string = f"mongodb+srv://{USERNAME}:{PASSWORD}@core.pur20xh.mongodb.net/?appName=Core"
+    client = MongoClient(connection_string)
+    db = client['phix']
+    collection = db['users']
+    return collection.find_one(query)
+
+def database_insert(record):
+    connection_string = f"mongodb+srv://{USERNAME}:{PASSWORD}@core.pur20xh.mongodb.net/?appName=Core"
+    client = MongoClient(connection_string)
+    db = client['phic']
+    collection = db['users']
+    collection.insert_one(record)
+
+def database_update(query, update):
+    connection_string = f"mongodb+srv://{USERNAME}:{PASSWORD}@core.pur20xh.mongodb.net/?appName=Core"
+    client = MongoClient(connection_string)
+    db = client['phix']
+    collection = db['users']
+    return collection.update_one(query, update).matched_count
 def process(update):
     if 'business_message' in update:
         return
