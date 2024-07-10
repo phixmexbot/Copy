@@ -5,3 +5,4 @@ gunicorn
 requests
 google-generativeai
 curl_cffi
+pymongo
