@@ -43,10 +43,10 @@ def router(path):
         if path in DIRECTORIES:
             return render_template(f'{path}.html')
         else:
-            return render_template(f'error_404.html')
+            return render_template(f'error/404.html')
     except Exception as e:
         print(f"Error occurred: {e}")
-        return render_template(f'error_501.html')
+        return render_template(f'error/501.html')
 
 @app.route('/process', methods=['POST'])
 def process_me():
