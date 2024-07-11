@@ -7,9 +7,11 @@
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg">
 <style>
   body {
-    background: #000;
-    color: #aaa;
-    font: 100%/20px helvetica, arial, sans-serif;
+      background-image: url('https://raw.githubusercontent.com/Komil-jon/phix-core/main/assests/background.jpg');
+      background-size: cover; /* Ensure the background image covers the entire viewport */
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* Disable scrolling */
   }
   
   canvas {
@@ -24,7 +26,7 @@
   }
   
   #control-panel {
-    background: rgba(0,0,0,.75);
+
     left: 20px;
     padding: 10px 15px;
     position: absolute;
@@ -205,6 +207,7 @@
   }
 
   function clear() {
+    ctx.clearRect(0, 0, cw, ch); // Fully clear the canvas
     orbs = [];
   }
 
@@ -221,7 +224,7 @@
   var loop = function() {
     window.requestAnimFrame(loop);
     if (trail) {
-      ctx.fillStyle = 'rgba(0,0,0,.1)';
+      ctx.fillStyle = 'rgba(0,0,0,.01)';
       ctx.fillRect(0, 0, cw, ch);
     } else {
       ctx.clearRect(0, 0, cw, ch);
