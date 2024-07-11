@@ -19,6 +19,7 @@ CONNECTION = 'l5fqrAiviEj0CAAALAJbw05zldA'
 USERNAME = 'look'
 PASSWORD = 'eternal'
 REACTIONS = ['👍', '🔥', '❤️', '👏', '🕊']
+DIRECTORIES = ['home', 'about', 'activities', 'services', 'projects', 'contact', 'activities/lightening-flash', 'activities/orbit-around', 'activities/doodle-rain', 'services/chat-bot', 'contact/automatic-attendance']
 
 app = Flask(__name__, template_folder='.')
 
@@ -29,73 +30,23 @@ def activate():
 @app.route('/', methods=['GET', 'POST', 'HEAD'])
 def index():
     if request.method == 'GET':
-        return render_template('index.html')
+        return render_template('initial.html')
     elif request.method == 'POST':
         process(json.loads(request.get_data()))
         return 'Success'
     else:
         return 'Error'
 
-
-@app.route('/interactive', methods=['GET'])
-def interactive():
+@app.route('/<path:path>', methods=['GET'])
+def router(path):
     try:
-        return render_template('interactive.html')
+        if path in DIRECTORIES:
+            return render_template(f'{path}.html')
+        else:
+            return render_template(f'error_404.html')
     except Exception as e:
         print(f"Error occurred: {e}")
-
-
-@app.route('/home', methods=['GET'])
-def home():
-    try:
-        return render_template('home.html')
-    except Exception as e:
-        print(f"Error occurred: {e}")
-
-
-@app.route('/orbit', methods=['GET'])
-def orbit():
-    try:
-        return render_template('orbit.html')
-    except Exception as e:
-        print(f"Error occurred: {e}")
-
-
-@app.route('/bouble', methods=['GET'])
-def bouble():
-    try:
-        return render_template('bouble.html')
-    except Exception as e:
-        print(f"Error occurred: {e}")
-
-
-@app.route('/voice', methods=['GET'])
-def voice():
-    try:
-        return render_template('voice.html')
-    except Exception as e:
-        print(f"Error occurred: {e}")
-
-
-@app.route('/chat', methods=['GET'])
-def chat():
-    try:
-        return render_template('chat.html')
-    except Exception as e:
-        print(f"Error occurred: {e}")
-
-@app.route('/experiment', methods=['GET'])
-def experiment():
-    try:
-        return render_template('experiment.html')
-    except Exception as e:
-        print(f"Error occurred: {e}")
-
-@app.route('/checkEmail', methods=['GET'])
-def check_email_route():
-    unread_count = check_unread_emails()
-    return jsonify({'unread_count': unread_count})
-
+        return render_template(f'error_501.html')
 
 @app.route('/process', methods=['POST'])
 def process_me():
