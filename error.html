@@ -227,6 +227,26 @@
                 text-shadow: 0 0 1rem #fefefe;
             }
         }
+      .logo-container {
+        position: absolute;
+        top: 30px; /* Adjust the top distance */
+        left: 30px; /* Adjust the left distance */
+        width: 60px; /* Adjust the width of the circle */
+        height: 60px; /* Adjust the height of the circle */
+        border-radius: 50%; /* Makes the container circular */
+        overflow: hidden;
+        background-color: white;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow effect */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100; /* Ensure the logo is above other content */
+      }
+
+      .logo {
+        width: 80%; /* Adjust the size of the logo inside the circle */
+        height: auto; /* Maintain aspect ratio */
+      }
       .footer {
         position: fixed;
         bottom: 30px; /* Adjusted from 10px to 40px */
@@ -258,6 +278,9 @@
 </head>
 
 <body>
+  <div class="logo-container">
+    <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg" alt="Logo" class="logo">
+  </div>
   <footer class="footer">
     <a href="https://github.com/Komil-jon/phix-core" target="_blank" class="footer-link">
       <span class="footer-text">© Core 2024</span>
