@@ -77,4 +77,27 @@
       <span class="footer-text">© Core 2024</span>
     </a>
   </footer>
+  <script>
+    function isMobileDevice() {
+  return /Mobi|Android/i.test(navigator.userAgent);
+}
+
+// Rotate the body for mobile devices in landscape mode
+if (isMobileDevice()) {
+  window.addEventListener('orientationchange', function() {
+    if (window.orientation === 90 || window.orientation === -90) {
+      document.body.style.transform = 'rotate(90deg)';
+      document.body.style.transformOrigin = 'left top';
+      document.body.style.width = '100vh';
+      document.body.style.height = '100vw';
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.transform = '';
+      document.body.style.width = '';
+      document.body.style.height = '';
+      document.body.style.overflow = '';
+    }
+  });
+}
+  </script>
 </body>
