@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Core</title>
+  <style>
+    body {
+      background-color: #031033
+    }
+  </style>
+  <style>
+    body {
+      background-image: url('https://raw.githubusercontent.com/Komil-jon/phix-core/main/assests/background.jpg');
+      background-size: cover; /* Ensure the background image covers the entire viewport */
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* Disable scrolling */
+      font-family: sans-serif; /* Default font for the body */
+      font-weight: bold;
+    }
+    .logo-container {
+      position: absolute;
+      top: 30px; /* Adjust the top distance */
+      left: 30px; /* Adjust the left distance */
+      width: 60px; /* Adjust the width of the circle */
+      height: 60px; /* Adjust the height of the circle */
+      border-radius: 50%; /* Makes the container circular */
+      overflow: hidden;
+      background-color: white;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow effect */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100; /* Ensure the logo is above other content */
+    }
+
+    .logo {
+      width: 80%; /* Adjust the size of the logo inside the circle */
+      height: auto; /* Maintain aspect ratio */
+    }
+  .footer {
+      position: fixed;
+      bottom: 30px; /* Adjusted from 10px to 40px */
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      z-index: 1000; /* Ensure the footer is above other content */
+    }
+
+    .footer-link {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-logo {
+      width: 30px;
+      height: 30px;
+      margin-right: 0.5rem;
+    }
+
+    .footer-text {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-container">
+    <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg" alt="Logo" class="logo">
+  </div>
+  <footer class="footer">
+    <a href="https://github.com/Komil-jon/phix-core" target="_blank" class="footer-link">
+      <span class="footer-text">© Core 2024</span>
+    </a>
+  </footer>
+</body>
