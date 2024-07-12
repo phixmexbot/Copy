@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Core</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       background-color: #031033
@@ -26,29 +27,30 @@
     }
 
     .message-container {
-      position: relative;
+      position: absolute;
+      top: 40%; /* Adjust as needed */
+      transform: translateX(-50%);
       text-align: center;
       opacity: 0;
-      transform: translateY(-50%);
       animation: fadeIn 3s forwards;
-      z-index: 10; /* Ensure it's above other elements */
+      z-index: 10;
+      width: 70%; /* Adjust the width of the message container */
+      box-sizing: border-box;
     }
 
-  .message {
-    padding: 60px;
-    border-radius: 10px;
-    display: inline-block; /* Ensure block-level display for full width */
-    width: 70%; /* Adjust width as needed */
-    margin: auto; /* Center align */
-    box-sizing: border-box; /* Include padding and border in width calculation */
-  }
+    .message {
+      padding: 60px;
+      border-radius: 10px;
+      display: inline-block;
+      width: 70%;
+      box-sizing: border-box;
+    }
 .logo-container {
   position: absolute;
-  top: calc(30%); /* Adjust to center vertically */
-  left: 47.5%; /* Center horizontally */
+  top: calc(10%); /* Adjust to center vertically */
   transform: translateX(-50%);
-  width: 100px; /* Adjust the width of the circle */
-  height: 100px; /* Adjust the height of the circle */
+  width: 300px; /* Adjust the width of the circle */
+  height: 300px; /* Adjust the height of the circle */
   border-radius: 50%; /* Makes the container circular */
   overflow: hidden;
   background-color: white;
@@ -347,6 +349,7 @@
         }
 
         .social-icon {
+            top: 275px; /* Adjusted to shift 100px downwards */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -356,11 +359,14 @@
             margin: 0 0.5rem;
             border-radius: 50%;
             cursor: pointer;
-            font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+            font-family: sans-serif;
+            font-weight: bold;
             font-size: 2.5rem;
             text-decoration: none;
             transition: all 0.15s ease;
+            z-index: 1000; /* Ensure it's above other content */
         }
+        
 
         .social-icon .tooltip {
             visibility: hidden;
@@ -535,6 +541,12 @@
     <div class="trail"></div>
   </div>
   
+    <p class="message-container">
+    <span class="message">
+Core is a project created by Eternal team purely for enjoyment and satisfaction. It aims to provide a space where visitors can relax and immerse themselves in a visually stimulating environment. Whether you're here to explore its artistic elements, enjoy the serene landscapes, or simply unwind, Core invites you to take a moment to pause and appreciate the beauty of simplicity.
+    </span>
+  </p>
+  
   
   <div class="social-icons">
     <a class="social-icon social-icon--lms" data-url="https://lms.newuu.uz">
@@ -629,6 +641,12 @@
         star.style.animationDuration = (Math.floor(Math.random() * 6) + 1) + 's';
       }
     })();
+    document.querySelectorAll('.social-icon').forEach(icon => {
+    icon.addEventListener('click', () => {
+        const url = icon.getAttribute('data-url');
+        window.location.href = url;
+    });
+});
   </script>
 </body>
 </html>
