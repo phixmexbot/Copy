@@ -13,44 +13,44 @@
   <style>
     body {
       background-image: url('https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/background.jpg');
-      background-size: cover; /* Ensure the background image covers the entire viewport */
+      background-size: cover; 
       width: 100%;
       height: 100%;
-      overflow: hidden; /* Disable scrolling */
-      font-family: sans-serif; /* Default font for the body */
+      overflow: hidden; 
+      font-family: sans-serif;
       font-weight: bold;
       font-size: 1.5rem;
     }
     canvas {
       display: block;
     }
-        .footer {
-        position: fixed;
-        bottom: 30px; /* Adjusted from 10px to 40px */
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: center;
-        z-index: 1000; /* Ensure the footer is above other content */
-      }
+    .footer {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      z-index: 1000;
+    }
 
-      .footer-link {
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-      }
+    .footer-link {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
 
-      .footer-logo {
-        width: 30px;
-        height: 30px;
-        margin-right: 0.5rem;
-      }
+    .footer-logo {
+      width: 30px;
+      height: 30px;
+      margin-right: 0.5rem;
+    }
 
-      .footer-text {
-        color: #ffffff;
-        font-weight: bold;
-        font-size: 1.2rem;
-      }
+    .footer-text {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
   </style>
 </head>
 <body>
@@ -60,9 +60,8 @@
     </a>
   </footer>
   <canvas id="canvas"></canvas>
-
   <script>
-    // Canvas Lightning v1
+
     var canvasLightning = function(c, cw, ch) {
       var _this = this;
       this.c = c;
@@ -73,17 +72,14 @@
       this.lightTimeCurrent = 0;
       this.lightTimeTotal = 50;
 
-      // Initialize
       this.init = function() {
         this.loop();
       };
 
-      // Utility Functions
       this.rand = function(rMi, rMa) {
         return ~~((Math.random() * (rMa - rMi + 1)) + rMi);
       };
 
-      // Create Lightning
       this.createL = function(x, y, canSpawn) {
         this.lightning.push({
           x: x,
@@ -100,7 +96,6 @@
         });
       };
 
-      // Update Lightning
       this.updateL = function() {
         var i = this.lightning.length;
         while (i--) {
@@ -117,7 +112,6 @@
         }
       };
 
-      // Render Lightning
       this.renderL = function() {
         var i = this.lightning.length;
         while (i--) {
@@ -170,7 +164,6 @@
         }
       };
 
-      // Lightning Timer
       this.lightningTimer = function() {
         this.lightTimeCurrent++;
         if (this.lightTimeCurrent >= this.lightTimeTotal) {
@@ -185,7 +178,6 @@
         }
       };
 
-      // Clear Canvas
       this.clearCanvas = function() {
         this.ctx.globalCompositeOperation = 'destination-out';
         this.ctx.fillStyle = 'rgba(0,0,0,' + this.rand(1, 30) / 100 + ')';
@@ -193,13 +185,11 @@
         this.ctx.globalCompositeOperation = 'source-over';
       };
 
-      // Resize Canvas on Window Resize
       window.addEventListener('resize', function() {
         _this.cw = _this.c.width = window.innerWidth;
         _this.ch = _this.c.height = window.innerHeight;
       });
 
-      // Animation Loop
       this.loop = function() {
         var loopIt = function() {
           requestAnimationFrame(loopIt, _this.c);
@@ -213,13 +203,11 @@
 
     };
 
-    // Check Canvas Support
     var isCanvasSupported = function() {
       var elem = document.createElement('canvas');
       return !!(elem.getContext && elem.getContext('2d'));
     };
 
-    // Initialize Canvas Lightning
     window.addEventListener('DOMContentLoaded', function() {
       if (isCanvasSupported()) {
         var c = document.getElementById('canvas');
