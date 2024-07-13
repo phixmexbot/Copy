@@ -32,71 +32,71 @@
       opacity: 0;
       transform: translateY(-50%);
       animation: fadeIn 3s forwards;
-      z-index: 10; /* Ensure it's above other elements */
+      z-index: 10;
     }
 
   .message {
     padding: 60px;
     border-radius: 10px;
-    display: inline-block; /* Ensure block-level display for full width */
-    width: 70%; /* Adjust width as needed */
-    margin: auto; /* Center align */
-    box-sizing: border-box; /* Include padding and border in width calculation */
+    display: inline-block;
+    width: 70%;
+    margin: auto;
+    box-sizing: border-box;
   }
-.photo-container {
-  position: absolute  ;
-  top: calc(11%); /* Adjust to center vertically */
-  transform: translateX(-50%);
-  width: 300px; /* Adjust the width of the circle */
-  height: 300px; /* Adjust the height of the circle */
-  border-radius: 50%; /* Makes the container circular */
-  overflow: hidden;
-  background-color: white;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow effect */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 0; /* Ensure the logo is above other content */
-  opacity: 0;
-  animation: fadeInLogo 3s forwards;
-}
-
-.photo {
-  width: 80%; /* Adjust the size of the logo inside the circle */
-  height: auto; /* Maintain aspect ratio */
-}
-
-          .logo-container {
-        position: absolute;
-        top: 30px; /* Adjust the top distance */
-        left: 30px; /* Adjust the left distance */
-        width: 60px; /* Adjust the width of the circle */
-        height: 60px; /* Adjust the height of the circle */
-        border-radius: 50%; /* Makes the container circular */
-        overflow: hidden;
-        background-color: white;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow effect */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 100; /* Ensure the logo is above other content */
-      }
-
-      .logo {
-        width: 80%; /* Adjust the size of the logo inside the circle */
-        height: auto; /* Maintain aspect ratio */
-      }
-
-@keyframes fadeInLogo {
-  0% {
+  .photo-container {
+    position: absolute  ;
+    top: calc(11%);
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
     opacity: 0;
-    transform: translateY(-50%);
+    animation: fadeInLogo 3s forwards;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+
+  .photo {
+    width: 80%;
+    height: auto;
   }
-}
+
+  .logo-container {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+
+  .logo {
+    width: 80%;
+    height: auto;
+  }
+
+    @keyframes fadeInLogo {
+      0% {
+        opacity: 0;
+        transform: translateY(-50%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
     @keyframes fadeIn {
       0% {
@@ -114,14 +114,12 @@
       height: 100px;
       border-radius: 50%;
       background: #ffffdd;
-      box-shadow: inset -11px -8px 0px 4px #feffa2,
-        0px 0px 10px 0px #feffa2,
-        0px 0px 50px 0px #feffa2;
+      box-shadow: inset -11px -8px 0px 4px #feffa2, 0px 0px 10px 0px #feffa2, 0px 0px 50px 0px #feffa2;
       position: absolute;
       top: 10%;
       right: 10%;
       animation: moonglow 6s ease-in-out infinite alternate;
-      z-index: 1; /* Ensure it's behind other content */
+      z-index: 1;
     }
 
     .crater {
@@ -221,53 +219,52 @@
       width: 100px;
     }
 
-.shooting {
-  position: absolute;
-  top: 30%; /* Adjust as needed */
-  left: 30%; /* Adjust as needed */
-  width: 300px;
-  height: 5px;
-  border-radius: 5px;
-  display: inline-block;
-  transform: rotateZ(-30deg);
-  z-index: 1000; /* Ensure it's above other content */
-}
+    .shooting {
+      position: absolute;
+      top: 30%;
+      left: 30%;
+      width: 300px;
+      height: 5px;
+      border-radius: 5px;
+      display: inline-block;
+      transform: rotateZ(-30deg);
+      z-index: 1000;
+    }
 
-.shooting .core,
-.shooting .trail {
-  position: absolute;
-}
+    .shooting .core,
+    .shooting .trail {
+      position: absolute;
+    }
 
-.shooting .core {
-  display: inline-block;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #ffff84;
-  box-shadow: 0px 0px 3px 1px rgba(255, 245, 131, 0.5),
-    0px 0px 10px 5px rgba(255, 245, 131, 0.2);
-  animation: 6s linear infinite core;
-  z-index: 1001; /* Ensure it's above other content */
-}
+    .shooting .core {
+      display: inline-block;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #ffff84;
+      box-shadow: 0px 0px 3px 1px rgba(255, 245, 131, 0.5), 0px 0px 10px 5px rgba(255, 245, 131, 0.2);
+      animation: 6s linear infinite core;
+      z-index: 1001;
+    }
 
-.shooting .trail {
-  display: inline-block;
-  content: '';
-  width: 100px;
-  height: 5px;
-  border-radius: 50% 0 0 50%;
-  background: linear-gradient(
-    to right,
-    rgba(255, 245, 174, 0.7),
-    rgba(255, 245, 174, 0.2) 50%,
-    transparent);
-  top: -1px;
-  left: 0;
-  animation: 6s linear infinite trail;
-  z-index: 1000; /* Ensure it's above other content */
-}
+    .shooting .trail {
+      display: inline-block;
+      content: '';
+      width: 100px;
+      height: 5px;
+      border-radius: 50% 0 0 50%;
+      background: linear-gradient(
+        to right,
+        rgba(255, 245, 174, 0.7),
+        rgba(255, 245, 174, 0.2) 50%,
+        transparent);
+      top: -1px;
+      left: 0;
+      animation: 6s linear infinite trail;
+      z-index: 1000;
+    }
 
     @keyframes glow {
       0% {
@@ -335,12 +332,12 @@
 
   .footer {
       position: fixed;
-      bottom: 30px; /* Adjusted from 10px to 40px */
+      bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       align-items: center;
-      z-index: 1000; /* Ensure the footer is above other content */
+      z-index: 1000;
     }
 
     .footer-link {
@@ -369,36 +366,28 @@
   <div class="photo-container">
     <img class="photo" src="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg" alt="photo">
   </div>
-
   <footer class="footer">
     <a href="https://github.com/Komil-jon/phix-core" target="_blank" class="footer-link">
       <span class="footer-text">© Core 2024</span>
     </a>
   </footer>
-
   <div class="moon">
     <span class="crater"></span>
     <span class="crater"></span>
     <span class="crater"></span>
     <span class="crater"></span>
   </div>
-
   <div class="ground">
     <div class="rock"></div>
     <div class="rock"></div>
     <div class="rock"></div>
   </div>
-
   <div class="shooting">
     <div class="core"></div>
     <div class="trail"></div>
   </div>
-
   <svg class="cactus" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 714.000000 1280.000000"
    preserveAspectRatio="xMidYMid meet">
-    <metadata>
-    Created by potrace 1.15, written by Peter Selinger 2001-2017
-    </metadata>
     <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
     fill="#000000" stroke="none">
     <path d="M3650 12793 c-269 -30 -610 -116 -848 -215 -221 -91 -504 -249 -633
@@ -425,13 +414,11 @@
     -56 166 -188 389 -290 490 -118 118 -304 195 -540 224 -85 10 -268 12 -345 4z"/>
     </g>
   </svg>
-
   <p class="message-container">
     <span class="message">
-Core is a project created by Eternal team purely for enjoyment and satisfaction. It aims to provide a space where visitors can relax and immerse themselves in a visually stimulating environment. Whether you're here to explore its artistic elements, enjoy the serene landscapes, or simply unwind, Core invites you to take a moment to pause and appreciate the beauty of simplicity.
+      Core is a project created by Eternal team purely for enjoyment and satisfaction. It aims to provide a space where visitors can relax and immerse themselves in a visually stimulating environment. Whether you're here to explore its artistic elements, enjoy the serene landscapes, or simply unwind, Core invites you to take a moment to pause and appreciate the beauty of simplicity.
     </span>
   </p>
-
   <script>
     (() => {
       const max_stars = 100;
