@@ -13,48 +13,47 @@
   <style>
     html, body {
       background-image: url('https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/background.jpg');
-      background-size: cover; /* Ensure the background image covers the entire viewport */
+      background-size: cover;
       width: 100%;
       height: 100%;
-      overflow: hidden; /* Disable scrolling */
-      margin: 0; /* Remove default margin */
-      padding: 0; /* Remove default padding */
-      font-family: sans-serif; /* Default font for the body */
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
       font-weight: bold;
-      font-size: 1.5rem;
+      font-size: 16px;
     }
 
-    /* Initially hide the css-doodle element */
     css-doodle {
       display: none;
     }
-        .footer {
-        position: fixed;
-        bottom: 30px; /* Adjusted from 10px to 40px */
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: center;
-        z-index: 1000; /* Ensure the footer is above other content */
-      }
+    .footer {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      z-index: 1000;
+    }
 
-      .footer-link {
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-      }
+    .footer-link {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
 
-      .footer-logo {
-        width: 30px;
-        height: 30px;
-        margin-right: 0.5rem;
-      }
+    .footer-logo {
+      width: 30px;
+      height: 30px;
+      margin-right: 0.5rem;
+    }
 
-      .footer-text {
-        color: #ffffff;
-        font-weight: bold;
-        font-size: 1.2rem;
-      }
+    .footer-text {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
   </style>
 </head>
 <body>
@@ -63,7 +62,13 @@
       <span class="footer-text">© Core 2024</span>
     </a>
   </footer>
-  <!-- Second css-doodle -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.6.1/css-doodle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var doodle = document.getElementById('doodle');
+      doodle.style.display = 'block';
+    });
+  </script>
   <css-doodle id="doodle"> 
     :doodle {
       @grid: 1x3 / 100vmax;
@@ -92,14 +97,5 @@
       to { transform: translateY(100%); }
     }
   </css-doodle>
-
-  <!-- JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.6.1/css-doodle.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var doodle = document.getElementById('doodle');
-      doodle.style.display = 'block'; // Show the css-doodle element once the page is loaded
-    });
-  </script>
 </body>
 </html>
