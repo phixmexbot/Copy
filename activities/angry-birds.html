@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Core</title>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/logo.svg">
+      <style>
+    body {
+      font-family: sans-serif; /* Default font for the body */
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+  .footer {
+      position: fixed;
+      bottom: 30px; /* Adjusted from 10px to 40px */
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      z-index: 1000; /* Ensure the footer is above other content */
+    }
+
+    .footer-link {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-logo {
+      width: 30px;
+      height: 30px;
+      margin-right: 0.5rem;
+    }
+
+    .footer-text {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+  </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <footer class="footer">
+    <a href="https://github.com/Komil-jon/phix-core" target="_blank" class="footer-link">
+      <span class="footer-text">© Core 2024</span>
+    </a>
+  </footer>
+    <div id="vanta-element" style="display: block; position: absolute; z-index: 0; top: 0px; left: 0px; width: 100%; height: 100vh;"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.birds.min.js"></script>
+    <script>
+        VANTA.BIRDS({
+            el: "#vanta-element",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            colorMode: "variance"
+        });
+    </script>
+</body>
+</html>
