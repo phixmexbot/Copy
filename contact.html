@@ -22,13 +22,13 @@
       overflow: hidden;
       color: #ffffff;
       font-family: sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       font-weight: bold;
     }
 
     .message-container {
       position: absolute;
-      top: 40%; /* Adjust as needed */
+      top: 35%; /* Adjust as needed */
       transform: translateX(-50%);
       text-align: center;
       opacity: 0;
@@ -45,9 +45,57 @@
       width: 70%;
       box-sizing: border-box;
     }
-.logo-container {
-  position: absolute;
-  top: calc(10%); /* Adjust to center vertically */
+        .headline-container {
+      position: absolute;
+      top: 0; /* Adjust as needed */
+      transform: translateX(-50%);
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 3s forwards;
+      z-index: 10;    .message-container {
+      position: absolute;
+      top: 35%; /* Adjust as needed */
+      transform: translateX(-50%);
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 3s forwards;
+      z-index: 10;
+      width: 70%; /* Adjust the width of the message container */
+      box-sizing: border-box;
+    }
+      width: 70%; /* Adjust the width of the message container */
+      box-sizing: border-box;
+    }
+        .headline {
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      width: 70%;
+      box-sizing: border-box;
+    }
+          .logo-container {
+        position: absolute;
+        top: 30px; /* Adjust the top distance */
+        left: 30px; /* Adjust the left distance */
+        width: 60px; /* Adjust the width of the circle */
+        height: 60px; /* Adjust the height of the circle */
+        border-radius: 50%; /* Makes the container circular */
+        overflow: hidden;
+        background-color: white;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow effect */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100; /* Ensure the logo is above other content */
+      }
+
+      .logo {
+        width: 80%; /* Adjust the size of the logo inside the circle */
+        height: auto; /* Maintain aspect ratio */
+      }
+.photo-container {
+  position: absolute  ;
+  top: calc(11%); /* Adjust to center vertically */
   transform: translateX(-50%);
   width: 300px; /* Adjust the width of the circle */
   height: 300px; /* Adjust the height of the circle */
@@ -58,13 +106,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100; /* Ensure the logo is above other content */
+  z-index: 0; /* Ensure the logo is above other content */
   opacity: 0;
   animation: fadeInLogo 3s forwards;
 }
 
-.logo {
-  width: 80%; /* Adjust the size of the logo inside the circle */
+.photo {
+  width: 100%; /* Adjust the size of the logo inside the circle */
   height: auto; /* Maintain aspect ratio */
 }
 
@@ -100,7 +148,7 @@
         0px 0px 50px 0px #feffa2;
       position: absolute;
       top: 10%;
-      left: 10%;
+      right: 10%;
       animation: moonglow 6s ease-in-out infinite alternate;
       z-index: 1; /* Ensure it's behind other content */
     }
@@ -116,21 +164,21 @@
       width: 25px;
       height: 25px;
       top: 57%;
-      left: 30%;
+      right: 30%;
     }
 
     .crater:nth-child(2) {
       width: 16px;
       height: 16px;
       top: 30%;
-      left: 23%;
+      right: 23%;
     }
 
     .crater:nth-child(3) {
       width: 12px;
       height: 12px;
       top: 50%;
-      left: 14%;
+      right: 14%;
     }
 
     .crater:nth-child(4) {
@@ -514,7 +562,10 @@
 </head>
 <body>
   <div class="logo-container">
-    <img class="logo" src="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/ceo.png" alt="Logo">
+    <img src="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/logo.svg" alt="Logo" class="logo">
+  </div>
+  <div class="photo-container">
+    <img class="photo" src="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/ceo.png" alt="photo">
   </div>
 
   <footer class="footer">
@@ -541,9 +592,15 @@
     <div class="trail"></div>
   </div>
   
-    <p class="message-container">
+<p class="headline-container">
+    <span class="headline">
+Komiljon Qosimov
+    </span>
+  </p>
+  
+<p class="message-container">
     <span class="message">
-Core is a project created by Eternal team purely for enjoyment and satisfaction. It aims to provide a space where visitors can relax and immerse themselves in a visually stimulating environment. Whether you're here to explore its artistic elements, enjoy the serene landscapes, or simply unwind, Core invites you to take a moment to pause and appreciate the beauty of simplicity.
+For inquiries or collaborations, feel free to reach out to me through any of the following channels.
     </span>
   </p>
   
@@ -557,7 +614,7 @@ Core is a project created by Eternal team purely for enjoyment and satisfaction.
 <i class="fa-brands fa-square-github"></i>
         <div class="tooltip">Github</div>
     </a>
-    <a class="social-icon social-icon--linkedin" data-url="https://linkedin.com/p/komil-jon">
+    <a class="social-icon social-icon--linkedin" data-url="https://linkedin.com/in/komiljon">
 <i class="fa-brands fa-linkedin"></i>
         <div class="tooltip">LinkedIn</div>
     </a>
@@ -605,6 +662,15 @@ Core is a project created by Eternal team purely for enjoyment and satisfaction.
   </svg>
 
   <script>
+    const mainPhoto = document.getElementById('mainPhoto');
+    const mainImageSrc = 'https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/ceo.png';
+
+    const tempImage = new Image();
+    tempImage.src = mainImageSrc;
+    tempImage.onload = () => {
+      mainPhoto.src = mainImageSrc;
+      mainPhoto.classList.add('loaded');
+    };
     (() => {
       const max_stars = 100;
       const stars = [];
