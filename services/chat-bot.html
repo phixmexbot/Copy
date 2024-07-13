@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Core</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Core</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/logo.svg">
     <style>
-        /* Add your CSS styles here */
         body {
             margin: 0;
             padding: 0;
@@ -24,7 +23,7 @@
             overflow-y: scroll;
             border-top-left-radius: 0px;
             border-top-right-radius: 0px;
-            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1); 
         }
 
         .chat-bubble {
@@ -32,30 +31,30 @@
             border-radius: 10px;
             margin: 5px;
             max-width: 80%;
-            word-wrap: break-word; /* Wrap long words */
+            word-wrap: break-word;
         }
 
         .user-message {
             background-color: #4CAF50;
             color: white;
             align-self: flex-end;
-            animation: fadeInRight 0.5s ease forwards; /* Smooth animation for message appearance */
+            animation: fadeInRight 0.5s ease forwards; 
         }
 
         .system-message {
             background-color: #007bff;
             color: white;
-            animation: fadeInLeft 0.5s ease forwards; /* Smooth animation for message appearance */
+            animation: fadeInLeft 0.5s ease forwards;
         }
 
         .background-box {
-            background-color: #f8f9fa; /* Soft background color for background boxes */
+            background-color: #f8f9fa;
             padding: 10px 15px;
             border-radius: 10px;
             margin: 5px;
             max-width: 80%;
-            word-wrap: break-word; /* Wrap long words */
-            animation: fadeInLeft 0.5s ease forwards; /* Smooth animation for message appearance */
+            word-wrap: break-word;
+            animation: fadeInLeft 0.5s ease forwards;
         }
 
         .user-input-container {
@@ -63,10 +62,10 @@
             display: flex;
             align-items: center;
             padding: 10px;
-            background-color: #cad2c5; /* Monotone color */
+            background-color: #cad2c5;
             border-bottom-left-radius: 0px;
             border-bottom-right-radius: 0px;
-            box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
         }
 
         .user-input {
@@ -75,9 +74,9 @@
             border: none;
             border-radius: 20px;
             margin-right: 10px;
-            transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
-            font-size: 14px; /* Adjust font size for better readability */
-            outline: none; /* Remove default outline */
+            transition: background-color 0.3s, box-shadow 0.3s;
+            font-size: 14px;
+            outline: none;
         }
 
         .user-input::placeholder {
@@ -85,150 +84,143 @@
         }
 
         .user-input:focus {
-            background-color: #ffef96; /* Soft yellowish color when focused */
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Slight shadow when focused */
+            background-color: #ffef96;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
         .action-icon {
-            margin-left: -3px; /* Move the icon slightly to the left by 3px */
+            margin-left: -3px;
         }
 
         .action-icon img {
             width: 24px;
             height: 24px;
             cursor: pointer;
-            transition: transform 0.3s; /* Smooth transition for icon */
+            transition: transform 0.3s; 
         }
 
         .action-icon img:hover {
-            transform: scale(1.1); /* Enlarge icon on hover */
+            transform: scale(1.1); 
         }
 
         .voice-button img {
             width: 24px;
             height: 24px;
             cursor: pointer;
-            transition: transform 0.3s; /* Smooth transition for button */
+            transition: transform 0.3s;
         }
 
         .voice-button img:hover {
-            transform: scale(1.1); /* Enlarge button on hover */
+            transform: scale(1.1);
         }
 
         @keyframes fadeInRight {
             from {
                 opacity: 0;
-                transform: translateX(20px); /* Start slightly off to the right */
+                transform: translateX(20px);
             }
             to {
                 opacity: 1;
-                transform: translateX(0); /* Move to original position */
+                transform: translateX(0);
             }
         }
 
         @keyframes fadeInLeft {
             from {
                 opacity: 0;
-                transform: translateX(-20px); /* Start slightly off to the left */
+                transform: translateX(-20px);
             }
             to {
                 opacity: 1;
-                transform: translateX(0); /* Move to original position */
+                transform: translateX(0);
             }
         }
-            .logo-container {
-      position: absolute;
-      top: 30px; /* Adjust the top distance */
-      left: 30px; /* Adjust the left distance */
-      width: 60px; /* Adjust the width of the circle */
-      height: 60px; /* Adjust the height of the circle */
-      border-radius: 50%; /* Makes the container circular */
-      overflow: hidden;
-      background-color: white;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow effect */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 100; /* Ensure the logo is above other content */
-    }
+        .logo-container {
+            position: absolute;
+            top: 30px; 
+            left: 30px;
+            width: 60px; 
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: white;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+          }
 
-    .logo {
-      width: 80%; /* Adjust the size of the logo inside the circle */
-      height: auto; /* Maintain aspect ratio */
-    }
-  .footer {
-      position: fixed;
-      bottom: 30px; /* Adjusted from 10px to 40px */
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      z-index: 1000; /* Ensure the footer is above other content */
-    }
+        .logo {
+            width: 80%;
+            height: auto;
+          }
+        .footer {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+          }
 
-    .footer-link {
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-    }
+        .footer-link {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+          }
 
-    .footer-logo {
-      width: 30px;
-      height: 30px;
-      margin-right: 0.5rem;
-    }
+        .footer-logo {
+            width: 30px;
+            height: 30px;
+            margin-right: 0.5rem;
+          }
 
-    .footer-text {
-      color: #ffffff;
-      font-weight: bold;
-      font-size: 1.2rem;
-    }
+        .footer-text {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.2rem;
+          }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
-  <div class="logo-container">
-    <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg" alt="Logo" class="logo">
-  </div>
-  <footer class="footer">
-    <a href="https://github.com/Komil-jon/phix-core" target="_blank" class="footer-link">
-      <span class="footer-text">© Core 2024</span>
-    </a>
-  </footer>
+    <div class="logo-container">
+      <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg" alt="Logo" class="logo">
+    </div>
+    <footer class="footer">
+      <a href="https://github.com/Komil-jon/phix-core" target="_blank" class="footer-link">
+        <span class="footer-text">© Core 2024</span>
+      </a>
+    </footer>
     <div class="chat-container" id="chat-container">
-        <!-- Chat messages will be appended here -->
     </div>
     <div class="user-input-container">
         <input type="text" id="user-input" class="user-input" placeholder="Type your message...">
-        <input type="file" id="file-input" accept="image/*" style="display: none;"> <!-- Hidden file input -->
+        <input type="file" id="file-input" accept="image/*" style="display: none;">
         <div class="send-button action-icon" onclick="sendMessageFromInput()">
-            <!-- Add a custom icon for the send button -->
             <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/send.png" alt="Send">
         </div>
-        <div class="action-icon" onclick="document.getElementById('file-input').click();"> <!-- Clicking this icon will trigger file input click -->
-            <!-- Use a custom icon for the attachment button -->
+        <div class="action-icon" onclick="document.getElementById('file-input').click();"> 
             <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/attach.png" alt="Attach">
         </div>
         <div class="voice-button">
-            <!-- Replace the voice icon with your picture icon -->
             <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/voice.png" alt="Voice" id="start-record">
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.birds.min.js"></script>
     <script>
-
         const chatContainer = document.getElementById('chat-container');
         const userInput = document.getElementById('user-input');
         const fileInput = document.getElementById('file-input');
 
-        // Function to generate a random session ID
         function generateSessionId() {
             return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         }
 
         let sessionId = generateSessionId();
 
-        // Function to play the message sound
         function playSound(role) {
             Sound = new Audio('https://raw.githubusercontent.com/phixmexbot/recources/main/send2.mp3');
             if (role == 'user'){
@@ -239,7 +231,6 @@
             Sound.play();
         }
 
-        // Function to send message when send button is clicked
         function sendMessageFromInput() {
             const message = userInput.value.trim();
             if (message !== '') {
@@ -250,18 +241,17 @@
                     sendMessage(message, 'user');
                     sendMessageToServer(message);
                 }
-                userInput.value = ''; // Clear input field
+                userInput.value = '';
             }
         }
 
-        // Function to send message to server
         function sendMessageToServer(message) {
             fetch('/process', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ id: sessionId, message: message }) // Include sessionId as id attribute
+                body: JSON.stringify({ id: sessionId, message: message })
             })
             .then(response => response.json())
             .then(data => {
@@ -273,12 +263,10 @@
             });
         }
 
-        // Function to check if message is an image URL
         function isImage(message) {
             return /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(message);
         }
 
-        // Function to handle image message
         function sendImage(url) {
             const imageMessage = document.createElement('img');
             imageMessage.src = url;
@@ -289,7 +277,6 @@
             Sound.play();
         }
 
-        // Function to send image message to server
         function sendImageToServer(imageURL) {
             const file = fetch(imageURL)
                 .then(res => res.blob())
@@ -317,13 +304,11 @@
                 });
         }
 
-        // Event listener for voice input button
         document.getElementById('start-record').addEventListener('click', startRecording);
 
-        // Function to handle voice input
         function startRecording() {
             const recognition = new webkitSpeechRecognition();
-            recognition.lang = 'en-US'; // Set language to English (you can change it if needed)
+            recognition.lang = 'en-US';
 
             recognition.onstart = function() {
                 console.log('Recording started');
@@ -331,12 +316,12 @@
 
             recognition.onresult = function(event) {
                 const transcript = event.results[0][0].transcript;
-                userInput.value = transcript; // Set transcript to input field
+                userInput.value = transcript;
 
                 // Event listener for Enter key press
                 userInput.addEventListener('keyup', function(event) {
-                    if (event.keyCode === 13) { // Check if Enter key is pressed
-                        sendMessageFromInput(); // Send message if Enter key is pressed
+                    if (event.keyCode === 13) {
+                        sendMessageFromInput();
                     }
                 });
             };
@@ -353,19 +338,16 @@
             recognition.start();
         }
 
-        // Event listener for file input change
         fileInput.addEventListener('change', function(event) {
-            const file = fileInput.files[0]; // Get the selected file
+            const file = fileInput.files[0]; 
             if (file) {
-                const imageURL = URL.createObjectURL(file); // Get URL for uploaded image
-                sendImage(imageURL); // Display the image in the chat
-                sendImageToServer(imageURL); // Send the image to the server
-                // Clear the file input
+                const imageURL = URL.createObjectURL(file);
+                sendImage(imageURL); 
+                sendImageToServer(imageURL);
                 fileInput.value = '';
             }
         });
 
-        // Function to display messages in the chat
         function sendMessage(message, sender) {
             const chatBubble = document.createElement('div');
             chatBubble.classList.add('chat-bubble');
@@ -379,10 +361,9 @@
             playSound(sender);
         }
 
-        // Event listener for Enter key press in input field
         userInput.addEventListener('keyup', function(event) {
-            if (event.keyCode === 13) { // Check if Enter key is pressed
-                sendMessageFromInput(); // Send message if Enter key is pressed
+            if (event.keyCode === 13) { 
+                sendMessageFromInput();
             }
         });
     </script>
