@@ -1,328 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Core</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Core</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/logo.svg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-        body {
-            background-color: #323641;
-            font-family: sans-serif;
-            font-weight: bold;
-            margin: 0;
-            padding: 0; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+    body {
+        background-color: #323641;
+        font-family: sans-serif;
+        font-weight: bold;
+        margin: 0;
+        padding: 0; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
-        .age-display {
-            font-size: 24px;
-            color: white;
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: all 0.3s ease;
-        }
+    .age-display {
+        font-size: 24px;
+        color: white;
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: all 0.3s ease;
+    }
 
-        .container {
-            text-align: center;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 400px;
-            position: relative;
-            z-index: 1;
-        }
+    .container {
+        text-align: center;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 400px;
+        position: relative;
+        z-index: 1;
+    }
 
-        h1 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            color: black;
-            font-weight: bold;
-        }
+    h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+        color: black;
+        font-weight: bold;
+    }
 
-        .search-bar {
-            width: 80px; /* Adjust as needed */
-            padding: 10px;
-            font-size: 26px;
-            border: 4px solid #ffd52d;
-            border-radius: 50px;
-            box-sizing: border-box;
-            font-family: Comic Sans MS;
-            color: #ffd52d;
-            outline: none;
-            transition: width 0.5s, background-color 0.5s, border-radius 0.5s;
-        }
+    .search-bar {
+        width: 80px;
+        padding: 10px;
+        font-size: 26px;
+        border: 4px solid #ffd52d;
+        border-radius: 50px;
+        box-sizing: border-box;
+        font-family: Comic Sans MS;
+        color: #ffd52d;
+        outline: none;
+        transition: width 0.5s, background-color 0.5s, border-radius 0.5s;
+    }
 
-        .search-bar:focus {
-            width: 350px; /* Adjust as needed */
-            background-color: #3b3640;
-            border-radius: 10px;
-        }
+    .search-bar:focus {
+        width: 350px;
+        background-color: #3b3640;
+        border-radius: 10px;
+    }
 
-        .search-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            background-color: #4285f4;
-            color: white;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 10px;
-        }
+    .search-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        background-color: #4285f4;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+    }
 
-        .search-button:hover {
-            background-color: #357ae8;
-        }
+    .search-button:hover {
+        background-color: #357ae8;
+    }
 
-        .letter-image {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 100px;
-            height: 100px;
-            cursor: pointer;
-        }
+    .letter-image {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+    }
 
-        .animated-mail {
-            position: absolute;
-            height: 75px;
-            width: 100px;
-            transition: .4s;
-        }
+    .animated-mail {
+        position: absolute;
+        height: 75px;
+        width: 100px;
+        transition: .4s;
+    }
 
-        .body {
-            position: absolute;
-            bottom: 0;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 0 0 50px 100px;
-            border-color: transparent transparent #e95f55 transparent;
-            z-index: 2;
-        }
+    .body {
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 0 50px 100px;
+        border-color: transparent transparent #e95f55 transparent;
+        z-index: 2;
+    }
 
-        .top-fold {
-            position: absolute;
-            top: 25px;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 25px 50px 0 50px;
-            transform-origin: 50% 0%;
-            transition: transform .4s .4s, z-index .2s .4s;
-            border-color: #cf4a43 transparent transparent transparent;
-            z-index: 2;
-        }
+    .top-fold {
+        position: absolute;
+        top: 25px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 25px 50px 0 50px;
+        transform-origin: 50% 0%;
+        transition: transform .4s .4s, z-index .2s .4s;
+        border-color: #cf4a43 transparent transparent transparent;
+        z-index: 2;
+    }
 
-        .back-fold {
-            position: absolute;
-            bottom: 0;
-            width: 100px;
-            height: 50px;
-            background: #cf4a43;
-            z-index: 0;
-        }
+    .back-fold {
+        position: absolute;
+        bottom: 0;
+        width: 100px;
+        height: 50px;
+        background: #cf4a43;
+        z-index: 0;
+    }
 
-        .left-fold {
-            position: absolute;
-            bottom: 0;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 25px 0 25px 50px;
-            border-color: transparent transparent transparent #e15349;
-            z-index: 2;
-        }
+    .left-fold {
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 25px 0 25px 50px;
+        border-color: transparent transparent transparent #e15349;
+        z-index: 2;
+    }
 
-        .letter {
-            left: 10px;
-            bottom: 0px;
-            position: absolute;
-            width: 80px;
-            height: 30px;
-            background: white;
-            z-index: 1;
-            overflow: hidden;
-            transition: .4s .2s;
-        }
+    .letter {
+        left: 10px;
+        bottom: 0px;
+        position: absolute;
+        width: 80px;
+        height: 30px;
+        background: white;
+        z-index: 1;
+        overflow: hidden;
+        transition: .4s .2s;
+    }
 
-        .letter-border {
-            height: 5px;
-            width: 100%;
-            background: repeating-linear-gradient(
-                -45deg,
-                #cb5a5e,
-                #cb5a5e 4px,
-                transparent 4px,
-                transparent 9px
-            );
-        }
+    .letter-border {
+        height: 5px;
+        width: 100%;
+        background: repeating-linear-gradient(
+            -45deg,
+            #cb5a5e,
+            #cb5a5e 4px,
+            transparent 4px,
+            transparent 9px
+        );
+    }
 
-        .letter-title {
-            margin-top: 5px;
-            margin-left: 2.5px;
-            height: 5px;
-            width: 40%;
-            background: #cb5a5e;
-        }
+    .letter-title {
+        margin-top: 5px;
+        margin-left: 2.5px;
+        height: 5px;
+        width: 40%;
+        background: #cb5a5e;
+    }
 
-        .letter-context {
-            margin-top: 5px;
-            margin-left: 2.5px;
-            height: 5px;
-            width: 20%;
-            background: #cb5a5e;
-        }
+    .letter-context {
+        margin-top: 5px;
+        margin-left: 2.5px;
+        height: 5px;
+        width: 20%;
+        background: #cb5a5e;
+    }
 
-        .letter-stamp {
-            margin-top: 15px;
-            margin-left: 60px;
-            border-radius: 100%;
-            height: 15px;
-            width: 15px;
-            background: #cb5a5e;
-            opacity: 0.3;
-        }
+    .letter-stamp {
+        margin-top: 15px;
+        margin-left: 60px;
+        border-radius: 100%;
+        height: 15px;
+        width: 15px;
+        background: #cb5a5e;
+        opacity: 0.3;
+    }
 
-        .shadow {
-            position: absolute;
-            top: 100px;
-            left: 50%;
-            width: 200px;
-            height: 15px;
-            transition: .4s;
-            transform: translateX(-50%);
-            border-radius: 100%;
-            background: radial-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.0), rgba(0,0,0,0.0));
-        }
+    .shadow {
+        position: absolute;
+        top: 100px;
+        left: 50%;
+        width: 200px;
+        height: 15px;
+        transition: .4s;
+        transform: translateX(-50%);
+        border-radius: 100%;
+        background: radial-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.0), rgba(0,0,0,0.0));
+    }
 
-        .letter-image:hover .animated-mail {
-            transform: translateY(25px);
-        }
+    .letter-image:hover .animated-mail {
+        transform: translateY(25px);
+    }
 
-        .letter-image:hover .animated-mail .top-fold {
-            transition: transform .4s, z-index .2s;
-            transform: rotateX(180deg);
-            z-index: 0;
-        }
+    .letter-image:hover .animated-mail .top-fold {
+        transition: transform .4s, z-index .2s;
+        transform: rotateX(180deg);
+        z-index: 0;
+    }
 
-        .letter-image:hover .animated-mail .letter {
-            height: 90px;
-        }
+    .letter-image:hover .animated-mail .letter {
+        height: 90px;
+    }
 
-        .letter-image:hover .shadow {
-            width: 125px;
-        }
+    .letter-image:hover .shadow {
+        width: 125px;
+    }
 
-        /* Search box and YouTube icon styles */
-        .box {
-            position: relative;
-            margin-top: 20px;
-        }
+    .box {
+        position: relative;
+        margin-top: 20px;
+    }
 
-        .input {
-            padding: 10px;
-            width: 80px;
-            height: 80px;
-            background: none;
-            border: 4px solid #ffd52d;
-            border-radius: 50px;
-            box-sizing: border-box;
-            font-family: Comic Sans MS;
-            font-size: 26px;
-            color: #ffd52d;
-            outline: none;
-            transition: .5s;
-        }
+    .input {
+        padding: 10px;
+        width: 80px;
+        height: 80px;
+        background: none;
+        border: 4px solid #ffd52d;
+        border-radius: 50px;
+        box-sizing: border-box;
+        font-family: Comic Sans MS;
+        font-size: 26px;
+        color: #ffd52d;
+        outline: none;
+        transition: .5s;
+    }
 
-        .box:hover .input {
-            width: 350px;
-            background: #3b3640;
-            border-radius: 10px;
-        }
+    .box:hover .input {
+        width: 350px;
+        background: #3b3640;
+        border-radius: 10px;
+    }
 
-        .box i {
-            position: absolute;
-            top: 50%;
-            right: 15px;
-            transform: translate(-50%, -50%);
-            font-size: 26px;
-            color: #ffd52d;
-            transition: .2s;
-        }
+    .box i {
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform: translate(-50%, -50%);
+        font-size: 26px;
+        color: #ffd52d;
+        transition: .2s;
+    }
 
-        .box:hover i {
-            opacity: 0;
-            z-index: -1;
-        }
+    .box:hover i {
+        opacity: 0;
+        z-index: -1;
+    }
 
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
 
-        .social-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            width: 80px;
-            height: 80px;
-            margin: 0 0.5rem;
-            border-radius: 50%;
-            cursor: pointer;
-            font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-            font-size: 2.5rem;
-            text-decoration: none;
-            transition: all 0.15s ease;
-        }
+    .social-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        width: 80px;
+        height: 80px;
+        margin: 0 0.5rem;
+        border-radius: 50%;
+        cursor: pointer;
+        font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+        font-size: 2.5rem;
+        text-decoration: none;
+        transition: all 0.15s ease;
+    }
 
-        .social-icon .tooltip {
-            visibility: hidden;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            padding: 0.8rem 1rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            opacity: 0;
-            pointer-events: none;
-            text-transform: uppercase;
-            transform: translate(-50%, -100%);
-            transition: all 0.3s ease;
-            z-index: 1;
-        }
+    .social-icon .tooltip {
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        padding: 0.8rem 1rem;
+        border-radius: 40px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        opacity: 0;
+        pointer-events: none;
+        text-transform: uppercase;
+        transform: translate(-50%, -100%);
+        transition: all 0.3s ease;
+        z-index: 1;
+    }
 
-        .social-icon .tooltip:after {
-            content: "";
-            position: absolute;
-            bottom: 1px;
-            left: 50%;
-            border: solid;
-            border-width: 10px 10px 0 10px;
-            border-color: transparent;
-            transform: translate(-50%, 100%);
-        }
+    .social-icon .tooltip:after {
+        content: "";
+        position: absolute;
+        bottom: 1px;
+        left: 50%;
+        border: solid;
+        border-width: 10px 10px 0 10px;
+        border-color: transparent;
+        transform: translate(-50%, 100%);
+    }
 
-        .social-icon:hover {
-            color: #fff
-;
-}
+    .social-icon:hover {
+        color: #fff;
+    }
+    
     .social-icon:hover .tooltip {
         visibility: visible;
         opacity: 1;
@@ -433,31 +432,31 @@
     }
     .footer {
         position: fixed;
-        bottom: 30px; /* Adjusted from 10px to 40px */
+        bottom: 30px;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
         align-items: center;
-        z-index: 1000; /* Ensure the footer is above other content */
-      }
+        z-index: 1000;
+    }
 
       .footer-link {
         text-decoration: none;
         display: flex;
         align-items: center;
-      }
+    }
 
       .footer-logo {
         width: 30px;
         height: 30px;
         margin-right: 0.5rem;
-      }
+    }
 
       .footer-text {
         color: #ffffff;
         font-weight: bold;
         font-size: 1.2rem;
-      }
+    }
 </style>
 </head>
 <body>
@@ -466,7 +465,7 @@
       <span class="footer-text">© Core 2024</span>
     </a>
   </footer>
-    <div class="age-display" id="age"></div>
+  <div class="age-display" id="age"></div>
     <div class="letter-image">
         <div class="animated-mail">
             <div class="back-fold"></div>
@@ -490,43 +489,42 @@
         </form>
         <i class="fas fa-search"></i>
     </div>
-</div>
-<div class="social-icons">
+  </div>
+  <div class="social-icons">
     <a class="social-icon social-icon--lms" data-url="https://lms.newuu.uz">
         <i class="fa fa-graduation-cap"></i>
         <div class="tooltip">LMS</div>
     </a>
     <a class="social-icon social-icon--github" data-url="https://github.com">
-<i class="fa-brands fa-square-github"></i>
+        <i class="fa-brands fa-square-github"></i>
         <div class="tooltip">Github</div>
     </a>
     <a class="social-icon social-icon--instagram" data-url="https://instagram.com">
-<i class="fa-brands fa-square-instagram"></i>
+        <i class="fa-brands fa-square-instagram"></i>
         <div class="tooltip">Instagram</div>
     </a>
     <a class="social-icon social-icon--chatgpt" data-url="https://chatgpt.com">
-<i class="fa-solid fa-brain"></i>
+        <i class="fa-solid fa-brain"></i>
         <div class="tooltip">ChatGPT</div>
     </a>
     <a class="social-icon social-icon--linkedin" data-url="https://linkedin.com">
-<i class="fa-brands fa-linkedin"></i>
+        <i class="fa-brands fa-linkedin"></i>
         <div class="tooltip">LinkedIn</div>
     </a>
     <a class="social-icon social-icon--youtube" data-url="https://youtube.com">
-<i class="fa-brands fa-youtube"></i>
+      <i class="fa-brands fa-youtube"></i>
         <div class="tooltip">Youtube</div>
     </a>
     <a class="social-icon social-icon--facebook" data-url="https://facebook.com">
-<i class="fa-brands fa-square-facebook"></i>
+        <i class="fa-brands fa-square-facebook"></i>
         <div class="tooltip">Facebook</div>
     </a>
     <a class="social-icon social-icon--render" data-url="https://render.com">
-<i class="fa-solid fa-server"></i>
+        <i class="fa-solid fa-server"></i>
         <div class="tooltip">Render</div>
     </a>
-</div>
-
-<script>
+  </div>
+  <script>
     function updateAge() {
         const birthDate = new Date('2006-01-07T00:00:00');
         const now = new Date();
@@ -538,7 +536,7 @@
     setInterval(updateAge, 1000); // Update every 100 milliseconds for smooth transition
     updateAge(); // Initial call to set the age immediately
 
-document.querySelector('.letter-image').addEventListener('click', async () => {
+    document.querySelector('.letter-image').addEventListener('click', async () => {
     try {
         const response = await fetch('/checkEmail');
         if (!response.ok) {
@@ -554,19 +552,18 @@ document.querySelector('.letter-image').addEventListener('click', async () => {
         } else {
             alert('No unread emails.');
         }
-    } catch (error) {
-        console.error('Error checking emails:', error.message);
-        alert('Error checking emails. Please try again later.');
-    }
-});
-
-document.querySelectorAll('.social-icon').forEach(icon => {
-    icon.addEventListener('click', () => {
-        const url = icon.getAttribute('data-url');
-        window.location.href = url;
+      } catch (error) {
+            console.error('Error checking emails:', error.message);
+            alert('Error checking emails. Please try again later.');
+        }
     });
-});
 
+    document.querySelectorAll('.social-icon').forEach(icon => {
+        icon.addEventListener('click', () => {
+            const url = icon.getAttribute('data-url');
+            window.location.href = url;
+        });
+    });
 </script>
 </body>
 </html>
