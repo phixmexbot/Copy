@@ -21,11 +21,12 @@
       overflow: hidden;
       color: #ffffff;
       font-family: sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       font-weight: bold;
     }
 
     .message-container {
+      top: 10%;
       position: relative;
       text-align: center;
       opacity: 0;
@@ -42,13 +43,12 @@
     margin: auto; /* Center align */
     box-sizing: border-box; /* Include padding and border in width calculation */
   }
-.logo-container {
-  position: absolute;
-  top: calc(30%); /* Adjust to center vertically */
-
+.photo-container {
+  position: absolute  ;
+  top: calc(11%); /* Adjust to center vertically */
   transform: translateX(-50%);
-  width: 100px; /* Adjust the width of the circle */
-  height: 100px; /* Adjust the height of the circle */
+  width: 300px; /* Adjust the width of the circle */
+  height: 300px; /* Adjust the height of the circle */
   border-radius: 50%; /* Makes the container circular */
   overflow: hidden;
   background-color: white;
@@ -56,15 +56,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100; /* Ensure the logo is above other content */
+  z-index: 0; /* Ensure the logo is above other content */
   opacity: 0;
   animation: fadeInLogo 3s forwards;
 }
 
-.logo {
+.photo {
   width: 80%; /* Adjust the size of the logo inside the circle */
   height: auto; /* Maintain aspect ratio */
 }
+
+          .logo-container {
+        position: absolute;
+        top: 30px; /* Adjust the top distance */
+        left: 30px; /* Adjust the left distance */
+        width: 60px; /* Adjust the width of the circle */
+        height: 60px; /* Adjust the height of the circle */
+        border-radius: 50%; /* Makes the container circular */
+        overflow: hidden;
+        background-color: white;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow effect */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100; /* Ensure the logo is above other content */
+      }
+
+      .logo {
+        width: 80%; /* Adjust the size of the logo inside the circle */
+        height: auto; /* Maintain aspect ratio */
+      }
 
 @keyframes fadeInLogo {
   0% {
@@ -98,7 +119,7 @@
         0px 0px 50px 0px #feffa2;
       position: absolute;
       top: 10%;
-      left: 10%;
+      right: 10%;
       animation: moonglow 6s ease-in-out infinite alternate;
       z-index: 1; /* Ensure it's behind other content */
     }
@@ -114,14 +135,14 @@
       width: 25px;
       height: 25px;
       top: 57%;
-      left: 30%;
+      right: 30%;
     }
 
     .crater:nth-child(2) {
       width: 16px;
       height: 16px;
       top: 30%;
-      left: 23%;
+      right: 23%;
     }
 
     .crater:nth-child(3) {
@@ -156,7 +177,7 @@
       width: 10%;
       height: 100%;
       top: -20%;
-      left: 10%;
+      right: 10%;
       background: black;
       border-radius: 20px;
       transform: skewX(10deg)
@@ -167,7 +188,7 @@
       width: 15%;
       height: 100%;
       top: -20%;
-      right: 25%;
+      left: 25%;
       background: black;
       border-radius: 20px;
       transform: rotateZ(10deg) skewX(9deg);
@@ -178,7 +199,7 @@
       width: 5%;
       height: 50%;
       top: -15%;
-      right: 38%;
+      left: 38%;
       background: black;
       border-radius: 20px;
       transform: rotateZ(-15deg);
@@ -195,7 +216,7 @@
     .cactus {
       position: absolute;
       bottom: 10%;
-      right: 10%;
+      left: 10%;
       z-index: 900;
       width: 100px;
     }
@@ -343,7 +364,10 @@
 </head>
 <body>
   <div class="logo-container">
-    <img class="logo" src="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg" alt="Logo">
+    <img src="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/logo.svg" alt="Logo" class="logo">
+  </div>
+  <div class="photo-container">
+    <img class="photo" src="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg" alt="photo">
   </div>
 
   <footer class="footer">
