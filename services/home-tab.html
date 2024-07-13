@@ -457,7 +457,7 @@
         font-weight: bold;
         font-size: 1.2rem;
     }
-</style>
+  </style>
 </head>
 <body>
   <footer class="footer">
@@ -533,8 +533,8 @@
         document.getElementById('age').innerText = ageInYears.toFixed(8);
     }
 
-    setInterval(updateAge, 1000); // Update every 100 milliseconds for smooth transition
-    updateAge(); // Initial call to set the age immediately
+    setInterval(updateAge, 1000); 
+    updateAge();
 
     document.querySelector('.letter-image').addEventListener('click', async () => {
     try {
@@ -545,10 +545,8 @@
         const data = await response.json();
         const unreadCount = data.unread_count;
 
-        // Example: Update UI based on unread email count
         if (unreadCount > 0) {
             alert(`You have ${unreadCount} unread emails!`);
-            // Additional UI updates or actions here
         } else {
             alert('No unread emails.');
         }
