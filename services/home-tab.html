@@ -14,6 +14,7 @@
     }
 
     body {
+    
         overflow: hidden;
         background-color: #323641;
         font-family: sans-serif;
@@ -25,6 +26,27 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
+    }
+    
+        .logo-container {
+      position: absolute;
+      top: 30px; /* Adjust the top distance */
+      left: 30px; /* Adjust the left distance */
+      width: 60px; /* Adjust the width of the circle */
+      height: 60px; /* Adjust the height of the circle */
+      border-radius: 50%; /* Makes the container circular */
+      overflow: hidden;
+      background-color: white;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow effect */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100; /* Ensure the logo is above other content */
+    }
+
+    .logo {
+      width: 80%; /* Adjust the size of the logo inside the circle */
+      height: auto; /* Maintain aspect ratio */
     }
 
     .age-display {
@@ -88,23 +110,9 @@
         background-color: #357ae8;
     }
 
-    .letter-image {
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        width: 100px;
-        height: 100px;
-        cursor: pointer;
-    }
-
-    .animated-mail {
-        position: relative;
-        height: 75px;
-        width: 100px;
-        transition: .4s;
-    }
-
     .body {
+    
+            overflow: hidden;
         position: absolute;
         bottom: 0;
         width: 0;
@@ -148,85 +156,6 @@
         z-index: 2;
     }
 
-    .letter {
-        left: 10px;
-        bottom: 0px;
-        position: absolute;
-        width: 80px;
-        height: 30px;
-        background: white;
-        z-index: 1;
-        overflow: hidden;
-        transition: .4s .2s;
-    }
-
-    .letter-border {
-        height: 5px;
-        width: 100%;
-        background: repeating-linear-gradient(
-            -45deg,
-            #cb5a5e,
-            #cb5a5e 4px,
-            transparent 4px,
-            transparent 9px
-        );
-    }
-
-    .letter-title {
-        margin-top: 5px;
-        margin-left: 2.5px;
-        height: 5px;
-        width: 40%;
-        background: #cb5a5e;
-    }
-
-    .letter-context {
-        margin-top: 5px;
-        margin-left: 2.5px;
-        height: 5px;
-        width: 20%;
-        background: #cb5a5e;
-    }
-
-    .letter-stamp {
-        margin-top: 15px;
-        margin-left: 60px;
-        border-radius: 100%;
-        height: 15px;
-        width: 15px;
-        background: #cb5a5e;
-        opacity: 0.3;
-    }
-
-    .shadow {
-        position: absolute;
-        top: 100px;
-        left: 50%;
-        width: 200px;
-        height: 15px;
-        transition: .4s;
-        transform: translateX(-50%);
-        border-radius: 100%;
-        background: radial-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.0), rgba(0,0,0,0.0));
-    }
-
-    .letter-image:hover .animated-mail {
-        transform: translateY(25px);
-    }
-
-    .letter-image:hover .animated-mail .top-fold {
-        transition: transform .4s, z-index .2s;
-        transform: rotateX(180deg);
-        z-index: 0;
-    }
-
-    .letter-image:hover .animated-mail .letter {
-        height: 90px;
-    }
-
-    .letter-image:hover .shadow {
-        width: 125px;
-    }
 
     .box {
         position: relative;
@@ -460,594 +389,314 @@
     }
     
     
-    
-    
-    @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,700);
 
-$da-font: sans-serif;
-
-    body {
-        overflow: hidden;
-        background-color: #323641;
-        font-family: sans-serif;
-        font-weight: bold;
-        margin: 0;
-        padding: 0; 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      background: #f9f9f9;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 2em;
     }
-.circle{
-  width:300px;
-  height:300px;
-  background-color: #3b3640;
-  border-radius: 150px;
-position: absolute;
-top: 5px;
-left: 5px;
-  &:after{
-    content: "\00a0";
-    position:absolute;
-    width: 270px;
-    height:270px;
-    border-radius:50%;
-    border:4px solid #ffd52d;
-    top:10px;
-    left:10px;
-  }
-  #location{
-    font-size:14px;
-    font-weight:700;
-    position:absolute;
-    top:70px;
-    left:40px;
-    color:#ffffff;
-    text-align:center;
-    width:220px;
-    
-  }
-  #show-weather{
-    font-size:94px;
-    font-weight:100;
-    position:absolute;
-    top:85px;
-    left:34px;
-    width:230px;
-    text-align: center;
-    color:#ffffff;
-  }
-}//card
 
-/*
-=======================
-  celcius / farenheit switch
-=======================
-*/
-.onoffswitch {
-    position: relative; 
-    width: 55px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
-    margin-left:20px;
-}
-.onoffswitch-checkbox {
-    display: none;
-}
+    input[type="date"] {
+      width: 100%;
+      padding: .5em 1em;
+      font-family: inherit;
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      text-transform: uppercase;
+    }
 
-.onoffswitch-label:before {
-    content: "C";
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: block;
-    background-color: #fff;
-    position: absolute; top: 50px; bottom: 0;
-    right: 0px; left:240px;
-    text-align: center;
-    line-height:60px;
-    font-size:30px;
-    font-weight:100;
-    box-shadow: 0px 6px 12px 0px rgba(0,0,0,0.4);
-    transition: box-shadow 0.3s ease-in-out;
-    z-index:100;
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label:before {
-    content: "F";  
-    right: 0px; 
-    background-color: #FFF; 
-    box-shadow: 3px 6px 18px 0px rgba(0, 0, 0, 0.2);
+    input[type="button"] {
+      margin-top: 1em;
+      padding: .5em 2em;
+    }
 
+    #result {
+      margin-top: 1em;
+    }
+
+    .close {
+      position: absolute;
+      top: 0.5em;
+      right: 0.5em;
+      cursor: pointer;
+      font-size: 1.5em;
+    }
+
+    .toggle-button {
+      display: none; /* Initially hide the button */
+
+    }
+
+    .age-display {
+      display: none;
+    }
+    .fa-circle-plus {
+  
+  font-size: 24px; /* Adjust icon size as needed */
+  color: #ffd52d; /* Adjust icon color */
 }
-.onoffswitch-label:hover:before{
-  color:#C86DD7;
-  box-shadow: 0px 6px 12px 3px rgba(0,0,0,0.5);
-}
-/*
-====================
-weather icons
-====================
-*/
-.icon {
-  position: relative;
+.circle-icon { 
+      display: none; /* Initially hide the button */
+  position: absolute;
+  top: 10px; /* Adjust top positioning as needed */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%);
   display: inline-block;
-  width: 12em;
-  height: 10em;
-  font-size: 0.5em; /* control icon size here */
-  margin-top:175px;
-  margin-left:95px;
-  padding-left:3px;
-}
-
-.cloud {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: 50%;
-  width: 3.6875em;
-  height: 3.6875em;
-  margin: -1.84375em;
-  background: currentColor;
-  border-radius: 50%;
-  box-shadow:
-    -2.1875em 0.6875em 0 -0.6875em,
-    2.0625em 0.9375em 0 -0.9375em,
-    0 0 0 0.375em #fff,
-    -2.1875em 0.6875em 0 -0.3125em #fff,
-    2.0625em 0.9375em 0 -0.5625em #fff;
-}
-.cloud:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: -0.5em;
-  display: block;
-  width: 4.5625em;
-  height: 1em;
-  background: currentColor;
-  box-shadow: 0 0.4375em 0 -0.0625em #fff;
-}
-.cloud:nth-child(2) {
-  z-index: 0;
-  background: #fff;
-  box-shadow:
-    -2.1875em 0.6875em 0 -0.6875em #fff,
-    2.0625em 0.9375em 0 -0.9375em #fff,
-    0 0 0 0.375em #fff,
-    -2.1875em 0.6875em 0 -0.3125em #fff,
-    2.0625em 0.9375em 0 -0.5625em #fff;
-  opacity: 0.3;
-  transform: scale(0.5) translate(6em, -3em);
-  animation: cloud 4s linear infinite;
-}
-.cloud:nth-child(2):after { background: #fff; }
-
-.sun {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 2.5em;
-  height: 2.5em;
-  margin: -1.25em;
-  background: currentColor;
-  border-radius: 50%;
-  box-shadow: 0 0 0 0.375em #fff;
-  animation: spin 12s infinite linear;
-}
-.rays {
-  position: absolute;
-  top: -2em;
-  left: 50%;
-  display: block;
-  width: 0.375em;
-  height: 1.125em;
-  margin-left: -0.1875em;
-  background: #fff;
-  border-radius: 0.25em;
-  box-shadow: 0 5.375em #fff;
-}
-.rays:before,
-.rays:after {
-  content: '';
-  position: absolute;
-  top: 0em;
-  left: 0em;
-  display: block;
-  width: 0.375em;
-  height: 1.125em;
-  transform: rotate(60deg);
-  transform-origin: 50% 3.25em;
-  background: #fff;
-  border-radius: 0.25em;
-  box-shadow: 0 5.375em #fff;
-}
-.rays:before {
-  transform: rotate(120deg);
-}
-.cloud + .sun {
-  margin: -2em 1em;
-}
-
-.rain,
-.lightning,
-.snow {
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  width: 3.75em;
-  height: 3.75em;
-  margin: 0.375em 0 0 -2em;
-  background: currentColor;
-}
-
-.rain:after {
-  content: '';
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  width: 1.125em;
-  height: 1.125em;
-  margin: -1em 0 0 -0.25em;
-  background: #0cf;
-  border-radius: 100% 0 60% 50% / 60% 0 100% 50%;
-  box-shadow:
-    0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
-    -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
-    -1.375em -0.125em 0 rgba(255,255,255,0.2);
-  transform: rotate(-28deg);
-  animation: rain 3s linear infinite;
-}
-
-.bolt {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -0.25em 0 0 -0.125em;
-  color: #fff;
-  opacity: 0.3;
-  animation: lightning 2s linear infinite;
-}
-.bolt:nth-child(2) {
-  width: 0.5em;
-  height: 0.25em;
-  margin: -1.75em 0 0 -1.875em;
-  transform: translate(2.5em, 2.25em);
-  opacity: 0.2;
-  animation: lightning 1.5s linear infinite;
-}
-.bolt:before,
-.bolt:after {
-  content: '';
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  margin: -1.625em 0 0 -1.0125em;
-  border-top: 1.25em solid transparent;
-  border-right: 0.75em solid;
-  border-bottom: 0.75em solid;
-  border-left: 0.5em solid transparent;
-  transform: skewX(-10deg);
-}
-.bolt:after {
-  margin: -0.25em 0 0 -0.25em;
-  border-top: 0.75em solid;
-  border-right: 0.5em solid transparent;
-  border-bottom: 1.25em solid transparent;
-  border-left: 0.75em solid;
-  transform: skewX(-10deg);
-}
-.bolt:nth-child(2):before {
-  margin: -0.75em 0 0 -0.5em;
-  border-top: 0.625em solid transparent;
-  border-right: 0.375em solid;
-  border-bottom: 0.375em solid;
-  border-left: 0.25em solid transparent;
-}
-.bolt:nth-child(2):after {
-  margin: -0.125em 0 0 -0.125em;
-  border-top: 0.375em solid;
-  border-right: 0.25em solid transparent;
-  border-bottom: 0.625em solid transparent;
-  border-left: 0.375em solid;
-}
-
-.flake:before,
-.flake:after {
-  content: '\2744';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -1.025em 0 0 -1.0125em;
-  color: #fff;
-  list-height: 1em;
-  opacity: 0.2;
-  animation: spin 8s linear infinite reverse;
-}
-.flake:after {
-  margin: 0.125em 0 0 -1em;
-  font-size: 1.5em;
-  opacity: 0.4;
-  animation: spin 14s linear infinite;
-}
-.flake:nth-child(2):before {
-  margin: -0.5em 0 0 0.25em;
-  font-size: 1.25em;
-  opacity: 0.2;
-  animation: spin 10s linear infinite;
-}
-.flake:nth-child(2):after {
-  margin: 0.375em 0 0 0.125em;
-  font-size: 2em;
-  opacity: 0.4;
-  animation: spin 16s linear infinite reverse;
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Adjust size as needed */
+  border-radius: 50%; /* Makes it circular */
+  text-align: center;
+  line-height: 40px; /* Vertically centers the icon */
 }
 
 
-/* Animations */ 
-
-@keyframes spin {
-  100% { transform: rotate(360deg); }
+.bigbox {
+    position: absolute; /* Ensures it is positioned relative to the nearest positioned ancestor */
+    top: 20px; /* Top left corner */
+    right: 20px; /* Top left corner */
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
 }
 
-@keyframes cloud {
-  0% { opacity: 0; }
-  50% { opacity: 0.3; }
-  100% {
-    opacity: 0;
-    transform: scale(0.5) translate(-200%, -3em);
-  }
+.bigbox svg {
+  image-size: cover;
 }
 
-@keyframes rain {
+.left{
+  animation: left-animation ease 2s;
+  animation-iteration-count: infinite;
+  transform-origin: 50% 50%;
+  animation-fill-mode:forwards; /*when the spec is finished*/
+  -webkit-animation: left-animation ease 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/ 
+  -moz-animation: left-animation ease 2s;
+  -moz-animation-iteration-count: infinite;
+  -moz-transform-origin: 50% 50%;
+  -moz-animation-fill-mode:forwards; /*FF 5+*/
+  -o-animation: left-animation ease 2s;
+  -o-animation-iteration-count: infinite;
+  -o-transform-origin: 50% 50%;
+  -o-animation-fill-mode:forwards; /*Not implemented yet*/
+  -ms-animation: left-animation ease 2s;
+  -ms-animation-iteration-count: infinite;
+  -ms-transform-origin: 50% 50%;
+  -ms-animation-fill-mode:forwards; /*IE 10+*/
+}
+
+@keyframes left-animation{
   0% {
-    background: #0cf;
-    box-shadow:
-      0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
-      -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
-      -1.375em -0.125em 0 #0cf;
+    transform:  translate(0px,0px)  ;
   }
   25% {
-    box-shadow:
-      0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
-      -0.875em 1.125em 0 -0.125em #0cf,
-      -1.375em -0.125em 0 rgba(255,255,255,0.2);
+    transform:  translate(0px,13px)  ;
   }
   50% {
-    background: rgba(255,255,255,0.3);
-    box-shadow:
-      0.625em 0.875em 0 -0.125em #0cf,
-      -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
-      -1.375em -0.125em 0 rgba(255,255,255,0.2);
+    transform:  translate(0px,13px)  ;
+  }
+  75% {
+    transform:  translate(0px,0px)  ;
   }
   100% {
-    box-shadow:
-      0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
-      -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
-      -1.375em -0.125em 0 #0cf;
+    transform:  translate(0px,0px)  ;
   }
 }
 
-@keyframes lightning {
-  45% {
-    color: #fff;
-    background: #fff;
-    opacity: 0.2;
+@-moz-keyframes left-animation{
+  0% {
+    -moz-transform:  translate(0px,0px)  ;
+  }
+  25% {
+    -moz-transform:  translate(0px,13px)  ;
   }
   50% {
-    color: #0cf;
-    background: #0cf;
-    opacity: 1;
+    -moz-transform:  translate(0px,13px)  ;
   }
-  55% {
-    color: #fff;
-    background: #fff;
-    opacity: 0.2;
+  75% {
+    -moz-transform:  translate(0px,0px)  ;
+  }
+  100% {
+    -moz-transform:  translate(0px,0px)  ;
   }
 }
 
-/*
-===================
-loader
-===================
-*/
-@-webkit-keyframes uil-ripple {
+@-webkit-keyframes left-animation {
   0% {
-    width: 0;
-    height: 0;
-    opacity: 0;
-    margin: 0 0 0 0;
+    -webkit-transform:  translate(0px,0px)  ;
   }
-  33% {
-    width: 44%;
-    height: 44%;
-    margin: -22% 0 0 -22%;
-    opacity: 1;
+  25% {
+    -webkit-transform:  translate(0px,13px)  ;
+  }
+  50% {
+    -webkit-transform:  translate(0px,13px)  ;
+  }
+  75% {
+    -webkit-transform:  translate(0px,0px)  ;
   }
   100% {
-    width: 88%;
-    height: 88%;
-    margin: -44% 0 0 -44%;
-    opacity: 0;
+    -webkit-transform:  translate(0px,0px)  ;
   }
 }
-@-webkit-keyframes uil-ripple {
+
+@-o-keyframes left-animation {
   0% {
-    width: 0;
-    height: 0;
-    opacity: 0;
-    margin: 0 0 0 0;
+    -o-transform:  translate(0px,0px)  ;
   }
-  33% {
-    width: 44%;
-    height: 44%;
-    margin: -22% 0 0 -22%;
-    opacity: 1;
+  25% {
+    -o-transform:  translate(0px,13px)  ;
+  }
+  50% {
+    -o-transform:  translate(0px,13px)  ;
+  }
+  75% {
+    -o-transform:  translate(0px,0px)  ;
   }
   100% {
-    width: 88%;
-    height: 88%;
-    margin: -44% 0 0 -44%;
-    opacity: 0;
+    -o-transform:  translate(0px,0px)  ;
   }
 }
-@-moz-keyframes uil-ripple {
+
+@-ms-keyframes left-animation {
   0% {
-    width: 0;
-    height: 0;
-    opacity: 0;
-    margin: 0 0 0 0;
+    -ms-transform:  translate(0px,0px)  ;
   }
-  33% {
-    width: 44%;
-    height: 44%;
-    margin: -22% 0 0 -22%;
-    opacity: 1;
+  25% {
+    -ms-transform:  translate(0px,13px)  ;
+  }
+  50% {
+    -ms-transform:  translate(0px,13px)  ;
+  }
+  75% {
+    -ms-transform:  translate(0px,0px)  ;
   }
   100% {
-    width: 88%;
-    height: 88%;
-    margin: -44% 0 0 -44%;
-    opacity: 0;
+    -ms-transform:  translate(0px,0px)  ;
   }
 }
-@-ms-keyframes uil-ripple {
+
+.right{
+top:0px;
+  animation: right-animation ease 2s;
+  animation-iteration-count: infinite;
+  transform-origin: 50% 50%;
+  animation-fill-mode:forwards; /*when the spec is finished*/
+  -webkit-animation: right-animation ease 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-transform-origin: 50% 50%;
+  -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/ 
+  -moz-animation: right-animation ease 2s;
+  -moz-animation-iteration-count: infinite;
+  -moz-transform-origin: 50% 50%;
+  -moz-animation-fill-mode:forwards; /*FF 5+*/
+  -o-animation: right-animation ease 2s;
+  -o-animation-iteration-count: infinite;
+  -o-transform-origin: 50% 50%;
+  -o-animation-fill-mode:forwards; /*Not implemented yet*/
+  -ms-animation: right-animation ease 2s;
+  -ms-animation-iteration-count: infinite;
+  -ms-transform-origin: 50% 50%;
+  -ms-animation-fill-mode:forwards; /*IE 10+*/
+}
+
+@keyframes right-animation{
   0% {
-    width: 0;
-    height: 0;
-    opacity: 0;
-    margin: 0 0 0 0;
+    transform:  translate(0px,0px)  ;
   }
-  33% {
-    width: 44%;
-    height: 44%;
-    margin: -22% 0 0 -22%;
-    opacity: 1;
+  25% {
+    transform:  translate(0px,-13px)  ;
+  }
+  50% {
+    transform:  translate(0px,-13px)  ;
+  }
+  75% {
+    transform:  translate(0px,0px)  ;
   }
   100% {
-    width: 88%;
-    height: 88%;
-    margin: -44% 0 0 -44%;
-    opacity: 0;
+    transform:  translate(0px,0px)  ;
   }
 }
-@-moz-keyframes uil-ripple {
+
+@-moz-keyframes right-animation{
   0% {
-    width: 0;
-    height: 0;
-    opacity: 0;
-    margin: 0 0 0 0;
+    -moz-transform:  translate(0px,0px)  ;
   }
-  33% {
-    width: 44%;
-    height: 44%;
-    margin: -22% 0 0 -22%;
-    opacity: 1;
+  25% {
+    -moz-transform:  translate(0px,-13px)  ;
+  }
+  50% {
+    -moz-transform:  translate(0px,-13px)  ;
+  }
+  75% {
+    -moz-transform:  translate(0px,0px)  ;
   }
   100% {
-    width: 88%;
-    height: 88%;
-    margin: -44% 0 0 -44%;
-    opacity: 0;
+    -moz-transform:  translate(0px,0px)  ;
   }
 }
-@-webkit-keyframes uil-ripple {
+
+@-webkit-keyframes right-animation {
   0% {
-    width: 0;
-    height: 0;
-    opacity: 0;
-    margin: 0 0 0 0;
+    -webkit-transform:  translate(0px,0px)  ;
   }
-  33% {
-    width: 44%;
-    height: 44%;
-    margin: -22% 0 0 -22%;
-    opacity: 1;
+  25% {
+    -webkit-transform:  translate(0px,-13px)  ;
+  }
+  50% {
+    -webkit-transform:  translate(0px,-13px)  ;
+  }
+  75% {
+    -webkit-transform:  translate(0px,0px)  ;
   }
   100% {
-    width: 88%;
-    height: 88%;
-    margin: -44% 0 0 -44%;
-    opacity: 0;
+    -webkit-transform:  translate(0px,0px)  ;
   }
 }
-@-o-keyframes uil-ripple {
+
+@-o-keyframes right-animation {
   0% {
-    width: 0;
-    height: 0;
-    opacity: 0;
-    margin: 0 0 0 0;
+    -o-transform:  translate(0px,0px)  ;
   }
-  33% {
-    width: 44%;
-    height: 44%;
-    margin: -22% 0 0 -22%;
-    opacity: 1;
+  25% {
+    -o-transform:  translate(0px,-13px)  ;
+  }
+  50% {
+    -o-transform:  translate(0px,-13px)  ;
+  }
+  75% {
+    -o-transform:  translate(0px,0px)  ;
   }
   100% {
-    width: 88%;
-    height: 88%;
-    margin: -44% 0 0 -44%;
-    opacity: 0;
+    -o-transform:  translate(0px,0px)  ;
   }
 }
-@keyframes uil-ripple {
+
+@-ms-keyframes right-animation {
   0% {
-    width: 0;
-    height: 0;
-    opacity: 0;
-    margin: 0 0 0 0;
+    -ms-transform:  translate(0px,0px)  ;
   }
-  33% {
-    width: 44%;
-    height: 44%;
-    margin: -22% 0 0 -22%;
-    opacity: 1;
+  25% {
+    -ms-transform:  translate(0px,-13px)  ;
+  }
+  50% {
+    -ms-transform:  translate(0px,-13px)  ;
+  }
+  75% {
+    -ms-transform:  translate(0px,0px)  ;
   }
   100% {
-    width: 88%;
-    height: 88%;
-    margin: -44% 0 0 -44%;
-    opacity: 0;
+    -ms-transform:  translate(0px,0px)  ;
   }
 }
-.uil-ripple-css {
-  background: none;
-  position: relative;
-  width: 200px;
-  height: 200px;
-}
-.uil-ripple-css div {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: 0;
-  width: 0;
-  height: 0;
-  opacity: 0;
-  border-radius: 50%;
-  border-width: 12px;
-  border-style: solid;
-  -ms-animation: uil-ripple 1s ease-out infinite;
-  -moz-animation: uil-ripple 1s ease-out infinite;
-  -webkit-animation: uil-ripple 1s ease-out infinite;
-  -o-animation: uil-ripple 1s ease-out infinite;
-  animation: uil-ripple 1s ease-out infinite;
-}
-.uil-ripple-css div:nth-of-type(1) {
-  border-color: #afafb7;
-}
-.uil-ripple-css div:nth-of-type(2) {
-  border-color: #472EB4;
-  -ms-animation-delay: 0.5s;
-  -moz-animation-delay: 0.5s;
-  -webkit-animation-delay: 0.5s;
-  -o-animation-delay: 0.5s;
-  animation-delay: 0.5s;
-}
+
 
 
 
@@ -1056,24 +705,58 @@ loader
 <body>
 
 
-<div class="error"></div>
-<div class="circle">
-    <div class="onoffswitch">
-    
-      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
-      <label class="onoffswitch-label" for="myonoffswitch"></label>
-    </div>
-  
-  <div id="location"></div>
 
-  <div id="show-weather">
-    <span></span>
-
-  </div>
-
-  <div class="weather-icons">
-  </div>
+<div class="bigbox">
+<svg class="scaling-svg" viewBox="0 0 60 55" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <g>
+  <title>Layer 1</title>
+  <rect id="svg_1" fill="#1E2127" height="52" width="52"/>
+  <path id="svg_2" fill="#BEC2CC" d="m32,11.5c0,-0.8284 0.6716,-1.5 1.5,-1.5c0.8284,0 1.5,0.6716 1.5,1.5l0,29c0,0.8284 -0.6716,1.5 -1.5,1.5c-0.8284,0 -1.5,-0.6716 -1.5,-1.5l0,-29z"/>
+  <path id="svg_3" fill="#BEC2CC" d="m17,11.5c0,-0.8284 0.6716,-1.5 1.5,-1.5c0.8284,0 1.5,0.6716 1.5,1.5l0,29c0,0.8284 -0.6716,1.5 -1.5,1.5c-0.8284,0 -1.5,-0.6716 -1.5,-1.5l0,-29z"/>
+  <path id="svg_4" fill="#BEC2CC" d="m5,1c-2.20898,0 -4,1.79102 -4,4l0,42c0,2.209 1.79102,4 4,4l42,0c2.209,0 4,-1.791 4,-4l0,-42c0,-2.20898 -1.791,-4 -4,-4l-42,0zm0,3c-0.55225,0 -1,0.44775 -1,1l0,42c0,0.3521 0.18164,0.6611 0.45654,0.8394c0.15625,0.1015 0.34326,0.1606 0.54346,0.1606l42,0c0.5522,0 1,-0.4478 1,-1l0,-42c0,-0.55225 -0.4478,-1 -1,-1l-42,0z" clip-rule="evenodd" fill-rule="evenodd"/>
+  <g class="left">
+   <circle id="svg_5" fill="#BEC2CC" r="5.5" cy="19.5" cx="18.5"/>
+   <circle id="svg_6" fill="#1E2127" r="3.5" cy="19.5" cx="18.5"/>
+  </g>
+  <g class="right">
+   <circle id="svg_7" fill="#BEC2CC" r="5.5" cy="32.5" cx="33.5"/>
+   <circle id="svg_8" fill="#1E2127" r="3.5" cy="32.5" cx="33.5"/>
+  </g>
+ </g>
+</svg>
 </div>
+
+
+  <div class="logo-container">
+    <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg" alt="Logo" class="logo">
+  </div>
+
+<div class="circle-icon">
+  <i class="fa-solid fa-circle-plus toggle-button"></i>
+</div>
+  <div id="age-display" class="age-display"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check if userAgeData exists in local storage
+      const userAgeData = localStorage.getItem('userAgeData');
+
+      if (!userAgeData) {
+        // Show the button if userAgeData is not found
+        document.querySelector('.toggle-button').style.display = 'inline-block';
+      }
+    });
+</script>
+
+  <div id="age-calculator" class="popup">
+    <span class="close" onclick="closePopup()">×</span>
+    <h3>Select Your Birthday</h3>
+    <form id="calculator-form">
+      <input type="date" name="birthday" />
+      <input type="button" value="Go" onclick="calculateAge()" />
+    </form>
+    <div id="result"></div>
+  </div>
 
 
   <footer class="footer">
@@ -1081,22 +764,6 @@ loader
       <span class="footer-text">© Core 2024</span>
     </a>
   </footer>
-  <div class="age-display" id="age"></div>
-    <div class="letter-image">
-        <div class="animated-mail">
-            <div class="back-fold"></div>
-            <div class="letter">
-                <div class="letter-border"></div>
-                <div class="letter-title"></div>
-                <div class="letter-context"></div>
-                <div class="letter-stamp"></div>
-            </div>
-            <div class="top-fold"></div>
-            <div class="body"></div>
-            <div class="left-fold"></div>
-        </div>
-        <div class="shadow"></div>
-    </div>
     <div class="container">
     <h1>Core</h1>
     <div class="box">
@@ -1144,103 +811,67 @@ loader
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
   <script>
-  
-  
-  $(document).ready(function(){
-  if("geolocation" in navigator){
-    navigator.geolocation.getCurrentPosition(function(position) {
-      showWeather(position.coords.latitude, position.coords.longitude);
+      document.querySelector(".toggle-button").addEventListener("click", function() {
+      popup.style.display = "block";
     });
-    //console.log('geo is available');
-  } else{
-    $('.error').html('<p>Geo is not available in your browser</p>');
-    //console.log('geo is not available');
-  }
-});
+    var popup = document.getElementById("age-calculator");
+    var toggleButton = document.querySelector(".toggle-button");
+    var ageDisplay = document.getElementById("age-display");
 
-  $('#show-weather span').html('<div class="uil-ripple-css" style="transform:scale(0.26); top:-42px; left:15px;"><div></div><div></div></div>');
+    // Check if user is new or returning
+    var userData = localStorage.getItem("userAgeData");
+    
+    if (userData) {
+      // Display existing age data
+      var ageData = JSON.parse(userData);
+      setInterval(function() {
+        displayCurrentAge(ageData.day, ageData.month, ageData.year);
+      }, 1000);
+    } else {
+      // Show the "+" button for new users
+      toggleButton.style.display = "block";
+    }
 
-function showWeather(latitude, longitude){
-  var urlWeather = "https://api.openweathermap.org/data/2.5/weather?";
-  var lat = "lat=" + latitude;
-  var lon = "&lon=" + longitude;
-  var APIKEY = "&APPID=" + "f4b463ce4558c625c7004c6d7fa86b1a";
-  var unitsCelcius = "&units=metric";
-  var fetchUrl = urlWeather + lat + lon + unitsCelcius + APIKEY;
-  $.ajax({
-   url: fetchUrl,
-   success:function(data){
-     var temperature = data.main.temp;
-     var weatherIcons = data.weather[0].main;
-     
-        $('#show-weather span').text(Math.round(temperature));     
-        $('#location').text(data.name);
-     $('#myonoffswitch').on('click', function(){
-         if( $('#myonoffswitch').is(':checked') ){
-              temperature = temperature * 9/5 + 32;
-              $('#show-weather span').text(Math.round(temperature));
-              console.log(temperature);
-          }else{
-              temperature = data.main.temp;
-              $('#show-weather span').text(temperature);
-          }
-     });
-     
-     switch(weatherIcons){
-       case "Clouds":
-         $('.weather-icons').html(
-          '<div class="icon cloudy"><div class="cloud"></div><div class="cloud"></div></div>'
-         );
-         break;
-       case "Thunderstorm":
-         $('.weather-icons').html('<div class="icon thunder-storm"><div class="cloud"></div><div class="lightning"><div class="bolt"></div><div class="bolt"></div></div></div>');
-         break;
-       case "Rain":
-         $('.weather-icons').html('<div class="icon rainy"><div class="cloud"></div><div class="rain"></div></div>');
-         break;
-       case "Snow":
-         $('.weather-icons').html('<div class="icon flurries"><div class="cloud"></div><div class="snow"><div class="flake"></div><div class="flake"></div></div></div>');
-       case "Clear":
-        $('.weather-icons').html('<div class="icon sunny"><div class="sun"><div class="rays"></div></div></div>');
-     };
-   }
-  });
-
-}
-  
-  
-  </script>
-  <script>
-    function updateAge() {
-        const birthDate = new Date('2006-01-07T00:00:00');
+    function displayCurrentAge(day, month, year) {
+        const birthDate = new Date(`${year}-${month}-${day}T00:00:00`);
+        console.log("Name:", `${year}-${month}-${day}T00:00:00`);
         const now = new Date();
         const ageInMilliseconds = now - birthDate;
         const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
-        document.getElementById('age').innerText = ageInYears.toFixed(8);
+      ageDisplay.innerHTML = ageInYears.toFixed(8);;
+      ageDisplay.style.display = "block";
+      toggleButton.style.display = "none"; // Hide the "+" button once age is displayed
+    }
+    
+
+
+    function calculateAge() {
+      var dateInput = document.querySelector("input[name=birthday]").value;
+      var dateParts = dateInput.split("-");
+
+      // Save age data to localStorage
+      var ageData = {
+        day: dateParts[2],
+        month: dateParts[1],
+        year: dateParts[0]
+      };
+      localStorage.setItem("userAgeData", JSON.stringify(ageData));
+
+
+      
+      // Show the result popup
+      popup.style.display = "block";
+      closePopup();
+      setInterval(function() {
+      displayCurrentAge(ageData.day, ageData.month, ageData.year);
+    }, 1000);
     }
 
-    setInterval(updateAge, 1000); 
-    updateAge();
-
-    document.querySelector('.letter-image').addEventListener('click', async () => {
-    try {
-        const response = await fetch('/checkEmail');
-        if (!response.ok) {
-            throw new Error('Error checking unread emails');
-        }
-        const data = await response.json();
-        const unreadCount = data.unread_count;
-
-        if (unreadCount > 0) {
-            alert(`You have ${unreadCount} unread emails!`);
-        } else {
-            alert('No unread emails.');
-        }
-      } catch (error) {
-            console.error('Error checking emails:', error.message);
-            alert('Error checking emails. Please try again later.');
-        }
-    });
+    function closePopup() {
+      popup.style.display = "none";
+      document.getElementById("calculator-form").reset(); // Reset form on close
+      document.getElementById("result").innerHTML = ""; // Clear result on close
+    }
 
     document.querySelectorAll('.social-icon').forEach(icon => {
         icon.addEventListener('click', () => {
@@ -1248,6 +879,8 @@ function showWeather(latitude, longitude){
             window.location.href = url;
         });
     });
-</script>
+  
+  
+  </script>
 </body>
 </html>
