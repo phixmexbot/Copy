@@ -5,34 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Core</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/logo.svg">
-  <style>
-    body {
-      background-color: #031033
-    }
-  </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
   <style>
     body {
       background: linear-gradient(#0f1a2b, #411d63);
       margin: 0;
-      display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       overflow: hidden;
       color: #ffffff;
       font-family: sans-serif;
-      font-size: 1.5rem;
-      font-weight: bold;
+
     }
 
     .message-container {
       top: 10%;
-      position: relative;
+      position: absolute;
       text-align: center;
       opacity: 0;
       transform: translateY(-50%);
       animation: fadeIn 3s forwards;
       z-index: 10;
+      font-size: 1.5em;
+      font-weight: bold;
     }
 
   .message {
@@ -43,33 +40,12 @@
     margin: auto;
     box-sizing: border-box;
   }
-  .photo-container {
-    position: absolute  ;
-    top: calc(11%);
-    transform: translateX(-50%);
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: white;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 0;
-    opacity: 0;
-    animation: fadeInLogo 3s forwards;
-  }
 
-  .photo {
-    width: 80%;
-    height: auto;
-  }
 
   .logo-container {
     position: absolute;
     top: 30px;
-    left: 30px;
+    right: 30px;
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -90,7 +66,7 @@
     @keyframes fadeInLogo {
       0% {
         opacity: 0;
-        transform: translateY(-50%);
+        transform: translateY(-10%);
       }
       100% {
         opacity: 1;
@@ -101,7 +77,7 @@
     @keyframes fadeIn {
       0% {
         opacity: 0;
-        transform: translateY(-50%);
+        transform: translateY(-10%);
       }
       100% {
         opacity: 1;
@@ -109,225 +85,227 @@
       }
     }
 
-    .moon {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: #ffffdd;
-      box-shadow: inset -11px -8px 0px 4px #feffa2, 0px 0px 10px 0px #feffa2, 0px 0px 50px 0px #feffa2;
-      position: absolute;
-      top: 10%;
-      right: 10%;
-      animation: moonglow 6s ease-in-out infinite alternate;
-      z-index: 1;
-    }
 
-    .crater {
-      position: absolute;
-      background: rgba(255, 244, 118, 1);
-      border-radius: 50%;
-      box-shadow: inset 1px 1px 0px 1px #ecec79;
-    }
 
-    .crater:nth-child(1) {
-      width: 25px;
-      height: 25px;
-      top: 57%;
-      right: 30%;
-    }
+.moon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #ffffdd;
+  box-shadow: inset -11px -8px 0px 4px #feffa2,
+    0px 0px 10px 0px #feffa2,
+    0px 0px 50px 0px #feffa2,
+    0px 0px 500px 0px #feffa2;
+  display: inline-block;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  animation: 3s moonglow ease-in-out infinite alternate;
+}
 
-    .crater:nth-child(2) {
-      width: 16px;
-      height: 16px;
-      top: 30%;
-      right: 23%;
-    }
+.crater {
+  position: absolute;
+  background: rgba(255, 244, 118, 1);
+  border-radius: 50%;
+  box-shadow: inset 1px 1px 0px 1px #ecec79;
+}
 
-    .crater:nth-child(3) {
-      width: 12px;
-      height: 12px;
-      top: 50%;
-      left: 14%;
-    }
+.crater:nth-child(1) {
+  width: 25px;
+  height: 25px;
+  top: 57%;
+  left: 30%;
+}
 
-    .crater:nth-child(4) {
-      width: 30px;
-      height: 30px;
-      top: 20%;
-      left: 30%;
-      box-shadow: none;
-      background: rgba(255, 244, 118, 0.3);
-    }
+.crater:nth-child(2) {
+  width: 16px;
+  height: 16px;
+  top: 30%;
+  left: 23%;
+}
 
-    .ground {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 11%;
-      background: black;
-      z-index: 100;
-      perspective: 1000px;
-    }
+.crater:nth-child(3) {
+  width: 12px;
+  height: 12px;
+  top: 50%;
+  left: 14%;
+}
 
-    .rock:nth-child(1) {
-      position: absolute;
-      width: 10%;
-      height: 100%;
-      top: -20%;
-      right: 10%;
-      background: black;
-      border-radius: 20px;
-      transform: skewX(10deg)
-    }
+.crater:nth-child(4) {
+  width: 30px;
+  height: 30px;
+  top: 20%;
+  left: 30%;
+  box-shadow: none;
+  background: rgba(255, 244, 118, 0.3);
+}
 
-    .rock:nth-child(2) {
-      position: absolute;
-      width: 15%;
-      height: 100%;
-      top: -20%;
-      left: 25%;
-      background: black;
-      border-radius: 20px;
-      transform: rotateZ(10deg) skewX(9deg);
-    }
+.ground {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 11%;
+  background: black; 
+  z-index: 100;
+  perspective: 1000px;
+}
 
-    .rock:nth-child(3) {
-      position: absolute;
-      width: 5%;
-      height: 50%;
-      top: -15%;
-      left: 38%;
-      background: black;
-      border-radius: 20px;
-      transform: rotateZ(-15deg);
-    }
+.rock:nth-child(1) {
+  position: absolute;
+  width: 10%;
+  height: 100%;
+  top: -20%;
+  left: 10%;
+  background: black;
+  border-radius: 20px;
+  transform: skewX(10deg)
+}
 
-    .star {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      border-radius: 50%;
-      animation-iteration-count: infinite;
-    }
+.rock:nth-child(2) {
+  position: absolute;
+  width: 15%;
+  height: 100%;
+  top: -20%;
+  right: 25%;
+  background: black;
+  border-radius: 20px;
+  transform: rotateZ(10deg) skewX(9deg);
+}
 
-    .cactus {
-      position: absolute;
-      bottom: 10%;
-      left: 10%;
-      z-index: 900;
-      width: 100px;
-    }
+.rock:nth-child(3) {
+  position: absolute;
+  width: 5%;
+  height: 50%;
+  top: -15%;
+  right: 38%;
+  background: black;
+  border-radius: 20px;
+  transform: rotateZ(-15deg);
+}
 
-    .shooting {
-      position: absolute;
-      top: 30%;
-      left: 30%;
-      width: 300px;
-      height: 5px;
-      border-radius: 5px;
-      display: inline-block;
-      transform: rotateZ(-30deg);
-      z-index: 1000;
-    }
+.star {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  animation-iteration-count: infinite;
+}
 
-    .shooting .core,
-    .shooting .trail {
-      position: absolute;
-    }
+.cactus {
+  position: absolute; 
+  bottom: 10%;
+  right: 10%;
+  z-index: 900;
+  width: 100px;
+}
 
-    .shooting .core {
-      display: inline-block;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: #ffff84;
-      box-shadow: 0px 0px 3px 1px rgba(255, 245, 131, 0.5), 0px 0px 10px 5px rgba(255, 245, 131, 0.2);
-      animation: 6s linear infinite core;
-      z-index: 1001;
-    }
+.shooting {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  width: 300px;
+  height: 5px;
+  border-radius: 5px;
+  display: inline-block;
+  transform: rotateZ(-30deg);
+}
 
-    .shooting .trail {
-      display: inline-block;
-      content: '';
-      width: 100px;
-      height: 5px;
-      border-radius: 50% 0 0 50%;
-      background: linear-gradient(
-        to right,
-        rgba(255, 245, 174, 0.7),
-        rgba(255, 245, 174, 0.2) 50%,
-        transparent);
-      top: -1px;
-      left: 0;
-      animation: 6s linear infinite trail;
-      z-index: 1000;
-    }
 
-    @keyframes glow {
-      0% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.3;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
+.shooting .core {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 4px; 
+  border-radius: 50%;
+  background: #ffff84;
+  box-shadow: 0px 0px 3px 1px rgba(255, 245, 131, 0.5),
+    0px 0px 10px 5px rgba(255, 245, 131, 0.2);
+  animation: 6s linear infinite core;
+}
 
-    @keyframes moonglow {
-      0% {
-        transform: scale(1);
-      }
-      100% {
-        transform: scale(1.02);
-      }
-    }
+.shooting .trail {
+  display: inline-block;
+  position: absolute;
+  content: '';
+  width: 100px;
+  height: 5px; 
+  border-radius: 50% 0 0 50%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 245, 174,0.7),
+    rgba(255, 245, 174, 0.2) 50%,
+    transparent);
+  top: -1px;
+  left: 0;
+  animation: 6s linear infinite trail;
+}
 
-    @keyframes core {
-      0% {
-        left: 100%;
-        opacity: 1;
-      }
-      5% {
-        left: 60%;
-        opacity: 0.8;
-      }
-      10% {
-        left: 0;
-        opacity: 0;
-      }
-      100% {
-        left: 0;
-        opacity: 0;
-      }
-    }
 
-    @keyframes trail {
-      0% {
-        left: 100%;
-        opacity: 1;
-        width: 0;
-      }
-      5% {
-        left: 65%;
-        opacity: 0.5;
-        width: 150px;
-      }
-      10% {
-        left: 0;
-        opacity: 0;
-        width: 150px;
-      }
-      100% {
-        left: 0;
-        opacity: 0;
-        width: 150px; 
-      }
-    }
+@keyframes glow {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes moonglow {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes core {
+  0% {
+    left: 100%;
+    opacity: 1;
+  }
+  5% {
+    left: 60%;
+    opacity: 0.8;
+  }
+  10% {
+    left: 0;
+    opacity: 0;
+  }
+  100% {
+    left: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes trail {
+  0% {
+    left: 100%;
+    opacity: 1;
+    width: 0;
+  }
+  5% {
+    left: 65%;
+    opacity: 0.5;
+    width: 150px;
+  }
+  10% {
+    left: 0;
+    opacity: 0;
+    width: 150px;
+  }
+  100% {
+    left: 0;
+    opacity: 0;
+    width: 150px;
+  }
+}
 
 
   .footer {
@@ -357,14 +335,58 @@
       font-weight: bold;
       font-size: 1.2rem;
     }
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Margin from bottom */
+.mb-40 {
+
+
+font-weight: bold;
+    margin-bottom: 100px;
+    bottom: 100px;
+}
+
+/* Z-index */
+.z-2 {
+    z-index: 100;
+}
+
   </style>
 </head>
 <body>
+  <script src="https://cdn.tailwindcss.com/3.4.5"></script>
+<div class="bg-black/0 w-screen h-screen flex flex-col justify-end">
+    <div class="bg-black/50 w-96 mx-auto mb-40 flex justify-stretch rounded-md shadow-lg backdrop-blur z-2">
+        <a href="mailto:look@eternal.uz" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+            <i class="fa-solid fa-envelope"></i>
+            <small>Email</small>
+        </a>
+        <a href="https://github.com/komil-jon" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+            <i class="fa-brands fa-github"></i>
+            <small>Github</small>
+        </a>
+        <a href="https://linkedin.com/in/komiljon" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+            <i class="fa-brands fa-linkedin"></i>
+            <small>Linkedin</small>
+        </a>
+        <a href="https://instagram.com/komil.john" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+            <i class="fa-brands fa-instagram"></i>
+            <small>Instagram</small>
+        </a>
+        <a href="https://telegram.me/stellarpulse" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+            <i class="fa-brands fa-telegram"></i>
+            <small>Telegram</small>
+        </a>
+    </div>
+</div>
+
   <div class="logo-container">
     <img src="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/logo.svg" alt="Logo" class="logo">
   </div>
-  <div class="photo-container">
-    <img class="photo" src="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg" alt="photo">
   </div>
   <footer class="footer">
     <a href="https://github.com/Komil-jon/phix-core" target="_blank" class="footer-link">
