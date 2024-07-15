@@ -6,6 +6,11 @@
   <title>Core</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/logo.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/EasePack.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
     body {
       font-size: 1.5rem;
@@ -17,7 +22,7 @@
     }
     :root {
       --animation-time: 300ms;
-      --app-font-family: Montserrat, sans-serif;
+      --app-font-family: sans-serif;
 
       --cpc-menu-background-color: rgba(0, 0, 0, 0.5);
       --cpc-menu-max-width: 320px;
@@ -453,6 +458,22 @@ body {
   }
 }
 
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Margin from bottom */
+.mb-40 {
+position: relative;
+    margin-bottom: 100px;
+    bottom: 100px;
+}
+
+/* Z-index */
+.z-2 {
+    z-index: 100;
+}
 
 
   </style>
@@ -509,6 +530,33 @@ fill="#000000" stroke="none">
 -56 166 -188 389 -290 490 -118 118 -304 195 -540 224 -85 10 -268 12 -345 4z"/>
 </g>
 </svg>
+  <script src="https://cdn.tailwindcss.com/3.4.5"></script>
+
+<div class="bg-black/0 w-screen h-screen flex flex-col justify-end">
+    <div class="bg-black/50 w-96 mx-auto mb-40 flex justify-stretch rounded-md shadow-lg backdrop-blur z-2">
+        <a href="mailto:look@eternal.uz" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+            <i class="fa-solid fa-envelope"></i>
+            <small>Email</small>
+        </a>
+        <a href="https://github.com/komil-jon" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+            <i class="fa-brands fa-github"></i>
+            <small>Github</small>
+        </a>
+        <a href="https://linkedin.com/in/komiljon" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+            <i class="fa-brands fa-linkedin"></i>
+            <small>Linkedin</small>
+        </a>
+        <a href="https://instagram.com/komil.john" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+            <i class="fa-brands fa-instagram"></i>
+            <small>Instagram</small>
+        </a>
+        <a href="https://telegram.me/stellarpulse" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+            <i class="fa-brands fa-telegram"></i>
+            <small>Telegram</small>
+        </a>
+    </div>
+</div>
+
 
 
   <div class="logo-container">
@@ -520,11 +568,7 @@ fill="#000000" stroke="none">
       <span class="footer-text">© Core 2024</span>
     </a>
   </footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/EasePack.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
   <script type="text/babel">
     class CpcNavigation extends React.Component {
       constructor(props) {
@@ -656,10 +700,6 @@ fill="#000000" stroke="none">
         'link': '/',
         'icon': 'fas fa-home'
       },
-      'About': {
-        'link': '/about',
-        'icon': 'fas fa-info-circle'
-      },
       'Activities': {
         'link': '#activities',
         'icon': 'fa-solid fa-gamepad',
@@ -706,6 +746,10 @@ fill="#000000" stroke="none">
           }
         }
       },
+      'About': {
+        'link': '/about',
+        'icon': 'fas fa-info-circle'
+      }
     };
 
     ReactDOM.render(
@@ -714,7 +758,8 @@ fill="#000000" stroke="none">
     );
     
 
-
+</script>
+<script>
 (() => {
   const max_stars = 100;
   const stars = [];
@@ -742,5 +787,3 @@ fill="#000000" stroke="none">
 
 
   </script>
-</body>
-</html>
