@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <link rel="icon" href="https://i.ibb.co/z2fXCW9/image-removebg-preview-89.png" type="image/jpeg">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tolar</title>
+    <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      zoom: 1.2;
+    }
+    /* Styles pour l'en-tête */
+      .response-options {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 5px;
+    }
+
+    .response-option {
+      background-color: #4e99df;
+      color: #fff;
+      border: none;
+      border-radius: 15px;
+      padding: 5px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      margin-left: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .response-option:hover {
+      background-color: #3b82c4;
+    }
+    .header {
+        background-color:#4e99df;
+        color: #fff;
+        padding: 20px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .header h1 {
+        margin: 0;
+        font-size: 24px;
+    }
+    #chat-container {
+        width: 80%;
+        height: 80vh;
+        background: linear-gradient(135deg, hsla(0, 0%, 100%, 1) 0%, hsla(211, 100%, 90%, 1) 100%);
+        display: flex;
+        flex-direction: column;
+        position: absolute !important;
+        border-radius: 10px;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        margin: auto !important;
+        left: 50%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 14px;
+        flex-grow: 1;
+      
+    }
+    
+    /* ... other CSS ... */
+
+    #messages {
+      padding: 10px;
+      margin: 10px 0;
+      overflow-y: auto;  /* Add this line for vertical scroll */
+      height: calc(80vh - 100px); /* Calculate height for messages area */
+    }
+
+    .message {
+      padding: 10px;
+      margin: 10px 0;
+      white-space: pre-wrap; /* Preserve whitespace and line breaks */
+
+    }
+
+    .user-message {
+        background-color: #4e73df;
+        color: #fff;
+        align-self: flex-end;
+        border-radius: 15px;
+      padding-bottom: .625rem;
+      padding-top: .625rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    .bot-message {
+      background-color: #fff;
+      color: #333;
+      margin-right: 0px;
+      align-self: flex-start;
+      box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+      border-radius: 15px;
+      padding-bottom: .625rem;
+      padding-top: .625rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    #input-area {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      margin-top: auto;
+    }
+
+    #input {
+      border: none;
+      padding: 10px;
+      border-radius: 20px;
+      outline: none;
+      font-size: 15px;
+      box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+      flex-grow: 1;
+    }
+    .W37tNe {
+        font-family: "Google Sans", Roboto, Arial, sans-serif;
+        font-size: .75rem;
+        font-weight: 400;
+        letter-spacing: .006rem;
+        line-height: 1rem;
+        text-align: center;
+        text-wrap: balance;
+        color: var(--gm3-sys-color-outline, #747775);
+    }
+
+    #send-button, 
+#clear-button,
+#microphone-button,
+#settings-button {
+    background-color: #4e99df; /* Blue background for buttons */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+#send-button:hover, 
+#clear-button:hover,
+#microphone-button:hover,
+#settings-button:hover {
+    background-color: #3b82c4; /* Darker blue on hover */
+}
+
+.quick-button {
+    background-color: #4e99df;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 10px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px;
+    transition: background-color 0.3s ease;
+}
+
+.quick-button:hover {
+    background-color: #3b82c4;
+}
+
+.loading {
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+}
+
+.loading span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: 2px;
+    background-color:  #4e99df;
+    border-radius: 50%;
+    animation: loading 1.4s infinite both;
+}
+
+.loading span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.loading span:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes loading {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* Microphone Icon */
+#microphone-button svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff; /* White fill color for the icon */
+}
+
+/* Settings Button Icon */
+#settings-button svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+}
+
+/* Settings Panel */
+#settings-panel {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 250px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 100; /* Ensure it's on top */
+    display: none; /* Hidden by default */
+}
+
+#settings-panel h3 {
+    margin-top: 0;
+    color: #4e99df; /* Blue title */
+    font-weight: bold;
+}
+
+#settings-panel select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    background-color: #f8f8f8; /* Light gray background */
+    appearance: none; /* Remove default dropdown arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+#settings-panel select::-ms-expand {
+    display: none; /* Remove default dropdown arrow in IE */
+}
+
+#settings-panel select::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid #4e99df; /* Blue dropdown arrow */
+}
+
+#settings-panel button {
+    background-color: #4e99df;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Make button full width */
+}
+
+#settings-panel button:hover {
+    background-color: #3b82c4;
+}
+
+#microphone-button.recording svg {
+  animation: mic-pulse 1s infinite;
+}
+
+@keyframes mic-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+    
+    /* Dark mode styles */
+        body.dark-mode {
+            background-color: #222;
+            color: #fff;
+        }
+
+        body.dark-mode #chat-container {
+            background: linear-gradient(135deg, hsla(0, 0%, 20%, 1) 0%, hsla(211, 30%, 30%, 1) 100%);
+        }
+
+        body.dark-mode .bot-message {
+            background-color: #444;
+            color: #fff;
+        }
+
+        body.dark-mode #input {
+            background-color: #333;
+            color: #fff;
+        }
+
+        /* Feedback system styles */
+        .feedback-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 5px;
+        }
+
+        .feedback-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            margin-left: 10px;
+        }
+    #dark-mode-toggle {
+      background-color: #4e99df; /* Blue background for buttons */
+        color: #fff; /* White text */
+        border: none;
+        border-radius: 20px;
+        padding: 5px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 10px;
+        transition: background-color 0.3s ease; /* Smooth transition on hover */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+    /* Styles for Pollinations.ai images */
+    .pollinations-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 10px 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .pollinations-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .pollinations-image-container {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+    }
+
+    .pollinations-image-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 8px;
+      font-size: 14px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .pollinations-image-container:hover .pollinations-image-caption {
+      opacity: 1;
+    }
+
+    @media  {
+      .pollinations-image {
+        margin: 5px 0;
+      }
+
+      .pollinations-image-caption {
+        font-size: 12px;
+        padding: 5px;
+      }
+      /* Styles for Pollinations.ai images */
+      .image-style {
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        width: 30%;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+        margin: 20px;
+      }
+
+      .image-style:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      }
+      #export-chat {
+        background-color: #4e99df;
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        padding: 5px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 10px;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      #export-chat:hover {
+        background-color: #3e8e41; / Dark Green /
+      }
+
+      #export-chat:focus {
+        box-shadow: 0 0 0 2px #4CAF50;
+      }
+      
+    
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  #chat-container {
+    width: 95%;
+  }
+
+  .message {
+    max-width: 90%;
+  }
+      .bot-message img {
+        max-width: 100%;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 8px;
+      }
+    .image-style {
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      object-position: center;
+      margin: 20px;
+    }
+
+    .image-style:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    }
+    .message img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 9px;
+    }
+
+    .regenerate-button {
+      margin-left: 10px;
+      background-color: #4e99df;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 5px 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .regenerate-button:hover {
+      background-color: #3b82c4;
+    }
+
+    /* Microphone button styles */
+    #microphone-button {
+      margin-left: 10px;
+      background-color: #4e99df; /* Blue background color */
+      color: #fff; /* White text color */
+      border: none; /* Remove border */
+      border-radius: 20px; /* Rounded corners */
+      padding: 5px 15px; /* Padding for button content */
+      font-size: 16px; /* Font size for button text */
+      cursor: pointer; /* Change cursor to pointer on hover */
+      transition: background-color 0.3s ease; /* Smooth background transition */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+
+    }
+
+    /* Hover effect for the button */
+    #microphone-button:hover {
+      background-color: #3b82c4; /* Darker blue on hover */
+    }
+
+    /* Style for the microphone icon (SVG) */
+    #microphone-button svg {
+      width: 20px; /* Icon width */
+      height: 20px; /* Icon height */
+      fill: #fff; /* White fill color for the icon */
+    }
+
+    /* Animation for the microphone icon when recording */
+    #microphone-button.recording svg {
+      animation: mic-pulse 1s infinite; /* Apply the pulsating animation */
+    }
+
+    @keyframes mic-pulse {
+      0% { transform: scale(1); } /* Initial scale */
+      50% { transform: scale(1.1); } /* Expand slightly */
+      100% { transform: scale(1); } /* Return to initial scale */
+    }
+
+    /* Styles for the language settings panel */
+    #settings-panel {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      width: 250px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 100; /* Ensure it's on top */
+      display: none; /* Hidden by default */
+    }
+
+    #settings-panel h3 {
+      margin-top: 0;
+      color: #4e99df;
+    }
+
+    #settings-panel select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    #settings-panel button {
+      background-color: #4e99df;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #settings-panel button:hover {
+      background-color: #3b82c4;
+    }
+
+    /* Button to toggle the settings panel */
+    #settings-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #4e99df;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      padding: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #settings-button:hover {
+      background-color: #3b82c4;
+    }
+
+    #settings-button svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+  /* Styles pour les mobiles (jusqu'à 768px de largeur) */
+  @media (max-width: 768px) {
+    body {
+      zoom: 1.4; /* Réinitialiser le zoom sur mobile */
+    }
+
+    #chat-container {
+      height: 100%;
+      border-radius: 0;
+      transform: translate(0, 0); /* Réinitialiser la translation */
+      top: 0;
+      left: 0;
+    }
+
+    .header {
+      padding: 10px; /* Réduire le padding */
+    }
+
+    .header h1 {
+      font-size: 18px; /* Réduire la taille du texte */
+    }
+
+    #messages {
+      padding: 5px; /* Réduire le padding */
+      height: calc(100vh - 150px); /* Ajuster la hauteur en fonction de la taille de l'écran */
+    }
+
+    .message {
+      padding: 8px; /* Réduire le padding */
+      font-size: 14px; /* Réduire la taille du texte */
+    }
+
+    #input-area {
+      display: flex; /* Utiliser flexbox pour aligner les éléments */
+      padding: 10px;
+    }
+
+    #input {
+      padding: 8px; /* Réduire le padding */
+      font-size: 14px; /* Réduire la taille du texte */
+    }
+
+    #send-button,
+    #clear-button,
+    #microphone-button,
+    #settings-button {
+      padding: 5px 10px; /* Réduire le padding */
+      font-size: 14px; /* Réduire la taille du texte */
+      margin-left: 5px; /* Réduire la marge */
+    }
+    #clear-button
+     {
+       position: fixed;
+       top: 20px;
+       right: 65px;
+       background-color: #4e99df;
+       color: #fff;
+       border: none;
+       border-radius: 50%;
+       padding: 10px;
+       font-size: 18px;
+       cursor: pointer;
+       transition: background-color 0.3s ease;
+    }
+    #microphone-button
+     {
+       position: fixed;
+          right: 55px;
+          background-color: #4e99df;
+          color: #fff;
+          border: none;
+          border-radius: 50%;
+          padding: 3px;
+          font-size: 10px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+       
+       margin-right: 20px;
+    }
+    .quick-button {
+      padding: 8px 12px; /* Réduire le padding */
+      font-size: 14px; /* Réduire la taille du texte */
+      margin: 5px; /* Réduire la marge */
+    }
+
+    /* Ajuster la taille de la police du disclaimer */
+    .W37tNe {
+      font-size: 12px;
+    }
+
+    /* Styles pour le panneau des paramètres */
+    #settings-panel {
+      width: 90%;
+      right: 5%;
+    }
+  
+       /* Dark mode styles */
+        body.dark-mode {
+            background-color: #222;
+            color: #fff;
+        }
+
+        body.dark-mode #chat-container {
+            background: linear-gradient(135deg, hsla(0, 0%, 20%, 1) 0%, hsla(211, 30%, 30%, 1) 100%);
+        }
+
+        body.dark-mode .bot-message {
+            background-color: #444;
+            color: #fff;
+        }
+
+        body.dark-mode #input {
+            background-color: #333;
+            color: #fff;
+        }
+
+        /* Feedback system styles */
+        .feedback-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 5px;
+        }
+
+        .feedback-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            margin-left: 10px;
+        }
+    #dark-mode-toggle {
+      background-color: #4e99df; /* Blue background for buttons */
+        color: #fff; /* White text */
+        border: none;
+        border-radius: 20px;
+        padding: 5px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-left: 10px;
+        transition: background-color 0.3s ease; /* Smooth transition on hover */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+    /* Styles for Pollinations.ai images */
+    .pollinations-image {
+      max-width: 50%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin: 10px 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .pollinations-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .pollinations-image-container {
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+    }
+
+    .pollinations-image-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 8px;
+      font-size: 14px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .pollinations-image-container:hover .pollinations-image-caption {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .pollinations-image {
+        margin: 5px 0;
+      }
+
+      .pollinations-image-caption {
+        font-size: 12px;
+        padding: 5px;
+      }
+      /* Styles for Pollinations.ai images */
+      .image-style {
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+        margin: 20px;
+      }
+
+      .image-style:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      }
+      
+    }
+    
+    </style>
+</head>
+
+<body>
+  <div id="chat-container">
+    <div class="header">
+      <h1>Tolar</h1>
+      <div class="b_wlcmPersAuthorText"><svg aria-hidden="true" aria-label="Answer logo" fill="white" class="___12fm75w f1w7gpdv fez10in fg4l7m0" role="img" width="18" height="18" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path d="M10.06 18.7a1.63 1.63 0 0 0 2.43-.67l.77-2.34a3.82 3.82 0 0 1 2.42-2.42l2.23-.73a1.61 1.61 0 0 0 1.07-1.3 1.62 1.62 0 0 0-1.13-1.78l-2.21-.72a3.82 3.82 0 0 1-2.42-2.42l-.73-2.23a1.62 1.62 0 0 0-3.07.01l-.74 2.27a3.82 3.82 0 0 1-2.36 2.36l-2.24.73a1.63 1.63 0 0 0 .02 3.07l2.22.72a3.86 3.86 0 0 1 2.42 2.43l.73 2.23c.1.32.32.6.6.8Zm9.74 6.08a1.2 1.2 0 0 0 1.84-.6l.37-1.14a1.6 1.6 0 0 1 1.02-1.02l1.16-.38a1.21 1.21 0 0 0 .59-1.83 1.23 1.23 0 0 0-.62-.45L23 18.99A1.6 1.6 0 0 1 22 17.97l-.38-1.16a1.2 1.2 0 0 0-2.27.01l-.38 1.15a1.6 1.6 0 0 1-.99 1.02l-1.17.38a1.21 1.21 0 0 0-.58 1.83c.15.2.36.36.6.44l1.14.37A1.6 1.6 0 0 1 19 23.04l.37 1.16c.09.24.24.44.44.58Z" fill="white"></path></svg> AI
+    </div>
+  </div>
+  <div id="messages">
+    <div class="message bot-message">Hi👋 , I'm <b>Tolar</b>, your virtual assistant and collaborator . How can I help you? ✨ </div>
+    <div class="quick-buttons" id="quick-buttons">
+      <button class="quick-button">What’s the reaction to and impact of autonomous vehicles</button>
+      <button class="quick-button">Give me a quick walkthrough of The Byzantine Empire</button>
+      <button class="quick-button">Teach me some korean words</button>
+    </div>
+  </div>
+
+  <div id="input-area">
+    <input type="text" id="input" placeholder="Type your message...">
+    <button id="send-button">
+      <svg id="submit" aria-label="Envoyer" role="button" width="24" height="24" viewBox="0 0 27 29" fill="#FFFFFF"
+        xmlns="http://www.w3.org/2000/svg" class="ng-tns-c103064306-9">
+        <path d="M11.1827 16.8068L13.9848 23L16.7868 16.8068L23 14L16.7868 11.1932L13.9848 5L11.1827 11.1932L5 14L11.1827 16.8068Z"
+          class="sparkle ng-tns-c103064306-9"></path>
+        <path d="M22.0136 27L20.739 24.261L18 23.0136L20.739 21.739L22.0136 19L23.261 21.739L26 23.0136L23.261 24.261L22.0136 27Z"
+          class="sparkle ng-tns-c103064306-9"></path>
+      </svg>
+    </button>
+    <button id="clear-button"><svg data-icon-name="deleteIcon" viewBox="0 0 24 24" width="24" height="24" fill="white"
+        aria-hidden="true" sandboxuid="0">
+        <path fill-rule="evenodd" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+          sandboxuid="0"></path>
+      </svg></button>
+    <button id="microphone-button">
+      <svg data-icon-name="micIcon" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true" sandboxuid="0"><path fill-rule="evenodd" d="M11.023 8.613l.007-4.417C11.03 2.974 10.12 2 8.98 2c-1.14 0-1.983.974-1.983 2.196v4.417c0 1.222.843 2.124 1.984 2.124 1.14 0 2.042-.902 2.042-2.124zm-2.014 3.441c-1.896.095-3.641-1.725-3.641-3.934H4.2c0 2.51 1.868 4.883 4.153 5.244V16h1.311v-2.636c2.285-.354 4.153-2.726 4.153-5.244h-1.168c0 2.209-1.745 4.029-3.64 3.934z" sandboxuid="0"></path></svg>
+    </button>
+    <button id="settings-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" d="M9 17.77c.37.19.75.34 1.15.46l.71 2.2c.73.1 1.47.1 2.2 0l.7-2.17c.47-.13.9-.31 1.31-.53l2.09 1.03c.58-.44 1.1-.96 1.55-1.53l-1.02-2.08c.25-.46.45-.95.6-1.47l2.16-.78c.08-.73.07-1.46-.05-2.18l-2.2-.7a6.47 6.47 0 0 0-.58-1.3l1-2.05c-.46-.57-1-1.09-1.59-1.52L15 6.23a6.46 6.46 0 0 0-1.15-.46l-.71-2.2c-.73-.1-1.47-.1-2.2 0l-.7 2.17c-.47.13-.9.31-1.31.53L6.84 5.24c-.58.44-1.1.96-1.55 1.53l1.02 2.08c-.25.46-.45.95-.6 1.47l-2.16.78c-.08.73-.07 1.46.05 2.18l2.2.7c.15.46.35.89.58 1.3l-1 2.05c.46.57 1 1.09 1.59 1.52L9 17.77zm-.02 1.71-2.1 1.11a9.94 9.94 0 0 1-3.24-3.1l1.1-2.27-2.44-.78a9.95 9.95 0 0 1-.1-4.45l2.55-.92-1.2-2.43a9.95 9.95 0 0 1 3.17-3.13l2.3 1.13.77-2.4a9.94 9.94 0 0 1 4.5.02l.73 2.26 2.1-1.11a9.94 9.94 0 0 1 3.24 3.1l-1.1 2.27 2.44.78c.36 1.43.4 2.95.1 4.45l-2.55.92 1.2 2.43a9.95 9.95 0 0 1-3.17 3.13l-2.3-1.13-.77 2.4a9.94 9.94 0 0 1-4.5-.02l-.73-2.26zM12 14.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm0 1.5a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"></path></svg>
+    </button>
+     <button id="dark-mode-toggle">🌓</button>
+        <button id="export-chat">💾</button>
+        <button id="text-to-speech">🔊</button>
+    
+    </div>
+
+  <div class="W37tNe" jslog="204396;"><span id="XeP4af">Tolar may display inaccurate information and does not represent creator's views. Double check responses.</span>
+  </div>
+
+  <div id="settings-panel">
+    <h3>Language Settings</h3>
+    <select id="language-select">
+      <option value="en-US">English</option>
+      <option value="fr-FR">French</option>
+      <option value="es-ES">Spanish</option>
+      <option value="de-DE">German</option>
+      <option value="ja-JP">Japanese</option>
+      <option value="ko-KR">Korean</option>
+    </select>
+    <button id="save-language">Save</button>
+  </div>
+
+</body>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-java.min.js"></script>
+<script>
+  const apiKey = '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';
+
+const chatContainer = document.getElementById('chat-container');
+const messagesContainer = document.getElementById('messages');
+const input = document.getElementById('input');
+const sendButton = document.getElementById('send-button');
+const clearButton = document.getElementById('clear-button');
+const quickButtons = document.querySelectorAll('.quick-button');
+const microphoneButton = document.getElementById('microphone-button');
+const settingsButton = document.getElementById('settings-button');
+const settingsPanel = document.getElementById('settings-panel');
+const languageSelect = document.getElementById('language-select');
+const saveLanguageButton = document.getElementById('save-language');
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+const exportChatButton = document.getElementById('export-chat');
+const textToSpeechButton = document.getElementById('text-to-speech');
+
+let recognition = null;
+let currentLang = 'en-US'; // Default language
+let isSpeaking = false;
+let conversationContext = [];
+const MAX_CONTEXT_LENGTH = 10; // Adjust as needed
+  function formatMessage(message) {
+    let formattedMessage = message
+      .replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')
+      .replace(/\*(.*?)\*/g, '<i>$1</i>')
+      .replace(/```(\w+)?\n([\s\S]*?)```/g, (match, lang, code) => {
+        const language = lang || 'javascript';
+        return `<pre><code class="language-${language}">${Prism.highlight(code, Prism.languages[language], language)}</code></pre>`;
+      });
+
+    const pollinationsRegex = /(https?:\/\/image\.pollinations\.ai\/[^\s]+)/g;
+
+    formattedMessage = formattedMessage.replace(pollinationsRegex, (match) => {
+      const decodedUrl = decodeURIComponent(match);
+      const promptMatch = decodedUrl.match(/prompt\/(.+?)(\?|$)/);
+      const prompt = promptMatch ? promptMatch[1].replace(/%20/g, ' ') : 'Image';
+
+      const widthMatch = match.match(/width=(\d+)/);
+      const heightMatch = match.match(/height=(\d+)/);
+      const width = widthMatch ? widthMatch[1] : '212';
+      const height = heightMatch ? heightMatch[1] : '212';
+
+      return `<img src="${match}" alt="${prompt}" title="${prompt}" width="${width}" height="${height}" class="image-style">`;
+    });
+
+    return formattedMessage;
+  }
+function displayMessage(message, isBot, userMessage) {
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('message');
+  messageElement.classList.add(isBot ? 'bot-message' : 'user-message');
+  messageElement.innerHTML = formatMessage(message);
+
+  if (isBot) {
+    const regenerateButton = document.createElement('button');
+    regenerateButton.classList.add('regenerate-button');
+    regenerateButton.textContent = '↺ Regenerate';
+    regenerateButton.style.marginLeft = '10px';
+    regenerateButton.style.backgroundColor = '#4e99df';
+    regenerateButton.style.color = '#fff';
+    regenerateButton.style.border = 'none';
+    regenerateButton.style.borderRadius = '20px';
+    regenerateButton.style.padding = '5px 15px';
+    regenerateButton.style.fontSize = '16px';
+    regenerateButton.style.cursor = 'pointer';
+    regenerateButton.style.margin = '5px';
+
+    regenerateButton.addEventListener('click', () => {
+      regenerateMessage(userMessage, messageElement);
+    });
+
+    messageElement.appendChild(regenerateButton);
+    addFeedbackButtons(messageElement);
+  }
+
+  messagesContainer.appendChild(messageElement);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+async function regenerateMessage(userMessage, messageElement) {
+  displayLoading();
+  messageElement.innerHTML = '<div class="loading"><span></span><span></span><span></span></div>';
+
+  try {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        messages: [
+          {
+            role: 'system',
+            content: 'Your name is Tolar! An AI created by Thomas. Be accurate and relevant. Try to do your best. Be helpful and creative. If i chat with you in a specific language, answer in the same language! Only If you are answering to a friendly message, use emojis. Only make a table or graph if the user asks for it, otherwise no! If the user doesn\'t ask it in their question, don\'t do it! In addition, you are able to generate graphs to illustrate mathematical concepts. Your graphs and tables must always be made in HTML OR SVG. Only if I ask you to generate an image here is how to do it: https://image.pollinations.ai/prompt/{description}?width={width}&height={height}". Very important, always respect this format for image generation. Show ALL the link.'
+          },
+          {
+            role: 'user',
+            content: userMessage
+          }
+        ],
+        model: 'llama3-70b-8192',
+        temperature: 0.8,
+        max_tokens: 31950,
+        top_p: 1,
+        stream: false
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+    const botResponse = responseData.choices[0].message.content;
+    removeLoading();
+    messageElement.innerHTML = formatMessage(botResponse);
+    addFeedbackButtons(messageElement);
+  } catch (error) {
+    removeLoading();
+    console.error('Error during API call:', error);
+    messageElement.innerHTML = `An error occurred: ${error.message}`;
+  }
+}
+
+function displayLoading() {
+  const loadingElement = document.createElement('div');
+  loadingElement.classList.add('message', 'bot-message');
+  loadingElement.innerHTML = '<div class="loading"><span></span><span></span><span></span></div>';
+  loadingElement.setAttribute('id', 'loading');
+  messagesContainer.appendChild(loadingElement);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function removeLoading() {
+  const loadingElement = document.getElementById('loading');
+  if (loadingElement) {
+    messagesContainer.removeChild(loadingElement);
+  }
+}
+
+async function sendMessage(messageContent) {
+  displayMessage(messageContent, false);
+  input.value = '';
+
+  displayLoading();
+
+  // Add user message to context
+  conversationContext.push({role: 'user', content: messageContent});
+  if (conversationContext.length > MAX_CONTEXT_LENGTH) {
+    conversationContext.shift();
+  }
+
+  try {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        messages: [
+          {
+            role: 'system',
+            content: 'Your name is Tolar! An AI created by Thomas. Be accurate and relevant. Try to do your best. Be helpful and creative. If i chat with you in a specific language, answer in the same language! Only If you are answering to a friendly message, use emojis. Only make a table or graph if the user asks for it, otherwise no! If the user doesn\'t ask it in their question, don\'t do it! In addition, you are able to generate graphs to illustrate mathematical concepts. Your graphs and tables must always be made in HTML OR SVG. Only if I ask you to generate an image here is how to do it: https://image.pollinations.ai/prompt/{description}?width={width}&height={height}". Very important, always respect this format for image generation. Show ALL the link.'
+          },
+          ...conversationContext
+        ],
+        model: 'llama3-70b-8192',
+        temperature: 0.8,
+        max_tokens: 31950,
+        top_p: 1,
+        stream: false
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+    const botResponse = responseData.choices[0].message.content;
+    
+    // Add bot response to context
+    conversationContext.push({role: 'assistant', content: botResponse});
+    if (conversationContext.length > MAX_CONTEXT_LENGTH) {
+      conversationContext.shift();
+    }
+
+    removeLoading();
+    displayMessage(botResponse, true, messageContent);
+  } catch (error) {
+    removeLoading();
+    console.error('Error during API call:', error);
+    displayMessage(`An error occurred: ${error.message}`, true);
+  }
+}
+
+sendButton.addEventListener('click', () => {
+  const userMessage = input.value.trim();
+  if (userMessage) {
+    sendMessage(userMessage);
+  }
+});
+
+input.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    const userMessage = input.value.trim();
+    if (userMessage) {
+      sendMessage(userMessage);
+    }
+  }
+});
+
+clearButton.addEventListener('click', () => {
+  messagesContainer.innerHTML = '';
+  conversationContext = []; // Clear the conversation context
+});
+
+quickButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    sendMessage(button.textContent);
+  });
+});
+
+function startRecording() {
+  recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = currentLang;
+  recognition.interimResults = true;
+
+  recognition.onresult = (event) => {
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      if (event.results[i].isFinal) {
+        const transcript = event.results[i][0].transcript;
+        sendMessage(transcript);
+        stopRecording();
+      } else {
+        input.value = event.results[i][0].transcript;
+      }
+    }
+  };
+
+  recognition.onerror = (event) => {
+    console.error('Speech recognition error:', event.error);
+    stopRecording();
+  };
+
+  recognition.start();
+  microphoneButton.classList.add('recording');
+}
+
+function stopRecording() {
+  if (recognition) {
+    recognition.stop();
+    recognition = null;
+    microphoneButton.classList.remove('recording');
+  }
+}
+
+microphoneButton.addEventListener('click', () => {
+  if (microphoneButton.classList.contains('recording')) {
+    stopRecording();
+  } else {
+    startRecording();
+  }
+});
+
+function changeLanguage(langCode) {
+  currentLang = langCode;
+  if (recognition) {
+    recognition.lang = currentLang;
+  }
+}
+
+function openSettingsPanel() {
+  settingsPanel.style.display = 'block';
+}
+
+function closeSettingsPanel() {
+  settingsPanel.style.display = 'none';
+}
+
+saveLanguageButton.addEventListener('click', () => {
+  currentLang = languageSelect.value;
+  closeSettingsPanel();
+});
+
+settingsButton.addEventListener('click', openSettingsPanel);
+settingsPanel.addEventListener('click', (event) => {
+  if (event.target === settingsPanel) {
+    closeSettingsPanel();
+  }
+});
+
+// Dark Mode Toggle
+darkModeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+});
+
+// Chat History Export
+exportChatButton.addEventListener('click', () => {
+  const chatHistory = Array.from(messagesContainer.children)
+    .map(msg => `${msg.classList.contains('user-message') ? 'User' : 'Tolar'}: ${msg.textContent}`)
+    .join('\n');
+  const blob = new Blob([chatHistory], {type: 'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'chat_history.txt';
+  a.click();
+});
+
+// Text-to-Speech for Bot Responses
+textToSpeechButton.addEventListener('click', () => {
+  if (!isSpeaking) {
+    const lastBotMessage = messagesContainer.querySelector('.bot-message:last-of-type');
+    if (lastBotMessage) {
+      const utterance = new SpeechSynthesisUtterance(lastBotMessage.textContent);
+      utterance.lang = currentLang;
+      speechSynthesis.speak(utterance);
+      isSpeaking = true;
+      textToSpeechButton.textContent = '🔇';
+    }
+  } else {
+    speechSynthesis.cancel();
+    isSpeaking = false;
+    textToSpeechButton.textContent = '🔊';
+  }
+});
+
+// User Feedback System
+function addFeedbackButtons(messageElement) {
+  const feedbackButtons = document.createElement('div');
+  feedbackButtons.classList.add('feedback-buttons');
+  feedbackButtons.innerHTML = `
+    <button class="feedback-button" data-feedback="positive">👍</button>
+    <button class="feedback-button" data-feedback="negative">👎</button>
+  `;
+  messageElement.appendChild(feedbackButtons);
+
+  feedbackButtons.querySelectorAll('.feedback-button').forEach(button => {
+    button.addEventListener('click', () => {
+      const feedback = button.getAttribute('data-feedback');
+      // Here you would typically send the feedback to your server
+      console.log(`Feedback received: ${feedback}`);
+      feedbackButtons.innerHTML = 'Thank you for your feedback!';
+    });
+  });
+}
+    function displayMessage(message, isBot, userMessage) {
+      const messageElement = document.createElement('div');
+      messageElement.classList.add('message');
+      messageElement.classList.add(isBot ? 'bot-message' : 'user-message');
+      messageElement.innerHTML = formatMessage(message);
+
+      if (isBot) {
+        const responseOptions = document.createElement('div');
+        responseOptions.classList.add('response-options');
+        
+        const options = [
+          { text: 'Shorten', action: 'shorten' },
+          { text: 'Expand', action: 'expand' },
+          { text: 'Simplify', action: 'simplify' },
+          { text: 'More technical', action: 'technical' },
+          { text: 'Regenerate', action: 'regenerate' }
+        ];
+
+        options.forEach(option => {
+          const button = document.createElement('button');
+          button.classList.add('response-option');
+          button.textContent = option.text;
+          button.addEventListener('click', () => modifyResponse(option.action, userMessage, messageElement));
+          responseOptions.appendChild(button);
+        });
+
+        messageElement.appendChild(responseOptions);
+        addFeedbackButtons(messageElement);
+      }
+
+      messagesContainer.appendChild(messageElement);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    async function modifyResponse(action, userMessage, messageElement) {
+      displayLoading();
+      messageElement.innerHTML = '<div class="loading"><span></span><span></span><span></span></div>';
+
+      let modificationPrompt;
+      switch (action) {
+        case 'shorten':
+          modificationPrompt = 'Please provide a shorter version of the previous response.';
+          break;
+        case 'expand':
+          modificationPrompt = 'Please provide a more detailed and expanded version of the previous response.';
+          break;
+        case 'simplify':
+          modificationPrompt = 'Please simplify the previous response, using less technical language.';
+          break;
+        case 'technical':
+          modificationPrompt = 'Please provide a more technical version of the previous response, with more specific details.';
+          break;
+        case 'regenerate':
+          modificationPrompt = 'Please generate a new response to the original question.';
+          break;
+      }
+
+      try {
+        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            messages: [
+              {
+                role: 'system',
+                content: 'Your name is Tolar! An AI created by Thomas. Be accurate and relevant. Try to do your best. Be helpful and creative. If i chat with you in a specific language, answer in the same language! Only If you are answering to a friendly message, use emojis. Only make a table or graph if the user asks for it, otherwise no! If the user doesn\'t ask it in their question, don\'t do it! In addition, you are able to generate graphs to illustrate mathematical concepts. Your graphs and tables must always be made in HTML OR SVG. Only if I ask you to generate an image here is how to do it: https://image.pollinations.ai/prompt/{description}?width={width}&height={height}". Very important, always respect this format for image generation. Show ALL the link.'
+              },
+              {
+                role: 'user',
+                content: userMessage
+              },
+              {
+                role: 'assistant',
+                content: messageElement.textContent
+              },
+              {
+                role: 'user',
+                content: modificationPrompt
+              }
+            ],
+            model: 'llama3-70b-8192',
+            temperature: 0.8,
+            max_tokens: 31950,
+            top_p: 1,
+            stream: false
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`API request failed: ${response.status}`);
+        }
+
+        const responseData = await response.json();
+        const botResponse = responseData.choices[0].message.content;
+        removeLoading();
+        messageElement.innerHTML = formatMessage(botResponse);
+        addFeedbackButtons(messageElement);
+        
+        // Re-add response options
+        const responseOptions = document.createElement('div');
+        responseOptions.classList.add('response-options');
+        const options = [
+          { text: 'Shorten', action: 'shorten' },
+          { text: 'Expand', action: 'expand' },
+          { text: 'Simplify', action: 'simplify' },
+          { text: 'More technical', action: 'technical' },
+          { text: 'Regenerate', action: 'regenerate' }
+        ];
+        options.forEach(option => {
+          const button = document.createElement('button');
+          button.classList.add('response-option');
+          button.textContent = option.text;
+          button.addEventListener('click', () => modifyResponse(option.action, userMessage, messageElement));
+          responseOptions.appendChild(button);
+        });
+        messageElement.appendChild(responseOptions);
+      } catch (error) {
+        removeLoading();
+        console.error('Error during API call:', error);
+        messageElement.innerHTML = `An error occurred: ${error.message}`;
+      }
+    }
+</script>
+
+</html>
