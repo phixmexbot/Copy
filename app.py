@@ -19,7 +19,7 @@ CONNECTION = 'l5fqrAiviEj0CAAALAJbw05zldA'
 USERNAME = 'look'
 PASSWORD = 'eternal'
 REACTIONS = ['👍', '🔥', '❤️', '👏', '🕊']
-DIRECTORIES = ['home', 'about', 'activities', 'services', 'projects', 'copyright' 'activities/lightening-flash', 'activities/orbit-around', 'activities/doodle-rain', 'activities/angry-birds', 'services/chat-bot', 'services/home-tab', 'projects/automatic-attendance']
+DIRECTORIES = ['home', 'about', 'activities', 'services', 'projects', 'copyright', 'activities/lightening-flash', 'activities/orbit-around', 'activities/doodle-rain', 'activities/angry-birds', 'services/chat-bot', 'services/home-tab', 'projects/automatic-attendance']
 
 app = Flask(__name__, template_folder='.')
 
