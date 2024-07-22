@@ -20,51 +20,39 @@
       font-family: sans-serif;
       font-weight: bold;
     }
-        .message-container {
-      color: white;
-      top: 10%;
-      position: absolute;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(-50%);
-      animation: fadeIn 3s forwards;
-      z-index: 10;
-      font-size: 1.5em;
-      font-weight: bold;
-    }
+.message-container {
+  color: white;
+  top: 10%;
+  position: absolute;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-20px); /* Initial shift */
+  animation: fadeIn 3s forwards;
+  z-index: 10;
+  font-size: 1.5em;
+  font-weight: bold;
+}
 
-  .message {
-    padding: 60px;
-    border-radius: 10px;
-    display: inline-block;
-    width: 70%;
-    margin: auto;
-    box-sizing: border-box;
-    z-index: 200;
+.message {
+  padding: 60px;
+  border-radius: 10px;
+  display: inline-block;
+  width: 70%;
+  margin: auto;
+  box-sizing: border-box;
+  z-index: 200;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px); /* Fixed pixel shift */
   }
-      @keyframes fadeInnessage {
-      0% {
-        opacity: 0;
-        transform: translateY(-10%);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(-10%);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* End at normal position */
+  }
+}
 
     :root {
       --animation-time: 300ms;
