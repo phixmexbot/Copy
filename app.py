@@ -43,6 +43,7 @@ def router(path):
         if path in DIRECTORIES:
             return render_template(f'{path}.html')
         else:
+            print(f'{path}.html')
             return render_template(f'error/404.html')
     except Exception as e:
         print(f"Error occurred: {e}")
