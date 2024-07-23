@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error 404</title>
+    <title>Core</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/logo.svg">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
+    <script src="https://clooned.com/wp-content/uploads/cloons/scripts/clooned.js"></script>
     <style>
 html {
   height: 100%;
@@ -30,7 +31,7 @@ body {
     0px 0px 50px 0px #feffa2,
     0px 0px 500px 0px #feffa2;
   display: inline-block;
-  position: relative;
+  position: absolute;
   top: 10%;
   left: 10%;
   animation: 3s moonglow ease-in-out infinite alternate;
@@ -239,6 +240,38 @@ body {
     width: 150px;
   }
 }
+.message-container {
+  color: transparent; /* Start with transparent text */
+  bottom: 10%;
+  position: absolute;
+  text-align: center;
+  animation: appearFromNowhere 3s forwards;
+  z-index: 10;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.message {
+  font-size: 1.2rem;
+  font-family: sans-serif;
+  font-weight: bold;
+  padding: 60px;
+  border-radius: 10px;
+  display: inline-block;
+  width: 70%;
+  margin: auto;
+  box-sizing: border-box;
+  z-index: 200;
+}
+
+@keyframes appearFromNowhere {
+  0% {
+    color: transparent; /* Start with transparent text */
+  }
+  100% {
+    color: white; /* End with white text */
+  }
+}
         .logo-container {
           position: absolute;
           top: 30px; 
@@ -260,6 +293,9 @@ body {
           height: auto;
         }
         .footer {
+          font-size: 1rem;
+          font-family: sans-serif;
+          font-weight: bold;
           position: fixed;
           bottom: 30px;
           left: 50%;
@@ -284,11 +320,21 @@ body {
         .footer-text {
           color: #ffffff;
           font-weight: bold;
-          font-size: 1.2rem;
+          font-size: 1rem;
         }
     </style>
 </head>
 <body>
+<clooned-object features="lsc;dt;fs" oid="271c091f92ce45d4a1caab5261bfa1fb"></clooned-object>
+<p class="message-container">
+    <span class="message">
+        Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br>
+        <br>
+        The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br>
+        <br>
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    </span>
+</p>
 <div class="moon">
   <span class="crater"></span>
   <span class="crater"></span>
@@ -342,7 +388,7 @@ fill="#000000" stroke="none">
   </div>
   <div id="app"></div>
   <footer class="footer">
-    <a href="/copyright" target="_blank" class="footer-link">
+    <a href="/copyright" class="footer-link">
       <span class="footer-text">© Core 2024</span>
     </a>
   </footer>
