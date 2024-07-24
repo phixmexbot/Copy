@@ -6,11 +6,20 @@
   <title>Core</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/logo.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/EasePack.min.js"></script>
+  
+
+
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.4.3/pixi.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+          <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/PixiPlugin.min.js?r=3"></script>
+            <script src="https://cdn.jsdelivr.net/npm/pixi-filters@2.6.1/dist/pixi-filters.js"></script>
+  
   <style>
     body {
       font-size: 1.5rem;
@@ -508,11 +517,45 @@ position: relative;
 
 
   </style>
+  
+  
+      <style>
+html, body
+{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+*{
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+}
+
+body
+{
+  background-color: lightgray;
+}
+
+#canvas
+{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  cursor: pointer;
+}
+    </style>
+  
+  
 </head>
 
 <body>
 
-
+    <div id="canvas"></div>
 <div class="moon">
   <span class="crater"></span>
   <span class="crater"></span>
@@ -607,196 +650,198 @@ fill="#000000" stroke="none">
     </a>
   </footer>
 
-  <script type="text/babel">
-    class CpcNavigation extends React.Component {
-      constructor(props) {
-        super(props);
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
 
-        this.state = {
-          jsxData: [],
-          submenu: []
-        };
-      }
+<script type="text/babel">
+  class CpcNavigation extends React.Component {
+    constructor(props) {
+      super(props);
 
-      componentDidMount() {
-        this.setState({ jsxData: this.createMenuJSX() });
-      }
-
-      menuClickEvent(i) {
-        let submenu = this.state.submenu;
-        let tmpmenu = submenu[i];
-        let sub = tmpmenu.sub.current;
-        let caret = tmpmenu.caret.current;
-
-        if (tmpmenu.active === false) {
-          tmpmenu.active = true;
-
-          gsap.to(caret, 1, {
-            transform: 'rotate(180deg)',
-            ease: "elastic.out(1, 0.3)"
-          });
-
-          gsap.to(sub, 1, {
-            height: sub.scrollHeight,
-            visibility: 'visible',
-            ease: "elastic.out(1, 0.3)"
-          });
-        } else {
-          tmpmenu.active = false;
-
-          gsap.to(caret, 1, {
-            transform: 'rotate(0deg)',
-            ease: "elastic.out(1, 0.3)"
-          });
-
-          gsap.to(sub, 0.5, {
-            height: 0,
-            ease: "bounce.out"
-          }).eventCallback('onComplete', () => {
-            gsap.to(sub, 0, {
-              visibility: 'hidden'
-            });
-          });
-        }
-
-        submenu[i] = tmpmenu;
-
-        this.setState({ submenu: submenu });
-      }
-
-      createMenuJSX(menu = this.props.menu) {
-        let link = [];
-
-        for (let i in menu) {
-          let m = menu[i];
-          let ic = <i className="cpc-icon cpc-hidden fas fa-caret-down"></i>;
-
-          if (typeof m.icon !== 'undefined') {
-            ic = <i className={'cpc-icon ' + m.icon}></i>;
-          }
-
-          if (typeof m.menu === 'undefined') {
-            link.push(
-              <li key={i}>
-                <a href={m.link}>
-                  {ic}
-                  <span>{i}</span>
-                  <i className="cpc-caret cpc-hidden fas fa-caret-down"></i>
-                </a>
-              </li>
-            );
-          } else if (typeof m.menu === 'object') {
-            let tmpSubmenu = this.state.submenu;
-            let tmpLength = tmpSubmenu.length;
-
-            tmpSubmenu.push({
-              'id': m.link,
-              'active': false,
-              'caret': React.createRef(),
-              'sub': React.createRef()
-            });
-            
-            link.push(
-              <li key={i}>
-                <a
-                  href={m.link}
-                  onClick={this.menuClickEvent.bind(this, tmpLength)}
-                >
-                  {ic}
-                  <span>{i}</span>
-                  <i
-                    className="cpc-caret fas fa-caret-down"
-                    ref={tmpSubmenu[tmpLength].caret}
-                  ></i>
-                </a>
-                <ul className="cpc-sub" ref={tmpSubmenu[tmpLength].sub}>
-                  {this.createMenuJSX(m.menu)}
-                </ul>
-              </li>
-            );
-
-            this.setState({ submenu: tmpSubmenu });
-          }
-        }
-
-        return link;
-      }
-
-      render() {
-        return (
-          <nav className="cpc-menu">
-            <ul className="cpc-main">
-              {this.state.jsxData}
-            </ul>
-          </nav>
-        );
-      }
+      this.state = {
+        jsxData: [],
+        submenu: []
+      };
     }
 
-    const menu = {
-      'Home': {
-        'link': '/',
-        'icon': 'fas fa-home'
-      },
-      'Activities': {
-        'link': '#activities',
-        'icon': 'fa-solid fa-gamepad',
-        'menu': {
-          'Lightening Flash': {
-            'link': '/activities/lightening-flash',
-            'icon': 'fa-solid fa-bolt'
-          },
-          'Orbit Around': {
-            'link': '/activities/orbit-around',
-            'icon': 'fa-solid fa-circle-dot'
-          },
-          'Doodle Rain': {
-            'link': '/activities/doodle-rain',
-            'icon': 'fa-solid fa-cloud-rain'
-          },
-          'Angry Birds': {
-            'link': '/activities/angry-birds',
-            'icon': 'fa-solid fa-dove'
-          },
-        }
-      },
-      'Services': {
-        'link': '#services',
-        'icon': 'fas fa-cogs',
-        'menu': {
-          'Chat Bot': {
-            'link': '/services/chat-bot',
-            'icon': 'fa-solid fa-robot'
-          },
-          'Home Tab': {
-            'link': '/services/home-tab',
-            'icon': 'fa-brands fa-searchengin'
+    componentDidMount() {
+      this.setState({ jsxData: this.createMenuJSX() });
+    }
+
+    menuClickEvent(i) {
+      let submenu = this.state.submenu;
+      let tmpmenu = submenu[i];
+      let sub = tmpmenu.sub.current;
+      let caret = tmpmenu.caret.current;
+
+      if (tmpmenu.active === false) {
+        tmpmenu.active = true;
+
+        TweenMax.to(caret, 1, {
+          rotation: 180,
+          ease: Elastic.easeOut.config(1, 0.3)
+        });
+
+        TweenMax.to(sub, 1, {
+          height: sub.scrollHeight,
+          visibility: 'visible',
+          ease: Elastic.easeOut.config(1, 0.3)
+        });
+      } else {
+        tmpmenu.active = false;
+
+        TweenMax.to(caret, 1, {
+          rotation: 0,
+          ease: Elastic.easeOut.config(1, 0.3)
+        });
+
+        TweenMax.to(sub, 0.5, {
+          height: 0,
+          ease: Bounce.easeOut,
+          onComplete: () => {
+            TweenMax.to(sub, 0, {
+              visibility: 'hidden'
+            });
           }
-        }
-      },
-      'Projects': {
-        'link': '#projects',
-        'icon': 'fa-solid fa-lightbulb',
-        'menu': {
-          'Automatic Attendance': {
-            'link': '/projects/automatic-attendance',
-            'icon': 'fa-solid fa-video'
-          }
-        }
-      },
-      'About': {
-        'link': '/about',
-        'icon': 'fas fa-info-circle'
+        });
       }
-    };
 
-    ReactDOM.render(
-      <CpcNavigation menu={menu} />,
-      document.querySelector('#app')
-    );
-    
+      submenu[i] = tmpmenu;
 
+      this.setState({ submenu: submenu });
+    }
+
+    createMenuJSX(menu = this.props.menu) {
+      let link = [];
+
+      for (let i in menu) {
+        let m = menu[i];
+        let ic = <i className="cpc-icon cpc-hidden fas fa-caret-down"></i>;
+
+        if (typeof m.icon !== 'undefined') {
+          ic = <i className={'cpc-icon ' + m.icon}></i>;
+        }
+
+        if (typeof m.menu === 'undefined') {
+          link.push(
+            <li key={i}>
+              <a href={m.link}>
+                {ic}
+                <span>{i}</span>
+                <i className="cpc-caret cpc-hidden fas fa-caret-down"></i>
+              </a>
+            </li>
+          );
+        } else if (typeof m.menu === 'object') {
+          let tmpSubmenu = this.state.submenu;
+          let tmpLength = tmpSubmenu.length;
+
+          tmpSubmenu.push({
+            'id': m.link,
+            'active': false,
+            'caret': React.createRef(),
+            'sub': React.createRef()
+          });
+
+          link.push(
+            <li key={i}>
+              <a
+                href={m.link}
+                onClick={this.menuClickEvent.bind(this, tmpLength)}
+              >
+                {ic}
+                <span>{i}</span>
+                <i
+                  className="cpc-caret fas fa-caret-down"
+                  ref={tmpSubmenu[tmpLength].caret}
+                ></i>
+              </a>
+              <ul className="cpc-sub" ref={tmpSubmenu[tmpLength].sub}>
+                {this.createMenuJSX(m.menu)}
+              </ul>
+            </li>
+          );
+
+          this.setState({ submenu: tmpSubmenu });
+        }
+      }
+
+      return link;
+    }
+
+    render() {
+      return (
+        <nav className="cpc-menu">
+          <ul className="cpc-main">
+            {this.state.jsxData}
+          </ul>
+        </nav>
+      );
+    }
+  }
+
+  const menu = {
+    'Home': {
+      'link': '/',
+      'icon': 'fas fa-home'
+    },
+    'Activities': {
+      'link': '#activities',
+      'icon': 'fa-solid fa-gamepad',
+      'menu': {
+        'Lightening Flash': {
+          'link': '/activities/lightening-flash',
+          'icon': 'fa-solid fa-bolt'
+        },
+        'Orbit Around': {
+          'link': '/activities/orbit-around',
+          'icon': 'fa-solid fa-circle-dot'
+        },
+        'Doodle Rain': {
+          'link': '/activities/doodle-rain',
+          'icon': 'fa-solid fa-cloud-rain'
+        },
+        'Angry Birds': {
+          'link': '/activities/angry-birds',
+          'icon': 'fa-solid fa-dove'
+        },
+      }
+    },
+    'Services': {
+      'link': '#services',
+      'icon': 'fas fa-cogs',
+      'menu': {
+        'Chat Bot': {
+          'link': '/services/chat-bot',
+          'icon': 'fa-solid fa-robot'
+        },
+        'Home Tab': {
+          'link': '/services/home-tab',
+          'icon': 'fa-brands fa-searchengin'
+        }
+      }
+    },
+    'Projects': {
+      'link': '#projects',
+      'icon': 'fa-solid fa-lightbulb',
+      'menu': {
+        'Automatic Attendance': {
+          'link': '/projects/automatic-attendance',
+          'icon': 'fa-solid fa-video'
+        }
+      }
+    },
+    'About': {
+      'link': '/about',
+      'icon': 'fas fa-info-circle'
+    }
+  };
+
+  ReactDOM.render(
+    <CpcNavigation menu={menu} />,
+    document.querySelector('#app')
+  );
 </script>
+
 <script>
 (() => {
   const max_stars = 100;
@@ -825,3 +870,327 @@ fill="#000000" stroke="none">
 
 
   </script>
+  
+      <script>
+let pixelate = false
+let background = false
+
+class Ember {
+  emberBlobs = []
+
+  constructor(colors, app, pixelate = false) {
+    this.embers = new PIXI.Container()
+
+    if (pixelate) {
+      this.embers.filters = [new PIXI.filters.PixelateFilter()]
+    }
+
+    colors.map(color => {
+      var circle = new PIXI.Graphics()
+      circle.lineStyle(0)
+      circle.beginFill(color, 1)
+      circle.drawCircle(0, 0, 10)
+      circle.endFill()
+
+      this.emberBlobs.push(app.renderer.generateTexture(circle))
+    })
+
+    setInterval(() => {
+      this.addEmber()
+    }, 300)
+  }
+
+  stoke() {
+    let amount = 40 + Math.round(Math.random() * 20)
+    for (let i = 0; i < amount; i++) {
+      this.addEmber()
+    }
+  }
+
+  makeBlob() {
+    let texture = this.emberBlobs[
+      Math.floor(Math.random() * this.emberBlobs.length)
+    ]
+    let blob = new PIXI.Sprite(texture)
+    blob.anchor.set(0.5)
+    let scaleScale = Math.random()
+    blob.scale.set(0.4 * scaleScale, 0.5 * scaleScale)
+    return blob
+  }
+
+  addEmber() {
+    let time = this.time * (0.3 + Math.random() * 0.6)
+    let blob = this.makeBlob()
+    this.embers.addChild(blob)
+
+    let bezier = [
+      {
+        x: Math.random() * 100 - 50,
+        y: -100
+      },
+      {
+        x: Math.random() * 200 - 100,
+        y: -100 + Math.random() * -20
+      },
+      {
+        x: Math.random() * 200 - 100,
+        y: -100 + Math.random() * -50
+      },
+      {
+        x: Math.random() * 200 - 100,
+        y: -200 + Math.random() * -50
+      },
+      {
+        x: Math.random() * 300 - 150,
+        y: -250 + Math.random() * -100
+      },
+      { x: Math.random() * 500 - 250, y: -500 + Math.random() * -150 }
+    ]
+    TweenMax.to(blob, time / 2, {
+      delay: time / 2,
+      ease: Power1.easeOut,
+      alpha: 0
+    })
+    TweenMax.to(blob.position, time, {
+      ease: Power1.easeOut,
+      bezier: bezier,
+      onComplete: () => {
+        this.embers.removeChild(blob)
+        blob = null
+      }
+    })
+  }
+
+  get time() {
+    return 2 + Math.random() * 1.5
+  }
+}
+
+class Fire {
+  constructor(color, app, pixelate = false) {
+    this.flame = new PIXI.Container()
+    this.cutout = new PIXI.Container()
+    this.fire = new PIXI.Container()
+
+    this.flame.addChild(this.fire)
+    this.flame.addChild(this.cutout)
+
+    this.fire.alpha = 0.7
+
+    var circle = new PIXI.Graphics()
+    circle.lineStyle(0)
+    circle.beginFill(color, 1)
+    circle.drawCircle(0, 0, 35)
+    circle.endFill()
+    this.fireBlob = app.renderer.generateTexture(circle)
+
+    var cutoutCircle = new PIXI.Graphics()
+    cutoutCircle.lineStyle(0)
+    cutoutCircle.beginFill(0x000000, 1)
+    cutoutCircle.drawCircle(0, 0, 40)
+    cutoutCircle.endFill()
+    this.cutoutBlob = app.renderer.generateTexture(cutoutCircle)
+
+    let filters = {
+      bloom: new PIXI.filters.AdvancedBloomFilter(0.45, 0.5, 0.5),
+      pixel: pixelate
+        ? new PIXI.filters.PixelateFilter()
+        : new PIXI.filters.VoidFilter(),
+      void: new PIXI.filters.VoidFilter()
+    }
+
+    this.flame.filters = [filters.bloom, filters.pixel, filters.void]
+
+    this.flame.filters[this.flame.filters.length - 1].blendMode =
+      PIXI.BLEND_MODES.SCREEN
+
+    setInterval(() => {
+      this.addFlame()
+      this.addCutout(Math.random() > 0.5 ? true : false)
+    }, 50)
+  }
+
+  makeBlob(texture) {
+    let blob = new PIXI.Sprite(texture)
+    blob.anchor.set(0.5)
+    return blob
+  }
+
+  addCutout(left) {
+    let time = this.time * (0.7 + Math.random() * 0.2)
+    let blob = this.makeBlob(this.cutoutBlob)
+    this.cutout.addChild(blob)
+    let scale = [1, 0.75 + Math.random() * 1]
+    blob.position.x = (130 + Math.random() * 50) * (left ? -1 : 1)
+    let targetX = (5 + Math.random() * 60) * (left ? -1 : 1)
+    blob.scale.set(scale[0])
+    TweenMax.to(blob, time, {
+      ease: Power1.easeIn,
+      pixi: { x: targetX, y: -270, scaleX: scale[1], scaleY: scale[1] },
+      onComplete: () => {
+        this.cutout.removeChild(blob)
+        blob = null
+      }
+    })
+  }
+
+  addFlame() {
+    let time = this.time
+    let blob = this.makeBlob(this.fireBlob)
+    this.fire.addChild(blob)
+    let scale = [1.2 + Math.random(), 0.5 + Math.random()]
+    let bezier = [
+      {
+        x: 0,
+        y: 0
+      },
+      {
+        x: Math.random() * 100 - 50,
+        y: Math.random() * -20
+      },
+      {
+        x: Math.random() * 100 - 50,
+        y: Math.random() * -50 + -50
+      },
+      { x: 0, y: -150 + Math.random() * -100 }
+    ]
+    blob.scale.set(scale[0])
+    TweenMax.to(blob, time, {
+      ease: Power1.easeIn,
+      bezier: bezier,
+      ease: Power0.easeOut
+    })
+    TweenMax.to(blob, time, {
+      pixi: { scaleX: scale[1], scaleY: scale[1] },
+      onComplete: () => {
+        this.fire.removeChild(blob)
+        blob = null
+      }
+    })
+  }
+
+  get time() {
+    return 1 + Math.random() * 0.4
+  }
+
+  set y(y) {
+    this.flame.position.y = y
+  }
+  set x(x) {
+    this.flame.position.x = x
+  }
+  set scale(s) {
+    this.flame.scale.set(s)
+  }
+}
+
+
+class Stage {
+  flames = []
+
+  constructor(canvas, pixelate = false, background = false) {
+    this.app = new PIXI.Application(window.innerWidth, window.innerHeight, {
+      antialias: true,
+      backgroundColor: background ? 0x0f0f0f : 0x11111d
+    })
+    canvas.appendChild(this.app.view)
+
+    this.stage = new PIXI.Container()
+    this.flamesContainer = new PIXI.Container()
+
+    if (background) {
+      var background = PIXI.Sprite.fromImage(
+        "https://assets.ste.vg/codepen/fire-background.png"
+      )
+      var light = PIXI.Sprite.fromImage(
+        "https://assets.ste.vg/codepen/light.png"
+      )
+
+      this.add(background)
+      this.add(light, this.flamesContainer)
+
+      background.anchor.set(0.5)
+      background.scale.set(0.8)
+      background.position.y = -150
+
+      light.anchor.set(0.5)
+      light.scale.set(1)
+      light.position.y = 20
+
+      setInterval(() => {
+        light.alpha = 0.3 + Math.random() * 0.2
+      }, 50)
+    }
+
+    this.add(this.stage, this.app.stage)
+    this.add(this.flamesContainer)
+
+    this.flamesContainer.scale.set(0.75)
+
+    let flames = [
+      { color: 0xe23b00, scale: 1, offset: -30 },
+      { color: 0xfe8200, scale: 1, offset: -10 },
+      { color: 0xfbe416, scale: 0.9, offset: 10 },
+      { color: 0xfdfdb4, scale: 0.7, offset: 30 }
+    ]
+
+    let ember = new Ember([0xfe9c00, 0xfea600, 0xe27100], this.app, pixelate)
+    this.add(ember.embers, this.flamesContainer)
+
+    flames.map(settings => {
+      let fire = new Fire(settings.color, this.app, pixelate)
+      this.flames.push(fire)
+      fire.y = settings.offset
+      fire.scale = settings.scale
+      fire.flame.pivot.set(0, 10)
+
+      this.add(fire.flame, this.flamesContainer)
+    })
+
+    this.onResize()
+    let f = this.flames.map(fire => fire.flame)
+    f.pop()
+    this.stokeAnimation = new TimelineMax()
+    this.stokeAnimation.to(f, 0.3, {
+      ease: Power2.easeOut,
+      pixi: { scaleY: 1.2, scaleX: 1.15 }
+    })
+    this.stokeAnimation.to(f, 1.4, {
+      ease: Bounce.easeOut,
+      pixi: { scaleY: 1, scaleX: 1 }
+    })
+    this.stokeAnimation.stop()
+
+    window.addEventListener("resize", e => {
+      this.onResize()
+    })
+    window.addEventListener("click", e => {
+      ember.stoke()
+      this.stokeAnimation.restart()
+    })
+  }
+
+  onResize = function() {
+    this.app.renderer.resize(window.innerWidth, window.innerHeight)
+    this.stage.position.x = window.innerWidth / 2
+    this.stage.position.y = window.innerHeight * 0.75
+    this.stage.position.y = window.innerHeight / 2;  // Center vertically
+    this.flamesContainer.position.x = 0;  // Center horizontally within the stage
+    this.flamesContainer.position.y = 0;  // Center vertically within the stage
+  }
+
+  add = function(element, container = this.stage) {
+    container.addChild(element)
+  }
+
+  remove = function(element, container = this.stage) {
+    container.removeChild(element)
+  }
+}
+
+let stage = new Stage(document.getElementById("canvas"), pixelate, background)
+
+
+    </script>
+</body>
+</html>
