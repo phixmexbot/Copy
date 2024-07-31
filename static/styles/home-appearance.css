@@ -213,3 +213,12 @@ body {
   animation-duration: 11s;
   animation-iteration-count: infinite;
 }
+
+@keyframes hideAfter10s {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.hidden-animation {
+  animation: hideAfter10s 10s forwards;
+}
