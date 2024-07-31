@@ -16,6 +16,7 @@ body {
   transform: translateX(-50%);
   text-align: center;
   z-index: 2;
+  animation: hideAfter10s 10s forwards;
 }
 @keyframes housemotion {
   0% {transform: translateY(180px)} 
@@ -217,8 +218,4 @@ body {
 @keyframes hideAfter10s {
   0% { opacity: 1; }
   100% { opacity: 0; }
-}
-
-.hidden-animation {
-  animation: hideAfter10s 10s forwards;
 }
