@@ -1,6 +1,6 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-
 function delayedFunction() {
+    
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
     
 class CpcNavigation extends React.Component {
   constructor(props) {
