@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Core</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/logo.svg">
-  <link rel="stylesheet" href="https://raw.githubusercontent.com/phixmexbot/Copy/main/styles/background.css">
-  <link rel="stylesheet" href="https://raw.githubusercontent.com/phixmexbot/Copy/main/styles/footer.css">
-  <link rel="stylesheet" href="https://raw.githubusercontent.com/phixmexbot/Copy/main/styles/home-appearance.css">
-  <link rel="stylesheet" href="https://raw.githubusercontent.com/phixmexbot/Copy/main/styles/logo.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/background.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/home-appearance.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/logo.css') }}">
 </head>
 <body>
 <div class="moon">
@@ -217,6 +217,6 @@ d="M73.271,98.742l0.002,0.001l0,0l126.73,0l126.73,0L200,50.123L73.271,98.742z"/>
 
 </svg>
 </div>
-  <script src="https://raw.githubusercontent.com/phixmexbot/Copy/main/scripts/background.js"></script>
-  <script src="https://raw.githubusercontent.com/phixmexbot/Copy/main/scripts/timeout.js"></script>
+  <script src="{{ url_for('static', filename='scripts/background') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/timeout.js') }}"></script>
 </body>
