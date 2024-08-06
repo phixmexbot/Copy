@@ -6,12 +6,77 @@
   <title>Core</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/logo.svg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+\
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/EasePack.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.4.3/pixi.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+          <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/PixiPlugin.min.js?r=3"></script>
+            <script src="https://cdn.jsdelivr.net/npm/pixi-filters@2.6.1/dist/pixi-filters.js"></script>
   <style>
+  
+  html, body
+{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+*{
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+}
+
+body
+{
+  background-color: lightgray;
+}
+
+#canvas
+{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+  .message-container {
+  color: transparent; /* Start with transparent text */
+  bottom: 20%;
+  position: absolute;
+  text-align: center;
+  animation: appearFromNowhere 3s forwards;
+  z-index: 10;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.message {
+  padding: 60px;
+  border-radius: 10px;
+  display: inline-block;
+  width: 70%;
+  margin: auto;
+  box-sizing: border-box;
+  z-index: 200;
+}
+
+@keyframes appearFromNowhere {
+  0% {
+    color: transparent; /* Start with transparent text */
+  }
+  100% {
+    color: white; /* End with white text */
+  }
+}
     body {
       font-size: 1.5rem;
       margin: 0;
@@ -501,7 +566,7 @@ svg {
     position: absolute;
 }
 
-#svg2 {
+#moving-rocket {
 position: absolute;
 top:0;
 }
@@ -553,11 +618,11 @@ position: absolute;
   100% { transform: scale(1); }
 }
 
-    .hidden {
+    .ishidden {
       opacity: 0;
-      transition: opacity 1s;
+
     }
-    .visible {
+    .isvisible {
       opacity: 1;
     }
 
@@ -569,8 +634,9 @@ position: absolute;
   transform: translateX(-50%);
   text-align: center;
   z-index: 2;
-  animation: hideAfter10s 10s forwards;
 }
+
+
 @keyframes housemotion {
   0% {transform: translateY(180px)} 
   50% {transform: translateY(180px)} 
@@ -773,12 +839,28 @@ position: absolute;
   99% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+#container {
+  text-align: center; /* Center the content horizontally */
+  position: relative; /* Position the link and the canvas relative to this container */
+  margin-top: 100px; /* Adjust this value to position the pizza animation */
+}
+
+/* Pizza animation positioning */
+#pizza {
+  display: block;
+  margin: auto;
+}
+
   </style>
 </head>
 
 <body>
+<div id="canvas" class="ishidden"></div>
 
-
+  <div id="container">
+    <canvas id="pizza" class="ishidden"></canvas>
+  </div>
 
 
 <div class="moon">
@@ -827,10 +909,27 @@ fill="#000000" stroke="none">
 </g>
 </svg>
 
+<p id="message1" class="message-container ishidden">
+    <span class="message">
+        Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:<br>
+        <br>
+        The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br>
+        <br>
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    </span>
+</p>
+<p id="message2" class="message-container ishidden">
+    <span class="message">
+      Core is a project created by Eternal team purely for enjoyment and satisfaction.<br> 
+      It aims to provide a space where visitors can relax and immerse themselves in a visually stimulating environment.
+      Whether you're here to explore its artistic elements, enjoy the serene landscapes, or simply unwind, Core invites you to take a moment to pause and appreciate the beauty of simplicity.
+    </span>
+</p>
+
   <script src="https://cdn.tailwindcss.com/3.4.5"></script>
 
   <div class="bg-black/0 w-screen h-[200vh] flex flex-col justify-end">
-    <div id="social-links" class="bg-black/50 w-96 mx-auto mb-20 flex justify-stretch rounded-md shadow-lg backdrop-blur z-2 hidden">
+    <div id="bottom-menu" class="bg-black/50 w-96 mx-auto mb-20 flex justify-stretch rounded-md shadow-lg backdrop-blur z-2 ishidden">
       <a href="mailto:look@eternal.uz" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
         <i class="fa-solid fa-envelope"></i>
         <small>Email</small>
@@ -859,14 +958,14 @@ fill="#000000" stroke="none">
   <div class="logo-container">
     <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg" alt="Logo" class="logo">
   </div>
-  <div id="app"></div>
+  <div id="app" class="ishidden"></div>
   <footer class="footer">
-    <a href="/copyright" class="footer-link">
+    <a href="#copyright" class="footer-link">
       <span class="footer-text">© Core 2024</span>
     </a>
   </footer>
   
-    <svg id="svg2" viewBox="0 0 800 600" preserveAspectRatio="xMinYMid slice" class="hidden">
+    <svg id="moving-rocket" viewBox="0 0 800 600" preserveAspectRatio="xMinYMid slice" class="ishidden">
       <g id="rocket">
         <path d="M445.3,256.3c-47.3-3.5-62.8,27-62.8,27c-18.5,2-24,10-24,10l15.5,12.3c-0.5,15.3,3.5,16.5,3.5,16.5c5.5,7.5,17.8,4.8,17.8,4.8l12.8,17c12-12.5,10.3-25.5,10.3-25.5C450.8,300,445.3,256.3,445.3,256.3zM416.3,297c-6.5,0-11.8-5.3-11.8-11.8c0-6.5,5.3-11.8,11.8-11.8s11.8,5.3,11.8,11.8C428,291.7,422.7,297,416.3,297z"></path>
         <circle></circle>
@@ -875,7 +974,7 @@ fill="#000000" stroke="none">
     </svg>
 
 
-<div class="center"><svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+<div id="mySvg" class="ishidden center"><svg version="1.1" xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 width="400px"
          height="400px" viewBox="0 0 400 400" enable-background="new 0 0 400
@@ -1029,8 +1128,12 @@ d="M73.271,98.742l0.002,0.001l0,0l126.73,0l126.73,0L200,50.123L73.271,98.742z"/>
 </g>
 
 </svg>
-  <script type="text/babel">
-  function delayedFunction() {
+
+
+
+
+<script type="text/babel">
+
     class CpcNavigation extends React.Component {
       constructor(props) {
         super(props);
@@ -1088,6 +1191,7 @@ d="M73.271,98.742l0.002,0.001l0,0l126.73,0l126.73,0L200,50.123L73.271,98.742z"/>
       }
 
       createMenuJSX(menu = this.props.menu) {
+      
         let link = [];
 
         for (let i in menu) {
@@ -1146,7 +1250,7 @@ d="M73.271,98.742l0.002,0.001l0,0l126.73,0l126.73,0L200,50.123L73.271,98.742z"/>
       }
 
       render() {
-        return (
+       return (
           <nav className="cpc-menu">
             <ul className="cpc-main">
               {this.state.jsxData}
@@ -1158,11 +1262,11 @@ d="M73.271,98.742l0.002,0.001l0,0l126.73,0l126.73,0L200,50.123L73.271,98.742z"/>
 
     const menu = {
       'Home': {
-        'link': '/',
+        'link': '#',
         'icon': 'fas fa-home'
       },
       'Activities': {
-        'link': '#activities',
+        'link': '#home',
         'icon': 'fa-solid fa-gamepad',
         'menu': {
           'Lightening Flash': {
@@ -1184,7 +1288,7 @@ d="M73.271,98.742l0.002,0.001l0,0l126.73,0l126.73,0L200,50.123L73.271,98.742z"/>
         }
       },
       'Services': {
-        'link': '#services',
+        'link': '#home',
         'icon': 'fas fa-cogs',
         'menu': {
           'Chat Bot': {
@@ -1198,7 +1302,7 @@ d="M73.271,98.742l0.002,0.001l0,0l126.73,0l126.73,0L200,50.123L73.271,98.742z"/>
         }
       },
       'Projects': {
-        'link': '#projects',
+        'link': '#home',
         'icon': 'fa-solid fa-lightbulb',
         'menu': {
           'Automatic Attendance': {
@@ -1208,7 +1312,7 @@ d="M73.271,98.742l0.002,0.001l0,0l126.73,0l126.73,0L200,50.123L73.271,98.742z"/>
         }
       },
       'About': {
-        'link': '/about',
+        'link': '#about',
         'icon': 'fas fa-info-circle'
       }
     };
@@ -1217,24 +1321,538 @@ d="M73.271,98.742l0.002,0.001l0,0l126.73,0l126.73,0L200,50.123L73.271,98.742z"/>
       <CpcNavigation menu={menu} />,
       document.querySelector('#app')
     );
-  }
-
-setTimeout(delayedFunction, 10000);
-    
 
 </script>
 
-  <script>
-    // Wait for 10 seconds before making the elements visible
-    setTimeout(function() {
-      var socialLinks = document.getElementById('social-links');
-      var svg2 = document.getElementById('svg2');
-      socialLinks.classList.remove('hidden');
-      socialLinks.classList.add('visible');
-      svg2.classList.remove('hidden');
-      svg2.classList.add('visible');
-    }, 10000); // 10000 milliseconds = 10 seconds
+    <script>
+    'use strict';
+
+    let toRadians = (deg) => deg * Math.PI / 180;
+    let map = (val, a1, a2, b1, b2) => b1 + (val - a1) * (b2 - b1) / (a2 - a1);
+
+    class Pizza {
+      constructor(id) {
+        this.canvas = document.getElementById(id);
+        this.ctx = this.canvas.getContext('2d');
+
+        this.sliceCount = 6;
+        this.sliceSize = 80;
+
+        this.width = this.height = this.canvas.height = this.canvas.width = this.sliceSize * 2 + 50;
+        this.center = this.height / 2 | 0;
+
+        this.sliceDegree = 360 / this.sliceCount;
+        this.sliceRadians = toRadians(this.sliceDegree);
+        this.progress = 0;
+        this.cooldown = 10;
+      }
+
+      update() {
+        let ctx = this.ctx;
+        ctx.clearRect(0, 0, this.width, this.height);
+
+        if (--this.cooldown < 0) this.progress += this.sliceRadians * 0.01 + this.progress * 0.07;
+
+        ctx.save();
+        ctx.translate(this.center, this.center);
+
+        for (let i = this.sliceCount - 1; i > 0; i--) {
+          let rad;
+          if (i === this.sliceCount - 1) {
+            let ii = this.sliceCount - 1;
+            rad = this.sliceRadians * i + this.progress;
+            ctx.strokeStyle = '#FBC02D';
+            cheese(ctx, rad, .9, ii, this.sliceSize, this.sliceDegree);
+            cheese(ctx, rad, .6, ii, this.sliceSize, this.sliceDegree);
+            cheese(ctx, rad, .5, ii, this.sliceSize, this.sliceDegree);
+            cheese(ctx, rad, .3, ii, this.sliceSize, this.sliceDegree);
+          } else rad = this.sliceRadians * i;
+
+          // border
+          ctx.beginPath();
+          ctx.lineCap = 'butt';
+          ctx.lineWidth = 11;
+          ctx.arc(0, 0, this.sliceSize, rad, rad + this.sliceRadians);
+          ctx.strokeStyle = '#F57F17';
+          ctx.stroke();
+
+          // slice
+          let startX = this.sliceSize * Math.cos(rad);
+          let startY = this.sliceSize * Math.sin(rad);
+          let endX = this.sliceSize * Math.cos(rad + this.sliceRadians);
+          let endY = this.sliceSize * Math.sin(rad + this.sliceRadians);
+          let variation = [0.9,0.7,1.1,1.2];
+          ctx.fillStyle = '#FBC02D';
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(startX, startY);
+          ctx.arc(0, 0, this.sliceSize, rad, rad + this.sliceRadians);
+          ctx.lineTo(0, 0);
+          ctx.closePath();
+          ctx.fill();
+          ctx.lineWidth = .3;
+          ctx.stroke();
+
+          // meat
+          let x = this.sliceSize * .65 * Math.cos(rad + this.sliceRadians / 2);
+          let y = this.sliceSize * .65 * Math.sin(rad + this.sliceRadians / 2);
+          ctx.beginPath();
+          ctx.arc(x, y, this.sliceDegree / 6, 0, 2 * Math.PI);
+          ctx.fillStyle = '#D84315';
+          ctx.fill();
+        }
+
+        ctx.restore();
+
+        if (this.progress > this.sliceRadians) {
+          ctx.translate(this.center, this.center);
+          ctx.rotate(-this.sliceDegree * Math.PI / 180);
+          ctx.translate(-this.center, -this.center);
+          this.progress = 0;
+          this.cooldown = 20;
+        }
+      }
+    }
+
+    function cheese(ctx, rad, multi, ii, sliceSize, sliceDegree) {
+      let x1 = sliceSize * multi * Math.cos(toRadians(ii * sliceDegree) - .2);
+      let y1 = sliceSize * multi * Math.sin(toRadians(ii * sliceDegree) - .2);
+      let x2 = sliceSize * multi * Math.cos(rad + .2);
+      let y2 = sliceSize * multi * Math.sin(rad + .2);
+
+      let csx = sliceSize * Math.cos(rad);
+      let csy = sliceSize * Math.sin(rad);
+
+      let d = Math.sqrt((x1 - csx) * (x1 - csx) + (y1 - csy) * (y1 - csy));
+      ctx.beginPath();
+      ctx.lineCap = 'round';
+
+      let percentage = map(d, 15, 70, 1.2, 0.2);
+
+      let tx = x1 + (x2 - x1) * percentage;
+      let ty = y1 + (y2 - y1) * percentage;
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(tx, ty);
+
+      tx = x2 + (x1 - x2) * percentage;
+      ty = y2 + (y1 - y2) * percentage;
+      ctx.moveTo(x2, y2);
+      ctx.lineTo(tx, ty);
+
+      ctx.lineWidth = map(d, 0, 100, 20, 2);
+      ctx.stroke();
+    }
+
+    let pizza = new Pizza('pizza');
+
+    (function update() {
+      requestAnimationFrame(update);
+      pizza.update();
+    }());
   </script>
+  
+        <script>
+let pixelate = false
+let background = false
+
+class Ember {
+  emberBlobs = []
+
+  constructor(colors, app, pixelate = false) {
+    this.embers = new PIXI.Container()
+
+    if (pixelate) {
+      this.embers.filters = [new PIXI.filters.PixelateFilter()]
+    }
+
+    colors.map(color => {
+      var circle = new PIXI.Graphics()
+      circle.lineStyle(0)
+      circle.beginFill(color, 1)
+      circle.drawCircle(0, 0, 10)
+      circle.endFill()
+
+      this.emberBlobs.push(app.renderer.generateTexture(circle))
+    })
+
+    setInterval(() => {
+      this.addEmber()
+    }, 300)
+  }
+
+  stoke() {
+    let amount = 40 + Math.round(Math.random() * 20)
+    for (let i = 0; i < amount; i++) {
+      this.addEmber()
+    }
+  }
+
+  makeBlob() {
+    let texture = this.emberBlobs[
+      Math.floor(Math.random() * this.emberBlobs.length)
+    ]
+    let blob = new PIXI.Sprite(texture)
+    blob.anchor.set(0.5)
+    let scaleScale = Math.random()
+    blob.scale.set(0.4 * scaleScale, 0.5 * scaleScale)
+    return blob
+  }
+
+  addEmber() {
+    let time = this.time * (0.3 + Math.random() * 0.6)
+    let blob = this.makeBlob()
+    this.embers.addChild(blob)
+
+    let bezier = [
+      {
+        x: Math.random() * 100 - 50,
+        y: -100
+      },
+      {
+        x: Math.random() * 200 - 100,
+        y: -100 + Math.random() * -20
+      },
+      {
+        x: Math.random() * 200 - 100,
+        y: -100 + Math.random() * -50
+      },
+      {
+        x: Math.random() * 200 - 100,
+        y: -200 + Math.random() * -50
+      },
+      {
+        x: Math.random() * 300 - 150,
+        y: -250 + Math.random() * -100
+      },
+      { x: Math.random() * 500 - 250, y: -500 + Math.random() * -150 }
+    ]
+    TweenMax.to(blob, time / 2, {
+      delay: time / 2,
+      ease: Power1.easeOut,
+      alpha: 0
+    })
+    TweenMax.to(blob.position, time, {
+      ease: Power1.easeOut,
+      bezier: bezier,
+      onComplete: () => {
+        this.embers.removeChild(blob)
+        blob = null
+      }
+    })
+  }
+
+  get time() {
+    return 2 + Math.random() * 1.5
+  }
+}
+
+class Fire {
+  constructor(color, app, pixelate = false) {
+    this.flame = new PIXI.Container()
+    this.cutout = new PIXI.Container()
+    this.fire = new PIXI.Container()
+
+    this.flame.addChild(this.fire)
+    this.flame.addChild(this.cutout)
+
+    this.fire.alpha = 0.7
+
+    var circle = new PIXI.Graphics()
+    circle.lineStyle(0)
+    circle.beginFill(color, 1)
+    circle.drawCircle(0, 0, 35)
+    circle.endFill()
+    this.fireBlob = app.renderer.generateTexture(circle)
+
+    var cutoutCircle = new PIXI.Graphics()
+    cutoutCircle.lineStyle(0)
+    cutoutCircle.beginFill(0x000000, 1)
+    cutoutCircle.drawCircle(0, 0, 40)
+    cutoutCircle.endFill()
+    this.cutoutBlob = app.renderer.generateTexture(cutoutCircle)
+
+    let filters = {
+      bloom: new PIXI.filters.AdvancedBloomFilter(0.45, 0.5, 0.5),
+      pixel: pixelate
+        ? new PIXI.filters.PixelateFilter()
+        : new PIXI.filters.VoidFilter(),
+      void: new PIXI.filters.VoidFilter()
+    }
+
+    this.flame.filters = [filters.bloom, filters.pixel, filters.void]
+
+    this.flame.filters[this.flame.filters.length - 1].blendMode =
+      PIXI.BLEND_MODES.SCREEN
+
+    setInterval(() => {
+      this.addFlame()
+      this.addCutout(Math.random() > 0.5 ? true : false)
+    }, 50)
+  }
+
+  makeBlob(texture) {
+    let blob = new PIXI.Sprite(texture)
+    blob.anchor.set(0.5)
+    return blob
+  }
+
+  addCutout(left) {
+    let time = this.time * (0.7 + Math.random() * 0.2)
+    let blob = this.makeBlob(this.cutoutBlob)
+    this.cutout.addChild(blob)
+    let scale = [1, 0.75 + Math.random() * 1]
+    blob.position.x = (130 + Math.random() * 50) * (left ? -1 : 1)
+    let targetX = (5 + Math.random() * 60) * (left ? -1 : 1)
+    blob.scale.set(scale[0])
+    TweenMax.to(blob, time, {
+      ease: Power1.easeIn,
+      pixi: { x: targetX, y: -270, scaleX: scale[1], scaleY: scale[1] },
+      onComplete: () => {
+        this.cutout.removeChild(blob)
+        blob = null
+      }
+    })
+  }
+
+  addFlame() {
+    let time = this.time
+    let blob = this.makeBlob(this.fireBlob)
+    this.fire.addChild(blob)
+    let scale = [1.2 + Math.random(), 0.5 + Math.random()]
+    let bezier = [
+      {
+        x: 0,
+        y: 0
+      },
+      {
+        x: Math.random() * 100 - 50,
+        y: Math.random() * -20
+      },
+      {
+        x: Math.random() * 100 - 50,
+        y: Math.random() * -50 + -50
+      },
+      { x: 0, y: -150 + Math.random() * -100 }
+    ]
+    blob.scale.set(scale[0])
+    TweenMax.to(blob, time, {
+      ease: Power1.easeIn,
+      bezier: bezier,
+      ease: Power0.easeOut
+    })
+    TweenMax.to(blob, time, {
+      pixi: { scaleX: scale[1], scaleY: scale[1] },
+      onComplete: () => {
+        this.fire.removeChild(blob)
+        blob = null
+      }
+    })
+  }
+
+  get time() {
+    return 1 + Math.random() * 0.4
+  }
+
+  set y(y) {
+    this.flame.position.y = y
+  }
+  set x(x) {
+    this.flame.position.x = x
+  }
+  set scale(s) {
+    this.flame.scale.set(s)
+  }
+}
+
+
+class Stage {
+  flames = []
+
+  constructor(canvas, pixelate = false, background = false) {
+    this.app = new PIXI.Application(window.innerWidth, window.innerHeight, {
+      antialias: true,
+      backgroundColor: background ? 0x0f0f0f : 0x11111d
+    })
+    canvas.appendChild(this.app.view)
+
+    this.stage = new PIXI.Container()
+    this.flamesContainer = new PIXI.Container()
+
+    if (background) {
+      var background = PIXI.Sprite.fromImage(
+        "https://assets.ste.vg/codepen/fire-background.png"
+      )
+      var light = PIXI.Sprite.fromImage(
+        "https://assets.ste.vg/codepen/light.png"
+      )
+
+      this.add(background)
+      this.add(light, this.flamesContainer)
+
+      background.anchor.set(0.5)
+      background.scale.set(0.8)
+      background.position.y = -150
+
+      light.anchor.set(0.5)
+      light.scale.set(1)
+      light.position.y = 20
+
+      setInterval(() => {
+        light.alpha = 0.3 + Math.random() * 0.2
+      }, 50)
+    }
+
+    this.add(this.stage, this.app.stage)
+    this.add(this.flamesContainer)
+
+    this.flamesContainer.scale.set(0.75)
+
+    let flames = [
+      { color: 0xe23b00, scale: 1, offset: -30 },
+      { color: 0xfe8200, scale: 1, offset: -10 },
+      { color: 0xfbe416, scale: 0.9, offset: 10 },
+      { color: 0xfdfdb4, scale: 0.7, offset: 30 }
+    ]
+
+    let ember = new Ember([0xfe9c00, 0xfea600, 0xe27100], this.app, pixelate)
+    this.add(ember.embers, this.flamesContainer)
+
+    flames.map(settings => {
+      let fire = new Fire(settings.color, this.app, pixelate)
+      this.flames.push(fire)
+      fire.y = settings.offset
+      fire.scale = settings.scale
+      fire.flame.pivot.set(0, 10)
+
+      this.add(fire.flame, this.flamesContainer)
+    })
+
+    this.onResize()
+    let f = this.flames.map(fire => fire.flame)
+    f.pop()
+    this.stokeAnimation = new TimelineMax()
+    this.stokeAnimation.to(f, 0.3, {
+      ease: Power2.easeOut,
+      pixi: { scaleY: 1.2, scaleX: 1.15 }
+    })
+    this.stokeAnimation.to(f, 1.4, {
+      ease: Bounce.easeOut,
+      pixi: { scaleY: 1, scaleX: 1 }
+    })
+    this.stokeAnimation.stop()
+
+    window.addEventListener("resize", e => {
+      this.onResize()
+    })
+    window.addEventListener("click", e => {
+      ember.stoke()
+      this.stokeAnimation.restart()
+    })
+  }
+
+  onResize = function() {
+    this.app.renderer.resize(window.innerWidth, window.innerHeight)
+    this.stage.position.x = window.innerWidth / 2
+    this.stage.position.y = window.innerHeight * 0.75
+    this.stage.position.y = window.innerHeight / 2;  // Center vertically
+    this.flamesContainer.position.x = 0;  // Center horizontally within the stage
+    this.flamesContainer.position.y = 0;  // Center vertically within the stage
+  }
+
+  add = function(element, container = this.stage) {
+    container.addChild(element)
+  }
+
+  remove = function(element, container = this.stage) {
+    container.removeChild(element)
+  }
+}
+
+let stage = new Stage(document.getElementById("canvas"), pixelate, background)
+
+
+    </script>
+
+
+<script>
+
+    
+    function handleHashChange() {
+    const elements = ['mySvg', 'app', 'moving-rocket', 'top-menu', 'bottom-menu', 'message-about', 'message-license', 'canvas', 'pizza', 'initial-home', 'project-attendance', 'project-car', 'message1', 'message2'];
+
+
+
+for (let item of elements) {
+  const element = document.getElementById(item);
+  if (element) {
+    element.classList.remove('isvisible');
+    element.classList.add('ishidden');
+  } else {
+    console.log(`Element with ID '${item}' not found.`);
+  }
+}
+  let topmenu = true;
+            console.log('hash detected');
+                        console.log(topmenu);
+      const hash = window.location.hash.substring(1); // Get the hash value without the #
+
+  if (hash === 'home') {
+    topmenu = true;
+    console.log('home');
+
+    document.getElementById('bottom-menu').classList.remove('ishidden');   
+    document.getElementById('moving-rocket').classList.remove('ishidden');  
+        document.getElementById('app').classList.remove('ishidden');  
+    document.getElementById('bottom-menu').classList.add('isvisible');   
+    document.getElementById('moving-rocket').classList.add('isvisible');  
+        document.getElementById('app').classList.add('isvisible');  
+      } 
+   else if (hash === '') {
+        console.log('initial');
+        
+        document.getElementById('mySvg').classList.remove('ishidden');
+        document.getElementById('mySvg').classList.add('isvisible');
+  setTimeout(() => {
+    document.getElementById('mySvg').classList.remove('isvisible');
+    document.getElementById('mySvg').classList.add('ishidden');
+    window.location.hash = '#home';
+  }, 10000);
+
+
+      }
+      
+      else if (hash === 'copyright') {
+        console.log('Services hash detected');
+    document.getElementById('message1').classList.remove('ishidden');  
+        document.getElementById('pizza').classList.remove('ishidden');  
+                document.getElementById('app').classList.remove('ishidden');  
+    document.getElementById('message1').classList.add('isvisible');   
+    document.getElementById('pizza').classList.add('isvisible');  
+            document.getElementById('app').classList.add('isvisible');  
+      } else if (hash === 'about') {
+        console.log('Projects hash detected');
+    document.getElementById('message2').classList.remove('ishidden');  
+        document.getElementById('canvas').classList.remove('ishidden');  
+                document.getElementById('app').classList.remove('ishidden');  
+    document.getElementById('message2').classList.add('isvisible');   
+    document.getElementById('canvas').classList.add('isvisible');  
+            document.getElementById('app').classList.add('isvisible');  
+      } else if (hash === 'about') {
+        console.log('About hash detected');
+        // Add your about-specific code here
+      }
+
+    }
+
+    // Set up hashchange event listener
+    window.addEventListener('hashchange', handleHashChange);
+    
+    handleHashChange();
+    
+</script>
+
+
+
   
 <script>
 (() => {
