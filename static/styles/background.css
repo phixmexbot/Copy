@@ -133,6 +133,7 @@ body {
   border-radius: 5px;
   display: inline-block;
   transform: rotateZ(-30deg);
+  z-index: 10;
 }
 
 
