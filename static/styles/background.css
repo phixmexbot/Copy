@@ -23,6 +23,7 @@ body {
   position: absolute;
   top: 10%;
   left: 10%;
+  z-index: 10;
   animation: 3s moonglow ease-in-out infinite alternate;
 }
 
