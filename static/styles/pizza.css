@@ -1,0 +1,10 @@
+#container {
+  text-align: center;
+  position: relative;
+  margin-top: 100px;
+}
+
+#pizza {
+  display: block;
+  margin: auto;
+}
