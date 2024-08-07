@@ -18,3 +18,12 @@
   box-sizing: border-box;
   z-index: 200;
 }
+
+@keyframes appearFromNowhere {
+  0% {
+    color: transparent;
+  }
+  100% {
+    color: white;
+  }
+}
