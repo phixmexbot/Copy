@@ -1,14 +1,16 @@
 .mx-auto {
+  font-size: 1em;
+  font-weight: bold;
   margin-left: auto;
   margin-right: auto;
-  position: absolute; /* Make position absolute to control its position relative to the container */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Center horizontally */
-  bottom: 75px; /* Adjust this value to position further from the bottom of the container */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 75px;
 }
 
 .mb-40 {
-  text-align: center; /* Center the content horizontally */
+  text-align: center;
   bottom: 100px;
 }
 
