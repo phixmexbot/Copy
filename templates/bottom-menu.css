@@ -1,0 +1,17 @@
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute; /* Make position absolute to control its position relative to the container */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center horizontally */
+  bottom: 75px; /* Adjust this value to position further from the bottom of the container */
+}
+
+.mb-40 {
+  text-align: center; /* Center the content horizontally */
+  bottom: 100px;
+}
+
+.z-2 {
+  z-index: 100;
+}
