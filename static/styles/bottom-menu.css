@@ -13,7 +13,10 @@
 }
 
 .z-2 {
-  font-size: 1em;
-  font-weight: bold;
   z-index: 100;
+}
+
+.icon-size {
+    font-weight: bold;
+    font-size: 1rem;
 }
