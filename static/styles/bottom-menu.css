@@ -1,6 +1,4 @@
 .mx-auto {
-  font-size: 1em;
-  font-weight: bold;
   margin-left: auto;
   margin-right: auto;
   position: absolute;
@@ -15,5 +13,7 @@
 }
 
 .z-2 {
+  font-size: 1em;
+  font-weight: bold;
   z-index: 100;
 }
