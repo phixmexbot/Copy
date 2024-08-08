@@ -1,10 +1,6 @@
-#pizza_container {
-  text-align: center; /* Center the content horizontally */
-  position: relative; /* Position the link and the canvas relative to this container */
-  margin-top: 100px; /* Adjust this value to position the pizza animation */
-}
-
 #pizza {
+  position: absolute;
+  margin-top: 100px;
   display: block;
   margin: auto;
 }
