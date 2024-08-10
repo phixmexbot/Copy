@@ -174,6 +174,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 window.addEventListener('hashchange', function() {
+  console.log('it is here');
   if (window.location.hash === '#light') {
     startLightning(); // Start lightning if hash changes to #light
   } else if (window.location.hash === '#') {
