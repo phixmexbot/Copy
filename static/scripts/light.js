@@ -20,7 +20,7 @@ var canvasLightning = function(c, cw, ch) {
   };
 
   this.createL = function(x, y, canSpawn) {
-    console.log('Creating lightning at:', x, y);
+    console.log('Creating lightning at:', x, y, 'Can spawn:', canSpawn);
     console.log('Lightning array before:', this.lightning.length);
     this.lightning.push({
       x: x,
@@ -51,6 +51,7 @@ var canvasLightning = function(c, cw, ch) {
       });
 
       if (light.path.length > light.pathLimit) {
+        console.log('Removing lightning bolt:', light);
         this.lightning.splice(i, 1);
       }
       light.hasFired = true;
@@ -100,12 +101,14 @@ var canvasLightning = function(c, cw, ch) {
     if (this.lightTimeCurrent >= this.lightTimeTotal) {
       var newX = this.rand(100, cw - 100);
       var newY = this.rand(0, ch / 2);
+      console.log('Creating new lightning bolts at:', newX, newY);
       var createCount = this.rand(1, 3);
       while (createCount--) {
         this.createL(newX, newY, true);
       }
       this.lightTimeCurrent = 0;
       this.lightTimeTotal = this.rand(30, 100);
+      console.log('New lightTimeTotal:', this.lightTimeTotal);
     }
   };
 
