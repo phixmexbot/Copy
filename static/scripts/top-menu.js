@@ -129,12 +129,12 @@ class CpcNavigation extends React.Component {
         'link': '/',
         'icon': 'fas fa-home'
       },
-      'Activities': {
-        'link': '#activities',
+      'Effects': {
+        'link': '#',
         'icon': 'fa-solid fa-gamepad',
         'menu': {
           'Lightening Flash': {
-            'link': '/activities/lightening-flash',
+            'link': '#light',
             'icon': 'fa-solid fa-bolt'
           },
           'Orbit Around': {
