@@ -41,7 +41,8 @@
     </a>
   </footer>
 <div id="canvas"></div>
-<div id="app"></div>
+<div id="app" style="z-index: 1; position: absolute;"></div>
+<canvas id="canvas"></canvas>
 
 <p class="message-container">
   <span class="message">
@@ -88,6 +89,7 @@
   
   <script src="{{ url_for('static', filename='scripts/background.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/top-menu.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/light.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/fire.js') }}"></script>
   
 </body>
