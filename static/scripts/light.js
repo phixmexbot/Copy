@@ -10,7 +10,7 @@ var canvasLightning = function(c, cw, ch) {
   this.loopActive = true; // Variable to control the loop
 
   this.init = function() {
-    console.log('Initializing lightning effect');
+    console.log('Initializing lightning');
     this.loopActive = true;
     this.loop();
   };
@@ -21,6 +21,7 @@ var canvasLightning = function(c, cw, ch) {
 
   this.createL = function(x, y, canSpawn) {
     console.log('Creating lightning at:', x, y);
+    console.log('Lightning array before:', this.lightning.length);
     this.lightning.push({
       x: x,
       y: y,
@@ -34,13 +35,16 @@ var canvasLightning = function(c, cw, ch) {
       canSpawn: canSpawn,
       hasFired: false
     });
+    console.log('Lightning array after:', this.lightning.length);
   };
 
   this.updateL = function() {
     console.log('Updating lightning');
     var i = this.lightning.length;
+    console.log('Number of lightning bolts:', i);
     while (i--) {
       var light = this.lightning[i];
+      console.log('Updating lightning bolt:', light);
       light.path.push({
         x: light.path[light.path.length - 1].x + (this.rand(0, light.xRange) - (light.xRange / 2)),
         y: light.path[light.path.length - 1].y + (this.rand(0, light.yRange))
@@ -56,8 +60,10 @@ var canvasLightning = function(c, cw, ch) {
   this.renderL = function() {
     console.log('Rendering lightning');
     var i = this.lightning.length;
+    console.log('Number of lightning bolts to render:', i);
     while (i--) {
       var light = this.lightning[i];
+      console.log('Rendering lightning bolt:', light);
       this.ctx.strokeStyle = 'hsla(0, 100%, 100%, ' + this.rand(10, 100) / 100 + ')';
       this.ctx.lineWidth = 1;
       if (this.rand(0, 30) == 0) {
@@ -82,23 +88,6 @@ var canvasLightning = function(c, cw, ch) {
       this.ctx.moveTo(light.x, light.y);
       for (var pc = 0; pc < pathCount; pc++) {
         this.ctx.lineTo(light.path[pc].x, light.path[pc].y);
-
-        if (light.canSpawn) {
-          if (this.rand(0, 100) == 0) {
-            light.canSpawn = false;
-            this.createL(light.path[pc].x, light.path[pc].y, false);
-          }
-        }
-      }
-
-      if (!light.hasFired) {
-        this.ctx.fillStyle = 'rgba(255, 255, 255, ' + this.rand(4, 12) / 100 + ')';
-        this.ctx.fillRect(0, 0, this.cw, this.ch);
-      }
-
-      if (this.rand(0, 30) == 0) {
-        this.ctx.fillStyle = 'rgba(255, 255, 255, ' + this.rand(1, 3) / 100 + ')';
-        this.ctx.fillRect(0, 0, this.cw, this.ch);
       }
 
       this.ctx.stroke();
@@ -112,7 +101,6 @@ var canvasLightning = function(c, cw, ch) {
       var newX = this.rand(100, cw - 100);
       var newY = this.rand(0, ch / 2);
       var createCount = this.rand(1, 3);
-      console.log('Spawning lightning bolts:', createCount, 'at', newX, newY);
       while (createCount--) {
         this.createL(newX, newY, true);
       }
@@ -130,7 +118,7 @@ var canvasLightning = function(c, cw, ch) {
   };
 
   this.stop = function() {
-    console.log('Stopping lightning effect');
+    console.log('Stopping lightning');
     this.loopActive = false; // Stop the loop
     this.ctx.clearRect(0, 0, this.cw, this.ch); // Clear the canvas
   };
@@ -163,21 +151,16 @@ var isCanvasSupported = function() {
 var cl; // Declare cl in the global scope
 
 function startLightning() {
-  console.log('Starting lightning effect');
   if (isCanvasSupported() && window.location.hash === '#light') {
     var c = document.getElementById('canvas');
     var cw = c.width = window.innerWidth;
     var ch = c.height = window.innerHeight;
-    console.log('Canvas width and height set to:', cw, ch);
     cl = new canvasLightning(c, cw, ch); // Assign to global variable
     cl.init();
-  } else {
-    console.log('Canvas not supported or hash is not #light');
   }
 }
 
 function stopLightning() {
-  console.log('Stopping lightning effect');
   if (cl) {
     cl.stop(); // Stop the lightning effect and clear the canvas
   }
@@ -192,6 +175,6 @@ window.addEventListener('hashchange', function() {
   if (window.location.hash === '#light') {
     startLightning(); // Start lightning if hash changes to #light
   } else if (window.location.hash === '#') {
-    stopLightning(); // Stop lightning if hash changes to #
+    stopLightning(); // Stop lightning if hash changes to #activities
   }
 });
