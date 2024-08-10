@@ -314,4 +314,4 @@ class Stage {
   }
 }
 
-let stage = new Stage(document.getElementById("canvas"), pixelate, background)
+let stage = new Stage(document.getElementById("fire"), pixelate, background)
