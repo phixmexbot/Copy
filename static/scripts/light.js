@@ -166,6 +166,7 @@ function startLightning() {
 function stopLightning() {
   if (cl) {
     cl.stop(); // Stop the lightning effect and clear the canvas
+    cl = null; // Clear the reference to the canvasLightning instance
   }
 }
 
