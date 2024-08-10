@@ -176,7 +176,7 @@
   window.addEventListener('hashchange', function() {
     if (window.location.hash === '#light') {
       startLightning(); // Start lightning if hash changes to #light
-    } else if (window.location.hash === '#activities') {
+    } else if (window.location.hash === '#') {
       stopLightning(); // Stop lightning if hash changes to #activities
     }
   });
