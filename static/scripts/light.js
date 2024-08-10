@@ -10,6 +10,7 @@ var canvasLightning = function(c, cw, ch) {
   this.loopActive = true; // Variable to control the loop
 
   this.init = function() {
+    console.log('Initializing lightning effect');
     this.loopActive = true;
     this.loop();
   };
@@ -19,6 +20,7 @@ var canvasLightning = function(c, cw, ch) {
   };
 
   this.createL = function(x, y, canSpawn) {
+    console.log('Creating lightning at:', x, y);
     this.lightning.push({
       x: x,
       y: y,
@@ -35,6 +37,7 @@ var canvasLightning = function(c, cw, ch) {
   };
 
   this.updateL = function() {
+    console.log('Updating lightning');
     var i = this.lightning.length;
     while (i--) {
       var light = this.lightning[i];
@@ -51,6 +54,7 @@ var canvasLightning = function(c, cw, ch) {
   };
 
   this.renderL = function() {
+    console.log('Rendering lightning');
     var i = this.lightning.length;
     while (i--) {
       var light = this.lightning[i];
@@ -102,11 +106,13 @@ var canvasLightning = function(c, cw, ch) {
   };
 
   this.lightningTimer = function() {
+    console.log('Lightning timer triggered');
     this.lightTimeCurrent++;
     if (this.lightTimeCurrent >= this.lightTimeTotal) {
       var newX = this.rand(100, cw - 100);
       var newY = this.rand(0, ch / 2);
       var createCount = this.rand(1, 3);
+      console.log('Spawning lightning bolts:', createCount, 'at', newX, newY);
       while (createCount--) {
         this.createL(newX, newY, true);
       }
@@ -116,6 +122,7 @@ var canvasLightning = function(c, cw, ch) {
   };
 
   this.clearCanvas = function() {
+    console.log('Clearing canvas');
     this.ctx.globalCompositeOperation = 'destination-out';
     this.ctx.fillStyle = 'rgba(0,0,0,' + this.rand(1, 30) / 100 + ')';
     this.ctx.fillRect(0, 0, this.cw, this.ch);
@@ -123,6 +130,7 @@ var canvasLightning = function(c, cw, ch) {
   };
 
   this.stop = function() {
+    console.log('Stopping lightning effect');
     this.loopActive = false; // Stop the loop
     this.ctx.clearRect(0, 0, this.cw, this.ch); // Clear the canvas
   };
@@ -130,6 +138,7 @@ var canvasLightning = function(c, cw, ch) {
   window.addEventListener('resize', function() {
     _this.cw = _this.c.width = window.innerWidth;
     _this.ch = _this.c.height = window.innerHeight;
+    console.log('Canvas resized to:', _this.cw, _this.ch);
   });
 
   this.loop = function() {
@@ -154,16 +163,21 @@ var isCanvasSupported = function() {
 var cl; // Declare cl in the global scope
 
 function startLightning() {
+  console.log('Starting lightning effect');
   if (isCanvasSupported() && window.location.hash === '#light') {
     var c = document.getElementById('canvas');
     var cw = c.width = window.innerWidth;
     var ch = c.height = window.innerHeight;
+    console.log('Canvas width and height set to:', cw, ch);
     cl = new canvasLightning(c, cw, ch); // Assign to global variable
     cl.init();
+  } else {
+    console.log('Canvas not supported or hash is not #light');
   }
 }
 
 function stopLightning() {
+  console.log('Stopping lightning effect');
   if (cl) {
     cl.stop(); // Stop the lightning effect and clear the canvas
   }
@@ -174,10 +188,10 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 window.addEventListener('hashchange', function() {
-  console.log('it is here');
+  console.log('Hash changed to:', window.location.hash);
   if (window.location.hash === '#light') {
     startLightning(); // Start lightning if hash changes to #light
   } else if (window.location.hash === '#') {
-    stopLightning(); // Stop lightning if hash changes to #activities
+    stopLightning(); // Stop lightning if hash changes to #
   }
 });
