@@ -45,7 +45,7 @@
   transition: fill 200ms ease-out;
 }
 .stars label:hover svg path, .stars label:hover ~ label svg path {
-  fill: rgba(0, 0, 0, 0.1);
+  fill: rgba(0, 0, 0, 0.9);
 }
 .stars .rating-comment {
 
