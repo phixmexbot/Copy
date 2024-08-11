@@ -174,6 +174,10 @@ class CpcNavigation extends React.Component {
       'About': {
         'link': '/about',
         'icon': 'fas fa-info-circle'
+      },
+      'Feedback': {
+        'link': '/feedback',
+        'icon': 'fa-solid fa-comment-dots'
       }
     };
 
