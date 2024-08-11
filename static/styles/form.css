@@ -26,7 +26,7 @@ body {
   color: #ffffff;
   font-size: 1.25em;
   font-family: inherit;
-  background: linear-gradient(to right, #6366F1, #EC4899);
+  background: rgba(0, 0, 0, 0.45);
   padding: 0.5em 1em;
   border: 0;
   outline: 0;
