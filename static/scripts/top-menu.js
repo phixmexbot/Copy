@@ -133,26 +133,18 @@ class CpcNavigation extends React.Component {
         'link': '#',
         'icon': 'fa-solid fa-gamepad',
         'menu': {
-          'Lightening Flash': {
+          'Lightening': {
             'link': '#light',
             'icon': 'fa-solid fa-bolt'
           },
-          'Orbit Around': {
-            'link': '/activities/orbit-around',
-            'icon': 'fa-solid fa-circle-dot'
-          },
-          'Doodle Rain': {
-            'link': '/activities/doodle-rain',
+          'Rain': {
+            'link': '#rain',
             'icon': 'fa-solid fa-cloud-rain'
-          },
-          'Angry Birds': {
-            'link': '/activities/angry-birds',
-            'icon': 'fa-solid fa-dove'
           },
         }
       },
       'Services': {
-        'link': '#services',
+        'link': '#',
         'icon': 'fas fa-cogs',
         'menu': {
           'Chat Bot': {
@@ -166,12 +158,16 @@ class CpcNavigation extends React.Component {
         }
       },
       'Projects': {
-        'link': '#projects',
+        'link': '#',
         'icon': 'fa-solid fa-lightbulb',
         'menu': {
           'Automatic Attendance': {
             'link': '/projects/automatic-attendance',
             'icon': 'fa-solid fa-video'
+          },
+          'AI Navigator': {
+            'link': '/projects/ai-navigator',
+            'icon': 'fa-solid fa-location-dot'
           }
         }
       },
