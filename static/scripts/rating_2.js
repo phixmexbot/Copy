@@ -21,7 +21,7 @@ Vue.component('starRating', {
   template: '#tpl_star_rating' });
 
 var app = new Vue({
-  el: '#app',
+  el: '#rate',
   data: {
     ratingTitle: 'Thank you!',
     ratingMessage: 'You rated this project:',
