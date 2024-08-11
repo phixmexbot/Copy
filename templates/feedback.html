@@ -104,6 +104,10 @@
     </div>
   </div>
 
+  <div id="rate">
+    <star-rating v-bind:rating-title="ratingTitle" v-bind:rating-message="ratingMessage" v-bind:star-text="starText"></star-rating>
+  </div>
+
   <script type="text/x-template" id="tpl_star_rating">
     <d class="stars" v-bind:class="{ 'rating-selected': ratingSelected }">
       <input type="radio" name="rating" id="rating_5" v-on:change="changeRating(5)"/>
