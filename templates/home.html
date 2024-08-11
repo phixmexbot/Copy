@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/logo.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/bottom-menu.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/snow.css') }}">
+
 
 </head>
 <body>
@@ -42,6 +44,7 @@
   </footer>
 <div id="app" style="z-index: 1; position: absolute;"></div>
 <canvas id="canvas"></canvas>
+<div class="snow-container"></div>
 
 <svg viewBox="0 0 800 600" id="moving-rocket">
   <g id="rocket">
@@ -84,6 +87,8 @@
   <script src="{{ url_for('static', filename='scripts/background.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/top-menu.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/light.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/snow.js') }}"></script>
+
 
 
 </body>
