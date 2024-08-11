@@ -70,6 +70,38 @@
           </a>
       </div>
   </div>
+
+  <label class="btn-open" for="frmContactForm"><i class="far fa-envelope"></i><span class="ml-half">Open Form</span></label>
+  <input type="checkbox" id="frmContactForm"/>
+  <div class="contact-modal">
+    <div class="contact-form">
+      <form>
+        <div class="contact-wrapper">
+          <div class="contact-section">
+            <h2 class="p-none m-none mb-quarter text-white"><i class="far fa-envelope"></i><span class="ml-half">Contact Me</span></h2>
+          </div>
+          <div class="contact-section">
+            <div class="form-item">
+              <input id="txtFullName" type="text" placeholder="Full Name (Optional)"/>
+              <label class="lbl-floating" for="txtFullName">Full Name (Optional)</label><i class="icon text-white fas fa-user"></i>
+            </div>
+            <div class="form-item">
+              <input id="txtEmail" type="email" placeholder="E-Mail Address"/>
+              <label class="lbl-floating" for="txtEmail">E-Mail Address</label><i class="icon text-white fas fa-at"></i>
+            </div>
+            <div class="form-item">
+              <textarea id="txtContent" placeholder="Your message to the developer" rows="5"></textarea>
+              <label class="lbl-floating" for="txtContent">Your message to the developer</label><i class="icon text-white far fa-comment"></i>
+            </div>
+          </div>
+          <div class="contact-section text-right">
+            <label class="contact-cancel" for="frmContactForm"><i class="fas fa-times-circle"></i><span class="ml-quarter">Cancel</span></label>
+            <button class="btn-open ml-whole" type="button"><i class="far fa-paper-plane"></i><span class="ml-half">Send</span></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.6.1/css-doodle.min.js"></script>
 
@@ -102,10 +134,12 @@
 		to { transform: translateY(100%) }
 	}
 </css-doodle>
+
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
   
   <script src="{{ url_for('static', filename='scripts/background.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/top-menu.js') }}"></script>
