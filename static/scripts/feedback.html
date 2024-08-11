@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Core</title>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/logo.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/top-menu.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/background.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/logo.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/bottom-menu.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/rating.css') }}">
+
+</head>
+<body>
+<div class="moon">
+  <span class="crater"></span>
+  <span class="crater"></span>
+  <span class="crater"></span>
+  <span class="crater"></span>
+</div>
+<div class="ground">
+  <div class="rock"></div>
+  <div class="rock"></div>
+  <div class="rock"></div>
+</div>
+<div class="shooting">
+  <div class="core"></div>
+  <div class="trail"></div>
+</div>
+  <object type="image/svg+xml" data="/static/assets/cactus.svg" class="cactus"></object>
+  <div class="logo-container">
+    <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg" alt="Logo" class="logo">
+  </div>
+  <footer class="footer">
+    <a href="/copyright" class="footer-link">
+      <span class="footer-text">© Core 2024</span>
+    </a>
+  </footer>
+<div id="app" style="z-index: 1; position: absolute;"></div>
+<canvas id="canvas"></canvas>
+<div class="snow-container"></div>
+  
+<script src="https://cdn.tailwindcss.com/3.4.5"></script>
+
+  <div class="bg-black/0 w-screen h-[200vh] flex flex-col justify-end">
+      <div class="bg-black/50 w-96 mx-auto mb-20 flex justify-stretch rounded-md shadow-lg backdrop-blur z-2">
+          <a href="mailto:look@eternal.uz" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+              <i class="fa-solid fa-envelope icon-size"></i>
+              <small>Email</small>
+          </a>
+          <a href="https://github.com/komil-jon" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+              <i class="fa-brands fa-github icon-size"></i>
+              <small>Github</small>
+          </a>
+          <a href="https://linkedin.com/in/komiljon" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+              <i class="fa-brands fa-linkedin icon-size"></i>
+              <small>Linkedin</small>
+          </a>
+          <a href="https://instagram.com/komil.john" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+              <i class="fa-brands fa-instagram icon-size"></i>
+              <small>Instagram</small>
+          </a>
+          <a href="https://telegram.me/stellarpulse" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+              <i class="fa-brands fa-telegram icon-size"></i>
+              <small>Telegram</small>
+          </a>
+      </div>
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.6.1/css-doodle.min.js"></script>
+
+
+  <css-doodle> 
+	:doodle {
+		@grid: 1x3 / 100vmax;
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 0;
+	}
+
+	@size: 100% 150%;
+	position: absolute;
+  
+	background: @m(100, (
+		linear-gradient(transparent, @p(
+      #FFFDE1@repeat(2, @p([0-9a-f])), 
+      #FB3569@repeat(2, @p([0-9a-f])) 
+    ))
+		@r(0%, 100%) @r(0%, 100%) /
+		@r(1px) @r(23vmin)
+		no-repeat
+	));
+
+	will-change: transform;
+	animation: f 20s linear calc(-20s / @size() * @i()) infinite;
+	@keyframes f {
+		from { transform: translateY(-100%) }
+		to { transform: translateY(100%) }
+	}
+</css-doodle>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+  
+  <script src="{{ url_for('static', filename='scripts/background.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/top-menu.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/light.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/rain.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/rating_1.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/rating_2.js') }}"></script>
+
+</body>
