@@ -4,7 +4,3 @@ onload = () => {
     clearTimeout(c);
   }, 1000);
 };
-
-setTimeout(function() {
-  window.location.href = '/home';
-}, 10000);
