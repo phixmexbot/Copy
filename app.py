@@ -31,10 +31,24 @@ def activate():
 def index():
     if request.method == 'GET':
         static_files = []
+        html_files = []
+        
         for root, dirs, files in os.walk('static'):
             for file in files:
                 static_files.append(os.path.join(root, file).replace('\\', '/'))
-        return render_template('initial.html', static_files=json.dumps(static_files))
+        
+        for root, dirs, files in os.walk('templates'):
+            for file in files:
+                if file.endswith('.html'):
+                    html_files.append(os.path.join(root, file).replace('\\', '/'))
+    
+        for root, dirs, files in os.walk('templates/errors'):
+            for file in files:
+                if file.endswith('.html'):
+                    html_files.append(os.path.join(root, file).replace('\\', '/'))
+    
+        return render_template('initial.html', static_files=json.dumps(static_files),html_files=json.dumps(html_files))
+        
     elif request.method == 'POST':
         process(json.loads(request.get_data()))
         return 'Success'
@@ -51,13 +65,13 @@ def serve_static(filename):
 def router(path):
     try:
         if path in DIRECTORIES:
-            return render_template(f'templates/{path}.html')
+            return send_from_directory('templates', path, max_age=timedelta(days=1))
         else:
             print(DIRECTORIES)
-            return render_template('templates/errors/404.html')
+            return send_from_directory('templates', 'errors/404.html', max_age=timedelta(days=1))
     except Exception as e:
         print(f"Error occurred: {e}")
-        return render_template('templates/errors/501.html')
+        return send_from_directory('templates', 'errors/501.html', max_age=timedelta(days=1))
 
 @app.route('/process', methods=['POST'])
 def process_me():
