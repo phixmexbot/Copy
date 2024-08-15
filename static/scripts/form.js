@@ -11,7 +11,7 @@ const addOpacity = () => {
 
 const removeOpacity = () => {
   if (rateElement) {
-    rateElement.style.opacity = '';
+    rateElement.style.opacity = '1';
   }
 };
 
