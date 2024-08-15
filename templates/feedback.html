@@ -103,13 +103,12 @@
       </form>
     </div>
   </div>
-
+  
   <div id="rate" style="position: fixed;bottom: 65%;">
     <star-rating v-bind:rating-title="ratingTitle" v-bind:rating-message="ratingMessage" v-bind:star-text="starText"></star-rating>
   </div>
-
   <script type="text/x-template" id="tpl_star_rating">
-    <div class="stars" v-bind:class="{ 'rating-selected': ratingSelected }">
+    <d class="stars" v-bind:class="{ 'rating-selected': ratingSelected }">
       <input type="radio" name="rating" id="rating_5" v-on:change="changeRating(5)"/>
       <label for="rating_5">
         <svg viewBox="0 0 24 24">
@@ -145,7 +144,7 @@
         <p v-if="ratingMessage != ''">{{ ratingMessage }}</p>
         <h2>{{ rating }} {{ starText }}</h2>
       </div>
-    </div>
+    </d>
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.6.1/css-doodle.min.js"></script>
