@@ -6,7 +6,6 @@ import requests
 import PIL.Image
 import urllib.parse
 from g4f.client import Client
-from datetime import timedelta
 from pymongo import MongoClient
 import google.generativeai as genai
 from flask import Flask, render_template, request, jsonify, send_from_directory
@@ -32,24 +31,10 @@ def activate():
 def index():
     if request.method == 'GET':
         static_files = []
-        html_files = []
-        
         for root, dirs, files in os.walk('static'):
             for file in files:
                 static_files.append(os.path.join(root, file).replace('\\', '/'))
-        
-        for root, dirs, files in os.walk('templates'):
-            for file in files:
-                if file.endswith('.html'):
-                    html_files.append(os.path.join(root, file).replace('\\', '/'))
-    
-        for root, dirs, files in os.walk('templates/errors'):
-            for file in files:
-                if file.endswith('.html'):
-                    html_files.append(os.path.join(root, file).replace('\\', '/'))
-    
-        return render_template('initial.html', static_files=json.dumps(static_files),html_files=json.dumps(html_files))
-        
+        return render_template('initial.html', static_files=json.dumps(static_files))
     elif request.method == 'POST':
         process(json.loads(request.get_data()))
         return 'Success'
@@ -66,13 +51,13 @@ def serve_static(filename):
 def router(path):
     try:
         if path in DIRECTORIES:
-            return send_from_directory('templates', path, max_age=timedelta(days=1))
+            return render_template(f'templates/{path}.html')
         else:
             print(DIRECTORIES)
-            return send_from_directory('templates', 'errors/404.html', max_age=timedelta(days=1))
+            return render_template('templates/errors/404.html')
     except Exception as e:
         print(f"Error occurred: {e}")
-        return send_from_directory('templates', 'errors/501.html', max_age=timedelta(days=1))
+        return render_template('templates/errors/501.html')
 
 @app.route('/process', methods=['POST'])
 def process_me():
