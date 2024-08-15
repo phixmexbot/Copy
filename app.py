@@ -6,6 +6,7 @@ import requests
 import PIL.Image
 import urllib.parse
 from g4f.client import Client
+from datetime import timedelta
 from pymongo import MongoClient
 import google.generativeai as genai
 from flask import Flask, render_template, request, jsonify, send_from_directory
