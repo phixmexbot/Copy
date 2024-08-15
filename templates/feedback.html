@@ -108,7 +108,7 @@
     <star-rating v-bind:rating-title="ratingTitle" v-bind:rating-message="ratingMessage" v-bind:star-text="starText"></star-rating>
   </div>
 
-  <script type="text/x-template" id="tpl_star_rating">
+  <script type="text/x-template" id="tpl_star_rating>
     <div class="stars" v-bind:class="{ 'rating-selected': ratingSelected }">
       <input type="radio" name="rating" id="rating_5" v-on:change="changeRating(5)"/>
       <label for="rating_5">
@@ -141,12 +141,12 @@
         </svg>
       </label>
       <div class="rating-comment">
-        <h3 v-if="ratingTitle != ''">{{ ratingTitle }}</h3>
-        <p v-if="ratingMessage != ''">{{ ratingMessage }}</p>
-        <h2>{{ rating }} {{ starText }}</h2>
+        <h3Thank you!</h3>
+        <pThis project got</p>
+        <h2>4.37 starts</h2>
       </div>
     </div>
-  </script>
+  </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.6.1/css-doodle.min.js"></script>
 
@@ -185,14 +185,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
-
   
   <script src="{{ url_for('static', filename='scripts/background.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/top-menu.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/light.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/rain.js') }}"></script>
-  <script src="{{ url_for('static', filename='scripts/rating.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/form.js') }}"></script>
 
 </body>
