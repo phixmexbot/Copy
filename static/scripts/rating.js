@@ -1,4 +1,5 @@
-Vue.component('starRating', {
+console.log("okay");
+  Vue.component('starRating', {
   props: ['ratingTitle', 'ratingMessage', 'starText'],
   data: () => {
     return {
