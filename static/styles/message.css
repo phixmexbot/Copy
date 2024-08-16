@@ -10,10 +10,10 @@
 }
 
 .message {
-  padding: 60px;
+  padding: 5%;
   border-radius: 10px;
   display: inline-block;
-  width: 70%;
+  width: 80%;
   margin: auto;
   box-sizing: border-box;
   z-index: 200;
