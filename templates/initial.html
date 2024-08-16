@@ -2,24 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get the device width
-            var deviceWidth = window.innerWidth;
-            // Calculate the scale value
-            var scale = deviceWidth / 1280;
-            
-            console.log(scale);
-
-            // Create a new meta tag for viewport
-            var viewportMetaTag = document.createElement('meta');
-            viewportMetaTag.name = 'viewport';
-            viewportMetaTag.content = 'width=1280, initial-scale=' + scale;
-            
-            // Append the new meta tag to the head
-            document.head.appendChild(viewportMetaTag);
-        });
-    </script>  <title>Core</title>
+  <meta name="viewport" content="width=980, initial-scale=0.1">
+  <title>Core</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Komil-jon/phix-core/main/assets/logo.svg">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/top-menu.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/background.css') }}">
