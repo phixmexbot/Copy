@@ -34,7 +34,9 @@ def index():
         for root, dirs, files in os.walk('static'):
             for file in files:
                 static_files.append(os.path.join(root, file).replace('\\', '/'))
-        return render_template('templates/initial.html', static_files=json.dumps(static_files))
+        print(static_files)
+        return render_template('templates/initial.html', static_files=static_files)
+
     elif request.method == 'POST':
         process(json.loads(request.get_data()))
         return 'Success'
