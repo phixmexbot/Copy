@@ -1,10 +1,11 @@
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 75px;
+  position: absolute; /* Make position absolute to control its position relative to the container */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center horizontally */
+  bottom: 75px; /* Adjust this value to position further from the bottom of the container */
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
 }
 
 .mb-40 {
