@@ -19,6 +19,7 @@
   z-index: 200;
   background-color: rgba(0, 0, 0, 0.6); /* 60% transparent black */
   color: white; /* Text color inside the box */
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
 }
 
 @keyframes appearFromNowhere {
