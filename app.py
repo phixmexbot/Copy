@@ -6,6 +6,7 @@ import requests
 import PIL.Image
 import urllib.parse
 from g4f.client import Client
+from datetime import timedelta
 from pymongo import MongoClient
 import google.generativeai as genai
 from flask import Flask, render_template, request, jsonify, send_from_directory
@@ -40,12 +41,17 @@ def index():
 
 @app.route('/static/<path:filename>')
 def serve_static(filename):
-    return send_from_directory('static', filename, max_age=timedelta(days=1))
+    response = send_from_directory('static', filename)
+    response.cache_control.max_age = timedelta(days=1).total_seconds()
+    response.cache_control.public = True
+    return response
 
 @app.route('/templates/<path:filename>')
 def serve_html(filename):
-    return send_from_directory('templates', filename, max_age=timedelta(days=1))
-    
+    response = send_from_directory('templates', filename)
+    response.cache_control.max_age = timedelta(days=1).total_seconds()
+    response.cache_control.public = True
+    return response
 
 @app.route('/<path:path>', methods=['GET'])
 def router(path):
