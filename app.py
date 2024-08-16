@@ -30,13 +30,7 @@ def activate():
 @app.route('/', methods=['GET', 'POST', 'HEAD'])
 def index():
     if request.method == 'GET':
-        static_files = []
-        for root, dirs, files in os.walk('static'):
-            for file in files:
-                static_files.append(os.path.join(root, file).replace('\\', '/'))
-        print(static_files)
-        return render_template('templates/initial.html', static_files=static_files)
-
+        return render_template('templates/initial.html')
     elif request.method == 'POST':
         process(json.loads(request.get_data()))
         return 'Success'
@@ -47,6 +41,10 @@ def index():
 @app.route('/static/<path:filename>')
 def serve_static(filename):
     return send_from_directory('static', filename, max_age=timedelta(days=1))
+
+@app.route('/templates/<path:filename>')
+def serve_html(filename):
+    return send_from_directory('templates', filename, max_age=timedelta(days=1))
     
 
 @app.route('/<path:path>', methods=['GET'])
