@@ -10,13 +10,15 @@
 }
 
 .message {
-  padding: 5%;
+  padding: 2%;
   border-radius: 10px;
   display: inline-block;
   width: 80%;
   margin: auto;
   box-sizing: border-box;
   z-index: 200;
+  background-color: rgba(0, 0, 0, 0.6); /* 60% transparent black */
+  color: white; /* Text color inside the box */
 }
 
 @keyframes appearFromNowhere {
