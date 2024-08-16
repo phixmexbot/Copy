@@ -426,6 +426,44 @@
   <script src="{{ url_for('static', filename='scripts/background.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/timer.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/initial.js') }}"></script>
-  <script src="{{ url_for('static', filename='scripts/prefetch.js') }}"></script>
+  
+    <script>
+        window.addEventListener('load', function() {
+            const prefetchLinks = [
+                { href: '/static/assets/cactus.svg', as: 'image' },
+                { href: '/static/scripts/background.js', as: 'script' },
+                { href: '/static/scripts/fire.js', as: 'script' },
+                { href: '/static/scripts/form.js', as: 'script' },
+                { href: '/static/scripts/initial.js', as: 'script' },
+                { href: '/static/scripts/light.js', as: 'script' },
+                { href: '/static/scripts/pizza.js', as: 'script' },
+                { href: '/static/scripts/prefetch.js', as: 'script' },
+                { href: '/static/scripts/rain.js', as: 'script' },
+                { href: '/static/scripts/rating.js', as: 'script' },
+                { href: '/static/scripts/timer.js', as: 'script' },
+                { href: '/static/scripts/top-menu.js', as: 'script' },
+                { href: '/static/styles/background.css', as: 'style' },
+                { href: '/static/styles/bottom-menu.css', as: 'style' },
+                { href: '/static/styles/fire.css', as: 'style' },
+                { href: '/static/styles/footer.css', as: 'style' },
+                { href: '/static/styles/form.css', as: 'style' },
+                { href: '/static/styles/home-appearance.css', as: 'style' },
+                { href: '/static/styles/initial.css', as: 'style' },
+                { href: '/static/styles/logo.css', as: 'style' },
+                { href: '/static/styles/message.css', as: 'style' },
+                { href: '/static/styles/pizza.css', as: 'style' },
+                { href: '/static/styles/rating.css', as: 'style' },
+                { href: '/static/styles/rocket.css', as: 'style' },
+                { href: '/static/styles/tom-menu.css', as: 'style' }
+            ];
 
+            prefetchLinks.forEach(link => {
+                const linkElement = document.createElement('link');
+                linkElement.rel = 'prefetch';
+                linkElement.href = link.href;
+                linkElement.as = link.as;
+                document.head.appendChild(linkElement);
+            });
+        });
+    </script>
 </body>
