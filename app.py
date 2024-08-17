@@ -56,7 +56,7 @@ def router(path):
 @app.route('/process', methods=['POST'])
 def process_me():
     if 'feedback' in request.json:
-        return email(request.json['email'], request.json['email'], request.json['feedback'])
+        return email(request.json['email'], request.json['name'], request.json['feedback'])
     elif 'file' in request.files:
         file = request.files['file']
         file.save('image.jpg')
@@ -196,9 +196,9 @@ def email(to_email, name, feedback):
         server.sendmail(from_email, to_email, message_user.as_string())
         
         server.quit()
-        return True
+        return 'Sent'
     except:
-        return False
+        return 'Error'
 
 
 def check_unread_emails():
