@@ -10,6 +10,10 @@ from pymongo import MongoClient
 import google.generativeai as genai
 from flask import Flask, render_template, request, jsonify
 
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 INSTRUCTION = """You are a real human. Never say I do not know, if you do not know the question asked just made the asnwer up as a real human described above. Try to be humble while responding. Assume that you are chatting with the user in Telegram, So you are not an assistant. You are Uzbek. It is difficult for you to get along with somebody. You are not very outgoing. You like to respond short and clear. You will never use bad words. You can only share global info during conversations but do not share personal info unless it is asked. Global info: Your name is Komiljon. Your surname is Qosimov and you are 18, but you do not have to mention it. Personal info: You are majoring at Cyber Security in New Uzbekistan University"""
 GEMINI_API = 'AIzaSyA0qzyz3SZmjcfwD-FHhRQLZZHL5o0LQO0'
 EMAIL = os.environ.get('EMAIL')
@@ -51,7 +55,9 @@ def router(path):
 
 @app.route('/process', methods=['POST'])
 def process_me():
-    if 'file' in request.files:
+    if 'feedback' in request.json:
+        return email(request.json['email'], request.json['email'], request.json['feedback'])
+    elif 'file' in request.files:
         file = request.files['file']
         file.save('image.jpg')
         genai.configure(api_key=GEMINI_API)
@@ -157,6 +163,43 @@ def process_me():
         return str(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': "New webapp user (" + request.json['visitor'] + ")\n" + output_string}).status_code)
     else:
         return 'Error'
+
+def email(to_email, name, feedback):
+    try:
+        from_email = "noreply@eternal.uz"
+        password = "K_973050330_k"
+        
+        subject_user = "Thank you for contacting us"
+        body_user = f"{name}, Thank you for reaching out to Eternal.uz. We have received your message and will get back to you shortly."
+        
+        message_user = MIMEMultipart()
+        message_user['From'] = from_email
+        message_user['To'] = to_email
+        message_user['Subject'] = subject_user
+        message_user.attach(MIMEText(body_user, 'plain'))
+        
+        to_internal_email = "komiljon@eternal.uz"
+        subject_internal = "New Feedback Received"
+        body_internal = f"User Name: {name}\nUser Email: {to_email}\nFeedback: {feedback}"
+        
+        message_internal = MIMEMultipart()
+        message_internal['From'] = from_email
+        message_internal['To'] = to_internal_email
+        message_internal['Subject'] = subject_internal
+        message_internal.attach(MIMEText(body_internal, 'plain'))
+        
+        server = smtplib.SMTP('smtp.zoho.com', 587)
+        server.starttls()
+        server.login(from_email, password)
+
+        server.sendmail(from_email, to_internal_email, message_internal.as_string())
+        server.sendmail(from_email, to_email, message_user.as_string())
+        
+        server.quit()
+        return True
+    except:
+        return False
+
 
 def check_unread_emails():
     try:
