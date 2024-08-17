@@ -31,9 +31,9 @@ if (sendButton) {
 
     if (email && message) {
       const formData = {
-        fullName: fullName || 'Anonymous',
+        name: fullName || 'Anonymous',
         email: email,
-        message: message
+        feedback: message
       };
 
       fetch('/process', {
