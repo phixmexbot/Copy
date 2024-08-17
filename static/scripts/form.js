@@ -1,6 +1,6 @@
 const openButton = document.querySelector('#openButton');
 const sendButton = document.querySelector('#sendButton');
-const closeButton = document.querySelector('#cancelButton'); // Corrected id from 'closeButton' to 'cancelButton'
+const closeButton = document.querySelector('#cancelButton');
 const rateElement = document.querySelector('#rate');
 const contactForm = document.querySelector('#frmContactForm');
 const fullNameInput = document.querySelector('#txtFullName');
@@ -17,6 +17,24 @@ const removeOpacity = () => {
   if (rateElement) {
     rateElement.style.opacity = '1';
   }
+};
+
+const showPopup = (message, isSuccess) => {
+  const popup = document.createElement('div');
+  popup.textContent = message;
+  popup.style.position = 'fixed';
+  popup.style.bottom = '20px';
+  popup.style.right = '20px';
+  popup.style.padding = '10px';
+  popup.style.backgroundColor = isSuccess ? 'green' : 'red';
+  popup.style.color = 'white';
+  popup.style.borderRadius = '5px';
+  popup.style.zIndex = '1000';
+  document.body.appendChild(popup);
+
+  setTimeout(() => {
+    popup.remove();
+  }, 3000);
 };
 
 if (openButton) {
@@ -43,24 +61,28 @@ if (sendButton) {
         },
         body: JSON.stringify(formData)
       })
-      .then(response => {
-        if (response.ok) {
+      .then(response => response.text())
+      .then(result => {
+        if (result === 'Sent') {
+          showPopup('Message sent successfully!', true);
+          
           // Clear the form fields
           fullNameInput.value = '';
           emailInput.value = '';
           messageInput.value = '';
-          
+
           // Collapse the form
           contactForm.checked = false;
           
           // Reset the opacity
           removeOpacity();
         } else {
-          console.error('Failed to send the message.');
+          showPopup('Failed to send the message.', false);
         }
       })
       .catch(error => {
         console.error('Error:', error);
+        showPopup('An error occurred while sending the message.', false);
       });
     } else {
       alert('Please fill out the required fields.');
