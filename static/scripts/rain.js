@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function startRainAnimation() {
         if (!rainStarted) {
             doodle.style.display = "block"; // Show the doodle element
+            doodle.style.opacity = "1"; // Set the opacity to 1 to make the doodle visible
             rainStarted = true;
         }
     }
@@ -15,8 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Initially hide the doodle element until the animation is triggered
+    // Initially hide the doodle element by setting display to "none" and opacity to 0
     doodle.style.display = "none";
+    doodle.style.opacity = "0";
 
     // Check the hash value when the page loads
     checkHashAndStartAnimation();
