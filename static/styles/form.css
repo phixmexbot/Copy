@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
 body {
-  font-size: 20px;
-  font-family: Lato, sans-serif;
+  font-family: sans-serif;
   width: 100vw;
   height: 100vh;
   display: flex;
