@@ -982,7 +982,10 @@ async function regenerateMessage(userMessage, messageElement) {
     });
 
     if (!response.ok) {
-      throw new Error(`API request failed: ${response.status}`);
+        const errorData = await response.json(); // Parse the error response as JSON
+        const errorMessage = errorData.error.message || 'Unknown error occurred';
+        const errorType = errorData.error.type || 'Unknown error type';
+        throw new Error(`API request failed: ${response.status} ${response.statusText} - ${errorType}: ${errorMessage}`);
     }
 
     const responseData = await response.json();
@@ -1049,7 +1052,10 @@ async function sendMessage(messageContent) {
     });
 
     if (!response.ok) {
-      throw new Error(`API request failed: ${response.status}`);
+        const errorData = await response.json(); // Parse the error response as JSON
+        const errorMessage = errorData.error.message || 'Unknown error occurred';
+        const errorType = errorData.error.type || 'Unknown error type';
+        throw new Error(`API request failed: ${response.status} ${response.statusText} - ${errorType}: ${errorMessage}`);
     }
 
     const responseData = await response.json();
@@ -1313,7 +1319,10 @@ function addFeedbackButtons(messageElement) {
         });
 
         if (!response.ok) {
-          throw new Error(`API request failed: ${response.status}`);
+            const errorData = await response.json(); // Parse the error response as JSON
+            const errorMessage = errorData.error.message || 'Unknown error occurred';
+            const errorType = errorData.error.type || 'Unknown error type';
+            throw new Error(`API request failed: ${response.status} ${response.statusText} - ${errorType}: ${errorMessage}`);
         }
 
         const responseData = await response.json();
