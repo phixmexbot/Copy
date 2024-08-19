@@ -973,9 +973,9 @@ async function regenerateMessage(userMessage, messageElement) {
             content: userMessage
           }
         ],
-        model: 'llama3-70b-8192',
+        model: 'llama-3.1-70b-versatile',
         temperature: 0.8,
-        max_tokens: 31950,
+        max_tokens: 131070,
         top_p: 1,
         stream: false
       })
@@ -1043,9 +1043,9 @@ async function sendMessage(messageContent) {
           },
           ...conversationContext
         ],
-        model: 'llama3-70b-8192',
+        model: 'llama-3.1-70b-versatile',
         temperature: 0.8,
-        max_tokens: 31950,
+        max_tokens: 131070,
         top_p: 1,
         stream: false
       })
@@ -1310,9 +1310,9 @@ function addFeedbackButtons(messageElement) {
                 content: modificationPrompt
               }
             ],
-            model: 'llama3-70b-8192',
+            model: 'llama-3.1-70b-versatile',
             temperature: 0.8,
-            max_tokens: 31950,
+            max_tokens: 131070,
             top_p: 1,
             stream: false
           })
