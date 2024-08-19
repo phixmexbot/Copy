@@ -975,7 +975,7 @@ async function regenerateMessage(userMessage, messageElement) {
         ],
         model: 'llama-3.1-70b-versatile',
         temperature: 0.8,
-        max_tokens: 131070,
+        max_tokens: 8000,
         top_p: 1,
         stream: false
       })
@@ -1045,7 +1045,7 @@ async function sendMessage(messageContent) {
         ],
         model: 'llama-3.1-70b-versatile',
         temperature: 0.8,
-        max_tokens: 131070,
+        max_tokens: 8000,
         top_p: 1,
         stream: false
       })
@@ -1312,7 +1312,7 @@ function addFeedbackButtons(messageElement) {
             ],
             model: 'llama-3.1-70b-versatile',
             temperature: 0.8,
-            max_tokens: 131070,
+            max_tokens: 8000,
             top_p: 1,
             stream: false
           })
