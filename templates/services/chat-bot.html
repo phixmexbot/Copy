@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tolar</title>
+    <title>Yordamchi</title>
     <link rel="stylesheet" href="styles.css">
   <style>
     body {
@@ -807,12 +807,12 @@
 <body>
   <div id="chat-container">
     <div class="header">
-      <h1>Tolar</h1>
+      <h1>Yordamchi</h1>
       <div class="b_wlcmPersAuthorText"><svg aria-hidden="true" aria-label="Answer logo" fill="white" class="___12fm75w f1w7gpdv fez10in fg4l7m0" role="img" width="18" height="18" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><path d="M10.06 18.7a1.63 1.63 0 0 0 2.43-.67l.77-2.34a3.82 3.82 0 0 1 2.42-2.42l2.23-.73a1.61 1.61 0 0 0 1.07-1.3 1.62 1.62 0 0 0-1.13-1.78l-2.21-.72a3.82 3.82 0 0 1-2.42-2.42l-.73-2.23a1.62 1.62 0 0 0-3.07.01l-.74 2.27a3.82 3.82 0 0 1-2.36 2.36l-2.24.73a1.63 1.63 0 0 0 .02 3.07l2.22.72a3.86 3.86 0 0 1 2.42 2.43l.73 2.23c.1.32.32.6.6.8Zm9.74 6.08a1.2 1.2 0 0 0 1.84-.6l.37-1.14a1.6 1.6 0 0 1 1.02-1.02l1.16-.38a1.21 1.21 0 0 0 .59-1.83 1.23 1.23 0 0 0-.62-.45L23 18.99A1.6 1.6 0 0 1 22 17.97l-.38-1.16a1.2 1.2 0 0 0-2.27.01l-.38 1.15a1.6 1.6 0 0 1-.99 1.02l-1.17.38a1.21 1.21 0 0 0-.58 1.83c.15.2.36.36.6.44l1.14.37A1.6 1.6 0 0 1 19 23.04l.37 1.16c.09.24.24.44.44.58Z" fill="white"></path></svg> AI
     </div>
   </div>
   <div id="messages">
-    <div class="message bot-message">Hi👋 , I'm <b>Tolar</b>, your virtual assistant and collaborator . How can I help you? ✨ </div>
+    <div class="message bot-message">Hi👋 , I'm <b>Yordamchi</b>, your virtual assistant and collaborator . How can I help you? ✨ </div>
     <div class="quick-buttons" id="quick-buttons">
       <button class="quick-button">What’s the reaction to and impact of autonomous vehicles</button>
       <button class="quick-button">Give me a quick walkthrough of The Byzantine Empire</button>
@@ -848,7 +848,7 @@
     
     </div>
 
-  <div class="W37tNe" jslog="204396;"><span id="XeP4af">Tolar may display inaccurate information and does not represent creator's views. Double check responses.</span>
+  <div class="W37tNe" jslog="204396;"><span id="XeP4af">Yordamchi may display inaccurate information and does not represent creator's views. Double check responses.</span>
   </div>
 
   <div id="settings-panel">
@@ -1039,7 +1039,7 @@ async function sendMessage(messageContent) {
         messages: [
           {
             role: 'system',
-            content: 'Your name is Tolar! An AI created by Thomas. Be accurate and relevant. Try to do your best. Be helpful and creative. If i chat with you in a specific language, answer in the same language! Only If you are answering to a friendly message, use emojis. Only make a table or graph if the user asks for it, otherwise no! If the user doesn\'t ask it in their question, don\'t do it! In addition, you are able to generate graphs to illustrate mathematical concepts. Your graphs and tables must always be made in HTML OR SVG. Only if I ask you to generate an image here is how to do it: https://image.pollinations.ai/prompt/{description}?width={width}&height={height}". Very important, always respect this format for image generation. Show ALL the link.'
+            content: 'Your name is Yordamchi! An AI created by Komiljon. Be accurate and relevant. Try to do your best. Be helpful and creative. If i chat with you in a specific language, answer in the same language! Only If you are answering to a friendly message, use emojis. Only make a table or graph if the user asks for it, otherwise no! If the user doesn\'t ask it in their question, don\'t do it! In addition, you are able to generate graphs to illustrate mathematical concepts. Your graphs and tables must always be made in HTML OR SVG. Only if I ask you to generate an image here is how to do it: https://image.pollinations.ai/prompt/{description}?width={width}&height={height}". Very important, always respect this format for image generation. Show ALL the link.'
           },
           ...conversationContext
         ],
@@ -1180,7 +1180,7 @@ darkModeToggle.addEventListener('click', () => {
 // Chat History Export
 exportChatButton.addEventListener('click', () => {
   const chatHistory = Array.from(messagesContainer.children)
-    .map(msg => `${msg.classList.contains('user-message') ? 'User' : 'Tolar'}: ${msg.textContent}`)
+    .map(msg => `${msg.classList.contains('user-message') ? 'User' : 'Yordamchi'}: ${msg.textContent}`)
     .join('\n');
   const blob = new Blob([chatHistory], {type: 'text/plain'});
   const url = URL.createObjectURL(blob);
@@ -1295,7 +1295,7 @@ function addFeedbackButtons(messageElement) {
             messages: [
               {
                 role: 'system',
-                content: 'Your name is Tolar! An AI created by Thomas. Be accurate and relevant. Try to do your best. Be helpful and creative. If i chat with you in a specific language, answer in the same language! Only If you are answering to a friendly message, use emojis. Only make a table or graph if the user asks for it, otherwise no! If the user doesn\'t ask it in their question, don\'t do it! In addition, you are able to generate graphs to illustrate mathematical concepts. Your graphs and tables must always be made in HTML OR SVG. Only if I ask you to generate an image here is how to do it: https://image.pollinations.ai/prompt/{description}?width={width}&height={height}". Very important, always respect this format for image generation. Show ALL the link.'
+                content: 'Your name is Yordamchi! An AI created by Komiljon. Be accurate and relevant. Try to do your best. Be helpful and creative. If i chat with you in a specific language, answer in the same language! Only If you are answering to a friendly message, use emojis. Only make a table or graph if the user asks for it, otherwise no! If the user doesn\'t ask it in their question, don\'t do it! In addition, you are able to generate graphs to illustrate mathematical concepts. Your graphs and tables must always be made in HTML OR SVG. Only if I ask you to generate an image here is how to do it: https://image.pollinations.ai/prompt/{description}?width={width}&height={height}". Very important, always respect this format for image generation. Show ALL the link.'
               },
               {
                 role: 'user',
