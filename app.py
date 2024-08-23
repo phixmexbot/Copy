@@ -254,7 +254,7 @@ def process(update):
 
         output = ""
         edit_id = requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage',
-            json={'chat_id': GROUP, 'reply_to_message_id': message_id, 'text': 'Initialising','parse_mode': 'Markdown'}).json()['result']['message_id']
+            json={'chat_id': GROUP, 'reply_to_message_id': message_id, 'text': '*Eternal © 2024*','parse_mode': 'Markdown'}).json()['result']['message_id']
 
         last_print_time = time.time()
         for chunk in response:
@@ -308,7 +308,7 @@ def process(update):
 
         output = ""
         edit_id = requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage',
-            json={'chat_id': GROUP, 'reply_to_message_id': talker_message_id, 'text': 'Initialising','parse_mode': 'Markdown'}).json()['result']['message_id']
+            json={'chat_id': GROUP, 'reply_to_message_id': talker_message_id, 'text': '*Eternal © 2024*','parse_mode': 'Markdown'}).json()['result']['message_id']
 
         last_print_time = time.time()
         for chunk in response:
