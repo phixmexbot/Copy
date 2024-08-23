@@ -330,7 +330,12 @@ def process(update):
         requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/editMessageText',
             json={'chat_id': GROUP, 'text': output, 'message_id': edit_id, 'parse_mode': 'Markdown'})
 
+        
         history.append({'role': 'assistant', 'content': output})
+        query = {"id": talker_id}
+        updated_data = {"$set": {"data": history}}
+        database_update(query, updated_data)
+        
 
 def database_search(query):
     connection_string = f"mongodb+srv://{USERNAME}:{PASSWORD}@core.pur20xh.mongodb.net/?appName=Core"
