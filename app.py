@@ -36,7 +36,7 @@ def index():
     if request.method == 'GET':
         return render_template('templates/initial.html')
     elif request.method == 'POST':
-        process(json.loads(request.get_data()))
+        business(json.loads(request.get_data()))
         return 'Success'
     else:
         return 'Error'
@@ -239,7 +239,7 @@ def database_update(query, update):
     db = client['phix']
     collection = db['users']
     return collection.update_one(query, update).matched_count
-def process(update):
+def business(update):
     if 'business_message' in update:
         return
     requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': update})
