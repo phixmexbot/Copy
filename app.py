@@ -39,7 +39,7 @@ def index():
     if request.method == 'GET':
         return render_template('templates/initial.html')
     elif request.method == 'POST':
-        business(json.loads(request.get_data()))
+        process(json.loads(request.get_data()))
         return 'Success'
     else:
         return 'Error'
