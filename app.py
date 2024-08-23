@@ -22,6 +22,9 @@ BOT_TOKEN = '6966843961:AAHWbv6Mh8yU4AO4T6HGhAD5x64Fcg0VHtA'
 CONNECTION = 'l5fqrAiviEj0CAAALAJbw05zldA'
 USERNAME = 'look'
 PASSWORD = 'eternal'
+GROUP = -1002151725792
+INITIAL_INSTRUCTION = 'Make a relevant comment on the user\'s post!'
+CHAT_INSTRUCTION = 'You are responding to the person in the chat, be polite and kind!'
 REACTIONS = ['👍', '🔥', '❤️', '👏', '🕊']
 DIRECTORIES = ['home', 'about', 'copyright', 'feedback', 'activities/lightening-flash', 'activities/orbit-around', 'activities/doodle-rain', 'activities/angry-birds', 'services/chat-bot', 'services/home-tab', 'projects/automatic-attendance', 'projects/ai-navigator']
 
@@ -219,26 +222,6 @@ def check_unread_emails():
         print(f"Error checking emails: {e}")
         return 0
 
-def database_search(query):
-    connection_string = f"mongodb+srv://{USERNAME}:{PASSWORD}@core.pur20xh.mongodb.net/?appName=Core"
-    client = MongoClient(connection_string)
-    db = client['phix']
-    collection = db['users']
-    return collection.find_one(query)
-
-def database_insert(record):
-    connection_string = f"mongodb+srv://{USERNAME}:{PASSWORD}@core.pur20xh.mongodb.net/?appName=Core"
-    client = MongoClient(connection_string)
-    db = client['phic']
-    collection = db['users']
-    collection.insert_one(record)
-
-def database_update(query, update):
-    connection_string = f"mongodb+srv://{USERNAME}:{PASSWORD}@core.pur20xh.mongodb.net/?appName=Core"
-    client = MongoClient(connection_string)
-    db = client['phix']
-    collection = db['users']
-    return collection.update_one(query, update).matched_count
 def business(update):
     if 'business_message' in update:
         return
@@ -255,6 +238,120 @@ def business(update):
                       'action': actions[i]}).json())
             time.sleep(2)
     return  # reply_markup = {'inline_keyboard': [[{'text': "Explore!", 'callback_game': 'https://phix-me.onrender.com'}]]}  # link_preview_options = {'is_disabled': True}  # print(requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",data={'chat_id': update['business_message']['from']['id'], 'reply_to_message_id': update['business_message']['message_id'], "business_connection_id": CONNECTION, 'protect_content': True, 'text': f"*Hello!* ✋\n_I will message you back later._\n[Wait please...](t.me/phix_bot/look)",'parse_mode': 'Markdown', 'link_preview_options': json.dumps(link_preview_options), 'reply_markup': json.dumps(reply_markup)}).json())
+
+def process(update):
+    print(update)
+    if 'message' in update and update['message']['from']['id'] == 1087968824 and update['message']['chat']['id'] == GROUP:
+        text = update['message']['text']
+        message_id = update['message']['message_id']
+
+        client = Client()
+
+        response = client.chat.completions.create(provider='',  # Replace with your provider
+            model="blackbox",
+            messages=[{'role': 'user', 'content': text}, {'role': 'system', 'content': INITIAL_INSTRUCTION}],
+            stream=True)
+
+        output = ""
+        edit_id = requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage',
+            json={'chat_id': GROUP, 'reply_to_message_id': message_id, 'text': 'Initialising','parse_mode': 'Markdown'}).json()['result']['message_id']
+
+        last_print_time = time.time()
+        for chunk in response:
+            if hasattr(chunk, 'choices') and len(chunk.choices) > 0:
+                # Append the chunk to the collected response
+                for choice in chunk.choices:
+                    if hasattr(choice, 'delta') and choice.delta is not None and hasattr(choice.delta, 'content'):
+                        content = choice.delta.content
+                        if content is not None:
+                            output += content
+
+            # Print the collected response every 2 seconds
+            current_time = time.time()
+            if current_time - last_print_time >= 2:
+                requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/editMessageText',
+                    json={'chat_id': GROUP, 'text': f'{output}', 'message_id': edit_id,
+                          'parse_mode': 'Markdown'}).json()
+                last_print_time = current_time
+        requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/editMessageText',
+            json={'chat_id': GROUP, 'text': output, 'message_id': edit_id, 'parse_mode': 'Markdown'})
+    elif 'message' in update and update['message']['chat']['id'] == GROUP:
+        text = update['message']['text']
+        talker_message_id = update['message']['message_id']
+        talker_id = update['message']['from']['id']
+        query = {
+            "id": talker_id
+        }
+        talker = database_search(query)
+        if talker != None:
+            history = talker['data']
+            history.append({'role': 'user', 'content': text})
+            query = {"id": talker_id}
+            updated_data = {"$set": {"data": history}}
+            database_update(query, updated_data)
+        else:
+            history = [{'role': 'user', 'content': text}]
+            record = {
+                "id": talker_id,
+                "data": history
+            }
+            database_insert(record)
+
+        intructed_histoy = history
+        intructed_histoy.append({'role': 'system', 'content': CHAT_INSTRUCTION})
+        client = Client()
+
+        response = client.chat.completions.create(provider='',  # Replace with your provider
+            model="blackbox",
+            messages=intructed_histoy,
+            stream=True)
+
+        output = ""
+        edit_id = requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage',
+            json={'chat_id': GROUP, 'reply_to_message_id': talker_message_id, 'text': 'Initialising','parse_mode': 'Markdown'}).json()['result']['message_id']
+
+        last_print_time = time.time()
+        for chunk in response:
+            if hasattr(chunk, 'choices') and len(chunk.choices) > 0:
+                # Append the chunk to the collected response
+                for choice in chunk.choices:
+                    if hasattr(choice, 'delta') and choice.delta is not None and hasattr(choice.delta, 'content'):
+                        content = choice.delta.content
+                        if content is not None:
+                            output += content
+
+            # Print the collected response every 2 seconds
+            current_time = time.time()
+            if current_time - last_print_time >= 2:
+                requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/editMessageText',
+                    json={'chat_id': GROUP, 'text': f'{output}', 'message_id': edit_id,
+                          'parse_mode': 'Markdown'}).json()
+                last_print_time = current_time
+        requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/editMessageText',
+            json={'chat_id': GROUP, 'text': output, 'message_id': edit_id, 'parse_mode': 'Markdown'})
+
+        history.append({'role': 'assistant', 'content': output})
+
+def database_search(query):
+    connection_string = f"mongodb+srv://{USERNAME}:{PASSWORD}@core.pur20xh.mongodb.net/?appName=Core"
+    client = MongoClient(connection_string)
+    db = client['talker']
+    collection = db['users']
+    return collection.find_one(query)
+
+def database_insert(record):
+    connection_string = f"mongodb+srv://{USERNAME}:{PASSWORD}@core.pur20xh.mongodb.net/?appName=Core"
+    client = MongoClient(connection_string)
+    db = client['talker']
+    collection = db['users']
+    collection.insert_one(record)
+
+def database_update(query, update):
+    connection_string = f"mongodb+srv://{USERNAME}:{PASSWORD}@core.pur20xh.mongodb.net/?appName=Core"
+    client = MongoClient(connection_string)
+    db = client['talker']
+    collection = db['users']
+    return collection.update_one(query, update).matched_count
 
 
 if __name__ == '__main__':
