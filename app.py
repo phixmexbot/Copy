@@ -23,16 +23,22 @@ CONNECTION = 'l5fqrAiviEj0CAAALAJbw05zldA'
 USERNAME = 'look'
 PASSWORD = 'eternal'
 GROUP = -1002151725792
-INITIAL_INSTRUCTION = 'Make a relevant comment on the user\'s post!'
-CHAT_INSTRUCTION = 'You are responding to the person in the chat, be polite and kind!'
+BOT_ID = 6966843961
+STICKER_INSTRUCTION = 'Based on the text, choose one reaction from the stickers provided and send that sticker only if the message is relevant or impactful enough to warrant a response. If the message is not important or if it feels overwhelming to react, you may choose not to respond and send I which stands for ignore. Remember, like a real human, you don\'t need to react to every message—only those that genuinely resonate or require acknowledgment. Stickers to choose from: 👍👎❤🔥🥰👏😁🤔🤯😱🤬😢🎉🤩🤮💩🙏👌🕊🤡🥱🥴😍🐳❤‍🔥🌚🌭💯🤣⚡🍌🏆💔🤨😐🍓🍾💋🖕😈😴😭🤓👻👨‍💻👀🎃🙈😇😨🤝✍🤗🫡🎅🎄☃💅🤪🗿🆒💘🙉🦄😘💊🙊😎👾🤷‍♂🤷🤷‍♀😡'
+CHAT_INSTRUCTION = 'You are a real human. Your name is Phix. You are using Telegram platform and replying to the messages. Make a relevant comment on the user\'s post and make it look like how real human do!'
+INITIAL_INSTRUCTION = 'You are a real human. You are using Telegram platform and making comment to the posts that you read. make it look like how real human do.'
 REACTIONS = ['👍', '🔥', '❤️', '👏', '🕊']
-DIRECTORIES = ['home', 'about', 'copyright', 'feedback', 'activities/lightening-flash', 'activities/orbit-around', 'activities/doodle-rain', 'activities/angry-birds', 'services/chat-bot', 'services/home-tab', 'projects/automatic-attendance', 'projects/ai-navigator']
+DIRECTORIES = ['home', 'about', 'copyright', 'feedback', 'activities/lightening-flash', 'activities/orbit-around',
+               'activities/doodle-rain', 'activities/angry-birds', 'services/chat-bot', 'services/home-tab',
+               'projects/automatic-attendance', 'projects/ai-navigator']
 
 app = Flask(__name__, template_folder='.')
+
 
 @app.route('/activate', methods=['GET'])
 def activate():
     return "Activation successful!", 200
+
 
 @app.route('/', methods=['GET', 'POST', 'HEAD'])
 def index():
@@ -43,6 +49,7 @@ def index():
         return 'Success'
     else:
         return 'Error'
+
 
 @app.route('/<path:path>', methods=['GET'])
 def router(path):
@@ -55,6 +62,7 @@ def router(path):
     except Exception as e:
         print(f"Error occurred: {e}")
         return render_template('templates/errors/501.html')
+
 
 @app.route('/process', methods=['POST'])
 def process_me():
@@ -70,16 +78,8 @@ def process_me():
         output = ''
         for message in response:
             output += message.text
-        print(requests.post(
-            f'https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto',
-            data={
-                'chat_id': 5934725286,
-                'caption': output
-            },
-            files={
-                'photo': open('image.jpg', 'rb')
-            }
-        ).json())
+        print(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendPhoto',
+            data={'chat_id': 5934725286, 'caption': output}, files={'photo': open('image.jpg', 'rb')}).json())
         return jsonify({'response': output})
 
     elif 'message' in request.json:
@@ -88,14 +88,14 @@ def process_me():
         chat_history.append({"role": "user", "content": request.json['message']})
 
         client = Client()
-        response = client.chat.completions.create(
-            model="mixtral-8x7b",
-            messages=chat_history
-        )
+        response = client.chat.completions.create(model="mixtral-8x7b", messages=chat_history)
         text = response.choices[0].message.content
         # send to the response text to client
 
-        requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': f"USER: {user['visitor']} on session: ({user['id']})\n" + request.json['message'] + "\nSYSTEM:\n" + text})
+        requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286,
+                                                                                    'text': f"USER: {user['visitor']} on session: ({user['id']})\n" +
+                                                                                            request.json[
+                                                                                                'message'] + "\nSYSTEM:\n" + text})
         chat_history.append({"role": "assistant", "content": text})
 
         query = {"id": request.json['id']}
@@ -155,49 +155,49 @@ def process_me():
             if key not in ['tgWebAppData', 'tgWebAppThemeParams']:
                 output_string += f'{key}: {value}\n'
 
-        record = {
-            "id": request.json['visitor'],
-            "session_id": request.json['id'],
-            "info": output_string,
-            "data": [{"role": "system", "content": INSTRUCTION}]
-        }
+        record = {"id": request.json['visitor'], "session_id": request.json['id'], "info": output_string,
+            "data": [{"role": "system", "content": INSTRUCTION}]}
         database_insert(record)
 
-        return str(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': "New webapp user (" + request.json['visitor'] + ")\n" + output_string}).status_code)
+        return str(requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286,
+                                                                                               'text': "New webapp user (" +
+                                                                                                       request.json[
+                                                                                                           'visitor'] + ")\n" + output_string}).status_code)
     else:
         return 'Error'
+
 
 def email(to_email, name, feedback):
     try:
         from_email = "noreply@eternal.uz"
         password = "K_973050330_k"
-        
+
         subject_user = "Thank you for contacting us"
         body_user = f"{name}, Thank you for reaching out to Eternal.uz. We have received your message and will get back to you shortly."
-        
+
         message_user = MIMEMultipart()
         message_user['From'] = from_email
         message_user['To'] = to_email
         message_user['Subject'] = subject_user
         message_user.attach(MIMEText(body_user, 'plain'))
-        
+
         to_internal_email = "komiljon@eternal.uz"
         subject_internal = "New Feedback Received"
         body_internal = f"User Name: {name}\nUser Email: {to_email}\nFeedback: {feedback}"
-        
+
         message_internal = MIMEMultipart()
         message_internal['From'] = from_email
         message_internal['To'] = to_internal_email
         message_internal['Subject'] = subject_internal
         message_internal.attach(MIMEText(body_internal, 'plain'))
-        
+
         server = smtplib.SMTP('smtp.zoho.com', 587)
         server.starttls()
         server.login(from_email, password)
 
         server.sendmail(from_email, to_internal_email, message_internal.as_string())
         server.sendmail(from_email, to_email, message_user.as_string())
-        
+
         server.quit()
         return 'Sent'
     except:
@@ -222,6 +222,7 @@ def check_unread_emails():
         print(f"Error checking emails: {e}")
         return 0
 
+
 def business(update):
     if 'business_message' in update:
         return
@@ -239,8 +240,9 @@ def business(update):
             time.sleep(2)
     return  # reply_markup = {'inline_keyboard': [[{'text': "Explore!", 'callback_game': 'https://phix-me.onrender.com'}]]}  # link_preview_options = {'is_disabled': True}  # print(requests.post(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",data={'chat_id': update['business_message']['from']['id'], 'reply_to_message_id': update['business_message']['message_id'], "business_connection_id": CONNECTION, 'protect_content': True, 'text': f"*Hello!* ✋\n_I will message you back later._\n[Wait please...](t.me/phix_bot/look)",'parse_mode': 'Markdown', 'link_preview_options': json.dumps(link_preview_options), 'reply_markup': json.dumps(reply_markup)}).json())
 
+
 def process(update):
-    requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286, 'text': update})
+    print(update)
     if 'message' in update and update['message']['from']['id'] == 1087968824 and update['message']['chat']['id'] == GROUP:
         text = update['message']['text']
         message_id = update['message']['message_id']
@@ -254,7 +256,8 @@ def process(update):
 
         output = ""
         edit_id = requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage',
-            json={'chat_id': GROUP, 'reply_to_message_id': message_id, 'text': '*Eternal © 2024*','parse_mode': 'Markdown'}).json()['result']['message_id']
+            json={'chat_id': GROUP, 'reply_to_message_id': message_id, 'text': '*Eternal © 2024*',
+                  'parse_mode': 'Markdown'}).json()['result']['message_id']
 
         last_print_time = time.time()
         for chunk in response:
@@ -275,13 +278,12 @@ def process(update):
                 last_print_time = current_time
         requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/editMessageText',
             json={'chat_id': GROUP, 'text': output, 'message_id': edit_id, 'parse_mode': 'Markdown'})
-    elif 'message' in update and update['message']['chat']['id'] == GROUP:
+    elif 'message' in update and update['message']['chat']['id'] == GROUP and ( 'reply_to_message' in update['message'] and update['message']['reply_to_message']['from'] == BOT_ID or update['message']['text'] == '@phix_bot') :
+        sticker(update['message']['text'], update['message']['message_id'])
         text = update['message']['text']
         talker_message_id = update['message']['message_id']
         talker_id = update['message']['from']['id']
-        query = {
-            "id": talker_id
-        }
+        query = {"id": talker_id}
         talker = database_search(query)
         if talker != None:
             history = talker['data']
@@ -291,10 +293,7 @@ def process(update):
             database_update(query, updated_data)
         else:
             history = [{'role': 'user', 'content': text}]
-            record = {
-                "id": talker_id,
-                "data": history
-            }
+            record = {"id": talker_id, "data": history}
             database_insert(record)
 
         intructed_histoy = history
@@ -302,13 +301,12 @@ def process(update):
         client = Client()
 
         response = client.chat.completions.create(provider='',  # Replace with your provider
-            model="blackbox",
-            messages=intructed_histoy,
-            stream=True)
+            model="blackbox", messages=intructed_histoy, stream=True)
 
         output = ""
         edit_id = requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage',
-            json={'chat_id': GROUP, 'reply_to_message_id': talker_message_id, 'text': '*Eternal © 2024*','parse_mode': 'Markdown'}).json()['result']['message_id']
+            json={'chat_id': GROUP, 'reply_to_message_id': talker_message_id, 'text': '*Eternal © 2024*',
+                  'parse_mode': 'Markdown'}).json()['result']['message_id']
 
         last_print_time = time.time()
         for chunk in response:
@@ -330,12 +328,20 @@ def process(update):
         requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/editMessageText',
             json={'chat_id': GROUP, 'text': output, 'message_id': edit_id, 'parse_mode': 'Markdown'})
 
-        
         history.append({'role': 'assistant', 'content': output})
         query = {"id": talker_id}
         updated_data = {"$set": {"data": history}}
         database_update(query, updated_data)
-        
+
+def sticker(text, message_id):
+    client = Client()
+    response = client.chat.completions.create(provider='',  # Replace with your provider
+        model="blackbox", messages=[{'role': 'user', 'content': text},{'role': 'system', 'content': STICKER_INSTRUCTION}], stream=False)
+
+    params = {'chat_id': GROUP,
+        'message_id': message_id, 'is_big': True,
+        'reaction': json.dumps([{'type': 'emoji', 'emoji': response.choices[0].message.content[-1]}])}
+    requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/setMessageReaction', params=params)
 
 def database_search(query):
     connection_string = f"mongodb+srv://{USERNAME}:{PASSWORD}@core.pur20xh.mongodb.net/?appName=Core"
@@ -344,12 +350,14 @@ def database_search(query):
     collection = db['users']
     return collection.find_one(query)
 
+
 def database_insert(record):
     connection_string = f"mongodb+srv://{USERNAME}:{PASSWORD}@core.pur20xh.mongodb.net/?appName=Core"
     client = MongoClient(connection_string)
     db = client['talker']
     collection = db['users']
     collection.insert_one(record)
+
 
 def database_update(query, update):
     connection_string = f"mongodb+srv://{USERNAME}:{PASSWORD}@core.pur20xh.mongodb.net/?appName=Core"
