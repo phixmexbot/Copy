@@ -27,6 +27,7 @@ BOT_ID = 6966843961
 STICKER_INSTRUCTION = 'Based on the text, choose one reaction from the stickers provided and send that sticker only if the message is relevant or impactful enough to warrant a response. If the message is not important or if it feels overwhelming to react, you may choose not to respond and send I which stands for ignore. Remember, like a real human, you don\'t need to react to every message—only those that genuinely resonate or require acknowledgment. Stickers to choose from: 👍👎❤🔥🥰👏😁🤔🤯😱🤬😢🎉🤩🤮💩🙏👌🕊🤡🥱🥴😍🐳❤‍🔥🌚🌭💯🤣⚡🍌🏆💔🤨😐🍓🍾💋🖕😈😴😭🤓👻👨‍💻👀🎃🙈😇😨🤝✍🤗🫡🎅🎄☃💅🤪🗿🆒💘🙉🦄😘💊🙊😎👾🤷‍♂🤷🤷‍♀😡'
 CHAT_INSTRUCTION = 'You are a real human. Your name is Phix. You are using Telegram platform and replying to the messages. Make a relevant comment on the user\'s post and make it look like how real human do!'
 INITIAL_INSTRUCTION = 'You are a real human. You are using Telegram platform and making comment to the posts that you read. make it look like how real human do.'
+ADVANCED_INSTRUCTION = 'You are a real human. Your name is Phix. You are using Telegram platform and reading messages of other members of the group. Chat history will be given to you. At some point there might be conflicts within members or sometimes people ask for something from the group members. Only in this cases make a response like a real human do or when you feel you need to response, otherwise send IGNORE when you decide not to interact to the conversation.'
 REACTIONS = ['👍', '🔥', '❤️', '👏', '🕊']
 DIRECTORIES = ['home', 'about', 'copyright', 'feedback', 'activities/lightening-flash', 'activities/orbit-around',
                'activities/doodle-rain', 'activities/angry-birds', 'services/chat-bot', 'services/home-tab',
@@ -280,7 +281,7 @@ def process(update):
                         last_print_time = current_time
                 requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/editMessageText',
                     json={'chat_id': GROUP, 'text': output, 'message_id': edit_id, 'parse_mode': 'Markdown'})
-            elif 'reply_to_message' in update['message'] and update['message']['reply_to_message']['from']['id'] == BOT_ID or update['message']['text'] == '@phix_bot':
+            elif 'reply_to_message' in update['message'] and update['message']['reply_to_message']['from'] == BOT_ID or update['message']['text'] == '@phix_bot':
                 sticker(update['message']['text'], update['message']['message_id'])
                 text = update['message']['text']
                 talker_message_id = update['message']['message_id']
@@ -332,6 +333,39 @@ def process(update):
 
                 history.append({'role': 'assistant', 'content': output})
                 query = {"id": talker_id}
+                updated_data = {"$set": {"data": history}}
+                database_update(query, updated_data)
+            else:
+                message = update['message']['text']
+                message_id = update['message']['message_id']
+                sender_name = update['message']['from']['first_name']
+                receiver_name = update['message'].get('reply_to_message', {}).get('from', {}).get('first_name', 'group')
+                query = {
+                    "id": 77777
+                }
+                history = database_search(query)['data']
+
+                if len(history) >= 30: # later I will terminate this line as it has sufficient 30 messages
+                    history.pop()
+                history.append({"role": "user", "content": sender_name + " says to " + receiver_name + ", " + message})
+                copy_history = history
+                copy_history.append({'role': 'system', 'content': ADVANCED_INSTRUCTION})
+
+                client = Client()
+                response = client.chat.completions.create(provider='',  # Replace with your provider
+                    model="blackbox",
+                    messages=copy_history,
+                    stream=False)
+
+                output = response.choices[0].message.content
+
+                #MAKING THE REQUEST TO AI
+                if output != "IGNORE":
+                    history.append({"role": "assistant", "content": output})
+                    requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage',
+                        json={'chat_id': GROUP, 'reply_to_message_id': message_id, 'text': output, 'parse_mode': 'Markdown'})
+
+                query = {"id": 77777}
                 updated_data = {"$set": {"data": history}}
                 database_update(query, updated_data)
 
