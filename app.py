@@ -281,11 +281,13 @@ def process(update):
                         last_print_time = current_time
                 requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/editMessageText',
                     json={'chat_id': GROUP, 'text': output, 'message_id': edit_id, 'parse_mode': 'Markdown'})
-            elif 'reply_to_message' in update['message'] and update['message']['reply_to_message']['from'] == BOT_ID or update['message']['text'] == '@phix_bot':
+            elif ('reply_to_message' in update['message'] and update['message']['reply_to_message']['from'] == BOT_ID) or update['message']['text'] == '@phix_bot':
+                print('second flow')
                 sticker(update['message']['text'], update['message']['message_id'])
                 text = update['message']['text']
                 talker_message_id = update['message']['message_id']
                 talker_id = update['message']['from']['id']
+                talker_name = update['message']['from']['first_name']
                 query = {"id": talker_id}
                 talker = database_search(query)
                 if talker != None:
@@ -335,6 +337,23 @@ def process(update):
                 query = {"id": talker_id}
                 updated_data = {"$set": {"data": history}}
                 database_update(query, updated_data)
+
+                query = {
+                    "id": 77777
+                }
+                history = database_search(query)['data']
+
+                if len(history) >= 30: # later I will terminate this line as it has sufficient 30 messages
+                    history.pop()
+                    history.pop()
+
+                history.append({"role": "user", "content": talker_name + " says to Phix, " + text})
+                history.append({"role": "assistant", "content": output})
+
+                query = {"id": 77777}
+                updated_data = {"$set": {"data": history}}
+                database_update(query, updated_data)
+
             else:
                 message = update['message']['text']
                 message_id = update['message']['message_id']
