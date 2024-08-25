@@ -359,6 +359,8 @@ def process(update):
                 message_id = update['message']['message_id']
                 sender_name = update['message']['from']['first_name']
                 receiver_name = update['message'].get('reply_to_message', {}).get('from', {}).get('first_name', 'group')
+                if receiver_name == 'Telegram':
+                    receiver_name = 'group'
                 query = {
                     "id": 77777
                 }
