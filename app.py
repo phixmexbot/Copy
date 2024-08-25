@@ -281,7 +281,7 @@ def process(update):
                         last_print_time = current_time
                 requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/editMessageText',
                     json={'chat_id': GROUP, 'text': output, 'message_id': edit_id, 'parse_mode': 'Markdown'})
-            elif ('reply_to_message' in update['message'] and update['message']['reply_to_message']['from'] == BOT_ID) or update['message']['text'] == '@phix_bot':
+            elif ('reply_to_message' in update['message'] and update['message']['reply_to_message']['from']['id'] == BOT_ID) or update['message']['text'] == '@phix_bot':
                 print('second flow')
                 sticker(update['message']['text'], update['message']['message_id'])
                 text = update['message']['text']
