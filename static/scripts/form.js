@@ -12,18 +12,17 @@ console.log(rateElement); // This should log the element to the console
 const addOpacity = () => {
   if (rateElement) {
     console.log("zero");
-    rateElement.style.setProperty('display', 'none', 'important');
-    rateElement.style.setProperty('visibility', 'hidden', 'important');
-    rateElement.style.setProperty('opacity', '0', 'important');
+    rateElement.removeAttribute('visible');
+    rateElement.classList.add('hidden');
+    
   }
 };
 
 const removeOpacity = () => {
   if (rateElement) {  
     console.log('one');
-    rateElement.style.setProperty('display', 'flex', 'important');
-    rateElement.style.setProperty('visibility', 'visible', 'important');
-    rateElement.style.setProperty('opacity', '1', 'important');
+    rateElement.removeAttribute('hidden');
+    rateElement.classList.add('visible');
   }
 };
 
