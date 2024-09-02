@@ -103,12 +103,13 @@
       </form>
     </div>
   </div>
-  
+
   <div id="rate" style="position: fixed;bottom: 65%;">
     <star-rating v-bind:rating-title="ratingTitle" v-bind:rating-message="ratingMessage" v-bind:star-text="starText"></star-rating>
   </div>
+  
   <script type="text/x-template" id="tpl_star_rating">
-    <d class="stars" v-bind:class="{ 'rating-selected': ratingSelected }">
+    <div class="stars" v-bind:class="{ 'rating-selected': ratingSelected }">
       <input type="radio" name="rating" id="rating_5" v-on:change="changeRating(5)"/>
       <label for="rating_5">
         <svg viewBox="0 0 24 24">
@@ -144,7 +145,38 @@
         <p v-if="ratingMessage != ''">{{ ratingMessage }}</p>
         <h2>{{ rating }} {{ starText }}</h2>
       </div>
-    </d>
+    </div>
+  </script>
+
+  <!-- Inline JavaScript to handle Vue component -->
+  <script>
+    Vue.component('starRating', {
+      props: ['ratingTitle', 'ratingMessage', 'starText'],
+      data: function() {
+        return {
+          rating: 0,
+          ratingSelected: false
+        };
+      },
+      methods: {
+        changeRating: function (val) {
+          this.rating = val;
+          this.ratingSelected = true;
+          this.$emit('update:ratingTitle', `Thank you!`);
+          this.$emit('update:ratingMessage', `You rated this project ${val} ${this.starText}.`);
+        }
+      },
+      template: '#tpl_star_rating'
+    });
+
+    new Vue({
+      el: '#rate',
+      data: {
+        ratingTitle: 'Rate this project', // Initial title
+        ratingMessage: 'Please select a star to rate.', // Initial message
+        starText: 'star/s'
+      }
+    });
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.6.1/css-doodle.min.js"></script>
@@ -191,7 +223,6 @@
   <script src="{{ url_for('static', filename='scripts/top-menu.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/light.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/rain.js') }}"></script>
-  <script src="{{ url_for('static', filename='scripts/rating.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/form.js') }}"></script>
 
 </body>
