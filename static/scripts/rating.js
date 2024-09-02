@@ -28,18 +28,16 @@ Vue.component('starRating', {
       })
       .then(response => response.json())
       .then(result => {
-        // Assuming the server returns the average rating as a string
         console.log('Success:', result);
         if (result.averageRating) {
-          // Update the rating with the average rating received from the server
           this.rating = parseFloat(result.averageRating);
+          document.getElementById('dynamic_value').textContent = `${this.rating} stars`;
         }
       })
       .catch(error => {
         console.error('Error:', error);
       });
-    }
-  },
+    },
   template: '#tpl_star_rating'
 });
 
