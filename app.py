@@ -167,6 +167,7 @@ def process_me():
     elif 'stars' in request.json:
         full_data = rating_update(request.json['stars'])
         value = round(full_data['total_stars'] / full_data['total_rates'], 2)
+        print(value)
         data = {"averageRating": value}
         return jsonify(data)
     else:
