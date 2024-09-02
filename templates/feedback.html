@@ -148,39 +148,6 @@
     </div>
   </script>
 
-  
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
-
-  <script>
-    Vue.component('starRating', {
-      props: ['ratingTitle', 'ratingMessage', 'starText'],
-      data: function() {
-        return {
-          rating: 0,
-          ratingSelected: false
-        };
-      },
-      methods: {
-        changeRating: function (val) {
-          this.rating = val;
-          this.ratingSelected = true;
-          this.$emit('update:ratingTitle', `Thank you!`);
-          this.$emit('update:ratingMessage', `You rated this project ${val} ${this.starText}.`);
-        }
-      },
-      template: '#tpl_star_rating'
-    });
-
-    new Vue({
-      el: '#rate',
-      data: {
-        ratingTitle: 'Rate this project', // Initial title
-        ratingMessage: 'Please select a star to rate.', // Initial message
-        starText: 'star/s'
-      }
-    });
-  </script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.6.1/css-doodle.min.js"></script>
 
   <css-doodle> 
@@ -219,12 +186,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
-
   
   <script src="{{ url_for('static', filename='scripts/background.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/top-menu.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/light.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/rain.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/form.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/rating.js') }}"></script>
 
 </body>
