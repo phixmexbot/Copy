@@ -22,8 +22,8 @@ Vue.component('starRating', {
 var app = new Vue({
   el: '#rate',
   data: {
-    ratingTitle: '',
-    ratingMessage: '',
+    ratingTitle: 'Rate this project', // Initial message
+    ratingMessage: 'Please select a star to rate.', // Initial message
     starText: 'star/s'
   }
 });
