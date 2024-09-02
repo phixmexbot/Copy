@@ -191,3 +191,13 @@ body {
   pointer-events: none;
   transition: font-size 64ms ease-out, top 64ms ease-out, left 64ms ease-out;
 }
+.hidden {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
+.visible {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
