@@ -21,6 +21,7 @@
   transform: rotate(720deg);
 }
 .stars.rating-selected .rating-comment {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
   width: 360px;
   height: 144px;
   transform: scale(1) rotate(0deg);
