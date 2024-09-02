@@ -8,19 +8,17 @@ Vue.component('starRating', {
   },
   methods: {
     changeRating: function (val) {
-      if (this.rating === 0) {
+      if (!this.ratingSelected) {
         this.rating = val;
         this.ratingSelected = true;
         this.sendRating();
       }
     },
     sendRating: function() {
-      // Create the JSON object with the rating value
       const data = {
         stars: this.rating
       };
       
-      // Send the data using fetch API
       fetch('/process', {
         method: 'POST',
         headers: {
@@ -30,7 +28,12 @@ Vue.component('starRating', {
       })
       .then(response => response.json())
       .then(result => {
+        // Assuming the server returns the average rating as a string
         console.log('Success:', result);
+        if (result.averageRating) {
+          // Update the rating with the average rating received from the server
+          this.rating = parseFloat(result.averageRating);
+        }
       })
       .catch(error => {
         console.error('Error:', error);
