@@ -12,7 +12,7 @@ console.log(rateElement); // This should log the element to the console
 const addOpacity = () => {
   if (rateElement) {
     console.log("zero");
-    rateElement.removeAttribute('visible');
+    rateElement.classList.remove('visible');
     rateElement.classList.add('hidden');
     
   }
@@ -21,7 +21,7 @@ const addOpacity = () => {
 const removeOpacity = () => {
   if (rateElement) {  
     console.log('one');
-    rateElement.removeAttribute('hidden');
+    rateElement.classList.remove('hidden');
     rateElement.classList.add('visible');
   }
 };
