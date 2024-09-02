@@ -41,7 +41,7 @@ Vue.component('starRating', {
 });
 
 var app = new Vue({
-  el: '#app',
+  el: '#rate',
   data: {
     ratingTitle: 'Thank you!',
     ratingMessage: 'You rated this project:',
