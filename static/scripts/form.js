@@ -14,6 +14,9 @@ const addOpacity = () => {
     rateElement.style.visibility = 'hidden';
     rateElement.style.display = 'none';  
     console.log("zero");
+    console.log(window.getComputedStyle(rateElement).visibility);
+    console.log(window.getComputedStyle(rateElement).display);
+
   }
 };
 
@@ -22,6 +25,9 @@ const removeOpacity = () => {
     rateElement.style.visibility = 'visible';
     rateElement.style.display = 'block';    
     console.log('one');
+    console.log(window.getComputedStyle(rateElement).visibility);
+    console.log(window.getComputedStyle(rateElement).display);
+
   }
 };
 
