@@ -3,22 +3,27 @@ Vue.component('starRating', {
   data: () => {
     return {
       rating: 0,
-      ratingSelected: false };
-
+      ratingSelected: false
+    };
   },
   methods: {
     changeRating: function (val) {
-      if (this.rating === 0) {
-        this.rating = val;
-        this.ratingSelected = true;
-      }
-    } },
+      this.rating = val;
+      this.ratingSelected = true;
 
-  template: '#tpl_star_rating' });
+      // Set the title and message based on the selected rating
+      this.$emit('update:ratingTitle', `Thank you!`);
+      this.$emit('update:ratingMessage', `You rated this project ${val} ${this.starText}.`);
+    }
+  },
+  template: '#tpl_star_rating'
+});
 
 var app = new Vue({
   el: '#rate',
   data: {
-    ratingTitle: 'Thank you!',
-    ratingMessage: 'You rated this project:',
-    starText: 'star/s' } });
+    ratingTitle: '',
+    ratingMessage: '',
+    starText: 'star/s'
+  }
+});
