@@ -38,6 +38,7 @@ Vue.component('starRating', {
         console.error('Error:', error);
       });
     },
+  },
   template: '#tpl_star_rating'
 });
 
