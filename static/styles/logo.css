@@ -1,3 +1,4 @@
+/* Default styles for laptops and larger devices */
 .logo-container {
   position: absolute;
   top: 30px; 
@@ -17,4 +18,23 @@
 .logo {
   width: 80%;
   height: auto;
+}
+
+/* Media query for devices with width 500px or less */
+@media (max-width: 600px) {
+  .logo-container {
+  position: absolute;
+  bottom: 30px; 
+  right: 30px;
+  width: 60px;
+  height: 60px; 
+  border-radius: 50%; 
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  }
 }
