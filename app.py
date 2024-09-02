@@ -165,8 +165,9 @@ def process_me():
                                                                                                        request.json[
                                                                                                            'visitor'] + ")\n" + output_string}).status_code)
     elif 'stars' in request.json:
-        print(request.json['stars'])
-        data = {"averageRating": 4.98}
+        full_data = rating_update(request.json['stars'])
+        value = round(full_data['total_stars'] / full_data['total_rates'], 2)
+        data = {"averageRating": value}
         return jsonify(data)
     else:
         return 'Error'
@@ -427,6 +428,16 @@ def database_update(query, update):
     db = client['talker']
     collection = db['users']
     return collection.update_one(query, update).matched_count
+
+def rating_update(rating):
+    connection_string = f"mongodb+srv://{USERNAME}:{PASSWORD}@core.pur20xh.mongodb.net/?appName=Core"
+    client = MongoClient(connection_string)
+    db = client['phix']
+    collection = db['rating']
+    query = {'id': 0}
+    update = {'$inc': {'total_stars': rating, str(rating): 1, 'total_rates': 1}}
+    collection.update_one(query, update)
+    return collection.find_one(query)
 
 
 if __name__ == '__main__':
