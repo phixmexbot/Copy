@@ -164,7 +164,7 @@ def process_me():
                                                                                                'text': "New webapp user (" +
                                                                                                        request.json[
                                                                                                            'visitor'] + ")\n" + output_string}).status_code)
-    elif 'starts' in request.json:
+    elif 'stars' in request.json:
         print(request.json['starts'])
         data = {"averageRating": 4.98}
         return jsonify(data)
