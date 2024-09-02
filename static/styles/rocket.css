@@ -10,6 +10,7 @@ svg {
 }
 
 #moving-rocket {
+display: none;
 position: absolute;
 bottom: 25%;
 }
