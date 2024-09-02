@@ -165,7 +165,7 @@ def process_me():
                                                                                                        request.json[
                                                                                                            'visitor'] + ")\n" + output_string}).status_code)
     elif 'stars' in request.json:
-        print(request.json['starts'])
+        print(request.json['stars'])
         data = {"averageRating": 4.98}
         return jsonify(data)
     else:
