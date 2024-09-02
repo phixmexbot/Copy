@@ -7,15 +7,19 @@ const fullNameInput = document.querySelector('#txtFullName');
 const emailInput = document.querySelector('#txtEmail');
 const messageInput = document.querySelector('#txtContent');
 
+console.log(rateElement); // This should log the element to the console
+
 const addOpacity = () => {
   if (rateElement) {
     rateElement.style.opacity = '0';
+    console.log("zero");
   }
 };
 
 const removeOpacity = () => {
   if (rateElement) {
     rateElement.style.opacity = '1';
+    console.log('one');
   }
 };
 
