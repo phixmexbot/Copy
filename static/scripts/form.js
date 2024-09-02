@@ -14,19 +14,22 @@ const addOpacity = () => {
     rateElement.style.visibility = 'hidden';
     rateElement.style.display = 'none';  
     console.log("zero");
-    console.log(window.getComputedStyle(rateElement).visibility);
-    console.log(window.getComputedStyle(rateElement).display);
 
   }
 };
+
+document.addEventListener('DOMContentLoaded', function () {
+    let rateElement = document.getElementById('rate');
+    console.log(window.getComputedStyle(rateElement).visibility);
+    console.log(window.getComputedStyle(rateElement).display);
+});
+
 
 const removeOpacity = () => {
   if (rateElement) {
     rateElement.style.visibility = 'visible';
     rateElement.style.display = 'block';    
     console.log('one');
-    console.log(window.getComputedStyle(rateElement).visibility);
-    console.log(window.getComputedStyle(rateElement).display);
 
   }
 };
