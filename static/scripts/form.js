@@ -1,15 +1,15 @@
-const openButton = document.querySelector('#openButton');
-const sendButton = document.querySelector('#sendButton');
-const closeButton = document.querySelector('#cancelButton');
-const rateElement = document.querySelector('#rate_me');
-const contactForm = document.querySelector('#frmContactForm');
-const fullNameInput = document.querySelector('#txtFullName');
-const emailInput = document.querySelector('#txtEmail');
-const messageInput = document.querySelector('#txtContent');
+const openButton = document.getElementById('openButton');
+const sendButton = document.getElementById('sendButton');
+const closeButton = document.getElementById('cancelButton');
+const rateElement = document.getElementById('rate_me');
+const contactForm = document.getElementById('frmContactForm');
+const fullNameInput = document.getElementById('txtFullName');
+const emailInput = document.getElementById('txtEmail');
+const messageInput = document.getElementById('txtContent');
 
 console.log(rateElement); // This should log the element to the console
 
-const addOpacity = () => {
+const removeOpacity = () => {
   if (rateElement) {
     console.log("zero");
     rateElement.classList.remove('hidden');
@@ -18,7 +18,7 @@ const addOpacity = () => {
   }
 };
 
-const removeOpacity = () => {
+const addOpacity = () => {
   if (rateElement) {  
     console.log('one');
     rateElement.classList.remove('visible');
