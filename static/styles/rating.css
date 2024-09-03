@@ -90,7 +90,6 @@ html, body, #rate {
   align-items: center;
   width: auto;
   height: auto;
-  opacity: 0;
 }
 
 #rate.visible {
