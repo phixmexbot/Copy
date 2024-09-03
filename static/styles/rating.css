@@ -83,9 +83,20 @@ html, body, #rate {
 }
 
 #rate {
+  position: fixed;
+  bottom: 65%;
   display: flex;
   justify-content: center;
   align-items: center;
   width: auto;
   height: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
+
+#rate.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
