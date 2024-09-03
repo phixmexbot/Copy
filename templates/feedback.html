@@ -180,6 +180,22 @@
    }
   </css-doodle>
 
+  <script>
+    document.getElementById('openButton').addEventListener('click', function() {
+      var rateElement = document.getElementById('rate');
+      rateElement.style.opacity = 0;
+      rateElement.style.display = 'none';
+    });
+
+    function showRateElement() {
+      var rateElement = document.getElementById('rate');
+      rateElement.style.opacity = 1;
+      rateElement.style.display = 'flex';
+    }
+
+    document.getElementById('cancelButton').addEventListener('click', showRateElement);
+    document.getElementById('sendButton').addEventListener('click', showRateElement);
+  </script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
