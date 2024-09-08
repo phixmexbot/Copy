@@ -703,6 +703,7 @@ document.querySelectorAll(".sketch-button").forEach((button) => {
   const style = getComputedStyle(button);
 
   const lines = document.createElement("div");
+
   lines.classList.add("lines");
 
   const groupTop = document.createElement("div");
@@ -736,23 +737,8 @@ document.querySelectorAll(".sketch-button").forEach((button) => {
   svg.addEventListener("animationend", () => {
     button.classList.remove("start");
   });
-
-  // Audio control on button press
-  button.addEventListener("click", () => {
-    const audio = document.getElementById("bg-audio");
-    audio.muted = false; // Unmute the audio
-    audio.volume = 1; // Set volume to 1 (full volume)
-    audio.play(); // Ensure the audio is playing
-  });
 });
 
-// Play audio muted when the page loads
-document.addEventListener("DOMContentLoaded", function() {
-  const audio = document.getElementById("bg-audio");
-  audio.muted = true; // Ensure the audio starts muted
-  audio.volume = 0.5; // Set a default volume
-  audio.play();
-});
 
   </script>
   
