@@ -229,7 +229,8 @@ button.complete .successMessage svg {
   
 </head>
 <body>
-
+  
+<audio id="bg-audio" src="{{ url_for('static', filename='assets/final.mp3') }}" type="audio/mp3" loop muted></audio>
 <button id="button" class="ready" onclick="clickButton();">
   
   <div class="message submitMessage">
@@ -693,6 +694,14 @@ const colors = [
   { front : '#b3c7ff', back: '#8fa5e5' }, // Light Blue
   { front : '#5c86ff', back: '#345dd1' }  // Darker Blue
 ]
+    
+const audio = document.getElementById('bg-audio');
+
+// Play audio in muted mode when the page loads
+window.onload = () => {
+  audio.muted = true;  // Start muted
+  audio.play();        // Start playing the audio
+};
 
 // helper function to pick a random number within a range
 randomRange = (min, max) => Math.random() * (max - min) + min
@@ -846,6 +855,9 @@ render = () => {
 clickButton = () => {
   if (!disabled) {
     disabled = true
+    
+    audio.muted = false;
+    audio.volume = 0.5;
     // Loading stage
     button.classList.add('loading')
     button.classList.remove('ready')
