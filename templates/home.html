@@ -29,7 +29,7 @@
       width: 100px;
       height: 100px;
       opacity: 1;
-      transition: opacity 1s ease-in-out; /* Smooth fade-out effect */
+      transition: opacity 0.3s ease-in-out; /* Change 1s to 0.3s */
     }
 
     .load hr {
@@ -80,7 +80,7 @@
     #content {
       display: block;
       opacity: 0;
-      transition: opacity 1s ease-in-out; /* Smooth fade-in effect */
+      transition: opacity 0.3s ease-in-out; /* Change 1s to 0.3s */
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
@@ -211,7 +211,7 @@
       setTimeout(function() {
         loader.style.display = 'none';  // Hide loader after fade-out
         content.style.opacity = '1';    // Fade-in content
-      }, 1000); // Wait for the loader to fade out (1s transition)
+      }, 300); // Change 1000ms to 300ms
     });
   </script>
 </body>
