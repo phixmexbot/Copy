@@ -18,8 +18,9 @@
   
   <style>
     body {
+      background: linear-gradient(#0f1a2b, #411d63);
       margin: 0;
-      overflow: hidden; /* Prevents scrolling while loading */
+      overflow: hidden;
     }
 
     .load {
@@ -29,6 +30,8 @@
       transform: translate(-50%, -50%);
       width: 100px;
       height: 100px;
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out; /* Change 1s to 0.3s */
     }
 
     .load hr {
@@ -75,9 +78,11 @@
       }
     }
 
-    /* Hide content before loading */
+    /* Initial content hidden with opacity 0 */
     #content {
-      display: none;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out; /* Change 1s to 0.3s */
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
@@ -223,7 +228,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.6.1/css-doodle.min.js"></script>
 
-  <css-doodle> 
+  <css-doodle styles="opacity: 0;"> 
    :doodle {
     @grid: 1x3 / 100vmax;
     position: absolute;
@@ -288,10 +293,19 @@
   <script src="{{ url_for('static', filename='scripts/rating.js') }}"></script>
 
   <script>
-    // Hide the preloader and show the content after page is fully loaded
+    // Hide the preloader and show the content with smooth transitions
     window.addEventListener('load', function() {
-      document.querySelector('.load').style.display = 'none';
-      document.querySelector('#content').style.display = 'block';
+      const loader = document.querySelector('.load');
+      const content = document.querySelector('#content');
+      
+      // Fade out the loader
+      loader.style.opacity = '0';
+
+      // Once loader is faded out (after 1s), display the content
+      setTimeout(function() {
+        loader.style.display = 'none';  // Hide loader after fade-out
+        content.style.opacity = '1';    // Fade-in content
+      }, 300); // Change 1000ms to 300ms
     });
   </script>
 </body>
