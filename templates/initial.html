@@ -2,10 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Preloader Demo</title>
+  <meta name="viewport" content="width=600, initial-scale=0.5">
+  <title>Core</title>
+  <link rel="icon" type="image/svg+xml" href="/static/assets/logo.svg">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/top-menu.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/background.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/home-appearance.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/logo.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/initial.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/music.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
   <style>
     body {
       /*background: linear-gradient(#0f1a2b, #411d63); */
@@ -76,20 +84,6 @@
       transition: opacity 0.3s ease-in-out; /* Change 1s to 0.3s */
     }
   </style>
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=600, initial-scale=0.5">
-  <title>Core</title>
-  <link rel="icon" type="image/svg+xml" href="/static/assets/logo.svg">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/top-menu.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/background.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/home-appearance.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/logo.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/initial.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles/music.css') }}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 </head>
 <body>
   <!-- Preloader -->
