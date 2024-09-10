@@ -16,8 +16,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <style>
     body {
+      background: #ECF0F1;
       margin: 0;
-      overflow: hidden; /* Prevents scrolling while loading */
+      overflow: hidden;
     }
 
     .load {
@@ -27,6 +28,8 @@
       transform: translate(-50%, -50%);
       width: 100px;
       height: 100px;
+      opacity: 1;
+      transition: opacity 1s ease-in-out; /* Smooth fade-out effect */
     }
 
     .load hr {
@@ -73,9 +76,11 @@
       }
     }
 
-    /* Hide content before loading */
+    /* Initial content hidden with opacity 0 */
     #content {
-      display: none;
+      display: block;
+      opacity: 0;
+      transition: opacity 1s ease-in-out; /* Smooth fade-in effect */
     }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
@@ -193,12 +198,20 @@
   <script src="{{ url_for('static', filename='scripts/light.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/rain.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/fire.js') }}"></script>
-
   <script>
-    // Hide the preloader and show the content after page is fully loaded
+    // Hide the preloader and show the content with smooth transitions
     window.addEventListener('load', function() {
-      document.querySelector('.load').style.display = 'none';
-      document.querySelector('#content').style.display = 'block';
+      const loader = document.querySelector('.load');
+      const content = document.querySelector('#content');
+      
+      // Fade out the loader
+      loader.style.opacity = '0';
+
+      // Once loader is faded out (after 1s), display the content
+      setTimeout(function() {
+        loader.style.display = 'none';  // Hide loader after fade-out
+        content.style.opacity = '1';    // Fade-in content
+      }, 1000); // Wait for the loader to fade out (1s transition)
     });
   </script>
 </body>
