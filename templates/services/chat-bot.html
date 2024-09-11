@@ -1,16 +1,10 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
     <link rel="icon" href="https://i.ibb.co/z2fXCW9/image-removebg-preview-89.png" type="image/jpeg">
      <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yordamchi</title>
+    <title>Phix</title>
     <link rel="stylesheet" href="styles.css">
   <style>
     body {
@@ -802,9 +796,86 @@
     }
     
     </style>
-</head>
 
+  <style>
+    body {
+      background-color: #11111d;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .load {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out; /* Change 1s to 0.3s */
+    }
+
+    .load hr {
+      border: 0;
+      margin: 0;
+      width: 25%;
+      height: 25%;
+      position: absolute;
+      border-radius: 50%;
+      animation: spin 2s linear infinite;
+    }
+
+    .load hr:nth-child(1) {
+      background: #19A68C;
+      animation-delay: -1.5s;
+    }
+
+    .load hr:nth-child(2) {
+      background: #F63D3A;
+      animation-delay: -1s;
+    }
+
+    .load hr:nth-child(3) {
+      background: #FDA543;
+      animation-delay: -0.5s;
+    }
+
+    .load hr:nth-child(4) {
+      background: #193B48;
+    }
+
+    @keyframes spin {
+      0%, 100% {
+        transform: translate(0);
+      }
+      25% {
+        transform: translate(160%);
+      }
+      50% {
+        transform: translate(160%, 160%);
+      }
+      75% {
+        transform: translate(0, 160%);
+      }
+    }
+
+    /* Initial content hidden with opacity 0 */
+    #content {
+      display: block;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out; /* Change 1s to 0.3s */
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+</head>
 <body>
+  <!-- Preloader -->
+  <div class="load">
+    <hr/><hr/><hr/><hr/>
+  </div>
+
+  <!-- Content that will load after the preloader -->
+  <div id="content">
   <div id="chat-container">
     <div class="header">
       <h1>Yordamchi</h1>
@@ -864,13 +935,7 @@
     <button id="save-language">Save</button>
   </div>
 
-</body>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-java.min.js"></script>
-<script>
+    <script>
   const apiKey = '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';
 
 const chatContainer = document.getElementById('chat-container');
@@ -1357,4 +1422,21 @@ function addFeedbackButtons(messageElement) {
     }
 </script>
 
+  <script>
+    // Hide the preloader and show the content with smooth transitions
+    window.addEventListener('load', function() {
+      const loader = document.querySelector('.load');
+      const content = document.querySelector('#content');
+      
+      // Fade out the loader
+      loader.style.opacity = '0';
+
+      // Once loader is faded out (after 1s), display the content
+      setTimeout(function() {
+        loader.style.display = 'none';  // Hide loader after fade-out
+        content.style.opacity = '1';    // Fade-in content
+      }, 300); // Change 1000ms to 300ms
+    });
+  </script>
+</body>
 </html>
