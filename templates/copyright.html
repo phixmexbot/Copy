@@ -124,3 +124,248 @@
   <script src="{{ url_for('static', filename='scripts/rain.js') }}"></script>
 
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=600, initial-scale=0.5">
+  <title>Core</title>
+  <link rel="icon" type="image/svg+xml" href="/static/assets/logo.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/top-menu.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/background.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/pizza.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/message.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/logo.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/bottom-menu.css') }}">
+  <style>
+    body {
+      background-color: #11111d;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .load {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out; /* Change 1s to 0.3s */
+    }
+
+    .load hr {
+      border: 0;
+      margin: 0;
+      width: 25%;
+      height: 25%;
+      position: absolute;
+      border-radius: 50%;
+      animation: spin 2s linear infinite;
+    }
+
+    .load hr:nth-child(1) {
+      background: #19A68C;
+      animation-delay: -1.5s;
+    }
+
+    .load hr:nth-child(2) {
+      background: #F63D3A;
+      animation-delay: -1s;
+    }
+
+    .load hr:nth-child(3) {
+      background: #FDA543;
+      animation-delay: -0.5s;
+    }
+
+    .load hr:nth-child(4) {
+      background: #193B48;
+    }
+
+    @keyframes spin {
+      0%, 100% {
+        transform: translate(0);
+      }
+      25% {
+        transform: translate(160%);
+      }
+      50% {
+        transform: translate(160%, 160%);
+      }
+      75% {
+        transform: translate(0, 160%);
+      }
+    }
+
+    /* Initial content hidden with opacity 0 */
+    #content {
+      display: block;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out; /* Change 1s to 0.3s */
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="load">
+    <hr/><hr/><hr/><hr/>
+  </div>
+
+  <!-- Content that will load after the preloader -->
+  <div id="content">
+<div class="moon">
+  <span class="crater"></span>
+  <span class="crater"></span>
+  <span class="crater"></span>
+  <span class="crater"></span>
+</div>
+<div class="ground">
+  <div class="rock"></div>
+  <div class="rock"></div>
+  <div class="rock"></div>
+</div>
+<div class="shooting">
+  <div class="core"></div>
+  <div class="trail"></div>
+</div>
+  <object type="image/svg+xml" data="/static/assets/cactus.svg" class="cactus"></object>
+  <div class="logo-container">
+    <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg" alt="Logo" class="logo">
+  </div>
+  <footer class="footer">
+    <a href="/copyright" class="footer-link">
+      <span class="footer-text">© Core 2024</span>
+    </a>
+  </footer>
+<div id="app" style="z-index: 1; position: absolute;"></div>
+<canvas id="canvas"></canvas>
+<canvas id="pizza"></canvas>
+
+<p class="message-container">
+  <span class="message">
+    Copyright (c) 2024 by Komiljon Qosimov <br>
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), <br>
+    to deal in the Software without restriction, including without limitation the rights to 
+    use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so.
+  </span>
+</p>
+  
+<script src="https://cdn.tailwindcss.com/3.4.5"></script>
+  
+  <div class="bg-black/0 w-screen h-[200vh] flex flex-col justify-end">
+      <div class="bg-black/60 w-96 mx-auto mb-20 flex justify-stretch rounded-md backdrop-blur z-2">
+          <a href="mailto:komiljon@eternal.uz" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+              <i class="fa-solid fa-envelope icon-size"></i>
+              <small>Email</small>
+          </a>
+          <a href="https://github.com/komil-jon" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+              <i class="fa-brands fa-github icon-size"></i>
+              <small>Github</small>
+          </a>
+          <a href="https://linkedin.com/in/komiljon" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+              <i class="fa-brands fa-linkedin icon-size"></i>
+              <small>Linkedin</small>
+          </a>
+          <a href="https://instagram.com/komil.john" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+              <i class="fa-brands fa-instagram icon-size"></i>
+              <small>Instagram</small>
+          </a>
+          <a href="https://telegram.me/stellarpulse" class="text-slate-200 hover:text-white hover:bg-black/20 w-1/4 py-3 flex flex-col items-center hover:scale-110 rounded-md transition-all">
+              <i class="fa-brands fa-telegram icon-size"></i>
+              <small>Telegram</small>
+          </a>
+      </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.6.1/css-doodle.min.js"></script>
+
+
+  <css-doodle styles="opacity: 0;"> 
+   :doodle {
+    @grid: 1x3 / 100vmax;
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 0; 
+    width: 100%;
+    height: 100%;
+   }
+
+   @size: 100% 150%;
+   position: absolute;
+   background: @m(100, (
+   linear-gradient(transparent, @p(
+   #FFFDE1@repeat(2, @p([0-9a-f])), 
+   #FB3569@repeat(2, @p([0-9a-f])) 
+   ))
+   @r(0%, 100%) @r(0%, 100%) /
+   @r(1px) @r(23vmin)
+   no-repeat
+   ));
+
+   will-change: transform;
+   animation: f 20s linear calc(-20s / @size() * @i()) infinite;
+   @keyframes f {
+   from { transform: translateY(-100%) }
+   to { transform: translateY(100%) }
+   }
+  </css-doodle>
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+  
+  <script src="{{ url_for('static', filename='scripts/background.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/top-menu.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/pizza.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/light.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/rain.js') }}"></script>
+  <script>
+    // Hide the preloader and show the content with smooth transitions
+    window.addEventListener('load', function() {
+      const loader = document.querySelector('.load');
+      const content = document.querySelector('#content');
+      
+      // Fade out the loader
+      loader.style.opacity = '0';
+
+      // Once loader is faded out (after 1s), display the content
+      setTimeout(function() {
+        loader.style.display = 'none';  // Hide loader after fade-out
+        content.style.opacity = '1';    // Fade-in content
+      }, 300); // Change 1000ms to 300ms
+    });
+  </script>
+</body>
+</html>
