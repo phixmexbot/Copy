@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
 .stars {
+  z-index:10;
   display: inline-flex;
   flex-direction: row-reverse;
 }
