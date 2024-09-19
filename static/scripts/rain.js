@@ -4,7 +4,7 @@ var ctx = c.getContext("2d");
 var w = c.width = window.innerWidth;
 var h = c.height = window.innerHeight;
 var clearColor = 'rgba(0, 0, 0, 0)'; // Transparent background
-var max = 1000;
+var max = 100;
 var drops = [];
 
 function random(min, max) {
