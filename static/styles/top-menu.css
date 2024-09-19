@@ -162,3 +162,12 @@
       .cpc-hidden {
         display: none;
       }
+        
+    #canvas-club {
+    background-color: transparent; /* Make sure canvas has no background color */
+    position: absolute; /* You can adjust the positioning as per your layout */
+    top: 0;
+    left: 0;
+    z-index: 1; /* Ensure correct layering */
+}
+
