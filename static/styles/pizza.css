@@ -4,4 +4,5 @@
   margin: auto;
   top: 11.5%;
   left: calc(50% - 105px);
+  z-index:10;
 }
