@@ -1,10 +1,10 @@
 let OPT = {
   selector: "#sparks",
-  amount: 400,
+  amount: 200,
   speed: 0.1,
   lifetime: 800,
   direction: { x: -0.5, y: 1 },
-  size: [2, 2],
+  size: [2.5, 2.5],
   maxopacity: 1,
   color: "255, 255, 255",
   randColor: false,
