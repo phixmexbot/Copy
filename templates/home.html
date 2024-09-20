@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/logo.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/bottom-menu.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/snow.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <style>
     body {
@@ -93,6 +94,7 @@
 
   <!-- Content that will load after the preloader -->
   <div id="content">
+    
 <div class="moon">
   <span class="crater"></span>
   <span class="crater"></span>
@@ -150,6 +152,7 @@
   </div>
     
   <canvas id="canvas-club"></canvas>
+  <canvas id="sparks"></canvas>
 
   </div>
 
@@ -168,6 +171,8 @@
   <script src="{{ url_for('static', filename='scripts/light.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/rain.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/fire.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/snow.js') }}"></script>
+
   <script>
     // Hide the preloader and show the content with smooth transitions
     window.addEventListener('load', function() {
