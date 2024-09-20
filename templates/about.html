@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/logo.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/bottom-menu.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/snow.css') }}">
   <style>
     body {
       background-color: #11111d;
@@ -162,6 +163,7 @@
   </div>
   
   <canvas id="canvas-club"></canvas>
+  <canvas id="sparks" style="z-index: 1;"></canvas>
 
   </div>
 
@@ -176,6 +178,8 @@
   <script src="{{ url_for('static', filename='scripts/light.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/rain.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/rocket.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/snow.js') }}"></script>
+
   
   <script>
     // Hide the preloader and show the content with smooth transitions
