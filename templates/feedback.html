@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/bottom-menu.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/rating.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/form.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/snow.css') }}">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   
   <style>
@@ -226,6 +228,7 @@
     </div>
   </script>
   <canvas id="canvas-club"></canvas>
+  <canvas id="sparks" style="z-index: 1;"></canvas>
 
   </div>
 
@@ -261,6 +264,7 @@
   <script src="{{ url_for('static', filename='scripts/rain.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/form.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/rating.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/snow.js') }}"></script>
 
   <script>
     // Hide the preloader and show the content with smooth transitions
