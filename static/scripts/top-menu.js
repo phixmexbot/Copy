@@ -141,6 +141,10 @@ class CpcNavigation extends React.Component {
             'link': '#rain',
             'icon': 'fa-solid fa-cloud-rain'
           },
+          'Snow': {
+            'link': '#snow',
+            'icon': 'fa-solid fa-snowflake'
+          },
         }
       },
       'Services': {
