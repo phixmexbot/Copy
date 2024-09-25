@@ -1,18 +1,27 @@
-$shadow-color: #555;
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #222a30;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
 .circle-action-btn {
+  position: absolute;
+  z-index: 1;
+  bottom: 30px;
+  right: 30px;
   background-color: #0053FF;
   border: none;
   border-radius: 100%;
   width: 50px;
   height: 50px;
-	box-shadow: none;
+  box-shadow: 0px 0px 5px #555;
   -webkit-animation: button-jump 2s infinite;
           animation: button-jump 2s infinite;
   cursor: pointer;
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
 }
 .circle-action-btn__icon {
   color: white;
@@ -67,17 +76,11 @@ $shadow-color: #555;
   }
 }
 @keyframes button-jump {
-	0% {
-		transform: scale(1); 
-		box-shadow: none;
-	}
-	50% {
-		transform: scale(1.1);
-		box-shadow: 0px 0px 15px 5px $shadow-color;
-	}
-	100% {
-		transform: scale(1);
-		box-shadow: none;
-	}
+  0% {
+    box-shadow: 0px 2px 5px #555;
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0px 6px 10px #555;
+  }
 }
-
