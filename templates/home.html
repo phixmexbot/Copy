@@ -14,7 +14,9 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/logo.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/bottom-menu.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/snow.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/attention-button.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel='stylesheet' href='https://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css'>
   <style>
     body {
       background-color: #11111d;
@@ -153,6 +155,10 @@
     
   <canvas id="canvas-club"></canvas>
   <canvas id="sparks" style="z-index: 1;"></canvas>
+    
+  <button class="circle-action-btn">
+    <div class="circle-action-btn__icon"><i class="ion-android-hand"></i></div>
+  </button>
     
   </div>
 
