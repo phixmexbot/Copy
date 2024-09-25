@@ -126,7 +126,7 @@ class CpcNavigation extends React.Component {
 // Navigation menu builder
     const menu = {
       'Home': {
-        'link': '/',
+        'link': '/home',
         'icon': 'fas fa-home'
       },
       'Effects': {
