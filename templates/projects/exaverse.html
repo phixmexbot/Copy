@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=600, initial-scale=0.5">
+  <title>Core</title>
+  <link rel="icon" type="image/svg+xml" href="/static/assets/logo.svg">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/background.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/message.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/logo.css') }}">
+  <style>
+    body {
+      background-color: #11111d;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .load {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out; /* Change 1s to 0.3s */
+    }
+
+    .load hr {
+      border: 0;
+      margin: 0;
+      width: 25%;
+      height: 25%;
+      position: absolute;
+      border-radius: 50%;
+      animation: spin 2s linear infinite;
+    }
+
+    .load hr:nth-child(1) {
+      background: #19A68C;
+      animation-delay: -1.5s;
+    }
+
+    .load hr:nth-child(2) {
+      background: #F63D3A;
+      animation-delay: -1s;
+    }
+
+    .load hr:nth-child(3) {
+      background: #FDA543;
+      animation-delay: -0.5s;
+    }
+
+    .load hr:nth-child(4) {
+      background: #193B48;
+    }
+
+    @keyframes spin {
+      0%, 100% {
+        transform: translate(0);
+      }
+      25% {
+        transform: translate(160%);
+      }
+      50% {
+        transform: translate(160%, 160%);
+      }
+      75% {
+        transform: translate(0, 160%);
+      }
+    }
+
+    /* Initial content hidden with opacity 0 */
+    #content {
+      display: block;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out; /* Change 1s to 0.3s */
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="load">
+    <hr/><hr/><hr/><hr/>
+  </div>
+
+  <!-- Content that will load after the preloader -->
+  <div id="content">
+<div class="moon">
+  <span class="crater"></span>
+  <span class="crater"></span>
+  <span class="crater"></span>
+  <span class="crater"></span>
+</div>
+<div class="ground">
+  <div class="rock"></div>
+  <div class="rock"></div>
+  <div class="rock"></div>
+</div>
+<div class="shooting">
+  <div class="core"></div>
+  <div class="trail"></div>
+</div>
+  <object type="image/svg+xml" data="/static/assets/cactus.svg" class="cactus"></object>
+  <div class="logo-container">
+    <img src="https://raw.githubusercontent.com/phixmexbot/recources/main/logo.svg" alt="Logo" class="logo">
+  </div>
+  <footer class="footer">
+    <a href="/copyright" class="footer-link">
+      <span class="footer-text">© Core 2024</span>
+    </a>
+  </footer>
+<clooned-object features="lsc;dt;fs" oid="271c091f92ce45d4a1caab5261bfa1fb"></clooned-object>
+<p class="message-container">
+  <span class="message">
+    we developed a robot equipped with advanced facial recognition technology to automate the attendance process in educational institutions.
+    The system is designed to identify and verify the faces of students in real-time as they enter the classroom.
+    By comparing captured facial data with a pre-registered database, the robot accurately records attendance, eliminating the need for manual roll calls and reducing the potential for human error. 
+  </span>
+</p>
+  <script src="https://clooned.com/wp-content/uploads/cloons/scripts/clooned.js"></script>
+  <script src="{{ url_for('static', filename='scripts/background.js') }}"></script>
+
+  <script>
+    // Hide the preloader and show the content with smooth transitions
+    window.addEventListener('load', function() {
+      const loader = document.querySelector('.load');
+      const content = document.querySelector('#content');
+      
+      // Fade out the loader
+      loader.style.opacity = '0';
+
+      // Once loader is faded out (after 1s), display the content
+      setTimeout(function() {
+        loader.style.display = 'none';  // Hide loader after fade-out
+        content.style.opacity = '1';    // Fade-in content
+      }, 300); // Change 1000ms to 300ms
+    });
+  </script>
+</body>
+</html>
