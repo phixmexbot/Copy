@@ -172,6 +172,10 @@ class CpcNavigation extends React.Component {
           'AI Navigator': {
             'link': '/projects/ai-navigator',
             'icon': 'fa-solid fa-location-dot'
+          },
+          'Exaverse': {
+            'link': '/projects/exaverse',
+            'icon': 'fa-solid fa-rocket'
           }
         }
       },
