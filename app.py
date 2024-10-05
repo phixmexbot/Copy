@@ -31,7 +31,7 @@ ADVANCED_INSTRUCTION = 'You are a real human. Your name is Phix. You are using T
 REACTIONS = ['👍', '🔥', '❤️', '👏', '🕊']
 DIRECTORIES = ['home', 'about', 'copyright', 'test', 'feedback', 'activities/lightening-flash', 'activities/orbit-around',
                'activities/doodle-rain', 'activities/angry-birds', 'services/chat-bot', 'services/home-tab',
-               'projects/automatic-attendance', 'projects/ai-navigator']
+               'projects/automatic-attendance', 'projects/ai-navigator', 'projects/exaverse']
 
 app = Flask(__name__, template_folder='.')
 
