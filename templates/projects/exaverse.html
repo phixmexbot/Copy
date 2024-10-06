@@ -141,5 +141,18 @@
       }, 300); // Change 1000ms to 300ms
     });
   </script>
+  <script>
+    // Function that gets triggered when 'f' is pressed
+    function handleFKey() {
+      console.log("Function for 'f' key is running!");
+      // Your existing logic here
+    }
+
+    // Simulate pressing 'f' when the page is fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Call the function directly
+      handleFKey();
+    });
+  </script>
 </body>
 </html>
