@@ -30,8 +30,9 @@ INITIAL_INSTRUCTION = 'You are a real human. You are using Telegram platform and
 ADVANCED_INSTRUCTION = 'You are a real human. Your name is Phix. You are using Telegram platform and reading messages of other members of the group. Chat history will be given to you. At some point there might be conflicts within members or sometimes people ask for something from the group members. Only in this cases make a response like a real human do or when you feel you need to response, otherwise send IGNORE when you decide not to interact to the conversation. If the message is not for you, just ignore, however you can respond if that message is something surprising. You are responding to the last message sender. Note that there are many people in the group, treat each of them separately'
 REACTIONS = ['👍', '🔥', '❤️', '👏', '🕊']
 DIRECTORIES = ['home', 'about', 'copyright', 'test', 'feedback', 'activities/lightening-flash', 'activities/orbit-around',
-               'activities/doodle-rain', 'activities/angry-birds', 'services/chat-bot', 'services/home-tab',
+               'activities/doodle-rain', 'activities/angry-birds',
                'projects/automatic-attendance', 'projects/ai-navigator', 'projects/exaverse']
+# 'services/chat-bot', 'services/home-tab', has been removed temporarily
 
 app = Flask(__name__, template_folder='.')
 
