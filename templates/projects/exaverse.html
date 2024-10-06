@@ -142,29 +142,30 @@
     });
   </script>
   <script>
-    // Function that gets triggered when 'f' is pressed
-    function handleFKey() {
-      console.log("Function for 'f' key is running!");
-      // Add your existing logic here
-    }
+window.addEventListener('load', function() {
+  const loader = document.querySelector('.load');
+  const content = document.querySelector('#content');
 
-    // Simulate pressing 'f' when the page is fully loaded
-    window.addEventListener('load', function() {
-      const loader = document.querySelector('.load');
-      const content = document.querySelector('#content');
-      
-      // Fade out the loader
-      loader.style.opacity = '0';
+  // Fade out the loader
+  loader.style.opacity = '0';
 
-      // Once loader is faded out, display the content
-      setTimeout(function() {
-        loader.style.display = 'none';
-        content.style.opacity = '1';
+  // Once loader is faded out (after 300ms), display the content
+  setTimeout(function() {
+    loader.style.display = 'none';  // Hide loader after fade-out
+    content.style.opacity = '1';    // Fade-in content
 
-        // Simulate pressing 'f' by calling the function directly
-        handleFKey();
-      }, 300); // Wait for 300ms after the loader fades out
-    });
+    // Simulate pressing 'f' after 5 seconds
+    setTimeout(function() {
+      handleFKey(); // Call the function for 'f' key press after 5 seconds
+    }, 5000); // 5000 milliseconds = 5 seconds
+  }, 300); // Change 1000ms to 300ms
+});
+
+// Function that gets triggered when 'f' is pressed
+function handleFKey() {
+  console.log("Function for 'f' key is running!");
+  // Your existing logic here
+}
   </script>
 </body>
 </html>
