@@ -145,13 +145,25 @@
     // Function that gets triggered when 'f' is pressed
     function handleFKey() {
       console.log("Function for 'f' key is running!");
-      // Your existing logic here
+      // Add your existing logic here
     }
 
     // Simulate pressing 'f' when the page is fully loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      // Call the function directly
-      handleFKey();
+    window.addEventListener('load', function() {
+      const loader = document.querySelector('.load');
+      const content = document.querySelector('#content');
+      
+      // Fade out the loader
+      loader.style.opacity = '0';
+
+      // Once loader is faded out, display the content
+      setTimeout(function() {
+        loader.style.display = 'none';
+        content.style.opacity = '1';
+
+        // Simulate pressing 'f' by calling the function directly
+        handleFKey();
+      }, 300); // Wait for 300ms after the loader fades out
     });
   </script>
 </body>
