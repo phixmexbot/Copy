@@ -92,7 +92,7 @@ Messages
   float: left;
   padding: 6px 10px 7px;
   border-radius: 10px 10px 10px 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: linear-gradient(120deg, #c33764, #1d2671);
   margin: 8px 0;
   font-size: 11px;
   line-height: 1.4;
@@ -135,7 +135,7 @@ Messages
   float: right;
   color: #fff;
   text-align: right;
-  background: linear-gradient(120deg, #248A52, #257287);
+  background: linear-gradient(120deg, #FF512F, #DD2476);
   border-radius: 10px 10px 0 10px;
 }
 .messages .message.message-personal::before {
@@ -150,6 +150,7 @@ Messages
   margin-bottom: 30px;
 }
 .messages .message.new {
+  color: white;
   transform: scale(0);
   transform-origin: 0 0;
   -webkit-animation: bounce 500ms linear both;
