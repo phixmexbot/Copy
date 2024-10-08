@@ -17,7 +17,7 @@ function updateScrollbar() {
 }
 
 function setDate(){
-  d = new Date();
+  d = new Date()
   if (m != d.getMinutes()) {
     m = d.getMinutes();
     $('<div class="timestamp">' + d.getHours() + ':' + m + '</div>').appendTo($('.message:last'));
@@ -25,39 +25,17 @@ function setDate(){
 }
 
 function insertMessage() {
-  let msg = $('.message-input').val();
+  msg = $('.message-input').val();
   if ($.trim(msg) == '') {
     return false;
   }
-  
-  let charLimit = 50; // Character limit per line
-  let splitMessage = splitIntoLines(msg, charLimit);
-  
-  // Insert each chunk into a new line
-  splitMessage.forEach(function(line) {
-    $('<div class="message message-personal">' + line + '</div>').appendTo($('.mCSB_container')).addClass('new');
-  });
-  
+  $('<div class="message message-personal">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
   setDate();
   $('.message-input').val(null);
   updateScrollbar();
-  
   setTimeout(function() {
     fakeMessage();
   }, 1000 + (Math.random() * 20) * 100);
-}
-
-// Helper function to split message into chunks based on the character limit
-function splitIntoLines(message, charLimit) {
-  let lines = [];
-  while (message.length > charLimit) {
-    lines.push(message.substring(0, charLimit)); // Push the first 50 characters
-    message = message.substring(charLimit); // Remove the first 50 characters from the message
-  }
-  if (message.length > 0) {
-    lines.push(message); // Add the remaining part of the message
-  }
-  return lines;
 }
 
 $('.message-submit').click(function() {
@@ -69,7 +47,7 @@ $(window).on('keydown', function(e) {
     insertMessage();
     return false;
   }
-});
+})
 
 var Fake = [
   'Hi there, I\'m Komiljon and you?',
@@ -102,4 +80,5 @@ function fakeMessage() {
     updateScrollbar();
     i++;
   }, 1000 + (Math.random() * 20) * 100);
+
 }
