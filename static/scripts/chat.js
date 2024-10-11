@@ -1,11 +1,11 @@
 var $messages = $('.messages-content'),
     d, h, m,
-    session_id = generateSessionId();  // Generate session_id when page loads
+    id = generateSessionId();  // Generate id when page loads
 
 $(window).load(function() {
   $messages.mCustomScrollbar();
   setTimeout(function() {
-    firstMessage();  // Display first message after session_id is generated
+    firstMessage();  // Display first message after id is generated
   }, 100);
 });
 
@@ -59,7 +59,7 @@ function sendMessageToServer(message) {
     url: '/process',  // Your server endpoint
     type: 'POST',
     contentType: 'application/json',
-    data: JSON.stringify({ "message": message, "session_id": session_id }),
+    data: JSON.stringify({ "message": message, "id": id }),
     success: function(response) {
       // Handle the response from the server and display it
       receiveMessage(response.response);  // Assuming server returns {response: "message"}
