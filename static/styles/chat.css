@@ -13,9 +13,9 @@ body {
 
 .chat {
   position: relative; /* absolute; */
-  top: 41%;
-  left: 35%; /* 50%; */
-  transform: translate(-50%, -50%);
+  top: 48%;
+  left: 50%; /* 50%; */
+  translate(-50%, -50%) scale(1.5);
   width: 300px;
   height: 80vh;
   max-height: calc(100% - 250vh); /* 500px; */
@@ -26,7 +26,6 @@ body {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  transform: scale(1.5);  /* added; */
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5); 
 }
 
