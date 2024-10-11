@@ -5,7 +5,10 @@ var $messages = $('.messages-content'),
 $(window).load(function() {
   $messages.mCustomScrollbar();
   setTimeout(function() {
-    firstMessage();  // Display first message after id is generated
+    showLoadingMessage();  // Show loading animation before displaying the first message
+    setTimeout(function() {
+      firstMessage();  // Display first message after the loading animation
+    }, 2000); // 2 seconds delay for the first message
   }, 100);
 });
 
@@ -58,7 +61,7 @@ function sendMessageToServer(message) {
   // Use setTimeout to delay showing the loading message
   setTimeout(function() {
     showLoadingMessage(); // Show loading message after the specified delay
-  }, 500); // 500 milliseconds delay
+  }, 2000); // 2 seconds delay
 
   $.ajax({
     url: '/process',  // Your server endpoint
@@ -88,6 +91,7 @@ function receiveMessage(message) {
 function firstMessage() {
   // Display the first message "Hi there, I'm Komiljon and you?" after generating the session ID
   let firstMsg = "Hi there, I'm Komiljon and you?";
+  hideLoadingMessage();  // Remove loading message before displaying the first message
   $('<div class="message new"><figure class="avatar"><img src="static/assets/profile.png" /></figure>' + firstMsg + '</div>').appendTo($('.mCSB_container')).addClass('new');
   setDate();
   updateScrollbar();
@@ -102,6 +106,6 @@ function showLoadingMessage() {
 }
 
 function hideLoadingMessage() {
-  // Remove the loading message after getting the response
+  // Remove the loading message after getting the response or before showing the first message
   $('.message.loading').remove();
 }
