@@ -15,7 +15,7 @@ body {
   position: relative; /* absolute; */
   top: 48%;
   left: 50%; /* 50%; */
-  translate(-50%, -50%) scale(1.5);
+  transform: translate(-50%, -50%) scale(1.5);
   width: 300px;
   height: 80vh;
   max-height: calc(100% - 250vh); /* 500px; */
