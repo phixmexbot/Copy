@@ -39,7 +39,7 @@ function insertMessage() {
   $('.message-input').val(null);
   updateScrollbar();
 
-  // Send the message to the server
+  // Send the message to the server with a delay before showing loading animation
   sendMessageToServer(msg);
 }
 
@@ -55,8 +55,10 @@ $(window).on('keydown', function(e) {
 });
 
 function sendMessageToServer(message) {
-  // Show loading message while waiting for server response
-  showLoadingMessage();
+  // Use setTimeout to delay showing the loading message
+  setTimeout(function() {
+    showLoadingMessage(); // Show loading message after the specified delay
+  }, 500); // 500 milliseconds delay
 
   $.ajax({
     url: '/process',  // Your server endpoint
