@@ -98,7 +98,7 @@ def process_me():
         # send to the response text to client
 
         requests.post(f'https://api.telegram.org/bot{BOT_TOKEN}/sendMessage', json={'chat_id': 5934725286,
-                                                                                    'text': f"USER: {user['visitor']} on session: ({user['id']})\n" +
+                                                                                    'text': f"USER: user['visitor'] on session: ({user['id']})\n" +
                                                                                             request.json[
                                                                                                 'message'] + "\nSYSTEM:\n" + text})
         chat_history.append({"role": "assistant", "content": text})
