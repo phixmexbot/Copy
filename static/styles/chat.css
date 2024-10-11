@@ -25,7 +25,6 @@ body {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  align-items: center;
   transform: scale(1.5);  /* added; */
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5); 
 }
