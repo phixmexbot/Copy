@@ -12,7 +12,7 @@ body {
 .chat {
   position: absolute;
   top: 40%;
-  left: 90%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 300px;
   height: 80vh;
