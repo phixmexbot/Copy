@@ -86,7 +86,7 @@ def process_me():
 
     elif 'message' in request.json:
         user = database_search({"session_id": request.json['id']})
-        if user != None:
+        if user == None:
             user = {"id": request.json['id'], "data": []}
             database_insert(user)
         chat_history = user['data']
