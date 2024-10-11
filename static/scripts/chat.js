@@ -1,11 +1,11 @@
 var $messages = $('.messages-content'),
     d, h, m,
-    id = generateSessionId();  // Generate id when page loads
+    session_id = generateSessionId();  // Generate session_id when page loads
 
 $(window).load(function() {
   $messages.mCustomScrollbar();
   setTimeout(function() {
-    firstMessage();  // Display first message after id is generated
+    firstMessage();  // Display first message after session_id is generated
   }, 100);
 });
 
@@ -55,22 +55,29 @@ $(window).on('keydown', function(e) {
 });
 
 function sendMessageToServer(message) {
+  // Show loading message while waiting for server response
+  showLoadingMessage();
+
   $.ajax({
     url: '/process',  // Your server endpoint
     type: 'POST',
     contentType: 'application/json',
-    data: JSON.stringify({ "message": message, "id": id }),
+    data: JSON.stringify({ "message": message, "session_id": session_id }),
     success: function(response) {
       // Handle the response from the server and display it
       receiveMessage(response.response);  // Assuming server returns {response: "message"}
     },
     error: function() {
       console.error('Error in sending message.');
+      // Optionally hide loading message or show an error message
+      hideLoadingMessage();
     }
   });
 }
 
 function receiveMessage(message) {
+  // Hide loading message once we get a response
+  hideLoadingMessage();
   $('<div class="message new"><figure class="avatar"><img src="static/assets/profile.png" /></figure>' + message + '</div>').appendTo($('.mCSB_container')).addClass('new');
   setDate();
   updateScrollbar();
@@ -84,4 +91,15 @@ function firstMessage() {
   updateScrollbar();
 
   // Note: The first message is displayed only and not sent to the server
+}
+
+function showLoadingMessage() {
+  // Show a loading animation or message while waiting for a response
+  $('<div class="message loading new"><figure class="avatar"><img src="static/assets/profile.png" /></figure><span>Loading...</span></div>').appendTo($('.mCSB_container'));
+  updateScrollbar();
+}
+
+function hideLoadingMessage() {
+  // Remove the loading message after getting the response
+  $('.message.loading').remove();
 }
