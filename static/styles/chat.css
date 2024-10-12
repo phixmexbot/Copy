@@ -113,7 +113,7 @@ Messages
   content: "";
   position: absolute;
   bottom: -6px;
-  border-top: 6px solid rgba(0, 0, 0, 0.3);
+  border-top: 6px solid #682e6b;
   left: 0;
   border-right: 7px solid transparent;
 }
