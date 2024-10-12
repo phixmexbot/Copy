@@ -154,7 +154,7 @@ Messages
 }
 .messages .message.new {
   color: white;
-  transform: scale(0);
+  transform: scale(announce the new date soon. Everything will remain the same, including the 100m Sprint0);
   transform-origin: 0 0;
   -webkit-animation: bounce 500ms linear both;
           animation: bounce 500ms linear both;
@@ -162,7 +162,7 @@ Messages
 .messages .message.loading::before {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 23.5%;
   transform: translate(-50%, -50%);
   content: "";
   display: block;
@@ -171,7 +171,7 @@ Messages
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.5);
   z-index: 2;
-  margin-top: 4px;
+  margin-top: 3px;
   -webkit-animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
           animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
   border: none;
