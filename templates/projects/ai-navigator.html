@@ -113,16 +113,21 @@
     </a>
   </footer>
 <clooned-object features="lsc;dt;fs" oid="5d67a65092f044f5b7e3144d6611ba93"></clooned-object>
-<p class="message-container">
-  <span class="message">
+    
+<div class="message-container">
+  <div class="message" id="message-box"></div>
+</div>
+
+<div id="message-text" style="display: none;">
     The AI Navigator project features a mini car robot designed to assist individuals in navigating their surroundings using a mobile app.
     The robot functions as a personal guide, physically leading its owner to a specified destination based on location input through the app.
     Equipped with advanced sensors and AI algorithms, the robot continuously monitors the owner's position, adjusting its speed to match the owner's walking pace. <br>
     Additionally, the robot is equipped with a collision detection system that identifies potential obstacles, such as other pedestrians, ensuring a safe and smooth journey. <br>
-  </span>
-</p>
+</div>
+    
   <script src="https://clooned.com/wp-content/uploads/cloons/scripts/clooned.js"></script>
   <script src="{{ url_for('static', filename='scripts/background.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/message.js') }}"></script>
 
   <script>
     // Hide the preloader and show the content with smooth transitions
