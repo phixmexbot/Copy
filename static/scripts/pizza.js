@@ -34,7 +34,7 @@ class Pizza {
       if (i === this.sliceCount - 1) {
         let ii = this.sliceCount - 1;
         rad = this.sliceRadians * i + this.progress;
-        ctx.strokeStyle = 'rgba(0, 0, 0, 0.6)'; 
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.4)'; 
         cheese(ctx, rad, .9, ii, this.sliceSize, this.sliceDegree);
         cheese(ctx, rad, .6, ii, this.sliceSize, this.sliceDegree);
         cheese(ctx, rad, .5, ii, this.sliceSize, this.sliceDegree);
@@ -46,7 +46,7 @@ class Pizza {
       ctx.lineCap = 'butt';
       ctx.lineWidth = 11;
       ctx.arc(0, 0, this.sliceSize, rad, rad + this.sliceRadians);
-      ctx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
+      ctx.strokeStyle = 'rgba(0, 0, 0, 0.7)';
       ctx.stroke();
 
       // slice
@@ -55,7 +55,7 @@ class Pizza {
       let endX = this.sliceSize * Math.cos(rad + this.sliceRadians);
       let endY = this.sliceSize * Math.sin(rad + this.sliceRadians);
       let variation = [0.9,0.7,1.1,1.2];
-      ctx.fillStyle = '#FBC02D';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.lineTo(startX, startY);
@@ -71,7 +71,7 @@ class Pizza {
       let y = this.sliceSize * .65 * Math.sin(rad + this.sliceRadians / 2);
       ctx.beginPath();
       ctx.arc(x, y, this.sliceDegree / 6, 0, 2 * Math.PI);
-      ctx.fillStyle = '#D84315';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
       ctx.fill();
     }
 
