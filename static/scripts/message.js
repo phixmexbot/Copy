@@ -1,10 +1,10 @@
     const fullMessage = document.getElementById('message-text').textContent;
     const messageBox = document.getElementById('message-box');
-    const messageContainer = document.querySelector('.message-container');
+    const messageContainer = document.getElementById('message-container');
 
     function calculateMaxChars() {
       const containerWidth = messageBox.clientWidth;
-      const avgCharWidth = 5;
+      const avgCharWidth = 2;
       const maxChars = Math.floor(containerWidth / avgCharWidth);
       return maxChars;
     }
@@ -61,25 +61,41 @@
 
         if (event.deltaY > scrollThreshold) {
           if (chunkIndex < messageChunks.length - 1) {
-            isScrolling = true;
             chunkIndex++;
             messageBox.style.opacity = '0';
             appendMessageChunk(messageChunks[chunkIndex]);
             messageBox.style.opacity = '1';
-            setTimeout(() => {
-              isScrolling = false;
-            }, 300);
+            isScrolling = true;
+
+            // Trigger bounce down animation only if last chunk is not reached
+            if (chunkIndex === messageChunks.length - 1) {
+              messageContainer.style.animation = 'bounce-down 0.5s';
+              setTimeout(() => {
+                messageContainer.style.animation = ''; // Reset animation
+                isScrolling = false;
+              }, 500);
+            } else {
+              isScrolling = false; // No animation
+            }
           }
         } else if (event.deltaY < -scrollThreshold) {
           if (chunkIndex > 0) {
-            isScrolling = true;
             chunkIndex--;
             messageBox.style.opacity = '0';
             appendMessageChunk(messageChunks[chunkIndex]);
             messageBox.style.opacity = '1';
-            setTimeout(() => {
-              isScrolling = false;
-            }, 300);
+            isScrolling = true;
+
+            // Trigger bounce up animation only if first chunk is not reached
+            if (chunkIndex === 0) {
+              messageContainer.style.animation = 'bounce-up 0.5s';
+              setTimeout(() => {
+                messageContainer.style.animation = ''; // Reset animation
+                isScrolling = false;
+              }, 500);
+            } else {
+              isScrolling = false; // No animation
+            }
           }
         }
       }
@@ -90,6 +106,33 @@
           handleScroll(event);
         }
       });
+
+      // Add click functionality for caret buttons
+      document.getElementById('caret-up').addEventListener('click', () => {
+        if (chunkIndex > 0) {
+          chunkIndex--;
+          messageBox.style.opacity = '0';
+          appendMessageChunk(messageChunks[chunkIndex]);
+          messageBox.style.opacity = '1';
+          messageContainer.style.animation = 'bounce-up 0.5s';
+          setTimeout(() => {
+            messageContainer.style.animation = ''; // Reset animation
+          }, 500);
+        }
+      });
+
+      document.getElementById('caret-down').addEventListener('click', () => {
+        if (chunkIndex < messageChunks.length - 1) {
+          chunkIndex++;
+          messageBox.style.opacity = '0';
+          appendMessageChunk(messageChunks[chunkIndex]);
+          messageBox.style.opacity = '1';
+          messageContainer.style.animation = 'bounce-down 0.5s';
+          setTimeout(() => {
+            messageContainer.style.animation = ''; // Reset animation
+          }, 500);
+        }
+      });
     }
 
-    window.addEventListener('DOMContentLoaded', initScrollChunks);
+    initScrollChunks();
