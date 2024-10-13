@@ -127,13 +127,17 @@
   </g>
 </svg>
 
-<p class="message-container">
-  <span class="message">
+  <div class="message-container" id="message-container">
+    <i class="fa-solid fa-caret-up caret caret-up" id="caret-up"></i>
+    <div class="message" id="message-box"></div>
+    <i class="fa-solid fa-caret-down caret caret-down" id="caret-down"></i>
+  </div>
+
+  <div id="message-text" style="display: none;">
     Core is a project created by Eternal team purely for enjoyment and satisfaction.<br> 
     It aims to provide a space where visitors can relax and immerse themselves in a visually stimulating environment.
     Whether you're here to explore its artistic elements, enjoy the serene landscapes, or simply unwind, Core invites you to take a moment to pause and appreciate the beauty of simplicity.
-  </span>
-</p>
+  </div>
   
 <script src="https://cdn.tailwindcss.com/3.4.5"></script>
 
@@ -179,6 +183,7 @@
   <script src="{{ url_for('static', filename='scripts/rain.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/rocket.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/snow.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/message.js') }}"></script>
 
   
   <script>
