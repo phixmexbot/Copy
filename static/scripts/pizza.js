@@ -34,7 +34,7 @@ class Pizza {
       if (i === this.sliceCount - 1) {
         let ii = this.sliceCount - 1;
         rad = this.sliceRadians * i + this.progress;
-        ctx.strokeStyle = '#FBC02D';
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.6)'; 
         cheese(ctx, rad, .9, ii, this.sliceSize, this.sliceDegree);
         cheese(ctx, rad, .6, ii, this.sliceSize, this.sliceDegree);
         cheese(ctx, rad, .5, ii, this.sliceSize, this.sliceDegree);
@@ -46,7 +46,7 @@ class Pizza {
       ctx.lineCap = 'butt';
       ctx.lineWidth = 11;
       ctx.arc(0, 0, this.sliceSize, rad, rad + this.sliceRadians);
-      ctx.strokeStyle = '#F57F17';
+      ctx.strokeStyle = 'rgba(0, 0, 0, 0.8)';
       ctx.stroke();
 
       // slice
