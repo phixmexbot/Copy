@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=600, initial-scale=0.5">
   <title>Core</title>
   <link rel="icon" type="image/svg+xml" href="/static/assets/logo.svg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/background.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/message.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/footer.css') }}">
@@ -113,15 +114,22 @@
     </a>
   </footer>
 <clooned-object features="lsc;dt;fs" oid="271c091f92ce45d4a1caab5261bfa1fb"></clooned-object>
-<p class="message-container">
-  <span class="message">
+
+  <div class="message-container" id="message-container">
+    <i class="fa-solid fa-caret-up caret caret-up" id="caret-up"></i>
+    <div class="message" id="message-box"></div>
+    <i class="fa-solid fa-caret-down caret caret-down" id="caret-down"></i>
+  </div>
+
+  <div id="message-text" style="display: none;">
     we developed a robot equipped with advanced facial recognition technology to automate the attendance process in educational institutions.
     The system is designed to identify and verify the faces of students in real-time as they enter the classroom.
     By comparing captured facial data with a pre-registered database, the robot accurately records attendance, eliminating the need for manual roll calls and reducing the potential for human error. 
-  </span>
-</p>
+  </div>
+    
   <script src="https://clooned.com/wp-content/uploads/cloons/scripts/clooned.js"></script>
   <script src="{{ url_for('static', filename='scripts/background.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/message.js') }}"></script>
 
   <script>
     // Hide the preloader and show the content with smooth transitions
