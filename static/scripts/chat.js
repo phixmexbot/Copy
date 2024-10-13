@@ -26,10 +26,19 @@ function updateScrollbar() {
 
 function setDate() {
   d = new Date();
+  
+  let hours = addLeadingZero(d.getHours());
+  let minutes = addLeadingZero(d.getMinutes());
+  
   if (m != d.getMinutes()) {
     m = d.getMinutes();
-    $('<div class="timestamp">' + d.getHours() + ':' + m + '</div>').appendTo($('.message:last'));
+    $('<div class="timestamp">' + hours + ':' + minutes + '</div>').appendTo($('.message:last'));
   }
+}
+
+// Helper function to add a leading zero if needed
+function addLeadingZero(num) {
+  return (num < 10 ? '0' : '') + num;
 }
 
 function insertMessage() {
