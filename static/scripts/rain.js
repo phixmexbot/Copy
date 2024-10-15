@@ -1,11 +1,17 @@
-
 var c = document.getElementById("canvas-club");
 var ctx = c.getContext("2d");
-var w = c.width = window.innerWidth;
-var h = c.height = window.innerHeight;
-var clearColor = 'rgba(0, 0, 0, 0)'; // Transparent background
+var w = c.width;
+var h = c.height;
 var max = 100;
 var drops = [];
+
+// Function to resize the canvas
+function resizeCanvas(width, height) {
+    c.width = width;
+    c.height = height;
+    w = c.width;
+    h = c.height;
+}
 
 function random(min, max) {
     return Math.random() * (max - min) + min;
@@ -45,13 +51,13 @@ O.prototype = {
                 this.x, this.y - this.h / 2
             );
 
-            ctx.strokeStyle = 'rgba(255, 255, 255, ' + this.a + ')'; 
+            ctx.strokeStyle = 'rgba(255, 255, 255, ' + this.a + ')';
             ctx.stroke();
             ctx.closePath();
 
         } else {
             ctx.fillStyle = this.color;
-            ctx.fillRect(this.x, this.y, this.size, this.size * 3); // Adjust this multiplier
+            ctx.fillRect(this.x, this.y, this.size, this.size * 3);
         }
         this.update();
     },
@@ -74,13 +80,8 @@ O.prototype = {
     }
 }
 
-function resize(){
-    w = c.width = window.innerWidth;
-    h = c.height = window.innerHeight;
-}
-
 function setup(){
-    drops = []; // Reset the array to avoid duplication
+    drops = []; 
     for(var i = 0; i < max; i++){
         (function(j){
             setTimeout(function(){
@@ -93,17 +94,20 @@ function setup(){
 }
 
 function anim() {
-    ctx.clearRect(0, 0, w, h); // Clears the canvas without filling it with a color
+    ctx.clearRect(0, 0, w, h); 
     for(var i in drops){
         drops[i].draw();
     }
     requestAnimationFrame(anim);
 }
 
-window.addEventListener("resize", resize);
+// Initially set the canvas size to 0x0
+resizeCanvas(0, 0);
 
 function onHashChange() {
     if (location.hash === '#rain') {
+        // Set the canvas to full screen when the hash is '#rain'
+        resizeCanvas(window.innerWidth, window.innerHeight);
         setup();
         anim();
     }
