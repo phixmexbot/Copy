@@ -1,76 +1,61 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
 .stars {
-  z-index: 10;
+  z-index:10;
   display: inline-flex;
   flex-direction: row-reverse;
-  cursor: pointer;
 }
-
-.stars input[type="radio"] {
-  display: none;
-}
-
-.stars label {
-  cursor: pointer;
-  transition: transform 500ms cubic-bezier(0.6, -0.28, 0.74, 0.05) 64ms;
-}
-
-.stars label svg {
-  width: 72px;
-  height: 72px;
-  vertical-align: middle;
-  transition: width 350ms ease-out 650ms, height 350ms ease-out 650ms, transform 350ms linear 650ms;
-}
-
-.stars label svg path {
-  fill: white;
-  transition: fill 200ms ease-out;
-}
-
-.stars input[type="radio"]:checked ~ label svg path {
-  fill: rgba(0, 0, 0, 0.45);
-}
-
-.stars label:hover svg path, 
-.stars label:hover ~ label svg path {
-  fill: rgba(0, 0, 0, 0.9);
-}
-
-/* Transitions for selected rating */
 .stars.rating-selected label:nth-child(10) {
   transform: translateX(200%);
 }
-
 .stars.rating-selected label:nth-child(8) {
   transform: translateX(100%);
 }
-
 .stars.rating-selected label:nth-child(4) {
   transform: translateX(-100%);
 }
-
 .stars.rating-selected label:nth-child(2) {
   transform: translateX(-200%);
 }
-
 .stars.rating-selected label svg {
   width: 0;
   height: 0;
   transform: rotate(720deg);
 }
-
 .stars.rating-selected .rating-comment {
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
   width: 360px;
   height: 144px;
   transform: scale(1) rotate(0deg);
 }
-
+.stars input[type=radio] {
+  display: none;
+}
+.stars input[type=radio]:checked ~ label svg path {
+  fill: rgba(0, 0, 0, 0.45);
+}
+.stars label {
+  transition: transform 500ms cubic-bezier(0.6, -0.28, 0.74, 0.05) 64ms;
+}
+.stars label svg {
+  width: 72px;
+  height: 72px;
+  vertical-align: middle;
+  transition: width 350ms ease-out 650ms, height 350ms ease-out 650ms, transform 350ms linear 650ms;
+}
+.stars label svg path {
+  fill: white;
+  transition: fill 200ms ease-out;
+}
+.stars label:hover svg path, .stars label:hover ~ label svg path {
+  fill: rgba(0, 0, 0, 0.9);
+}
 .stars .rating-comment {
+
   font-family: Montserrat, sans-serif;
-  background: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.45);
   width: 0;
   height: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -81,10 +66,34 @@
   transform: scale(0) rotate(-90deg);
   transition: width 0ms linear 1250ms, height 0ms linear 1125ms, transform 680ms cubic-bezier(0.68, 0.55, 0.27, 1.55) 1125ms;
 }
-
-.stars .rating-comment p, 
-.stars .rating-comment h2, 
-.stars .rating-comment h3 {
-  color: #ffffff;
+.stars .rating-comment p, .stars .rating-comment h2, .stars .rating-comment h3 {
+    color: #ffffff;
+  padding: 0;
+  margin: 0;
   margin-bottom: 10px;
+}
+.stars .rating-comment p:last-child, .stars .rating-comment h2:last-child, .stars .rating-comment h3:last-child {
+  margin-bottom: 0;
+}
+
+html, body, #rate {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#rate {
+  position: fixed;
+  bottom: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: auto;
+}
+
+#rate.visible {
+  opacity: 1;
+  visibility: visible;
 }
