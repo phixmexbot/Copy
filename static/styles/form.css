@@ -92,6 +92,8 @@ body {
   box-shadow: 0 2em 3em rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
   backdrop-filter: blur(0.4em);
+  position: relative;
+  top: -5%;
 }
 
 .contact-wrapper {
