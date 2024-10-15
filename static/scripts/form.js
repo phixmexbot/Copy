@@ -93,6 +93,7 @@ if (sendButton) {
       });
     } else {
       alert('Please fill out the required fields.');
+      addOpacity();
     }
   });
 }
