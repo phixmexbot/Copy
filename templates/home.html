@@ -15,92 +15,18 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/snow.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/attention-button.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/chat.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/load.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <link rel='stylesheet' href='https://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css'>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.min.css'>
-  <style>
-    body {
-      background: linear-gradient(#0f1a2b, #411d63);
-      margin: 0;
-      overflow: hidden;
-    }
-
-    .load {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100px;
-      height: 100px;
-      opacity: 1;
-      transition: opacity 0.3s ease-in-out; /* Change 1s to 0.3s */
-    }
-
-    .load hr {
-      border: 0;
-      margin: 0;
-      width: 25%;
-      height: 25%;
-      position: absolute;
-      border-radius: 50%;
-      animation: spin 2s linear infinite;
-      top: 17px;
-      left: 17px;
-    }
-
-    .load hr:nth-child(1) {
-      background: #19A68C;
-      animation-delay: -1.5s;
-    }
-
-    .load hr:nth-child(2) {
-      background: #F63D3A;
-      animation-delay: -1s;
-    }
-
-    .load hr:nth-child(3) {
-      background: #FDA543;
-      animation-delay: -0.5s;
-    }
-
-    .load hr:nth-child(4) {
-      background: #193B48;
-    }
-
-    @keyframes spin {
-      0%, 100% {
-        transform: translate(0);
-      }
-      25% {
-        transform: translate(160%);
-      }
-      50% {
-        transform: translate(160%, 160%);
-      }
-      75% {
-        transform: translate(0, 160%);
-      }
-    }
-
-    /* Initial content hidden with opacity 0 */
-    #content {
-      display: block;
-      opacity: 0;
-      transition: opacity 0.3s ease-in-out; /* Change 1s to 0.3s */
-    }
-  </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 </head>
 <body>
-  <!-- Preloader -->
-  <div class="load">
-    <hr/><hr/><hr/><hr/>
-  </div>
-
-  <!-- Content that will load after the preloader -->
-  <div id="content">
-
+<div class="load">
+  <hr/><hr/><hr/><hr/>
+</div>
+<div id="content">
 <div class="chat">
   <div class="chat-title">
     <h1>Komiljon</h1>
