@@ -223,9 +223,8 @@
       fetch(weatherUrl)
         .then(response => response.json())
         .then(data => {
-          //const weatherConditions = data.weather.map(condition => condition.main.toLowerCase());
+          const weatherConditions = data.weather.map(condition => condition.main.toLowerCase());
           const weatherState = data.weather[0].description.toLowerCase(); 
-          const weatherConditions = ['rain', 'snow']
     
           console.log("Weather state: ", weatherState);
           console.log("Weather conditions: ", weatherConditions);
