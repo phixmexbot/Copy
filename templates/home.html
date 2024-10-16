@@ -217,13 +217,16 @@
 
 
     function getWeather(lat, lon) {
-      const apiKey = 'YOUR_API_KEY'; // Replace with your OpenWeatherMap API key
+      const apiKey = '960a7824230191f4a129fa07e1769fe7'; 
       const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
     
       fetch(weatherUrl)
         .then(response => response.json())
         .then(data => {
           const weatherConditions = data.weather.map(condition => condition.main.toLowerCase());
+          const weatherState = data.weather[0].description.toLowerCase(); 
+    
+          console.log("Weather state: ", weatherState);
           console.log("Weather conditions: ", weatherConditions);
     
           const hashTags = [];
@@ -238,7 +241,6 @@
             hashTags.push('#light');
           }
     
-          // If any conditions match, cycle through them
           if (hashTags.length > 0) {
             cycleThroughHashes(hashTags);
           }
@@ -253,21 +255,19 @@
         if (index < hashTags.length) {
           window.location.hash = hashTags[index];
           index++;
-          setTimeout(changeHash, 1000); // Wait 1 second before switching to the next hash
+          setTimeout(changeHash, 1000);
         }
       }
     
-      changeHash(); // Start the cycle
+      changeHash(); 
     }
     
-    // Example of how to call getWeather with a position (assuming lat and lon are obtained from geolocation)
     function showPosition(position) {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
       getWeather(lat, lon);
     }
     
-    // Geolocation code remains the same
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
