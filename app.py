@@ -89,7 +89,11 @@ def process_me():
         if user == None:
             user = {"id": request.json['id'], "data": [{'role': 'system', 'content': INSTRUCTION}]}           
             database_insert(user)
-        chat_history = user['data']
+            chat_history = user['data']
+        else:
+            #removal of previous instruction
+            chat_history.pop(len(chat_history) - 3)
+            chat_history.append({'role': 'system', 'content': INSTRUCTION})
         chat_history.append({"role": "user", "content": request.json['message']})
 
         client = Client()
