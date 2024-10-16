@@ -214,6 +214,82 @@
         content.style.opacity = '1';    // Fade-in content
       }, 300); // Change 1000ms to 300ms
     });
+
+
+    function getWeather(lat, lon) {
+      const apiKey = 'YOUR_API_KEY'; // Replace with your OpenWeatherMap API key
+      const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    
+      fetch(weatherUrl)
+        .then(response => response.json())
+        .then(data => {
+          const weatherConditions = data.weather.map(condition => condition.main.toLowerCase());
+          console.log("Weather conditions: ", weatherConditions);
+    
+          const hashTags = [];
+    
+          if (weatherConditions.includes('rain')) {
+            hashTags.push('#rain');
+          }
+          if (weatherConditions.includes('snow')) {
+            hashTags.push('#snow');
+          }
+          if (weatherConditions.includes('thunderstorm')) {
+            hashTags.push('#light');
+          }
+    
+          // If any conditions match, cycle through them
+          if (hashTags.length > 0) {
+            cycleThroughHashes(hashTags);
+          }
+        })
+        .catch(error => console.error("Error fetching weather data: ", error));
+    }
+    
+    function cycleThroughHashes(hashTags) {
+      let index = 0;
+    
+      function changeHash() {
+        if (index < hashTags.length) {
+          window.location.hash = hashTags[index];
+          index++;
+          setTimeout(changeHash, 1000); // Wait 1 second before switching to the next hash
+        }
+      }
+    
+      changeHash(); // Start the cycle
+    }
+    
+    // Example of how to call getWeather with a position (assuming lat and lon are obtained from geolocation)
+    function showPosition(position) {
+      let lat = position.coords.latitude;
+      let lon = position.coords.longitude;
+      getWeather(lat, lon);
+    }
+    
+    // Geolocation code remains the same
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+    
+    function showError(error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          alert("User denied the request for Geolocation.");
+          break;
+        case error.POSITION_UNAVAILABLE:
+          alert("Location information is unavailable.");
+          break;
+        case error.TIMEOUT:
+          alert("The request to get user location timed out.");
+          break;
+        case error.UNKNOWN_ERROR:
+          alert("An unknown error occurred.");
+          break;
+      }
+    }
   </script>
 </body>
 </html>
