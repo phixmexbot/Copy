@@ -241,15 +241,16 @@
       rateElement.style.opacity = 0;
       rateElement.style.display = 'none';
     });
-
+  
     function showRateElement() {
       var rateElement = document.getElementById('rate');
       rateElement.style.opacity = 1;
       rateElement.style.display = 'flex';
     }
-
+  
     document.getElementById('cancelButton').addEventListener('click', showRateElement);
-    // STARTS FROM HERE
+  
+    // Popup for success/failure message
     const showPopup = (message, isSuccess) => {
       const popup = document.createElement('div');
       popup.textContent = message;
@@ -262,31 +263,31 @@
       popup.style.borderRadius = '5px';
       popup.style.zIndex = '1000';
       document.body.appendChild(popup);
-    
+  
       setTimeout(() => {
         popup.remove();
       }, 3000);
     };
-    
+  
     const sendButton = document.getElementById('sendButton');
     const contactForm = document.getElementById('frmContactForm');
     const fullNameInput = document.getElementById('txtFullName');
     const emailInput = document.getElementById('txtEmail');
     const messageInput = document.getElementById('txtContent');
-    
+  
     if (sendButton) {
       sendButton.addEventListener('click', () => {
         const fullName = fullNameInput.value.trim();
         const email = emailInput.value.trim();
         const message = messageInput.value.trim();
-    
+  
         if (email && message) {
           const formData = {
             name: fullName || 'Anonymous',
             email: email,
             feedback: message
           };
-    
+  
           fetch('/process', {
             method: 'POST',
             headers: {
@@ -298,18 +299,17 @@
           .then(result => {
             if (result === 'Sent') {
               showPopup('Message sent successfully!', true);
-              
+  
               // Clear the form fields
               fullNameInput.value = '';
               emailInput.value = '';
               messageInput.value = '';
-    
+  
               // Collapse the form
               contactForm.checked = false;
-              
-              // Reset the opacity
-              document.getElementById('sendButton').addEventListener('click', showRateElement);
-              
+  
+              // Show the 'rate' element again
+              showRateElement();
             } else {
               showPopup('Failed to send the message.', false);
             }
@@ -324,6 +324,7 @@
       });
     }
   </script>
+
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
