@@ -85,7 +85,7 @@ def process_me():
         return jsonify({'response': output})
 
     elif 'message' in request.json:
-        user = database_search({"session_id": request.json['id']})
+        user = database_search({"id": request.json['id']})
         if user == None:
             user = {"id": request.json['id'], "data": [{'role': 'system', 'content': INSTRUCTION}]}           
             database_insert(user)
