@@ -215,7 +215,26 @@
       }, 300); // Change 1000ms to 300ms
     });
 
-
+    
+    function getLocationFromIP() {
+      // Fetch user's location based on IP address
+      fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(data => {
+          const lat = data.latitude;
+          const lon = data.longitude;
+          const city = data.city;
+          const region = data.region;
+          const country = data.country_name;
+    
+          console.log(`Approximate location: ${city}, ${region}, ${country}`);
+          console.log(`Latitude: ${lat}, Longitude: ${lon}`);
+    
+          getWeather(lat, lon);
+        })
+        .catch(error => console.error('Error fetching location from IP:', error));
+    }
+    
     function getWeather(lat, lon) {
       const apiKey = '960a7824230191f4a129fa07e1769fe7'; 
       const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
@@ -224,9 +243,6 @@
         .then(response => response.json())
         .then(data => {
           const weatherConditions = data.weather.map(condition => condition.main.toLowerCase());
-          const weatherState = data.weather[0].description.toLowerCase(); 
-    
-          console.log("Weather state: ", weatherState);
           console.log("Weather conditions: ", weatherConditions);
     
           const hashTags = [];
@@ -253,43 +269,17 @@
     
       function changeHash() {
         if (index < hashTags.length) {
-          window.location.hash = hashTags[index];
+          window.location.hash = hashTags[index]; 
           index++;
-          setTimeout(changeHash, 1000);
+          setTimeout(changeHash, 1000); 
         }
       }
     
-      changeHash(); 
+      changeHash();
     }
     
-    function showPosition(position) {
-      let lat = position.coords.latitude;
-      let lon = position.coords.longitude;
-      getWeather(lat, lon);
-    }
-    
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
-    
-    function showError(error) {
-      switch (error.code) {
-        case error.PERMISSION_DENIED:
-          alert("User denied the request for Geolocation.");
-          break;
-        case error.POSITION_UNAVAILABLE:
-          alert("Location information is unavailable.");
-          break;
-        case error.TIMEOUT:
-          alert("The request to get user location timed out.");
-          break;
-        case error.UNKNOWN_ERROR:
-          alert("An unknown error occurred.");
-          break;
-      }
-    }
+    getLocationFromIP();
+
   </script>
 </body>
 </html>
