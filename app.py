@@ -91,6 +91,7 @@ def process_me():
             database_insert(user)
             chat_history = user['data']
         else:
+            chat_history = user['data']
             #removal of previous instruction
             chat_history.pop(len(chat_history) - 3)
             chat_history.append({'role': 'system', 'content': INSTRUCTION})
