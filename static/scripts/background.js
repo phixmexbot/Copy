@@ -1,4 +1,4 @@
-(() => {
+document.addEventListener('DOMContentLoaded', () => {
   const max_stars = 100;
   const stars = [];
   
@@ -15,10 +15,10 @@
     document.body.appendChild(star);
   }
   
-  for (let j = 0; j < max_stars * 0.6;  j++) {
+  for (let j = 0; j < max_stars * 0.6; j++) {
     const star = stars[j];
     star.style.animationName = 'glow';
     star.style.animationDelay = (Math.floor(Math.random() * 6) + 1) + 's';
     star.style.animationDuration = (Math.floor(Math.random() * 6) + 1) + 's';
   }
-})();
+});
