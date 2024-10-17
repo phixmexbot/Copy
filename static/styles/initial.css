@@ -27,6 +27,7 @@ body {
   transform: scale(0.5); /* Scale down everything */
   transform-origin: bottom center; /* Adjust origin as needed */
   z-index: 100;
+  left: 50%;
 }
 
 .flower {
