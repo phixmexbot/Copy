@@ -28,16 +28,13 @@ moon.addEventListener('click', function(event) {
     // Switch to night mode
     background.style.background = `linear-gradient(to bottom, #0f1a2b, #411d63)`;
     
-    // Change colors back to black uniformly after wave animation completes
-    setTimeout(() => {
-      ground.style.transition = 'background 0.5s'; // Smooth transition for ground color
-      ground.style.background = 'black'; // Reset ground color
-      rocks.forEach(rock => {
-        rock.style.transition = 'background 0.5s'; // Smooth transition for rocks
-        rock.style.background = 'black'; // Reset rock color
-      });
-      // No change for craters
-    }, 500); // Match this duration with the wave animation
+    // Change colors back to black uniformly
+    ground.style.transition = 'background 0.5s'; // Smooth transition for ground color
+    ground.style.background = 'black'; // Reset ground color
+    rocks.forEach(rock => {
+      rock.style.transition = 'background 0.5s'; // Smooth transition for rocks
+      rock.style.background = 'black'; // Reset rock color
+    });
 
     background.classList.remove('wave'); // Reset wave class
     void background.offsetWidth; // Trigger reflow to restart the animation
@@ -53,7 +50,6 @@ moon.addEventListener('click', function(event) {
       rock.style.transition = 'background 0.5s'; // Smooth transition for rocks
       rock.style.background = '#736944'; // Change rock color
     });
-    // No change for craters
 
     background.classList.remove('wave'); // Reset wave class
     void background.offsetWidth; // Trigger reflow to restart the animation
