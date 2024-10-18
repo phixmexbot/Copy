@@ -4,6 +4,7 @@ const moon = document.querySelector('.moon');
 const background = document.querySelector('.background');
 const ground = document.querySelector('.ground'); // Select the ground element
 const rocks = document.querySelectorAll('.rock'); // Select all rock elements
+const craters = document.querySelectorAll('.crater'); // Select all crater elements
 
 let isDayMode = false; // Flag to track the mode
 
@@ -26,25 +27,39 @@ moon.addEventListener('click', function(event) {
   // Toggle between day and night modes
   if (isDayMode) {
     // Switch to night mode
-    background.style.background = `radial-gradient(circle at ${xPos}px ${yPos}px, #0f1a2b, #411d63)`;
+    background.style.background = `linear-gradient(to bottom, #0f1a2b, #411d63)`;
+    
+    // Change colors back to black uniformly
     ground.style.transition = 'background 1s'; // Smooth transition for ground color
     ground.style.background = 'black'; // Reset ground color
     rocks.forEach(rock => {
       rock.style.transition = 'background 1s'; // Smooth transition for rocks
       rock.style.background = 'black'; // Reset rock color
     });
+    craters.forEach(crater => {
+      crater.style.transition = 'background 1s'; // Smooth transition for craters
+      crater.style.background = 'rgba(255, 244, 118, 1)'; // Reset crater color (or change as desired)
+    });
+
     background.classList.remove('wave'); // Reset wave class
     void background.offsetWidth; // Trigger reflow to restart the animation
     background.classList.add('wave'); // Re-add the wave class
   } else {
     // Switch to day mode
-    background.style.background = `radial-gradient(circle at ${xPos}px ${yPos}px, #87CEFA, #fff95b)`;
+    background.style.background = `linear-gradient(to bottom, #87CEFA, #fff95b)`;
+    
+    // Change colors uniformly for day mode
     ground.style.transition = 'background 1s'; // Smooth transition for ground color
     ground.style.background = '#736944'; // Change ground color
     rocks.forEach(rock => {
       rock.style.transition = 'background 1s'; // Smooth transition for rocks
       rock.style.background = '#736944'; // Change rock color
     });
+    craters.forEach(crater => {
+      crater.style.transition = 'background 1s'; // Smooth transition for craters
+      crater.style.background = 'rgba(255, 244, 118, 1)'; // Change crater color to yellow
+    });
+
     background.classList.remove('wave'); // Reset wave class
     void background.offsetWidth; // Trigger reflow to restart the animation
     background.classList.add('wave'); // Re-add the wave class
