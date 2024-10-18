@@ -203,34 +203,6 @@
   <script src="{{ url_for('static', filename='scripts/chat.js') }}"></script>
 
   <script>
-
-document.addEventListener('DOMContentLoaded', function() {
-  const moon = document.querySelector('.moon');
-  const background = document.querySelector('.background');
-
-  moon.addEventListener('click', function(event) {
-    // Ensure the element exists
-    if (!background) {
-      console.error('Background element not found');
-      return;
-    }
-
-    // Get the position of the moon element
-    const rect = event.target.getBoundingClientRect();
-    const xPos = rect.left + rect.width / 2; // Center of the moon
-    const yPos = rect.top + rect.height / 2; // Center of the moon
-
-    // Set the CSS variables to start the wave animation at the moon's position
-    background.style.setProperty('--x-pos', `${xPos}px`);
-    background.style.setProperty('--y-pos', `${yPos}px`);
-
-    // Change the background color with a wave effect
-    background.style.background = 'linear-gradient(#87CEFA, #fff95b)';
-    background.classList.add('wave');
-  });
-});
-
-
     
     // Hide the preloader and show the content with smooth transitions
     window.addEventListener('load', function() {
