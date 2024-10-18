@@ -150,6 +150,10 @@ body {
   transform: rotateZ(-15deg);
 }
 
+.ground, .rock {
+  transition: background 0.5s; /* Duration of 1 second */
+}
+
 .star {
   position: absolute;
   width: 1px;
