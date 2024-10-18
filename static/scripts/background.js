@@ -29,17 +29,19 @@ moon.addEventListener('click', function(event) {
     // Switch to night mode
     background.style.background = `linear-gradient(to bottom, #0f1a2b, #411d63)`;
     
-    // Change colors back to black uniformly
-    ground.style.transition = 'background 1s'; // Smooth transition for ground color
-    ground.style.background = 'black'; // Reset ground color
-    rocks.forEach(rock => {
-      rock.style.transition = 'background 1s'; // Smooth transition for rocks
-      rock.style.background = 'black'; // Reset rock color
-    });
-    craters.forEach(crater => {
-      crater.style.transition = 'background 1s'; // Smooth transition for craters
-      crater.style.background = 'rgba(255, 244, 118, 1)'; // Reset crater color (or change as desired)
-    });
+    // Change colors back to black uniformly after wave animation completes
+    setTimeout(() => {
+      ground.style.transition = 'background 0.5s'; // Smooth transition for ground color
+      ground.style.background = 'black'; // Reset ground color
+      rocks.forEach(rock => {
+        rock.style.transition = 'background 0.5s'; // Smooth transition for rocks
+        rock.style.background = 'black'; // Reset rock color
+      });
+      craters.forEach(crater => {
+        crater.style.transition = 'background 0.5s'; // Smooth transition for craters
+        crater.style.background = 'rgba(255, 244, 118, 1)'; // Reset crater color (or change as desired)
+      });
+    }, 500); // Match this duration with the wave animation
 
     background.classList.remove('wave'); // Reset wave class
     void background.offsetWidth; // Trigger reflow to restart the animation
@@ -49,14 +51,14 @@ moon.addEventListener('click', function(event) {
     background.style.background = `linear-gradient(to bottom, #87CEFA, #fff95b)`;
     
     // Change colors uniformly for day mode
-    ground.style.transition = 'background 1s'; // Smooth transition for ground color
+    ground.style.transition = 'background 0.5s'; // Smooth transition for ground color
     ground.style.background = '#736944'; // Change ground color
     rocks.forEach(rock => {
-      rock.style.transition = 'background 1s'; // Smooth transition for rocks
+      rock.style.transition = 'background 0.5s'; // Smooth transition for rocks
       rock.style.background = '#736944'; // Change rock color
     });
     craters.forEach(crater => {
-      crater.style.transition = 'background 1s'; // Smooth transition for craters
+      crater.style.transition = 'background 0.5s'; // Smooth transition for craters
       crater.style.background = 'rgba(255, 244, 118, 1)'; // Change crater color to yellow
     });
 
@@ -67,7 +69,7 @@ moon.addEventListener('click', function(event) {
 
   isDayMode = !isDayMode; // Toggle the mode
 });
-  
+
   setTimeout(() => {
     const max_stars = 100;
     const stars = [];
