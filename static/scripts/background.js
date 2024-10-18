@@ -4,7 +4,6 @@ const moon = document.querySelector('.moon');
 const background = document.querySelector('.background');
 const ground = document.querySelector('.ground'); // Select the ground element
 const rocks = document.querySelectorAll('.rock'); // Select all rock elements
-const craters = document.querySelectorAll('.crater'); // Select all crater elements
 
 let isDayMode = false; // Flag to track the mode
 
@@ -37,10 +36,7 @@ moon.addEventListener('click', function(event) {
         rock.style.transition = 'background 0.5s'; // Smooth transition for rocks
         rock.style.background = 'black'; // Reset rock color
       });
-      craters.forEach(crater => {
-        crater.style.transition = 'background 0.5s'; // Smooth transition for craters
-        crater.style.background = 'rgba(255, 244, 118, 1)'; // Reset crater color (or change as desired)
-      });
+      // No change for craters
     }, 500); // Match this duration with the wave animation
 
     background.classList.remove('wave'); // Reset wave class
@@ -57,10 +53,7 @@ moon.addEventListener('click', function(event) {
       rock.style.transition = 'background 0.5s'; // Smooth transition for rocks
       rock.style.background = '#736944'; // Change rock color
     });
-    craters.forEach(crater => {
-      crater.style.transition = 'background 0.5s'; // Smooth transition for craters
-      crater.style.background = 'rgba(255, 244, 118, 1)'; // Change crater color to yellow
-    });
+    // No change for craters
 
     background.classList.remove('wave'); // Reset wave class
     void background.offsetWidth; // Trigger reflow to restart the animation
