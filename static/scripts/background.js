@@ -4,6 +4,7 @@ const moon = document.querySelector('.moon');
 const background = document.querySelector('.background');
 const ground = document.querySelector('.ground'); // Select the ground element
 const rocks = document.querySelectorAll('.rock'); // Select all rock elements
+const cactus = document.querySelector('.cactus'); // Select the cactus SVG element
 
 let isDayMode = false; // Flag to track the mode
 
@@ -35,6 +36,10 @@ moon.addEventListener('click', function(event) {
       rock.style.transition = 'background 0.5s'; // Smooth transition for rocks
       rock.style.background = 'black'; // Reset rock color
     });
+    
+    // Change cactus color to black
+    cactus.style.transition = 'fill 0.5s'; // Smooth transition for cactus color
+    cactus.style.fill = 'black'; // Reset cactus color
 
     background.classList.remove('wave'); // Reset wave class
     void background.offsetWidth; // Trigger reflow to restart the animation
@@ -50,6 +55,10 @@ moon.addEventListener('click', function(event) {
       rock.style.transition = 'background 0.5s'; // Smooth transition for rocks
       rock.style.background = '#736944'; // Change rock color
     });
+    
+    // Change cactus color to #736944
+    cactus.style.transition = 'fill 0.5s'; // Smooth transition for cactus color
+    cactus.style.fill = '#736944'; // Change cactus color
 
     background.classList.remove('wave'); // Reset wave class
     void background.offsetWidth; // Trigger reflow to restart the animation
@@ -59,6 +68,7 @@ moon.addEventListener('click', function(event) {
   isDayMode = !isDayMode; // Toggle the mode
 });
 
+  
   setTimeout(() => {
     const max_stars = 100;
     const stars = [];
