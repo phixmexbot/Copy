@@ -14,7 +14,7 @@ function createClouds() {
     const sizeClass = (i % 4 === 0) ? 'tiny' : (i % 3 === 0) ? 'small' : (i % 2 === 0) ? 'normal' : 'large';
     cloudDiv.className = `cloud ${sizeClass} cloud-${i}`;
 
-    // Create inner divs for cloud structure
+    // Create inner divs
     for (let j = 0; j < 4; j++) {
       const innerDiv = document.createElement('div');
       cloudDiv.appendChild(innerDiv);
@@ -33,13 +33,15 @@ function toggleClouds() {
   cloudsVisible = !cloudsVisible;
 
   if (cloudsVisible) {
-    createClouds(); // Create clouds with opacity 0
-    // Start the fade-in animation after a delay of 0.5 seconds
+    createClouds(); // Create clouds
+    // Start the fade-in animation after a delay of 0.05 seconds
     setTimeout(() => {
-      container.classList.add('clouds-visible'); // Add class to trigger fade-in
+      container.classList.remove('clouds-hidden');
+      container.classList.add('clouds-visible');
     }, 500); // 0.5 seconds
   } else {
-    container.classList.remove('clouds-visible'); // Start fade-out
+    container.classList.remove('clouds-visible');
+    container.classList.add('clouds-hidden');
 
     // Delay removal of clouds to allow fade-out animation to finish
     setTimeout(() => {
@@ -50,4 +52,3 @@ function toggleClouds() {
 
 // Add event listener to the button
 document.querySelector('.moon').addEventListener('click', toggleClouds);
-
