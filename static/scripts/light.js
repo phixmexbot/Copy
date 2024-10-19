@@ -106,7 +106,7 @@ var canvasLightning = function(c, cw, ch) {
     this.lightTimeCurrent++;
     if (this.lightTimeCurrent >= this.lightTimeTotal) {
       var newX = this.rand(100, cw - 100);
-      var newY = this.rand(0, ch / 2);
+      var newY = this.rand(ch * 0.15, ch / 2); // Set newY to be between 15% of height and half the height
       var createCount = this.rand(1, 3);
       while (createCount--) {
         this.createL(newX, newY, true);
