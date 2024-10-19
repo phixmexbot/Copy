@@ -39,10 +39,12 @@ var Birds = function()
         engine = canvas.getContext('2d');
 
         width  = window.innerWidth;
-        height = window.innerHeight;
+        height = window.innerHeight * 0.2;
 
         canvas.setAttribute('width', width);
         canvas.setAttribute('height', height);
+
+        canvas.style.zIndex = 1;
 
         bgTop = engine.createLinearGradient(0, 0, 0, height / 2);
         bgTop.addColorStop(0, '#000');
