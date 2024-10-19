@@ -4,10 +4,14 @@ function createClouds() {
   const container = document.getElementById('cloud-container');
   container.innerHTML = '';
 
-  // Set cloud count to always be 20
-  const cloudCount = 20;
+  // Calculate the number of clouds based on screen width
+  const screenWidth = window.innerWidth;
+  let cloudCount;
 
-  // Create all clouds based on the calculated count
+   cloudCount = 20; 
+
+
+  // Create clouds based on calculated count
   for (let i = 1; i <= cloudCount; i++) {
     const cloudDiv = document.createElement('div');
     const sizeClass = (i % 4 === 0) ? 'tiny' : (i % 3 === 0) ? 'small' : (i % 2 === 0) ? 'normal' : 'large';
@@ -22,10 +26,6 @@ function createClouds() {
     // Append the cloud to the container
     container.appendChild(cloudDiv);
   }
-
-  // Lift the clouds higher by adjusting the container's position or clouds' styles
-  container.style.position = 'relative';
-  container.style.top = '-50px'; // Adjust this value to lift the clouds higher
 }
 
 // Create clouds on initial load
