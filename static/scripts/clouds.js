@@ -1,4 +1,5 @@
 let cloudsVisible = false; // State to track cloud visibility
+let cloudsCreatedByHash = false; // Flag to check if clouds were created by hash change
 
 // Function to create and append clouds based on screen width
 function createClouds() {
@@ -28,57 +29,61 @@ function createClouds() {
   }
 }
 
-// Function to toggle clouds
-function toggleClouds() {
+// Function to show clouds
+function showClouds() {
   const container = document.getElementById('cloud-container');
+  createClouds(); // Create clouds
+  container.classList.add('clouds-visible');
 
-  // Toggle visibility state
-  cloudsVisible = !cloudsVisible;
+  // Set opacity to 1 for fade-in effect
+  const clouds = container.querySelectorAll('.cloud');
+  clouds.forEach(cloud => {
+    cloud.style.transition = 'opacity 0.5s'; // Transition for opacity
+    cloud.style.opacity = '1'; // Fade in clouds
+  });
 
-  if (cloudsVisible) {
-    createClouds(); // Create clouds
-    // Start the fade-in animation after a delay of 0.5 seconds
-    setTimeout(() => {
-      container.classList.add('clouds-visible');
+  cloudsVisible = true; // Set clouds as visible
+  cloudsCreatedByHash = true; // Mark that clouds were created by hash change
+}
 
-      // Set opacity to 1 for fade-in effect
-      const clouds = container.querySelectorAll('.cloud');
-      clouds.forEach(cloud => {
-        cloud.style.transition = 'opacity 0.5s'; // Transition for opacity
-        cloud.style.opacity = '1'; // Fade in clouds
-      });
-    }, 500); // 0.5 seconds
-  } else {
-    container.classList.remove('clouds-visible');
+// Function to hide clouds
+function hideClouds() {
+  const container = document.getElementById('cloud-container');
+  container.classList.remove('clouds-visible');
 
-    // Immediately set opacity to 0 for fade-out
-    const clouds = container.querySelectorAll('.cloud');
-    clouds.forEach(cloud => {
-      cloud.style.opacity = '0'; // Fade out clouds
-    });
+  // Immediately set opacity to 0 for fade-out
+  const clouds = container.querySelectorAll('.cloud');
+  clouds.forEach(cloud => {
+    cloud.style.opacity = '0'; // Fade out clouds
+  });
 
-    // Clear clouds after fade-out
-    setTimeout(() => {
-      container.innerHTML = ''; // Clear clouds after fade-out
-    }, 500); // Match this time with the CSS transition duration
-  }
+  // Clear clouds after fade-out
+  setTimeout(() => {
+    container.innerHTML = ''; // Clear clouds after fade-out
+  }, 500); // Match this time with the CSS transition duration
+
+  cloudsVisible = false; // Set clouds as not visible
 }
 
 // Function to handle hash changes
 function handleHashChange() {
   const hash = window.location.hash.substring(1); // Get the hash without the '#'
   if (hash === 'light' || hash === 'snow' || hash === 'rain') {
-    if (!cloudsVisible) {
-      toggleClouds(); // Show clouds if they are not already visible
+    if (!cloudsCreatedByHash) {
+      showClouds(); // Show clouds if they were not created by hash change
     }
   } else {
-    // If the hash is not light, snow, or rain, and clouds are visible, do nothing
-    // If clouds are not visible, do nothing
+    // If the hash is not light, snow, or rain, do nothing
   }
 }
 
 // Add event listener to the button
-document.querySelector('.moon').addEventListener('click', toggleClouds);
+document.querySelector('.moon').addEventListener('click', () => {
+  // Only toggle clouds if they weren't created by a hash change
+  if (!cloudsCreatedByHash) {
+    cloudsVisible ? hideClouds() : showClouds();
+  }
+});
 
 // Listen for hash changes
 window.addEventListener('hashchange', handleHashChange);
