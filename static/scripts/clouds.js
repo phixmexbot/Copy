@@ -29,23 +29,31 @@ function createClouds() {
   }
 }
 
-// Function to show clouds
-function showClouds() {
+// Function to show clouds with an optional delay
+function showClouds(withDelay = false) {
   const container = document.getElementById('cloud-container');
   createClouds(); // Create clouds
   container.classList.add('clouds-visible');
 
-  // Set opacity to 1 for fade-in effect
-  const clouds = container.querySelectorAll('.cloud');
-  clouds.forEach(cloud => {
-    cloud.style.transition = 'opacity 0.5s'; // Transition for opacity
-    cloud.style.opacity = '1'; // Fade in clouds
-  });
+  // Function to fade in the clouds
+  function fadeInClouds() {
+    const clouds = container.querySelectorAll('.cloud');
+    clouds.forEach(cloud => {
+      cloud.style.transition = 'opacity 0.5s'; // Transition for opacity
+      cloud.style.opacity = '1'; // Fade in clouds
+    });
+    cloudsVisible = true; // Set clouds as visible
+  }
 
-  cloudsVisible = true; // Set clouds as visible
+  // Apply delay if needed
+  if (withDelay) {
+    setTimeout(fadeInClouds, 500); // 0.5 second delay for button-triggered clouds
+  } else {
+    fadeInClouds(); // Immediate for hash-triggered clouds
+  }
 }
 
-// Function to hide clouds
+// Function to hide clouds with a fade-out effect
 function hideClouds() {
   const container = document.getElementById('cloud-container');
   container.classList.remove('clouds-visible');
@@ -69,7 +77,7 @@ function handleHashChange() {
   const hash = window.location.hash.substring(1); // Get the hash without the '#'
   if (hash === 'light' || hash === 'snow' || hash === 'rain') {
     if (!cloudsCreatedByHash) {
-      showClouds(); // Show clouds if they were not created by hash change
+      showClouds(false); // Show clouds with no delay for hash change
       cloudsCreatedByHash = true; // Mark that clouds were created by hash change
     }
   } else if (cloudsCreatedByHash) {
@@ -87,7 +95,11 @@ function toggleCloudsByButton() {
   }
 
   // Toggle clouds visibility created by button
-  cloudsVisible ? hideClouds() : showClouds();
+  if (cloudsVisible) {
+    hideClouds();
+  } else {
+    showClouds(true); // Show clouds with a 0.5-second delay
+  }
 }
 
 // Add event listener to the button
