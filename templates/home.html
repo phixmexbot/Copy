@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/snow.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/attention-button.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/chat.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/clouds.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <link rel='stylesheet' href='https://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css'>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
@@ -100,7 +101,7 @@
 
   <!-- Content that will load after the preloader -->
   <div id="content">
-<canvas id= "birds"></canvas>
+<div id="cloud-container"></div>
 <div class="chat">
   <div class="chat-title">
     <h1>Komiljon</h1>
@@ -230,7 +231,7 @@ fill="#000000" stroke="none">
   <script src="{{ url_for('static', filename='scripts/rain.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/snow.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/chat.js') }}"></script>
-  <script src="{{ url_for('static', filename='scripts/birds.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/clouds.js') }}"></script>
 
 
   <script>
