@@ -17,20 +17,28 @@ function createClouds() {
     cloudCount = 4;  // Fewer clouds for smaller screens
   }
 
+  // Calculate how many clouds to show
+  const totalClouds = cloudCount; // Total number of clouds created
+  const cloudsToShow = Math.ceil(cloudCount / 2); // Show half of the clouds
+
   // Create clouds based on calculated count
-  for (let i = 1; i <= cloudCount; i++) {
-    const cloudDiv = document.createElement('div');
-    const sizeClass = (i % 4 === 0) ? 'tiny' : (i % 3 === 0) ? 'small' : (i % 2 === 0) ? 'normal' : 'large';
-    cloudDiv.className = `cloud ${sizeClass} cloud-${i}`;
+  for (let i = 1; i <= totalClouds; i++) {
+    // Show only the 1st, 3rd, 5th, ... clouds
+    if (i % 2 !== 0 && cloudsToShow > 0) {
+      const cloudDiv = document.createElement('div');
+      const sizeClass = (i % 4 === 0) ? 'tiny' : (i % 3 === 0) ? 'small' : (i % 2 === 0) ? 'normal' : 'large';
+      cloudDiv.className = `cloud ${sizeClass} cloud-${i}`;
 
-    // Create inner divs
-    for (let j = 0; j < 4; j++) {
-      const innerDiv = document.createElement('div');
-      cloudDiv.appendChild(innerDiv);
+      // Create inner divs
+      for (let j = 0; j < 4; j++) {
+        const innerDiv = document.createElement('div');
+        cloudDiv.appendChild(innerDiv);
+      }
+
+      // Append the cloud to the container
+      container.appendChild(cloudDiv);
+      cloudsToShow--; // Decrease the count of clouds to show
     }
-
-    // Append the cloud to the container
-    container.appendChild(cloudDiv);
   }
 }
 
