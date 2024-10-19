@@ -90,6 +90,39 @@
       opacity: 0;
       transition: opacity 0.3s ease-in-out; /* Change 1s to 0.3s */
     }
+
+
+/* Main content styles */
+#main-content {
+  transition: filter 0.3s ease; /* Smooth transition for the blur effect */
+}
+
+/* Popup styles */
+.popup-container {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.6); /* 60% black-transparent */
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  z-index: 1000;
+}
+
+.show {
+  display: block;
+}
+
+/* Blur effect */
+.blur {
+  filter: blur(4px); /* Adjust the blur amount as needed */
+}
+
+
+    
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 </head>
@@ -208,9 +241,16 @@ fill="#000000" stroke="none">
   <canvas id="canvas-club"></canvas>
   <canvas id="sparks" style="z-index: 1;"></canvas>
     
-  <button class="circle-action-btn">
-    <div class="circle-action-btn__icon"><i class="ion-android-hand"></i></div>
-  </button>
+  <div id="main-content">
+    <!-- Your main content goes here -->
+    <button class="circle-action-btn" onclick="showPopup()">
+      <div class="circle-action-btn__icon"><i class="ion-android-hand"></i></div>
+    </button>
+  
+    <div id="popup" class="popup-container">
+      <p>This is an example</p>
+    </div>
+  </div>
     
   </div>
 
@@ -235,6 +275,21 @@ fill="#000000" stroke="none">
 
 
   <script>
+
+function showPopup() {
+  const popup = document.getElementById("popup");
+  const mainContent = document.getElementById("main-content");
+  
+  popup.classList.add("show");
+  mainContent.classList.add("blur"); // Add the blur class to main content
+
+  // Automatically hide after 3 seconds
+  setTimeout(() => {
+    popup.classList.remove("show");
+    mainContent.classList.remove("blur"); // Remove the blur class
+  }, 3000);
+}
+
     
     // Hide the preloader and show the content with smooth transitions
     window.addEventListener('load', function() {
