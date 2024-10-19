@@ -178,7 +178,6 @@ body {
 #cloud-container {
   opacity: 0; /* Initially hidden */
   transition: opacity 0.5s ease; /* Smooth transition */
-  position: relative; /* Make sure the clouds are positioned correctly */
 }
 
 .clouds-visible {
