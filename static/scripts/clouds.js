@@ -19,7 +19,7 @@ function createClouds() {
 
   // Calculate how many clouds to show
   const totalClouds = cloudCount; // Total number of clouds created
-  const cloudsToShow = Math.ceil(cloudCount / 2); // Show half of the clouds
+  let cloudsToShow = Math.ceil(cloudCount / 2); // Show half of the clouds
 
   // Create clouds based on calculated count
   for (let i = 1; i <= totalClouds; i++) {
