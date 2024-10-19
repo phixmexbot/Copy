@@ -64,5 +64,21 @@ function toggleClouds() {
   }
 }
 
+// Function to handle hash changes
+function handleHashChange() {
+  const hash = window.location.hash.substring(1); // Get the hash without the '#'
+  if (hash === 'light' || hash === 'snow' || hash === 'rain') {
+    toggleClouds(); // Show clouds
+  } else if (cloudsVisible) {
+    toggleClouds(); // Hide clouds if already visible
+  }
+}
+
 // Add event listener to the button
 document.querySelector('.moon').addEventListener('click', toggleClouds);
+
+// Listen for hash changes
+window.addEventListener('hashchange', handleHashChange);
+
+// Initial check on page load
+handleHashChange();
