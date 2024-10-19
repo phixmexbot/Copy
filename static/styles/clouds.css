@@ -57,100 +57,120 @@ body {
 .cloud-1 {
   top: 15%;
   left: 5%;
+  z-index: 1;
 }
 
 .cloud-2 {
   top: 16%;
   left: 12%;
+  z-index: 1;
 }
 
 .cloud-3 {
   top: 18%;
   left: 20%;
+  z-index: 1;
 }
 
 .cloud-4 {
   top: 14%;
   left: 28%;
+  z-index: 1;
 }
 
 .cloud-5 {
   top: 20%;
   left: 36%;
+  z-index: 1;
 }
 
 .cloud-6 {
   top: 13%;
   left: 44%;
+  z-index: 1;
 }
 
 .cloud-7 {
   top: 19%;
   left: 52%;
+  z-index: 1;
 }
 
 .cloud-8 {
   top: 17%;
   left: 60%;
+  z-index: 1;
 }
 
 .cloud-9 {
   top: 15%;
   left: 68%;
+  z-index: 1;
 }
 
 .cloud-10 {
   top: 22%;
   left: 76%;
+  z-index: 1;
 }
 
 .cloud-11 {
   top: 16%;
   left: 84%;
+  z-index: 1;
 }
 
 .cloud-12 {
   top: 19%;
   left: 92%;
+  z-index: 1;
 }
 
 /* Additional clouds for denser appearance */
 .cloud-13 {
   top: 18%;
   left: 15%;
+  z-index: 1;
 }
 
 .cloud-14 {
   top: 13%;
   left: 25%;
+  z-index: 1;
 }
 
 .cloud-15 {
   top: 17%;
   left: 35%;
+  z-index: 1;
 }
 
 .cloud-16 {
   top: 16%;
   left: 45%;
+  z-index: 1;
 }
 
 .cloud-17 {
   top: 14%;
   left: 55%;
+  z-index: 1;
 }
 
 .cloud-18 {
   top: 21%;
   left: 65%;
+  z-index: 1;
 }
 
 .cloud-19 {
   top: 15%;
   left: 75%;
+  z-index: 1;
 }
 
 .cloud-20 {
   top: 19%;
   left: 85%;
+  z-index: 1;
 }
