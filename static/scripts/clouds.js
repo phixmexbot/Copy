@@ -1,15 +1,12 @@
+let cloudsVisible = false; // State to track cloud visibility
+
 // Function to create and append clouds based on screen width
 function createClouds() {
   // Clear existing clouds
   const container = document.getElementById('cloud-container');
   container.innerHTML = '';
 
-  // Calculate the number of clouds based on screen width
-  const screenWidth = window.innerWidth;
-  let cloudCount;
-
-   cloudCount = 20; 
-
+  const cloudCount = 20; // Fixed number of clouds
 
   // Create clouds based on calculated count
   for (let i = 1; i <= cloudCount; i++) {
@@ -28,8 +25,27 @@ function createClouds() {
   }
 }
 
-// Create clouds on initial load
-createClouds();
+// Function to toggle clouds
+function toggleClouds() {
+  const container = document.getElementById('cloud-container');
 
-// Recreate clouds on window resize
-window.addEventListener('resize', createClouds);
+  // Toggle visibility state
+  cloudsVisible = !cloudsVisible;
+
+  if (cloudsVisible) {
+    createClouds(); // Create clouds
+    container.classList.remove('clouds-hidden');
+    container.classList.add('clouds-visible');
+  } else {
+    container.classList.remove('clouds-visible');
+    container.classList.add('clouds-hidden');
+
+    // Delay removal of clouds to allow fade-out animation to finish
+    setTimeout(() => {
+      container.innerHTML = ''; // Clear clouds after fade-out
+    }, 500); // Match this time with the CSS transition duration
+  }
+}
+
+// Add event listener to the button
+document.querySelector('.moon').addEventListener('click', toggleClouds);
