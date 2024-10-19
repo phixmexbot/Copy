@@ -22,7 +22,8 @@ function O() {}
 O.prototype = {
     init: function() {
         this.x = random(0, w);
-        this.y = 0;
+        // Set the initial y position to 15% of the canvas height
+        this.y = h * 0.15; 
         this.color = '#FFFFFF';
         this.w = 2;
         this.h = 1;
