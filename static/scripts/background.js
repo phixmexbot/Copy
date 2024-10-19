@@ -68,29 +68,52 @@ moon.addEventListener('click', function(event) {
   isDayMode = !isDayMode; // Toggle the mode
 });
   
-  setTimeout(() => {
+    const moonButton = document.querySelector('.moon'); // Select the moon button
+    const shootingElement = document.getElementById('shooting'); // Select the shooting element
     const max_stars = 100;
     const stars = [];
-    
-    for (let i = 0; i < max_stars; i++) {
-      const star = document.createElement('span');
-      const size = (Math.floor(Math.random() * 3) + 1);
-      star.className = 'star';
-      star.style.width = size + 'px';
-      star.style.height = size + 'px';
-      star.style.background = `rgba(255, 255, 177, ${Math.random()})`;
-      star.style.top = Math.ceil(Math.random() * 100) + '%';
-      star.style.left = Math.ceil(Math.random() * 100) + '%';
-      stars.push(star);
-      document.body.appendChild(star);
+    let starsVisible = true;  // Keep track of visibility state
+
+    // Function to create stars
+    function createStars() {
+      for (let i = 0; i < max_stars; i++) {
+        const star = document.createElement('span');
+        const size = (Math.floor(Math.random() * 3) + 1);
+        star.className = 'star';
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.background = `rgba(255, 255, 177, ${Math.random()})`;
+        star.style.top = Math.ceil(Math.random() * 100) + '%';
+        star.style.left = Math.ceil(Math.random() * 100) + '%';
+        stars.push(star);
+        document.body.appendChild(star);
+      }
+
+      for (let j = 0; j < max_stars * 0.6; j++) {
+        const star = stars[j];
+        star.style.animationName = 'glow';
+        star.style.animationDelay = (Math.floor(Math.random() * 6) + 1) + 's';
+        star.style.animationDuration = (Math.floor(Math.random() * 6) + 1) + 's';
+      }
     }
-    
-    for (let j = 0; j < max_stars * 0.6; j++) {
-      const star = stars[j];
-      star.style.animationName = 'glow';
-      star.style.animationDelay = (Math.floor(Math.random() * 6) + 1) + 's';
-      star.style.animationDuration = (Math.floor(Math.random() * 6) + 1) + 's';
-    }
-  }, 300); 
+
+    // Create stars after a 300ms delay
+    setTimeout(() => {
+      createStars();
+    }, 300);
+
+    // Add click event listener to toggle visibility of stars and shooting element
+    moonButton.addEventListener('click', () => {
+      if (starsVisible) {
+        // Hide stars and shooting element
+        stars.forEach(star => star.style.display = 'none');
+        shootingElement.style.display = 'none';
+      } else {
+        // Show stars and shooting element
+        stars.forEach(star => star.style.display = 'block');
+        shootingElement.style.display = 'block';
+      }
+      starsVisible = !starsVisible;  // Toggle visibility state
+    });
 });
 
