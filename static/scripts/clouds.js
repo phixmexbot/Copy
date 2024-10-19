@@ -78,8 +78,6 @@ function handleHashChange() {
     }
   } else if (cloudsCreatedByHash) {
     // Do not hide clouds if they were created by a hash change
-  } else if (cloudsVisible) {
-    hideClouds(); // If hash changes to something else and clouds were created by button, hide them
   }
 }
 
