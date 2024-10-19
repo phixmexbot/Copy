@@ -87,7 +87,8 @@ function startSparkAnimation() {
 
   function addSpark() {
     let x = rand(-200, window.innerWidth + 200);
-    let y = rand(-200, window.innerHeight + 200);
+    // Start y at least 15% down the height of the window
+    let y = rand(window.innerHeight * 0.15, window.innerHeight + 200);
     sparks.push(new Spark(x, y));
   }
 
@@ -111,8 +112,6 @@ window.addEventListener('hashchange', () => {
     animationActive = false; // Reset if hash changes to something else
   }
 });
-
-
 
 function getLocationFromIP() {
   // Fetch user's location based on IP address
