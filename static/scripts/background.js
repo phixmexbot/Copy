@@ -67,6 +67,22 @@ moon.addEventListener('click', function(event) {
 
   isDayMode = !isDayMode; // Toggle the mode
 });
+
+// Function to handle hash change
+function handleHashChange() {
+  const hash = window.location.hash.slice(1); // Get the hash value without the '#'
+
+  if (['light', 'rain', 'snow'].includes(hash)) {
+    if (isDayMode) {
+      background.style.transition = 'background 0.5s'; // Transition for background color change
+      background.style.background = 'linear-gradient(to bottom, #b0c4de, #778899)';
+    }
+  }
+}
+
+// Listen for hash changes
+window.addEventListener('hashchange', handleHashChange);
+  
   
     const moonButton = document.querySelector('.moon'); // Select the moon button
     const shootingElement = document.getElementById('shooting'); // Select the shooting element
