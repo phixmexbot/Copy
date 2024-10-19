@@ -29,7 +29,7 @@ function createClouds() {
   }
 }
 
-// Function to show clouds with an optional delay
+// Function to show clouds with a fade-in effect and optional delay
 function showClouds(withDelay = false) {
   const container = document.getElementById('cloud-container');
   createClouds(); // Create clouds
@@ -45,12 +45,8 @@ function showClouds(withDelay = false) {
     cloudsVisible = true; // Set clouds as visible
   }
 
-  // Apply delay if needed
-  if (withDelay) {
-    setTimeout(fadeInClouds, 500); // 0.5 second delay for button-triggered clouds
-  } else {
-    fadeInClouds(); // Immediate for hash-triggered clouds
-  }
+  // Apply delay if needed (both button-triggered and hash-triggered clouds use the same process)
+  setTimeout(fadeInClouds, withDelay ? 500 : 0); // 0.5 second delay for button or hash-triggered clouds
 }
 
 // Function to hide clouds with a fade-out effect
@@ -77,11 +73,11 @@ function handleHashChange() {
   const hash = window.location.hash.substring(1); // Get the hash without the '#'
   if (hash === 'light' || hash === 'snow' || hash === 'rain') {
     if (!cloudsCreatedByHash) {
-      showClouds(false); // Show clouds with no delay for hash change
+      showClouds(true); // Show clouds with the same delay and animation for hash change
       cloudsCreatedByHash = true; // Mark that clouds were created by hash change
     }
   } else if (cloudsCreatedByHash) {
-    // Do not hide clouds if they were created by a hash change, but handle any further behavior if needed.
+    // Do not hide clouds if they were created by a hash change
   } else if (cloudsVisible) {
     hideClouds(); // If hash changes to something else and clouds were created by button, hide them
   }
