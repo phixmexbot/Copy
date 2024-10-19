@@ -68,9 +68,12 @@ function toggleClouds() {
 function handleHashChange() {
   const hash = window.location.hash.substring(1); // Get the hash without the '#'
   if (hash === 'light' || hash === 'snow' || hash === 'rain') {
-    toggleClouds(); // Show clouds
-  } else if (cloudsVisible) {
-    toggleClouds(); // Hide clouds if already visible
+    if (!cloudsVisible) {
+      toggleClouds(); // Show clouds if they are not already visible
+    }
+  } else {
+    // If the hash is not light, snow, or rain, and clouds are visible, do nothing
+    // If clouds are not visible, do nothing
   }
 }
 
