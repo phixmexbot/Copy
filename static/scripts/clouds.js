@@ -37,7 +37,7 @@ function toggleClouds() {
 
   if (cloudsVisible) {
     createClouds(); // Create clouds
-    // Start the fade-in animation after a delay of 0.05 seconds
+    // Start the fade-in animation after a delay of 0.5 seconds
     setTimeout(() => {
       container.classList.add('clouds-visible');
 
@@ -51,18 +51,16 @@ function toggleClouds() {
   } else {
     container.classList.remove('clouds-visible');
 
-    // Delay removal of clouds to allow fade-out animation to finish
-    setTimeout(() => {
-      const clouds = container.querySelectorAll('.cloud');
-      clouds.forEach(cloud => {
-        cloud.style.opacity = '0'; // Fade out clouds
-      });
+    // Immediately set opacity to 0 for fade-out
+    const clouds = container.querySelectorAll('.cloud');
+    clouds.forEach(cloud => {
+      cloud.style.opacity = '0'; // Fade out clouds
+    });
 
-      // Clear clouds after fade-out
-      setTimeout(() => {
-        container.innerHTML = ''; // Clear clouds after fade-out
-      }, 500); // Match this time with the CSS transition duration
-    }, 500); // 0.5 seconds for the fade-out delay
+    // Clear clouds after fade-out
+    setTimeout(() => {
+      container.innerHTML = ''; // Clear clouds after fade-out
+    }, 500); // Match this time with the CSS transition duration
   }
 }
 
