@@ -49,6 +49,7 @@ Chat Title
   margin: 0;
   padding: 0;
   text-align: left;
+  color: moccasin;
 }
 .chat-title h2 {
   color: rgba(255, 255, 255, 0.5);
