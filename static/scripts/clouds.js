@@ -33,9 +33,9 @@ function toggleClouds() {
   cloudsVisible = !cloudsVisible;
 
   if (cloudsVisible) {
+    createClouds(); // Create clouds
     // Start the fade-in animation after a delay of 0.05 seconds
     setTimeout(() => {
-      createClouds(); // Create clouds
       container.classList.remove('clouds-hidden');
       container.classList.add('clouds-visible');
     }, 500); // 0.5 seconds
