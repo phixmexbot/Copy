@@ -43,7 +43,6 @@ function showClouds() {
   });
 
   cloudsVisible = true; // Set clouds as visible
-  cloudsCreatedByHash = true; // Mark that clouds were created by hash change
 }
 
 // Function to hide clouds
@@ -71,19 +70,28 @@ function handleHashChange() {
   if (hash === 'light' || hash === 'snow' || hash === 'rain') {
     if (!cloudsCreatedByHash) {
       showClouds(); // Show clouds if they were not created by hash change
+      cloudsCreatedByHash = true; // Mark that clouds were created by hash change
     }
-  } else {
-    // If the hash is not light, snow, or rain, do nothing
+  } else if (cloudsCreatedByHash) {
+    // Do not hide clouds if they were created by a hash change, but handle any further behavior if needed.
+  } else if (cloudsVisible) {
+    hideClouds(); // If hash changes to something else and clouds were created by button, hide them
   }
 }
 
-// Add event listener to the button
-document.querySelector('.moon').addEventListener('click', () => {
-  // Only toggle clouds if they weren't created by a hash change
-  if (!cloudsCreatedByHash) {
-    cloudsVisible ? hideClouds() : showClouds();
+// Function to toggle clouds with the button
+function toggleCloudsByButton() {
+  if (cloudsCreatedByHash) {
+    // If clouds were created by hash change, do nothing (button has no effect)
+    return;
   }
-});
+
+  // Toggle clouds visibility created by button
+  cloudsVisible ? hideClouds() : showClouds();
+}
+
+// Add event listener to the button
+document.querySelector('.moon').addEventListener('click', toggleCloudsByButton);
 
 // Listen for hash changes
 window.addEventListener('hashchange', handleHashChange);
