@@ -185,7 +185,7 @@ def process_me():
 
 def email(to_email, name, feedback):
     try:
-        from_email = "noreply@eternal.uz"
+        from_email = "no-reply@eternal.uz"
         password = "K_973050330_k"
 
         subject_user = "Thank you for contacting us"
