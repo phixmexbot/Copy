@@ -236,6 +236,18 @@ fill="#000000" stroke="none">
 
   <script>
 
+    
+document.querySelector(".moon").addEventListener("click", function() {
+  // Get the current background color of the body
+  const currentBackground = window.getComputedStyle(document.body).backgroundImage;
+  
+  // Toggle background color based on the current background
+  document.body.style.background = currentBackground.includes("linear-gradient(#1c1c1c, #282828)") 
+    ? "linear-gradient(#0f1a2b, #411d63)" 
+    : "linear-gradient(#1c1c1c, #282828)";
+});
+
+    
     document.getElementById('popupButton').addEventListener('click', function() {
       alert("Press the moon to switch to day/night mode!");
     });
