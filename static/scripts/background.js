@@ -27,8 +27,7 @@ moon.addEventListener('click', function(event) {
   // Toggle between day and night modes
   if (isDayMode) {
     // Switch to night mode
-    background.style.background = `linear-gradient(to bottom, #0f1a2b, #411d63)`; // Old night mode background
-    background.querySelector('::before').style.background = `linear-gradient(to bottom, #87CEFA, #fff95b)`; // New day mode background
+    background.style.background = `linear-gradient(to bottom, #0f1a2b, #411d63)`;
     
     // Change colors back to black uniformly
     ground.style.transition = 'background 0.5s'; // Smooth transition for ground color
@@ -47,8 +46,7 @@ moon.addEventListener('click', function(event) {
     background.classList.add('wave'); // Re-add the wave class
   } else {
     // Switch to day mode
-    background.style.background = `linear-gradient(to bottom, #87CEFA, #fff95b)`; // Old day mode background
-    background.querySelector('::before').style.background = `linear-gradient(to bottom, #0f1a2b, #411d63)`; // New night mode background
+    background.style.background = `linear-gradient(to bottom, #87CEFA, #fff95b)`;
     
     // Change colors uniformly for day mode
     ground.style.transition = 'background 0.5s'; // Smooth transition for ground color
