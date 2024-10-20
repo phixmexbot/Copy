@@ -2,13 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const moon = document.querySelector('.moon');
 const background = document.querySelector('.background');
-const ground = document.querySelector('.ground');
-const rocks = document.querySelectorAll('.rock');
-const cactusPath = document.querySelector('.cactus path');
+const ground = document.querySelector('.ground'); // Select the ground element
+const rocks = document.querySelectorAll('.rock'); // Select all rock elements
+const cactusPath = document.querySelector('.cactus path'); // Select the path inside the cactus SVG
 
 let isDayMode = false; // Flag to track the mode
 
 moon.addEventListener('click', function(event) {
+  // Check if the background element exists
   if (!background || !ground) {
     console.error('Background or ground element not found');
     return;
@@ -19,44 +20,55 @@ moon.addEventListener('click', function(event) {
   const xPos = rect.left + rect.width / 2; // Center of the moon
   const yPos = rect.top + rect.height / 2; // Center of the moon
 
-  // Set the radial gradient's center position (from the moon's position)
+  // Create a CSS variable for the position of the wave effect
   background.style.setProperty('--x-pos', `${xPos}px`);
   background.style.setProperty('--y-pos', `${yPos}px`);
 
-  // Toggle between day and night modes with radial gradient
+  // Toggle between day and night modes
   if (isDayMode) {
-    // Apply the night-mode gradient
-    background.classList.add('night-mode-gradient');
-
-    // Change colors for night mode
-    ground.style.transition = 'background 0.5s';
-    ground.style.background = 'black'; // Night mode ground
+    // Switch to night mode
+    background.style.background = `linear-gradient(to bottom, #0f1a2b, #411d63)`;
+    
+    // Change colors back to black uniformly
+    ground.style.transition = 'background 0.5s'; // Smooth transition for ground color
+    ground.style.background = 'black'; // Reset ground color
     rocks.forEach(rock => {
-      rock.style.transition = 'background 0.5s';
-      rock.style.background = 'black'; // Night mode rocks
+      rock.style.transition = 'background 0.5s'; // Smooth transition for rocks
+      rock.style.background = 'black'; // Reset rock color
     });
-    cactusPath.style.transition = 'fill 0.5s';
-    cactusPath.style.fill = 'black'; // Night mode cactus
+    
+    // Change cactus color to black
+    cactusPath.style.transition = 'fill 0.5s'; // Smooth transition for cactus color
+    cactusPath.style.fill = 'black'; // Reset cactus color
+
+    background.classList.remove('wave'); // Reset wave class
+    void background.offsetWidth; // Trigger reflow to restart the animation
+    background.classList.add('wave'); // Re-add the wave class
   } else {
-    // Reset to day-mode gradient
-    background.classList.remove('night-mode-gradient');
-    background.style.background = `radial-gradient(circle at var(--x-pos) var(--y-pos), #87CEFA 0%, #fff95b 100%)`;
-
-    // Change colors for day mode
-    ground.style.transition = 'background 0.5s';
-    ground.style.background = '#736944'; // Day mode ground
+    // Switch to day mode
+    background.style.background = `linear-gradient(to bottom, #87CEFA, #fff95b)`;
+    
+    // Change colors uniformly for day mode
+    ground.style.transition = 'background 0.5s'; // Smooth transition for ground color
+    ground.style.background = '#736944'; // Change ground color
     rocks.forEach(rock => {
-      rock.style.transition = 'background 0.5s';
-      rock.style.background = '#736944'; // Day mode rocks
+      rock.style.transition = 'background 0.5s'; // Smooth transition for rocks
+      rock.style.background = '#736944'; // Change rock color
     });
-    cactusPath.style.transition = 'fill 0.5s';
-    cactusPath.style.fill = '#736944'; // Day mode cactus
+    
+    // Change cactus color to #736944
+    cactusPath.style.transition = 'fill 0.5s'; // Smooth transition for cactus color
+    cactusPath.style.fill = '#736944'; // Change cactus color
+
+    background.classList.remove('wave'); // Reset wave class
+    void background.offsetWidth; // Trigger reflow to restart the animation
+    background.classList.add('wave'); // Re-add the wave class
   }
 
   isDayMode = !isDayMode; // Toggle the mode
 });
 
-  // Function to handle hash change
+// Function to handle hash change
 function handleHashChange() {
   const hash = window.location.hash.slice(1); // Get the hash value without the '#'
 
@@ -120,4 +132,3 @@ window.addEventListener('hashchange', handleHashChange);
       starsVisible = !starsVisible;  // Toggle visibility state
     });
 });
-
