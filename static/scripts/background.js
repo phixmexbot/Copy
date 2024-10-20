@@ -74,8 +74,10 @@ function handleHashChange() {
 
   if (['light', 'rain', 'snow'].includes(hash)) {
     if (isDayMode) {
-      background.style.transition = 'background 0.5s'; // Transition for background color change
       background.style.background = 'linear-gradient(to bottom, #b0c4de, #778899)';
+      background.classList.remove('wave'); // Reset wave class
+      void background.offsetWidth; // Trigger reflow to restart the animation
+      background.classList.add('wave'); // Re-add the wave class
     }
   }
 }
